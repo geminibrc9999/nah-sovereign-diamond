@@ -23,8 +23,8 @@
     <div class="terminal">
         <div class="scanline"></div>
         <div class="header">
-            <h3 style="margin:0; color:#fff;">BRC ORACLE V1.0</h3>
-            <div style="font-size: 0.7rem; color: #555; margin-top:5px;">[ DATA FINALITY: STRICT ]</div>
+            <h3 style="margin:0; color:#fff;">BRC ORACLE V1.2</h3>
+            <div style="font-size: 0.7rem; color: #555; margin-top:5px;">[ DATALINK: MERCENARY PROXY ]</div>
         </div>
         
         <div class="data-row"><span class="label">SATS / NAH:</span><span class="value" id="sats-val">SYNCING...</span></div>
@@ -32,12 +32,13 @@
         <div class="data-row"><span class="label">VND / NAH:</span><span class="value" id="vnd-val">SYNCING...</span></div>
         <div class="data-row"><span class="label">GOLD (oz) / NAH:</span><span class="value" id="gold-val">SYNCING...</span></div>
 
-        <div class="status" id="last-update">AWAITING DATALINK...</div>
+        <div class="status" id="last-update">BREACHING FIREWALL...</div>
         <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" class="btn" target="_blank">LIQUIDITY PORTAL</a>
     </div>
 
     <script>
-        const WORKER_PROXY = "https://misty-voice-3bd5.geminibrc9999-ba3.workers.dev/?api=";
+        // Sử dụng Lính Đánh Thuê AllOrigins để đâm xuyên khiên chống Bot của DotSwap
+        const MERCENARY_PROXY = "https://api.allorigins.win/raw?url=";
         const DOTSWAP_API = "https://api.dotswap.app/brc20swap/stat/tick_price";
         const BTC_API = "https://api.coindesk.com/v1/bpi/currentprice.json";
 
@@ -64,26 +65,33 @@
 
         async function engageOracle() {
             try {
+                // 1. Lấy giá BTC
                 const btcRes = await fetch(BTC_API);
                 const btcData = await btcRes.json();
                 const btcUsd = btcData.bpi.USD.rate_float;
 
-                const dexRes = await fetch(WORKER_PROXY + encodeURIComponent(DOTSWAP_API));
-                if (!dexRes.ok) throw new Error("PROXY HTTP " + dexRes.status);
+                // 2. Dùng proxy lính đánh thuê tấn công cổng API
+                const dexRes = await fetch(MERCENARY_PROXY + encodeURIComponent(DOTSWAP_API));
+                
+                if (!dexRes.ok) {
+                    throw new Error("MERCENARY BLOCKED: " + dexRes.status);
+                }
                 
                 const dexData = await dexRes.json();
                 let nahBtcRate = extractNahPrice(dexData);
                 
                 if (!nahBtcRate) {
                     let rawSnippet = JSON.stringify(dexData).substring(0, 45) + "...";
-                    throw new Error("NOT FOUND. RAW: " + rawSnippet);
+                    throw new Error("NAH NOT FOUND. RAW: " + rawSnippet);
                 }
                 
+                // 3. Tính toán 
                 let satsVal = (nahBtcRate * 100000000).toFixed(2);
                 let usdVal = (nahBtcRate * btcUsd).toFixed(4);
                 let vndVal = Math.floor(usdVal * 25400).toLocaleString('vi-VN'); 
                 let goldVal = (usdVal / 2350).toFixed(6);
 
+                // 4. Kết xuất
                 document.getElementById("sats-val").className = "value";
                 document.getElementById("usd-val").className = "value";
                 document.getElementById("vnd-val").className = "value";
