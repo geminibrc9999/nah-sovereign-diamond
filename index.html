@@ -11,7 +11,7 @@
         .data-row { display: flex; justify-content: space-between; margin: 15px 0; font-size: 1.2rem; border-bottom: 1px solid #222; padding-bottom: 5px; }
         .label { color: #888; text-transform: uppercase; font-size: 0.9rem; margin-top: 4px; }
         .value { font-weight: bold; text-shadow: 0 0 5px rgba(0,255,65,0.4); }
-        .error-text { color: #ff0000; text-shadow: 0 0 5px rgba(255,0,0,0.4); font-size: 0.9rem; word-break: break-all; }
+        .error-text { color: #ff0000; text-shadow: 0 0 5px rgba(255,0,0,0.4); font-size: 0.8rem; word-break: break-all; }
         .status { font-size: 0.8rem; color: #ff9900; margin-top: 25px; text-align: right; }
         a.btn { display: block; text-align: center; background: transparent; color: #00ff41; text-decoration: none; padding: 12px; margin-top: 30px; font-weight: bold; text-transform: uppercase; border: 1px solid #00ff41; transition: all 0.2s; }
         a.btn:hover { background: #00ff41; color: #0a0a0a; box-shadow: 0 0 15px #00ff41; }
@@ -23,8 +23,8 @@
     <div class="terminal">
         <div class="scanline"></div>
         <div class="header">
-            <h3 style="margin:0; color:#fff;">BRC ORACLE V1.2</h3>
-            <div style="font-size: 0.7rem; color: #555; margin-top:5px;">[ DATALINK: MERCENARY PROXY ]</div>
+            <h3 style="margin:0; color:#fff;">BRC ORACLE V1.3</h3>
+            <div style="font-size: 0.7rem; color: #555; margin-top:5px;">[ DATALINK: SATFLOW ACTIVITY STREAM ]</div>
         </div>
         
         <div class="data-row"><span class="label">SATS / NAH:</span><span class="value" id="sats-val">SYNCING...</span></div>
@@ -32,31 +32,26 @@
         <div class="data-row"><span class="label">VND / NAH:</span><span class="value" id="vnd-val">SYNCING...</span></div>
         <div class="data-row"><span class="label">GOLD (oz) / NAH:</span><span class="value" id="gold-val">SYNCING...</span></div>
 
-        <div class="status" id="last-update">BREACHING FIREWALL...</div>
-        <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" class="btn" target="_blank">LIQUIDITY PORTAL</a>
+        <div class="status" id="last-update">BREACHING SATFLOW...</div>
+        <a href="https://satflow.com" class="btn" target="_blank">LIQUIDITY PORTAL</a>
     </div>
 
     <script>
-        // Sử dụng Lính Đánh Thuê AllOrigins để đâm xuyên khiên chống Bot của DotSwap
-        const MERCENARY_PROXY = "https://api.allorigins.win/raw?url=";
-        const DOTSWAP_API = "https://api.dotswap.app/brc20swap/stat/tick_price";
+        // Dùng Bóng Ma V2 của Thuyền trưởng
+        const WORKER_PROXY = "https://misty-voice-3bd5.geminibrc9999-ba3.workers.dev/?api=";
+        const SATFLOW_API = "https://memflow.satflow.com/api/v1/activity/confirmed-unindexed";
         const BTC_API = "https://api.coindesk.com/v1/bpi/currentprice.json";
 
+        // Máy Quét Tinh Thể phiên bản quét Dòng Sự Kiện
         function extractNahPrice(data) {
             try {
-                let target = data.data || data;
-                if (Array.isArray(target)) {
-                    let nahPool = target.find(p => JSON.stringify(p).includes("NAH"));
-                    if (nahPool) return nahPool.price || nahPool.tick_price || nahPool.last_price;
-                }
-                if (typeof target === 'object') {
-                    for (let key in target) {
-                        if (key.includes("NAH")) {
-                            let val = target[key];
-                            if (typeof val === 'number' || typeof val === 'string') return parseFloat(val);
-                            if (val.price) return parseFloat(val.price);
-                            if (val.tick_price) return parseFloat(val.tick_price);
-                        }
+                let events = data.data || data.items || data.events || data.activities || data;
+                if (Array.isArray(events)) {
+                    // Lùng sục mọi sự kiện xem có cái nào liên quan đến NAH không
+                    let nahEvent = events.find(e => JSON.stringify(e).includes("NAH"));
+                    if (nahEvent) {
+                        // Trích xuất bất cứ con số nào có vẻ giống tỷ giá
+                        return nahEvent.price || nahEvent.rate || nahEvent.amount || null;
                     }
                 }
                 return null;
@@ -65,33 +60,28 @@
 
         async function engageOracle() {
             try {
-                // 1. Lấy giá BTC
                 const btcRes = await fetch(BTC_API);
                 const btcData = await btcRes.json();
                 const btcUsd = btcData.bpi.USD.rate_float;
 
-                // 2. Dùng proxy lính đánh thuê tấn công cổng API
-                const dexRes = await fetch(MERCENARY_PROXY + encodeURIComponent(DOTSWAP_API));
-                
-                if (!dexRes.ok) {
-                    throw new Error("MERCENARY BLOCKED: " + dexRes.status);
-                }
+                // Tấn công cổng Satflow
+                const dexRes = await fetch(WORKER_PROXY + encodeURIComponent(SATFLOW_API));
+                if (!dexRes.ok) throw new Error("SATFLOW BLOCKED HTTP " + dexRes.status);
                 
                 const dexData = await dexRes.json();
                 let nahBtcRate = extractNahPrice(dexData);
                 
                 if (!nahBtcRate) {
-                    let rawSnippet = JSON.stringify(dexData).substring(0, 45) + "...";
-                    throw new Error("NAH NOT FOUND. RAW: " + rawSnippet);
+                    // Bắn dữ liệu thô lên màn hình để Thuyền trưởng phân tích
+                    let rawSnippet = JSON.stringify(dexData).substring(0, 80) + "...";
+                    throw new Error("NAH NOT FOUND IN STREAM. RAW: " + rawSnippet);
                 }
                 
-                // 3. Tính toán 
                 let satsVal = (nahBtcRate * 100000000).toFixed(2);
                 let usdVal = (nahBtcRate * btcUsd).toFixed(4);
                 let vndVal = Math.floor(usdVal * 25400).toLocaleString('vi-VN'); 
                 let goldVal = (usdVal / 2350).toFixed(6);
 
-                // 4. Kết xuất
                 document.getElementById("sats-val").className = "value";
                 document.getElementById("usd-val").className = "value";
                 document.getElementById("vnd-val").className = "value";
