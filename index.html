@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NAH SOVEREIGN DIAMOND 💎</title>
     <style>
-        /* PHONG CÁCH CYBERNETIC NOIR - MATRIX & BITCOIN MAXIMALIST */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap');
+
+        /* PHONG CÁCH CYBERNETIC NOIR - BITCOIN MAXIMALIST */
         body {
             background-color: #050505;
             color: #ffffff;
@@ -27,33 +29,55 @@
             border: 1px solid #222;
             background: #0a0a0a;
             padding: 30px;
-            box-shadow: 0px 0px 20px rgba(0, 255, 65, 0.05);
+            box-shadow: 0px 0px 20px rgba(255, 153, 0, 0.05);
             position: relative;
             z-index: 2;
         }
         
-        .title {
-            font-size: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
+        .title-container {
             margin-bottom: 25px;
             text-align: center;
-            letter-spacing: 1.5px;
-            color: #ff9900; /* Màu cam quyền lực của BTC */
-            text-shadow: 0 0 10px rgba(255, 153, 0, 0.4);
+        }
+
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ff9900;
+            text-shadow: 0 0 12px rgba(255, 153, 0, 0.5);
+            margin-bottom: 8px;
+            line-height: 1.2;
         }
         
-        /* Hiệu ứng Kim cương lấp lánh */
+        .slogan-1 {
+            font-size: 10px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        .slogan-2 {
+            font-size: 12px;
+            color: #ff9900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255, 153, 0, 0.3);
+        }
+
         .diamond {
             display: inline-block;
             animation: sparkle 1s infinite alternate;
         }
         @keyframes sparkle {
             0% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 2px rgba(255,255,255,0.5)); }
-            100% { transform: scale(1.2); filter: brightness(1.5) drop-shadow(0 0 12px rgba(0,255,65,0.8)); }
+            100% { transform: scale(1.2); filter: brightness(1.5) drop-shadow(0 0 12px rgba(255, 153, 0, 0.8)); }
         }
         
-        /* CẤU TRÚC DÒNG DỮ LIỆU SẮC BÉN */
         .data-row {
             display: flex;
             justify-content: space-between;
@@ -63,9 +87,14 @@
         }
         .data-row:last-of-type { border-bottom: 2px solid #333; padding-bottom: 15px; margin-bottom: 25px; }
         .label { text-transform: uppercase; color: #aaa; }
-        .value { font-weight: bold; color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.3); text-align: right; }
+        
+        .value { 
+            font-weight: bold; 
+            color: #ff9900; 
+            text-shadow: 0 0 5px rgba(255, 153, 0, 0.3); 
+            text-align: right; 
+        }
 
-        /* SUB-SECTION DÀNH CHO TOKENOMICS & BTC REFERENCE */
         .sub-section {
             margin-top: 5px;
             margin-bottom: 25px;
@@ -93,10 +122,10 @@
         .sub-row .label { color: #888; }
         .sub-row .value { color: #fff; }
         .sub-row .value.highlight { color: #ff9900; text-shadow: 0 0 4px rgba(255, 153, 0, 0.3); }
-        .sub-row a { color: #00ff41; text-decoration: none; border-bottom: 1px dotted #00ff41; }
-        .sub-row a:hover { color: #fff; border-bottom-color: #fff; }
         
-        /* ĐƯỜNG LINK ĐIỀU HƯỚNG CYPHERPUNK */
+        .sub-row a { color: #ff9900; text-decoration: none; border-bottom: 1px dotted #ff9900; }
+        .sub-row a:hover { color: #0a0a0a; background: #ff9900; box-shadow: 0 0 10px #ff9900; }
+        
         .info-text {
             font-size: 11px;
             margin-bottom: 12px;
@@ -104,29 +133,27 @@
             color: #777;
         }
         .info-text a {
-            color: #ff9900;
+            color: #00ff41; 
             text-decoration: none;
-            border-bottom: 1px dotted #ff9900;
+            border-bottom: 1px dotted #00ff41;
             transition: all 0.2s;
             font-weight: bold;
         }
         .info-text a:hover {
             color: #0a0a0a;
-            background: #ff9900;
-            box-shadow: 0 0 10px #ff9900;
+            background: #00ff41;
+            box-shadow: 0 0 10px #00ff41;
         }
         
-        /* HIỆU ỨNG RADAR QUÉT (SCANLINE EFFECT) */
         .scanline { 
             width: 100%; height: 70px; z-index: 10; position: absolute; left: 0; top: 0; pointer-events: none; 
-            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,255,65,0.05) 50%, rgba(0,0,0,0) 100%); 
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(255,153,0,0.05) 50%, rgba(0,0,0,0) 100%); 
             animation: scanline 4s linear infinite; 
         }
         @keyframes scanline { 0% { top: -70px; } 100% { top: 100%; } }
 
         .status { font-size: 10px; color: #444; text-align: right; margin-top: 15px; text-transform: uppercase; }
         
-        /* FOOTER & BRC LINKS */
         .footer {
             margin-top: 40px;
             font-size: 11px;
@@ -143,14 +170,21 @@
 <body>
     <div class="terminal">
         <div class="scanline"></div>
-        <div class="title">NAH SOVEREIGN DIAMOND <span class="diamond">💎</span></div>
+        
+        <div class="title-container">
+            <div class="title">NAH SOVEREIGN DIAMOND <span class="diamond">💎</span></div>
+            <div class="slogan-1">digital diamond etched on digital gold</div>
+            <div class="slogan-2">world's hardest asset</div>
+        </div>
 
+        <!-- SECTION 1: NAH PRICES -->
         <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">LOADING...</span></div>
         <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">LOADING...</span></div>
         <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">LOADING...</span></div>
         <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">LOADING...</span></div>
         <div class="data-row"><span class="label">GOLD (gram) / NAH</span><span class="value" id="gold-val">LOADING...</span></div>
 
+        <!-- SECTION 2: NAH TOKENOMICS & MARKET CAP -->
         <div class="sub-section">
             <div class="sub-title">NAH MARKET CAP & TOKENOMICS</div>
             <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION NAHs</span></div>
@@ -163,21 +197,23 @@
             <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
         </div>
 
+        <!-- SECTION 3: BTC REFERENCE DATA -->
         <div class="sub-section" style="border-left-color: #444;">
             <div class="sub-title" style="color:#aaa;">BTC REFERENCE DATA</div>
             <div class="sub-row"><span class="label">USD / BTC</span><span class="value" id="btc-usd">LOADING...</span></div>
             <div class="sub-row"><span class="label">VND / BTC</span><span class="value" id="btc-vnd">LOADING...</span></div>
-            <div class="sub-row"><span class="label">GOLD (gram) / BTC</span><span class="value" id="btc-gold">LOADING...</span></div>
+            <div class="sub-row"><span class="label">GOLD (kg) / BTC</span><span class="value" id="btc-gold">LOADING...</span></div>
         </div>
 
+        <!-- INFO LINKS -->
         <div class="info-text">
-            * Nah's price is updated based on the trading price on <a href="https://satflow.com" target="_blank">satflow.com</a>.
+            * Nah's price is updated based on the trading price on <a href="https://satflow.com" target="_blank">Satflow</a>.
         </div>
         <div class="info-text">
             * To view live BTC/NAH chart and get best prices, please visit <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">DotSwap</a>.
         </div>
         <div class="info-text">
-            * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank">Facebook</a> or <a href="https://bempresearch.com" target="_blank">Website</a>.
+            * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank">Facebook</a>, <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank">LinkedIn</a>, or <a href="https://bempresearch.com" target="_blank">Website</a>.
         </div>
         
         <div class="status" id="last-update">CONNECTING...</div>
@@ -186,33 +222,48 @@
     <div class="footer">[ WEBSITE UNDER CONSTRUCTION ]</div>
 
     <script>
-        // ==========================================
-        // KHU VỰC THAO TÁC CỦA THE HOLDER
-        // Cập nhật giá SAT/NAH ở đây mỗi khi có biến động
+        // ========================================================================
+        // KHU VỰC ĐIỀU KHIỂN CỦA THE HOLDER
+        // TỪ GIỜ THUYỀN TRƯỞNG CHỈ CẦN CẬP NHẬT ĐÚNG 1 THÔNG SỐ SATS Ở ĐÂY LÀ ĐỦ!
+        // ========================================================================
         const CURRENT_NAH_SATS = 0.08; 
         
-        // Hằng số Tokenomics
-        const CIRCULATING_SUPPLY = 85300000000000; // 85.3 Trillion
-        const GOLD_GLOBAL_MCAP_USD = 30720000000000; // Vốn hóa Vàng toàn cầu năm 2026 (~30.7 Trillion USD)
-        // ==========================================
+        const CIRCULATING_SUPPLY = 85300000000000; 
+        const TOTAL_GOLD_OUNCES = 6834500000; 
+        // ========================================================================
 
+        // 3 MẠCH MÁU DỮ LIỆU THỜI GIAN THỰC (REAL-TIME ORACLES)
         const BTC_API = "https://mempool.space/api/v1/prices";
+        const FOREX_API = "https://open.er-api.com/v6/latest/USD";
+        const GOLD_API = "https://api.coingecko.com/api/v3/simple/price?ids=pax-gold&vs_currencies=usd";
 
         async function engageOracle() {
             try {
-                // Rút tỷ giá BTC từ Mempool
-                const res = await fetch(BTC_API);
-                if (!res.ok) throw new Error("API OVERLOAD");
-                const data = await res.json();
-                const btcUsd = parseFloat(data.USD);
+                // Fetch đồng loạt 3 nguồn API tốc độ cao
+                const [btcRes, forexRes, goldRes] = await Promise.all([
+                    fetch(BTC_API),
+                    fetch(FOREX_API),
+                    fetch(GOLD_API)
+                ]);
 
-                // ==========================================
+                if (!btcRes.ok || !forexRes.ok || !goldRes.ok) throw new Error("ORACLE SYNC DELAYED");
+                
+                const btcData = await btcRes.json();
+                const forexData = await forexRes.json();
+                const goldData = await goldRes.json();
+
+                // Lấy các chỉ số thời gian thực (Real-time Live Data)
+                const btcUsd = parseFloat(btcData.USD);
+                const usdToVnd = parseFloat(forexData.rates.VND);
+                const currentGoldPriceUsd = parseFloat(goldData['pax-gold'].usd); // 1 oz Gold (PAXG)
+
+                const GOLD_GLOBAL_MCAP_USD = currentGoldPriceUsd * TOTAL_GOLD_OUNCES;
+
                 // 1. TÍNH TOÁN GIÁ TRỊ NAH SOVEREIGN
-                // ==========================================
                 const btcVal = CURRENT_NAH_SATS / 100000000;
                 const usdVal = btcVal * btcUsd;
-                const vndVal = usdVal * 25400;
-                const goldVal = (usdVal / 2350) * 31.1034768;
+                const vndVal = usdVal * usdToVnd; // Live VND
+                const goldVal = (usdVal / currentGoldPriceUsd) * 31.1034768; // Live Gold (Gram)
 
                 document.getElementById("btc-val").innerText = btcVal.toFixed(10) + " BTC";
                 document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " SATS";
@@ -220,38 +271,32 @@
                 document.getElementById("vnd-val").innerText = vndVal.toFixed(2) + " ₫";
                 document.getElementById("gold-val").innerText = goldVal.toFixed(7) + " g";
 
-                // ==========================================
-                // 2. TÍNH TOÁN MARKET CAP (DỰA TRÊN CIRCULATING SUPPLY)
-                // ==========================================
+                // 2. TÍNH TOÁN MARKET CAP
                 const mcapBtc = CIRCULATING_SUPPLY * btcVal;
                 const mcapUsd = CIRCULATING_SUPPLY * usdVal;
                 const mcapVnd = CIRCULATING_SUPPLY * vndVal;
                 const mcapGoldPct = (mcapUsd / GOLD_GLOBAL_MCAP_USD) * 100;
 
-                // Format số lớn để hiển thị cho đẹp
                 document.getElementById("mcap-btc").innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " BTC";
                 document.getElementById("mcap-usd").innerText = "$" + mcapUsd.toLocaleString('en-US', {maximumFractionDigits: 0});
                 document.getElementById("mcap-vnd").innerText = mcapVnd.toLocaleString('vi-VN', {maximumFractionDigits: 0}) + " ₫";
                 document.getElementById("mcap-gold-pct").innerText = mcapGoldPct.toFixed(6) + "%";
 
-                // ==========================================
                 // 3. TÍNH TOÁN BTC REFERENCE
-                // ==========================================
-                const btcVndVal = btcUsd * 25400;
-                const btcGoldVal = (btcUsd / 2350) * 31.1034768;
+                const btcVndVal = btcUsd * usdToVnd;
+                const btcGoldKg = (btcUsd / currentGoldPriceUsd) * 0.0311034768; 
 
                 document.getElementById("btc-usd").innerText = "$" + btcUsd.toLocaleString('en-US');
                 document.getElementById("btc-vnd").innerText = Math.floor(btcVndVal).toLocaleString('vi-VN') + " ₫";
-                document.getElementById("btc-gold").innerText = btcGoldVal.toFixed(2) + " g";
+                document.getElementById("btc-gold").innerText = btcGoldKg.toFixed(4) + " kg";
                 
                 let now = new Date();
-                document.getElementById("last-update").innerText = "MEMPOOL SYNC: " + now.toLocaleTimeString();
+                document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + now.toLocaleTimeString();
             } catch (error) {
                 const errText = "ERROR";
-                // Báo lỗi cho toàn bộ bảng điện
                 const ids = ["btc-val", "sats-val", "usd-val", "vnd-val", "gold-val", "mcap-btc", "mcap-usd", "mcap-vnd", "mcap-gold-pct", "btc-usd", "btc-vnd", "btc-gold"];
                 ids.forEach(id => document.getElementById(id).innerText = errText);
-                document.getElementById("last-update").innerText = "DATALINK FAILED";
+                document.getElementById("last-update").innerText = "DATALINK FAILED (RETRYING...)";
             }
         }
 
