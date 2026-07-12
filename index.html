@@ -5,76 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NAH SOVEREIGN DIAMOND TERMINAL</title>
     <style>
-        body { 
-            background-color: #0a0a0a; 
-            color: #00ff41; 
-            font-family: 'Courier New', Courier, monospace; 
-            margin: 0; 
-            padding: 20px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            height: 100vh; 
-            overflow: hidden; 
-        }
-        .terminal { 
-            border: 2px solid #333; 
-            border-top: 15px solid #00ff41;
-            background: #111;
-            padding: 30px; 
-            width: 90%; 
-            max-width: 500px; 
-            box-shadow: 10px 10px 0px #000; 
-            position: relative; 
-        }
-        .header { 
-            border-bottom: 1px dashed #00ff41; 
-            padding-bottom: 10px; 
-            margin-bottom: 20px; 
-            text-align: left; 
-            letter-spacing: 1px; 
-        }
-        .data-row { 
-            display: flex; 
-            justify-content: space-between; 
-            margin: 15px 0; 
-            font-size: 1.2rem; 
-            border-bottom: 1px solid #222;
-            padding-bottom: 5px;
-        }
+        body { background-color: #0a0a0a; color: #00ff41; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        .terminal { border: 2px solid #333; border-top: 15px solid #00ff41; background: #111; padding: 30px; width: 90%; max-width: 500px; box-shadow: 10px 10px 0px #000; position: relative; }
+        .header { border-bottom: 1px dashed #00ff41; padding-bottom: 10px; margin-bottom: 20px; text-align: left; letter-spacing: 1px; }
+        .data-row { display: flex; justify-content: space-between; margin: 15px 0; font-size: 1.2rem; border-bottom: 1px solid #222; padding-bottom: 5px; }
         .label { color: #888; text-transform: uppercase; font-size: 0.9rem; margin-top: 4px; }
         .value { font-weight: bold; text-shadow: 0 0 5px rgba(0,255,65,0.4); }
         .error-text { color: #ff0000; text-shadow: 0 0 5px rgba(255,0,0,0.4); font-size: 0.9rem; word-break: break-all; }
-        .status { 
-            font-size: 0.8rem; 
-            color: #ff9900; 
-            margin-top: 25px; 
-            text-align: right; 
-        }
-        a.btn { 
-            display: block; 
-            text-align: center; 
-            background: transparent; 
-            color: #00ff41; 
-            text-decoration: none; 
-            padding: 12px; 
-            margin-top: 30px; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            border: 1px solid #00ff41;
-            transition: all 0.2s; 
-        }
-        a.btn:hover { 
-            background: #00ff41; 
-            color: #0a0a0a; 
-            box-shadow: 0 0 15px #00ff41;
-        }
-        .scanline { 
-            width: 100%; height: 100px; z-index: 10; position: absolute; left: 0; pointer-events: none; 
-            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,255,65,0.1) 50%, rgba(0,0,0,0) 100%); 
-            animation: scanline 4s linear infinite; 
-        }
+        .status { font-size: 0.8rem; color: #ff9900; margin-top: 25px; text-align: right; }
+        a.btn { display: block; text-align: center; background: transparent; color: #00ff41; text-decoration: none; padding: 12px; margin-top: 30px; font-weight: bold; text-transform: uppercase; border: 1px solid #00ff41; transition: all 0.2s; }
+        a.btn:hover { background: #00ff41; color: #0a0a0a; box-shadow: 0 0 15px #00ff41; }
+        .scanline { width: 100%; height: 100px; z-index: 10; position: absolute; left: 0; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,255,65,0.1) 50%, rgba(0,0,0,0) 100%); animation: scanline 4s linear infinite; }
         @keyframes scanline { 0% { top: -100px; } 100% { top: 100%; } }
     </style>
 </head>
@@ -86,25 +27,12 @@
             <div style="font-size: 0.7rem; color: #555; margin-top:5px;">[ DATA FINALITY: STRICT ]</div>
         </div>
         
-        <div class="data-row">
-            <span class="label">SATS / NAH:</span>
-            <span class="value" id="sats-val">SYNCING...</span>
-        </div>
-        <div class="data-row">
-            <span class="label">USD / NAH:</span>
-            <span class="value" id="usd-val">SYNCING...</span>
-        </div>
-        <div class="data-row">
-            <span class="label">VND / NAH:</span>
-            <span class="value" id="vnd-val">SYNCING...</span>
-        </div>
-        <div class="data-row">
-            <span class="label">GOLD (oz) / NAH:</span>
-            <span class="value" id="gold-val">SYNCING...</span>
-        </div>
+        <div class="data-row"><span class="label">SATS / NAH:</span><span class="value" id="sats-val">SYNCING...</span></div>
+        <div class="data-row"><span class="label">USD / NAH:</span><span class="value" id="usd-val">SYNCING...</span></div>
+        <div class="data-row"><span class="label">VND / NAH:</span><span class="value" id="vnd-val">SYNCING...</span></div>
+        <div class="data-row"><span class="label">GOLD (oz) / NAH:</span><span class="value" id="gold-val">SYNCING...</span></div>
 
         <div class="status" id="last-update">AWAITING DATALINK...</div>
-        
         <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" class="btn" target="_blank">LIQUIDITY PORTAL</a>
     </div>
 
@@ -113,18 +41,13 @@
         const DOTSWAP_API = "https://api.dotswap.app/brc20swap/stat/tick_price";
         const BTC_API = "https://api.coindesk.com/v1/bpi/currentprice.json";
 
-        // Thuật toán bóc tách dữ liệu linh hoạt (Crystalline Scanner)
         function extractNahPrice(data) {
             try {
                 let target = data.data || data;
-                
-                // Trường hợp 1: Dạng danh sách mảng (Array)
                 if (Array.isArray(target)) {
                     let nahPool = target.find(p => JSON.stringify(p).includes("NAH"));
                     if (nahPool) return nahPool.price || nahPool.tick_price || nahPool.last_price;
                 }
-                
-                // Trường hợp 2: Dạng từ điển khóa (Object keys)
                 if (typeof target === 'object') {
                     for (let key in target) {
                         if (key.includes("NAH")) {
@@ -136,40 +59,31 @@
                     }
                 }
                 return null;
-            } catch (e) {
-                return null;
-            }
+            } catch (e) { return null; }
         }
 
         async function engageOracle() {
             try {
-                // 1. Kéo giá BTC nguyên khối
                 const btcRes = await fetch(BTC_API);
                 const btcData = await btcRes.json();
                 const btcUsd = btcData.bpi.USD.rate_float;
 
-                // 2. Kéo dữ liệu thực từ kho tick_price qua Bóng Ma
                 const dexRes = await fetch(WORKER_PROXY + encodeURIComponent(DOTSWAP_API));
-                if (!dexRes.ok) throw new Error("PROXY CONNECTION FAILED");
+                if (!dexRes.ok) throw new Error("PROXY HTTP " + dexRes.status);
                 
                 const dexData = await dexRes.json();
-                
-                // 3. Quét tìm NAH Sovereign Diamond
                 let nahBtcRate = extractNahPrice(dexData);
                 
                 if (!nahBtcRate) {
-                    // Nếu không thấy, in ra một mẩu dữ liệu thô để Thuyền trưởng làm trinh sát
                     let rawSnippet = JSON.stringify(dexData).substring(0, 45) + "...";
                     throw new Error("NOT FOUND. RAW: " + rawSnippet);
                 }
                 
-                // 4. Tính toán dựa trên giá thực
                 let satsVal = (nahBtcRate * 100000000).toFixed(2);
                 let usdVal = (nahBtcRate * btcUsd).toFixed(4);
                 let vndVal = Math.floor(usdVal * 25400).toLocaleString('vi-VN'); 
                 let goldVal = (usdVal / 2350).toFixed(6);
 
-                // 5. Kết xuất bảng mạch
                 document.getElementById("sats-val").className = "value";
                 document.getElementById("usd-val").className = "value";
                 document.getElementById("vnd-val").className = "value";
@@ -185,7 +99,6 @@
                 document.getElementById("last-update").style.color = "#ff9900";
 
             } catch (error) {
-                // TRẠNG THÁI BÁO LỖI VÀ XUẤT MÃ THÔ (IN-LINE DEBUG)
                 document.getElementById("sats-val").className = "value error-text";
                 document.getElementById("usd-val").className = "value error-text";
                 document.getElementById("vnd-val").className = "value error-text";
@@ -196,7 +109,6 @@
                 document.getElementById("vnd-val").innerText = "ERROR";
                 document.getElementById("gold-val").innerText = "ERROR";
                 
-                // In thẳng báo cáo trinh sát lên màn hình
                 document.getElementById("last-update").innerText = "DATALINK: " + error.message;
                 document.getElementById("last-update").style.color = "#ff0000";
             }
