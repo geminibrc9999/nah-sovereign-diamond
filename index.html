@@ -45,7 +45,7 @@
         }
         .label { color: #888; text-transform: uppercase; font-size: 0.9rem; margin-top: 4px; }
         .value { font-weight: bold; text-shadow: 0 0 5px rgba(0,255,65,0.4); }
-        .error-text { color: #ff0000; text-shadow: 0 0 5px rgba(255,0,0,0.4); }
+        .error-text { color: #ff0000; text-shadow: 0 0 5px rgba(255,0,0,0.4); font-size: 0.9rem; word-break: break-all; }
         .status { 
             font-size: 0.8rem; 
             color: #ff9900; 
@@ -110,19 +110,35 @@
 
     <script>
         const WORKER_PROXY = "https://misty-voice-3bd5.geminibrc9999-ba3.workers.dev/?api=";
-        const DOTSWAP_API = "https://api.dotswap.app/brc20swap/swap_pools_info_v2";
+        const DOTSWAP_API = "https://api.dotswap.app/brc20swap/stat/tick_price";
         const BTC_API = "https://api.coindesk.com/v1/bpi/currentprice.json";
 
         // Thuật toán bóc tách dữ liệu linh hoạt (Crystalline Scanner)
         function extractNahPrice(data) {
-            let pools = data.data || data.pools || data.result || data;
-            if (Array.isArray(pools)) {
-                let nahPool = pools.find(p => JSON.stringify(p).includes("NAH"));
-                if (nahPool) {
-                    return nahPool.price || nahPool.last_price || nahPool.rate || null;
+            try {
+                let target = data.data || data;
+                
+                // Trường hợp 1: Dạng danh sách mảng (Array)
+                if (Array.isArray(target)) {
+                    let nahPool = target.find(p => JSON.stringify(p).includes("NAH"));
+                    if (nahPool) return nahPool.price || nahPool.tick_price || nahPool.last_price;
                 }
+                
+                // Trường hợp 2: Dạng từ điển khóa (Object keys)
+                if (typeof target === 'object') {
+                    for (let key in target) {
+                        if (key.includes("NAH")) {
+                            let val = target[key];
+                            if (typeof val === 'number' || typeof val === 'string') return parseFloat(val);
+                            if (val.price) return parseFloat(val.price);
+                            if (val.tick_price) return parseFloat(val.tick_price);
+                        }
+                    }
+                }
+                return null;
+            } catch (e) {
+                return null;
             }
-            return null;
         }
 
         async function engageOracle() {
@@ -132,17 +148,19 @@
                 const btcData = await btcRes.json();
                 const btcUsd = btcData.bpi.USD.rate_float;
 
-                // 2. Kéo dữ liệu thực từ DotSwap qua Bóng Ma
+                // 2. Kéo dữ liệu thực từ kho tick_price qua Bóng Ma
                 const dexRes = await fetch(WORKER_PROXY + encodeURIComponent(DOTSWAP_API));
                 if (!dexRes.ok) throw new Error("PROXY CONNECTION FAILED");
                 
                 const dexData = await dexRes.json();
                 
-                // 3. Quét tìm NAH
+                // 3. Quét tìm NAH Sovereign Diamond
                 let nahBtcRate = extractNahPrice(dexData);
                 
                 if (!nahBtcRate) {
-                    throw new Error("NAH LIQUIDITY NOT FOUND IN LEDGER");
+                    // Nếu không thấy, in ra một mẩu dữ liệu thô để Thuyền trưởng làm trinh sát
+                    let rawSnippet = JSON.stringify(dexData).substring(0, 45) + "...";
+                    throw new Error("NOT FOUND. RAW: " + rawSnippet);
                 }
                 
                 // 4. Tính toán dựa trên giá thực
@@ -167,7 +185,7 @@
                 document.getElementById("last-update").style.color = "#ff9900";
 
             } catch (error) {
-                // TRẠNG THÁI BÁO LỖI CHÂN THỰC
+                // TRẠNG THÁI BÁO LỖI VÀ XUẤT MÃ THÔ (IN-LINE DEBUG)
                 document.getElementById("sats-val").className = "value error-text";
                 document.getElementById("usd-val").className = "value error-text";
                 document.getElementById("vnd-val").className = "value error-text";
@@ -178,7 +196,8 @@
                 document.getElementById("vnd-val").innerText = "ERROR";
                 document.getElementById("gold-val").innerText = "ERROR";
                 
-                document.getElementById("last-update").innerText = "DATALINK ERROR: " + error.message;
+                // In thẳng báo cáo trinh sát lên màn hình
+                document.getElementById("last-update").innerText = "DATALINK: " + error.message;
                 document.getElementById("last-update").style.color = "#ff0000";
             }
         }
