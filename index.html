@@ -3,195 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAH SOVEREIGN DIAMOND</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>NAH SOVEREIGN DIAMOND 💎</title>
     <style>
-        body { background-color: #050505; color: #00ff41; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 100vh; overflow-x: hidden; }
-        .terminal { border: 2px solid #333; border-top: 15px solid #00ff41; background: #0a0a0a; padding: 30px; width: 100%; max-width: 600px; box-shadow: 8px 8px 0px #000; position: relative; margin-bottom: 30px; }
+        /* PHONG CÁCH CYPHERPUNK TỐI GIẢN: TRẮNG & ĐEN */
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: 'SF Mono', 'Consolas', 'Courier New', monospace; /* Font chữ nhỏ, sắc bén */
+            font-size: 13px;
+            margin: 0;
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         
-        /* HEADER */
-        .header { border-bottom: 1px dashed #00ff41; padding-bottom: 15px; margin-bottom: 25px; text-align: center; }
-        .title-main { margin: 0; color: #fff; font-size: 1.8rem; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0,255,65,0.5); text-transform: uppercase; }
-        .under-construction { font-size: 0.85rem; color: #ff9900; margin-top: 8px; font-weight: bold; animation: blink 1.5s infinite; letter-spacing: 1px; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .container {
+            width: 100%;
+            max-width: 480px;
+        }
         
-        /* DATA ROWS */
-        .data-box { background: #111; border: 1px solid #222; padding: 15px; margin-bottom: 20px; }
-        .data-row { display: flex; justify-content: space-between; margin: 8px 0; font-size: 1.1rem; border-bottom: 1px dotted #333; padding-bottom: 6px; }
-        .data-row:last-child { border-bottom: none; padding-bottom: 0; }
-        .label { color: #888; text-transform: uppercase; font-size: 0.9rem; margin-top: 2px; }
-        .value { font-weight: bold; text-shadow: 0 0 5px rgba(0,255,65,0.4); }
-        .error-text { color: #ff0000; text-shadow: 0 0 5px rgba(255,0,0,0.4); }
+        .title {
+            font-size: 17px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
         
-        /* MULTI-CHARTS GRID */
-        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .chart-wrapper { background: #111; border: 1px solid #333; padding: 10px; position: relative; }
-        .chart-title { font-size: 0.7rem; color: #888; position: absolute; top: 8px; left: 10px; z-index: 2; }
-        canvas { width: 100% !important; height: 80px !important; margin-top: 15px; }
-
-        /* BUTTONS */
-        .actions { margin-top: 25px; display: flex; flex-direction: column; gap: 12px; }
-        a.btn { display: block; text-align: center; background: transparent; color: #00ff41; text-decoration: none; padding: 12px; font-weight: bold; text-transform: uppercase; border: 1px solid #00ff41; transition: all 0.2s; font-size: 0.85rem; letter-spacing: 1px; }
-        a.btn:hover { background: #00ff41; color: #0a0a0a; box-shadow: 0 0 15px #00ff41; }
-        a.btn-dotswap { border-color: #ff9900; color: #ff9900; }
-        a.btn-dotswap:hover { background: #ff9900; color: #0a0a0a; box-shadow: 0 0 15px #ff9900; }
-        .status { font-size: 0.75rem; color: #555; margin-top: 15px; text-align: right; }
-
-        /* BRC FOUNDATION SECTION */
-        .brc-section { width: 100%; max-width: 600px; border-top: 1px solid #222; padding-top: 20px; text-align: center; }
-        .brc-title { color: #fff; font-size: 1.1rem; font-weight: bold; letter-spacing: 1px; margin-bottom: 10px; }
-        .brc-links { display: flex; justify-content: center; gap: 20px; font-size: 0.9rem; }
-        .brc-links a { color: #888; text-decoration: none; border-bottom: 1px dotted #888; transition: color 0.2s; }
-        .brc-links a:hover { color: #fff; border-bottom-color: #fff; }
-
-        /* DECORATION */
-        .scanline { width: 100%; height: 50px; z-index: 10; position: absolute; left: 0; top: 0; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,255,65,0.05) 50%, rgba(0,0,0,0) 100%); animation: scanline 6s linear infinite; }
-        @keyframes scanline { 0% { top: -50px; } 100% { top: 100%; } }
+        /* BẢNG DỮ LIỆU ĐƯỢC KẺ KHUNG MỎNG, BÉN */
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dotted #000;
+            padding: 10px 0;
+        }
+        
+        .data-row:last-of-type {
+            border-bottom: 2px solid #000;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .label {
+            text-transform: uppercase;
+            font-weight: normal;
+        }
+        
+        .value {
+            font-weight: bold;
+        }
+        
+        /* CÁC DÒNG THÔNG TIN ĐIỀU HƯỚNG */
+        .info-text {
+            font-size: 12px;
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: #111;
+        }
+        
+        .info-text a {
+            color: #000000;
+            font-weight: bold;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+        
+        .info-text a:hover {
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        /* FOOTER ĐƯỢC ĐẨY XUỐNG ĐÁY */
+        .footer {
+            margin-top: 60px;
+            font-size: 11px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
     </style>
 </head>
 <body>
-    <div class="terminal">
-        <div class="scanline"></div>
-        <div class="header">
-            <h1 class="title-main">NAH SOVEREIGN DIAMOND</h1>
-            <div class="under-construction">[ WEBSITE UNDER CONSTRUCTION ]</div>
+    <div class="container">
+        <div class="title">NAH SOVEREIGN DIAMOND 💎</div>
+
+        <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">LOADING...</span></div>
+        <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">LOADING...</span></div>
+        <div class="data-row"><span class="label">GOLD (g) / NAH</span><span class="value" id="gold-val">LOADING...</span></div>
+        <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">LOADING...</span></div>
+        <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">LOADING...</span></div>
+
+        <div class="info-text">
+            * The NAH price is updated based on the trading price on <a href="https://satflow.com" target="_blank">satflow.com</a>.
+        </div>
+        <div class="info-text">
+            * To view live BTC/NAH chart and get best prices, please visit <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">DotSwap</a>.
         </div>
         
-        <div class="data-box">
-            <div class="data-row"><span class="label">SATS / NAH:</span><span class="value" id="sats-val">LOADING...</span></div>
-            <div class="data-row"><span class="label">USD / NAH:</span><span class="value" id="usd-val">LOADING...</span></div>
-            <div class="data-row"><span class="label">VND / NAH:</span><span class="value" id="vnd-val">LOADING...</span></div>
-            <div class="data-row"><span class="label">GOLD (g) / NAH:</span><span class="value" id="gold-val">LOADING...</span></div>
-        </div>
-
-        <div class="chart-grid">
-            <div class="chart-wrapper">
-                <div class="chart-title">SATS TRACKER</div>
-                <canvas id="satsChart"></canvas>
-            </div>
-            <div class="chart-wrapper">
-                <div class="chart-title">USD TRACKER</div>
-                <canvas id="usdChart"></canvas>
-            </div>
-            <div class="chart-wrapper">
-                <div class="chart-title">VND TRACKER</div>
-                <canvas id="vndChart"></canvas>
-            </div>
-            <div class="chart-wrapper">
-                <div class="chart-title">GOLD TRACKER</div>
-                <canvas id="goldChart"></canvas>
-            </div>
-        </div>
-
-        <div class="actions">
-            <a href="https://satflow.com" class="btn" target="_blank">TRADE ON SATFLOW</a>
-            <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" class="btn btn-dotswap" target="_blank">FOR BEST PRICES PLEASE VISIT DOTSWAP</a>
-        </div>
-        
-        <div class="status" id="last-update">AWAITING DATALINK...</div>
-    </div>
-
-    <div class="brc-section">
-        <div class="brc-title">BEMP RESEARCH CORPORATION</div>
-        <div class="brc-links">
-            <a href="https://bempresearch.com" target="_blank">bempresearch.com</a>
-            <a href="https://facebook.com/bempresearch" target="_blank">facebook.com/bempresearch</a>
-        </div>
+        <div class="footer">[ WEBSITE UNDER CONSTRUCTION ]</div>
     </div>
 
     <script>
-        // ========================================================================
-        // KHU VỰC QUYỀN LỰC CỦA THE HOLDER (SỔ CÁI LỊCH SỬ GIÁ)
-        // ========================================================================
-        const PRICE_HISTORY = [
-            { date: "01/07/2026", sats: 0.01 },
-            { date: "12/07/2026", sats: 0.08 }
-        ];
+        // ==========================================
+        // QUYỀN LỰC TỰ TRỊ (MANUAL DECENTRALIZATION)
+        // Thay đổi con số SATS ở đây khi có biến động trên Satflow
+        const CURRENT_NAH_SATS = 0.08; 
+        // ==========================================
 
-        // Mạch máu phi tập trung Mempool.space
         const BTC_API = "https://mempool.space/api/v1/prices";
-
-        function createBrutalistChart(ctxId, color) {
-            return new Chart(document.getElementById(ctxId).getContext('2d'), {
-                type: 'line',
-                data: { labels: [], datasets: [{ data: [], borderColor: color, borderWidth: 2, pointBackgroundColor: color, pointRadius: 3, tension: 0 }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false } }, animation: { duration: 0 } }
-            });
-        }
-
-        const chartSats = createBrutalistChart('satsChart', '#00ff41');
-        const chartUsd = createBrutalistChart('usdChart', '#fff');
-        const chartVnd = createBrutalistChart('vndChart', '#ff9900');
-        const chartGold = createBrutalistChart('goldChart', '#ffd700');
 
         async function engageOracle() {
             try {
-                const btcRes = await fetch(BTC_API);
-                if (!btcRes.ok) throw new Error("MEMPOOL SYSTEM OVERLOAD");
-                
-                const btcData = await btcRes.json();
-                const btcUsd = parseFloat(btcData.USD);
+                // Rút giá BTC tĩnh lặng từ Mempool
+                const res = await fetch(BTC_API);
+                if (!res.ok) throw new Error("API FAILED");
+                const data = await res.json();
+                const btcUsd = parseFloat(data.USD);
 
-                const labels = PRICE_HISTORY.map(entry => entry.date);
-                const dataSats = [];
-                const dataUsd = [];
-                const dataVnd = [];
-                const dataGold = [];
+                // Thuật toán phân rã đơn vị
+                const btcVal = CURRENT_NAH_SATS / 100000000;
+                const usdVal = btcVal * btcUsd;
+                const vndVal = usdVal * 25400;
+                const goldVal = (usdVal / 2350) * 31.1034768;
 
-                PRICE_HISTORY.forEach(entry => {
-                    let rate = entry.sats;
-                    let usd = (rate / 100000000) * btcUsd;
-                    dataSats.push(rate);
-                    dataUsd.push(usd);
-                    dataVnd.push(usd * 25400);
-                    // Thuật toán quy đổi từ Ounce sang Gram: (USD_NAH / Giá_Ounce_Vàng) * 31.1034768
-                    dataGold.push((usd / 2350) * 31.1034768);
-                });
-
-                const currentSats = dataSats[dataSats.length - 1];
-                const currentUsd = dataUsd[dataUsd.length - 1];
-                const currentVnd = dataVnd[dataVnd.length - 1];
-                const currentGold = dataGold[dataGold.length - 1];
-
-                document.getElementById("sats-val").className = "value";
-                document.getElementById("usd-val").className = "value";
-                document.getElementById("vnd-val").className = "value";
-                document.getElementById("gold-val").className = "value";
-
-                document.getElementById("sats-val").innerText = currentSats + " SATS";
-                document.getElementById("usd-val").innerText = "$" + currentUsd.toFixed(5);
-                document.getElementById("vnd-val").innerText = currentVnd.toFixed(2) + " ₫";
-                // Hiển thị độ mịn Gram với 7 chữ số thập phân để thấy rõ giá trị gia tăng
-                document.getElementById("gold-val").innerText = currentGold.toFixed(7) + " g";
-
-                chartSats.data.labels = labels; chartSats.data.datasets[0].data = dataSats; chartSats.update();
-                chartUsd.data.labels = labels; chartUsd.data.datasets[0].data = dataUsd; chartUsd.update();
-                chartVnd.data.labels = labels; chartVnd.data.datasets[0].data = dataVnd; chartVnd.update();
-                chartGold.data.labels = labels; chartGold.data.datasets[0].data = dataGold; chartGold.update();
-                
-                let now = new Date();
-                // Làm sạch thanh trạng thái theo lệnh của Thuyền trưởng
-                document.getElementById("last-update").innerText = "MEMPOOL SYNC: " + now.toLocaleTimeString();
-                document.getElementById("last-update").style.color = "#555";
-
+                // Cập nhật màn hình sắc lẹm
+                document.getElementById("usd-val").innerText = "$" + usdVal.toFixed(5);
+                document.getElementById("vnd-val").innerText = Math.floor(vndVal).toLocaleString('vi-VN') + " ₫";
+                document.getElementById("gold-val").innerText = goldVal.toFixed(7) + " g";
+                document.getElementById("btc-val").innerText = btcVal.toFixed(10) + " BTC";
+                document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " SATS";
             } catch (error) {
-                document.getElementById("sats-val").className = "value error-text";
-                document.getElementById("usd-val").className = "value error-text";
-                document.getElementById("vnd-val").className = "value error-text";
-                document.getElementById("gold-val").className = "value error-text";
-
-                document.getElementById("sats-val").innerText = "ERROR";
-                document.getElementById("usd-val").innerText = "ERROR";
-                document.getElementById("vnd-val").innerText = "ERROR";
-                document.getElementById("gold-val").innerText = "ERROR";
-                
-                document.getElementById("last-update").innerText = "DATALINK ERROR: " + error.message;
-                document.getElementById("last-update").style.color = "#ff0000";
+                const errText = "ERROR";
+                document.getElementById("usd-val").innerText = errText;
+                document.getElementById("vnd-val").innerText = errText;
+                document.getElementById("gold-val").innerText = errText;
+                document.getElementById("btc-val").innerText = errText;
+                document.getElementById("sats-val").innerText = errText;
             }
         }
 
         engageOracle();
-        setInterval(engageOracle, 60000); 
+        setInterval(engageOracle, 60000); // Ẩn đồng hồ đo giờ, chỉ cập nhật dữ liệu ngầm mỗi phút
     </script>
 </body>
 </html>
