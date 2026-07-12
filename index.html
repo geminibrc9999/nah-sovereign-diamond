@@ -3,130 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAH SOVEREIGN DIAMOND TERMINAL</title>
+    <title>NAH SOVEREIGN DIAMOND</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { background-color: #0a0a0a; color: #00ff41; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
-        .terminal { border: 2px solid #333; border-top: 15px solid #00ff41; background: #111; padding: 30px; width: 90%; max-width: 500px; box-shadow: 10px 10px 0px #000; position: relative; }
-        .header { border-bottom: 1px dashed #00ff41; padding-bottom: 10px; margin-bottom: 20px; text-align: left; letter-spacing: 1px; }
-        .data-row { display: flex; justify-content: space-between; margin: 15px 0; font-size: 1.2rem; border-bottom: 1px solid #222; padding-bottom: 5px; }
-        .label { color: #888; text-transform: uppercase; font-size: 0.9rem; margin-top: 4px; }
+        body { background-color: #050505; color: #00ff41; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 100vh; overflow-x: hidden; }
+        .terminal { border: 2px solid #333; border-top: 15px solid #00ff41; background: #0a0a0a; padding: 30px; width: 100%; max-width: 600px; box-shadow: 8px 8px 0px #000; position: relative; margin-bottom: 30px; }
+        
+        /* HEADER */
+        .header { border-bottom: 1px dashed #00ff41; padding-bottom: 15px; margin-bottom: 25px; text-align: center; }
+        .title-main { margin: 0; color: #fff; font-size: 1.8rem; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0,255,65,0.5); text-transform: uppercase; }
+        .under-construction { font-size: 0.85rem; color: #ff9900; margin-top: 8px; font-weight: bold; animation: blink 1.5s infinite; letter-spacing: 1px; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        
+        /* DATA ROWS */
+        .data-box { background: #111; border: 1px solid #222; padding: 15px; margin-bottom: 20px; }
+        .data-row { display: flex; justify-content: space-between; margin: 8px 0; font-size: 1.1rem; border-bottom: 1px dotted #333; padding-bottom: 6px; }
+        .data-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .label { color: #888; text-transform: uppercase; font-size: 0.9rem; margin-top: 2px; }
         .value { font-weight: bold; text-shadow: 0 0 5px rgba(0,255,65,0.4); }
-        .error-text { color: #ff0000; text-shadow: 0 0 5px rgba(255,0,0,0.4); font-size: 0.8rem; word-break: break-all; }
-        .status { font-size: 0.8rem; color: #ff9900; margin-top: 25px; text-align: right; }
-        a.btn { display: block; text-align: center; background: transparent; color: #00ff41; text-decoration: none; padding: 12px; margin-top: 30px; font-weight: bold; text-transform: uppercase; border: 1px solid #00ff41; transition: all 0.2s; }
+        
+        /* MULTI-CHARTS GRID */
+        .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .chart-wrapper { background: #111; border: 1px solid #333; padding: 10px; position: relative; }
+        .chart-title { font-size: 0.7rem; color: #888; position: absolute; top: 8px; left: 10px; z-index: 2; }
+        canvas { width: 100% !important; height: 80px !important; margin-top: 15px; }
+
+        /* BUTTONS */
+        .actions { margin-top: 25px; display: flex; flex-direction: column; gap: 12px; }
+        a.btn { display: block; text-align: center; background: transparent; color: #00ff41; text-decoration: none; padding: 12px; font-weight: bold; text-transform: uppercase; border: 1px solid #00ff41; transition: all 0.2s; font-size: 0.85rem; letter-spacing: 1px; }
         a.btn:hover { background: #00ff41; color: #0a0a0a; box-shadow: 0 0 15px #00ff41; }
-        .scanline { width: 100%; height: 100px; z-index: 10; position: absolute; left: 0; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,255,65,0.1) 50%, rgba(0,0,0,0) 100%); animation: scanline 4s linear infinite; }
-        @keyframes scanline { 0% { top: -100px; } 100% { top: 100%; } }
+        a.btn-dotswap { border-color: #ff9900; color: #ff9900; }
+        a.btn-dotswap:hover { background: #ff9900; color: #0a0a0a; box-shadow: 0 0 15px #ff9900; }
+        .status { font-size: 0.75rem; color: #555; margin-top: 15px; text-align: right; }
+
+        /* BRC FOUNDATION SECTION */
+        .brc-section { width: 100%; max-width: 600px; border-top: 1px solid #222; padding-top: 20px; text-align: center; }
+        .brc-title { color: #fff; font-size: 1.1rem; font-weight: bold; letter-spacing: 1px; margin-bottom: 10px; }
+        .brc-links { display: flex; justify-content: center; gap: 20px; font-size: 0.9rem; }
+        .brc-links a { color: #888; text-decoration: none; border-bottom: 1px dotted #888; transition: color 0.2s; }
+        .brc-links a:hover { color: #fff; border-bottom-color: #fff; }
+
+        /* DECORATION */
+        .scanline { width: 100%; height: 50px; z-index: 10; position: absolute; left: 0; top: 0; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,255,65,0.05) 50%, rgba(0,0,0,0) 100%); animation: scanline 6s linear infinite; }
+        @keyframes scanline { 0% { top: -50px; } 100% { top: 100%; } }
     </style>
 </head>
 <body>
     <div class="terminal">
         <div class="scanline"></div>
         <div class="header">
-            <h3 style="margin:0; color:#fff;">BRC ORACLE V2.1</h3>
-            <div style="font-size: 0.7rem; color: #555; margin-top:5px;">[ DATALINK: SATFLOW TROJAN BRIDGE ]</div>
+            <h1 class="title-main">NAH SOVEREIGN DIAMOND</h1>
+            <div class="under-construction">[ WEBSITE UNDER CONSTRUCTION ]</div>
         </div>
         
-        <div class="data-row"><span class="label">SATS / NAH:</span><span class="value" id="sats-val">SYNCING...</span></div>
-        <div class="data-row"><span class="label">USD / NAH:</span><span class="value" id="usd-val">SYNCING...</span></div>
-        <div class="data-row"><span class="label">VND / NAH:</span><span class="value" id="vnd-val">SYNCING...</span></div>
-        <div class="data-row"><span class="label">GOLD (oz) / NAH:</span><span class="value" id="gold-val">SYNCING...</span></div>
+        <div class="data-box">
+            <div class="data-row"><span class="label">BTC / NAH:</span><span class="value" id="sats-val">LOADING...</span></div>
+            <div class="data-row"><span class="label">USD / NAH:</span><span class="value" id="usd-val">LOADING...</span></div>
+            <div class="data-row"><span class="label">VND / NAH:</span><span class="value" id="vnd-val">LOADING...</span></div>
+            <div class="data-row"><span class="label">GOLD (oz) / NAH:</span><span class="value" id="gold-val">LOADING...</span></div>
+        </div>
 
-        <div class="status" id="last-update">CONNECTING VIA GOOGLE CLOUD...</div>
-        <a href="https://satflow.com" class="btn" target="_blank">LIQUIDITY PORTAL (SATFLOW)</a>
+        <!-- 4 BIỂU ĐỒ ĐỘC LẬP (QUAD-CHART SYSTEM) -->
+        <div class="chart-grid">
+            <div class="chart-wrapper">
+                <div class="chart-title">SATS TRACKER</div>
+                <canvas id="satsChart"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <div class="chart-title">USD TRACKER</div>
+                <canvas id="usdChart"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <div class="chart-title">VND TRACKER</div>
+                <canvas id="vndChart"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <div class="chart-title">GOLD TRACKER</div>
+                <canvas id="goldChart"></canvas>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="https://satflow.com" class="btn" target="_blank">TRADE ON SATFLOW</a>
+            <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" class="btn btn-dotswap" target="_blank">FOR BEST PRICES PLEASE VISIT DOTSWAP</a>
+        </div>
+        
+        <div class="status" id="last-update">AWAITING BTC DATALINK...</div>
+    </div>
+
+    <!-- KHU VỰC NỀN TẢNG BRC -->
+    <div class="brc-section">
+        <div class="brc-title">BEMP RESEARCH CORPORATION</div>
+        <div class="brc-links">
+            <a href="https://bempresearch.com" target="_blank">bempresearch.com</a>
+            <a href="https://facebook.com/bempresearch" target="_blank">facebook.com/bempresearch</a>
+        </div>
     </div>
 
     <script>
-        // Cổng kết nối tối thượng Thuyền trưởng vừa kích hoạt
-        const GOOGLE_ORACLE_URL = "https://script.google.com/macros/s/AKfycbxHlnBRJ8Ije3E0ZNOp0HqoSo7XLR_BapxR7VTrcNPomR9oGNeXtonV_IodX0uOJ8x_/exec"; 
-        const BTC_API = "https://api.coindesk.com/v1/bpi/currentprice.json";
+        // ========================================================================
+        // KHU VỰC QUYỀN LỰC CỦA THE HOLDER (SỔ CÁI LỊCH SỬ)
+        // Thêm điểm dữ liệu mới vào cuối danh sách mỗi khi có biến động giá.
+        // Cấu trúc: { date: "Ngày/Tháng/Năm", sats: Giá_Sats_Mới }
+        // ========================================================================
+        const PRICE_HISTORY = [
+            { date: "01/07/2026", sats: 0.01 },
+            { date: "12/07/2026", sats: 0.08 }
+        ];
 
-        // Trình dò tìm Crystalline Scanner cho dải dữ liệu Satflow
-        function extractNahPriceFromStream(data) {
-            try {
-                if (data.error) return null;
-                
-                let target = data.data || data.items || data.events || data.activities || data;
-                
-                if (Array.isArray(target)) {
-                    let nahItem = target.find(item => JSON.stringify(item).includes("NAH"));
-                    if (nahItem) {
-                        return nahItem.price || nahItem.rate || nahItem.tick_price || nahItem.amount || null;
-                    }
-                }
-                
-                if (typeof target === 'object') {
-                    for (let key in target) {
-                        if (key.includes("NAH")) {
-                            let val = target[key];
-                            if (typeof val === 'number' || typeof val === 'string') return parseFloat(val);
-                            return val.price || val.rate || val.tick_price || null;
-                        }
-                    }
-                }
-                return null;
-            } catch (e) { return null; }
+        const BTC_API = "https://api.coindesk.com/v1/bpi/currentprice.json";
+        
+        // Khai báo biến lưu trữ 4 biểu đồ để cập nhật tự động
+        let chartSats, chartUsd, chartVnd, chartGold;
+
+        // Hàm chung để tạo biểu đồ phong cách Cybernetic Noir
+        function createBrutalistChart(ctxId, color) {
+            return new Chart(document.getElementById(ctxId).getContext('2d'), {
+                type: 'line',
+                data: { labels: [], datasets: [{ data: [], borderColor: color, borderWidth: 2, pointBackgroundColor: color, pointRadius: 3, tension: 0 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false } }, animation: { duration: 0 } }
+            });
         }
+
+        // Khởi tạo 4 biểu đồ trống
+        window.onload = () => {
+            chartSats = createBrutalistChart('satsChart', '#00ff41');
+            chartUsd = createBrutalistChart('usdChart', '#fff');
+            chartVnd = createBrutalistChart('vndChart', '#ff9900');
+            chartGold = createBrutalistChart('goldChart', '#ffd700');
+            engageOracle();
+        };
 
         async function engageOracle() {
             try {
-                // 1. Kéo giá Bitcoin nguyên khối
+                // Lấy giá BTC
                 const btcRes = await fetch(BTC_API);
                 const btcData = await btcRes.json();
                 const btcUsd = btcData.bpi.USD.rate_float;
 
-                // 2. Ép máy chủ Google đi hút máu Satflow
-                const dexRes = await fetch(GOOGLE_ORACLE_URL);
-                if (!dexRes.ok) throw new Error("GOOGLE CLOUD TIMEOUT");
+                // Tách dữ liệu nhãn (Ngày tháng)
+                const labels = PRICE_HISTORY.map(entry => entry.date);
                 
-                const dexData = await dexRes.json();
-                
-                // 3. Khởi chạy Crystalline Scanner
-                let nahBtcRate = extractNahPriceFromStream(dexData);
-                
-                if (!nahBtcRate) {
-                    let rawSnippet = JSON.stringify(dexData).substring(0, 50) + "...";
-                    throw new Error("STREAM CONNECTED. RAW SNIPPET: " + rawSnippet);
-                }
-                
-                // 4. Phân rã dữ liệu
-                let satsVal = (nahBtcRate * 100000000).toFixed(2);
-                let usdVal = (nahBtcRate * btcUsd).toFixed(4);
-                let vndVal = Math.floor(usdVal * 25400).toLocaleString('vi-VN'); 
-                let goldVal = (usdVal / 2350).toFixed(6);
+                // Thuật toán tính toán chuỗi dữ liệu lịch sử dựa trên giá BTC hiện tại
+                const dataSats = [];
+                const dataUsd = [];
+                const dataVnd = [];
+                const dataGold = [];
 
-                // 5. Kết xuất bảng mạch Terminal
-                document.getElementById("sats-val").className = "value";
-                document.getElementById("usd-val").className = "value";
-                document.getElementById("vnd-val").className = "value";
-                document.getElementById("gold-val").className = "value";
+                PRICE_HISTORY.forEach(entry => {
+                    let rate = entry.sats;
+                    let usd = (rate / 100000000) * btcUsd;
+                    dataSats.push(rate);
+                    dataUsd.push(usd);
+                    dataVnd.push(usd * 25400);
+                    dataGold.push(usd / 2350);
+                });
 
-                document.getElementById("sats-val").innerText = satsVal + " SATS";
-                document.getElementById("usd-val").innerText = "$" + usdVal;
-                document.getElementById("vnd-val").innerText = vndVal + " ₫";
-                document.getElementById("gold-val").innerText = goldVal + " oz";
+                // Lấy giá trị mới nhất (dòng cuối cùng) để hiển thị lên bảng chữ
+                const currentSats = dataSats[dataSats.length - 1];
+                const currentUsd = dataUsd[dataUsd.length - 1];
+                const currentVnd = dataVnd[dataVnd.length - 1];
+                const currentGold = dataGold[dataGold.length - 1];
+
+                document.getElementById("sats-val").innerText = currentSats + " SATS";
+                document.getElementById("usd-val").innerText = "$" + currentUsd.toFixed(4);
+                document.getElementById("vnd-val").innerText = Math.floor(currentVnd).toLocaleString('vi-VN') + " ₫";
+                document.getElementById("gold-val").innerText = currentGold.toFixed(6) + " oz";
+
+                // Bơm dữ liệu vào 4 biểu đồ
+                chartSats.data.labels = labels; chartSats.data.datasets[0].data = dataSats; chartSats.update();
+                chartUsd.data.labels = labels; chartUsd.data.datasets[0].data = dataUsd; chartUsd.update();
+                chartVnd.data.labels = labels; chartVnd.data.datasets[0].data = dataVnd; chartVnd.update();
+                chartGold.data.labels = labels; chartGold.data.datasets[0].data = dataGold; chartGold.update();
                 
                 let now = new Date();
-                document.getElementById("last-update").innerText = "SATFLOW GOOGLE SYNC: " + now.toLocaleTimeString();
-                document.getElementById("last-update").style.color = "#00ff41";
+                document.getElementById("last-update").innerText = "DATALINK: MANUAL DECENTRAL | BTC SYNC: " + now.toLocaleTimeString();
 
             } catch (error) {
-                document.getElementById("sats-val").className = "value error-text";
-                document.getElementById("usd-val").className = "value error-text";
-                document.getElementById("vnd-val").className = "value error-text";
-                document.getElementById("gold-val").className = "value error-text";
-
-                document.getElementById("sats-val").innerText = "ERROR";
-                document.getElementById("usd-val").innerText = "ERROR";
-                document.getElementById("vnd-val").innerText = "ERROR";
-                document.getElementById("gold-val").innerText = "ERROR";
-                
-                document.getElementById("last-update").innerText = "ORACLE: " + error.message;
+                document.getElementById("last-update").innerText = "BTC DATALINK ERROR...";
                 document.getElementById("last-update").style.color = "#ff0000";
             }
         }
 
-        engageOracle();
         setInterval(engageOracle, 60000); 
     </script>
 </body>
