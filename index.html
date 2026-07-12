@@ -197,12 +197,15 @@
             <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
         </div>
 
-        <!-- SECTION 3: BTC REFERENCE DATA -->
+        <!-- SECTION 3: BTC & SAT REFERENCE DATA -->
         <div class="sub-section" style="border-left-color: #444;">
-            <div class="sub-title" style="color:#aaa;">BTC REFERENCE DATA</div>
+            <div class="sub-title" style="color:#aaa;">BTC (SAT / DIGITAL GOLD) DATA</div>
             <div class="sub-row"><span class="label">USD / BTC</span><span class="value" id="btc-usd">LOADING...</span></div>
             <div class="sub-row"><span class="label">VND / BTC</span><span class="value" id="btc-vnd">LOADING...</span></div>
-            <div class="sub-row"><span class="label">GOLD (kg) / BTC</span><span class="value" id="btc-gold">LOADING...</span></div>
+            <div class="sub-row"><span class="label">GOLD (gram) / BTC</span><span class="value" id="btc-gold">LOADING...</span></div>
+            <div class="sub-row"><span class="label">USD / SAT</span><span class="value" id="sat-usd">LOADING...</span></div>
+            <div class="sub-row"><span class="label">VND / SAT</span><span class="value" id="sat-vnd">LOADING...</span></div>
+            <div class="sub-row"><span class="label">GOLD (gram) / SAT</span><span class="value" id="sat-gold">LOADING...</span></div>
         </div>
 
         <!-- INFO LINKS -->
@@ -224,7 +227,6 @@
     <script>
         // ========================================================================
         // KHU VỰC ĐIỀU KHIỂN CỦA THE HOLDER
-        // TỪ GIỜ THUYỀN TRƯỞNG CHỈ CẦN CẬP NHẬT ĐÚNG 1 THÔNG SỐ SATS Ở ĐÂY LÀ ĐỦ!
         // ========================================================================
         const CURRENT_NAH_SATS = 0.08; 
         
@@ -252,18 +254,18 @@
                 const forexData = await forexRes.json();
                 const goldData = await goldRes.json();
 
-                // Lấy các chỉ số thời gian thực (Real-time Live Data)
+                // Lấy các chỉ số thời gian thực
                 const btcUsd = parseFloat(btcData.USD);
                 const usdToVnd = parseFloat(forexData.rates.VND);
-                const currentGoldPriceUsd = parseFloat(goldData['pax-gold'].usd); // 1 oz Gold (PAXG)
+                const currentGoldPriceUsd = parseFloat(goldData['pax-gold'].usd); 
 
                 const GOLD_GLOBAL_MCAP_USD = currentGoldPriceUsd * TOTAL_GOLD_OUNCES;
 
                 // 1. TÍNH TOÁN GIÁ TRỊ NAH SOVEREIGN
                 const btcVal = CURRENT_NAH_SATS / 100000000;
                 const usdVal = btcVal * btcUsd;
-                const vndVal = usdVal * usdToVnd; // Live VND
-                const goldVal = (usdVal / currentGoldPriceUsd) * 31.1034768; // Live Gold (Gram)
+                const vndVal = usdVal * usdToVnd; 
+                const goldVal = (usdVal / currentGoldPriceUsd) * 31.1034768; 
 
                 document.getElementById("btc-val").innerText = btcVal.toFixed(10) + " BTC";
                 document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " SATS";
@@ -282,19 +284,33 @@
                 document.getElementById("mcap-vnd").innerText = mcapVnd.toLocaleString('vi-VN', {maximumFractionDigits: 0}) + " ₫";
                 document.getElementById("mcap-gold-pct").innerText = mcapGoldPct.toFixed(6) + "%";
 
-                // 3. TÍNH TOÁN BTC REFERENCE
+                // 3. TÍNH TOÁN BTC & SAT REFERENCE (CẬP NHẬT MỚI)
                 const btcVndVal = btcUsd * usdToVnd;
-                const btcGoldKg = (btcUsd / currentGoldPriceUsd) * 0.0311034768; 
+                const btcGoldGram = (btcUsd / currentGoldPriceUsd) * 31.1034768; 
+                
+                // Thuật toán nguyên tử cho Satoshi
+                const satUsd = btcUsd / 100000000;
+                const satVnd = btcVndVal / 100000000;
+                const satGoldGram = btcGoldGram / 100000000;
 
-                document.getElementById("btc-usd").innerText = "$" + btcUsd.toLocaleString('en-US');
+                document.getElementById("btc-usd").innerText = "$" + btcUsd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
                 document.getElementById("btc-vnd").innerText = Math.floor(btcVndVal).toLocaleString('vi-VN') + " ₫";
-                document.getElementById("btc-gold").innerText = btcGoldKg.toFixed(4) + " kg";
+                document.getElementById("btc-gold").innerText = btcGoldGram.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " g";
+
+                document.getElementById("sat-usd").innerText = "$" + satUsd.toFixed(6);
+                document.getElementById("sat-vnd").innerText = satVnd.toFixed(4) + " ₫";
+                document.getElementById("sat-gold").innerText = satGoldGram.toFixed(8) + " g";
                 
                 let now = new Date();
                 document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + now.toLocaleTimeString();
             } catch (error) {
                 const errText = "ERROR";
-                const ids = ["btc-val", "sats-val", "usd-val", "vnd-val", "gold-val", "mcap-btc", "mcap-usd", "mcap-vnd", "mcap-gold-pct", "btc-usd", "btc-vnd", "btc-gold"];
+                const ids = [
+                    "btc-val", "sats-val", "usd-val", "vnd-val", "gold-val", 
+                    "mcap-btc", "mcap-usd", "mcap-vnd", "mcap-gold-pct", 
+                    "btc-usd", "btc-vnd", "btc-gold",
+                    "sat-usd", "sat-vnd", "sat-gold"
+                ];
                 ids.forEach(id => document.getElementById(id).innerText = errText);
                 document.getElementById("last-update").innerText = "DATALINK FAILED (RETRYING...)";
             }
