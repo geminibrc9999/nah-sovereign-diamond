@@ -61,7 +61,7 @@
             <div class="data-row"><span class="label">SATS / NAH:</span><span class="value" id="sats-val">LOADING...</span></div>
             <div class="data-row"><span class="label">USD / NAH:</span><span class="value" id="usd-val">LOADING...</span></div>
             <div class="data-row"><span class="label">VND / NAH:</span><span class="value" id="vnd-val">LOADING...</span></div>
-            <div class="data-row"><span class="label">GOLD (oz) / NAH:</span><span class="value" id="gold-val">LOADING...</span></div>
+            <div class="data-row"><span class="label">GOLD (g) / NAH:</span><span class="value" id="gold-val">LOADING...</span></div>
         </div>
 
         <div class="chart-grid">
@@ -101,14 +101,14 @@
 
     <script>
         // ========================================================================
-        // KHU VỰC QUYỀN LỰC CỦA THE HOLDER (SỔ CÁI LỊCH SỬ)
+        // KHU VỰC QUYỀN LỰC CỦA THE HOLDER (SỔ CÁI LỊCH SỬ GIÁ)
         // ========================================================================
         const PRICE_HISTORY = [
             { date: "01/07/2026", sats: 0.01 },
             { date: "12/07/2026", sats: 0.08 }
         ];
 
-        // Mạch máu tối thượng của Bitcoin Maximalist: Mempool.space
+        // Mạch máu phi tập trung Mempool.space
         const BTC_API = "https://mempool.space/api/v1/prices";
 
         function createBrutalistChart(ctxId, color) {
@@ -126,12 +126,11 @@
 
         async function engageOracle() {
             try {
-                // Rút giá Bitcoin nguyên khối từ Mempool
                 const btcRes = await fetch(BTC_API);
-                if (!btcRes.ok) throw new Error("MEMPOOL CONNECTION FAILED");
+                if (!btcRes.ok) throw new Error("MEMPOOL SYSTEM OVERLOAD");
                 
                 const btcData = await btcRes.json();
-                const btcUsd = parseFloat(btcData.USD); // Mempool trả thẳng giá USD sạch sẽ
+                const btcUsd = parseFloat(btcData.USD);
 
                 const labels = PRICE_HISTORY.map(entry => entry.date);
                 const dataSats = [];
@@ -145,7 +144,8 @@
                     dataSats.push(rate);
                     dataUsd.push(usd);
                     dataVnd.push(usd * 25400);
-                    dataGold.push(usd / 2350);
+                    // Thuật toán quy đổi từ Ounce sang Gram: (USD_NAH / Giá_Ounce_Vàng) * 31.1034768
+                    dataGold.push((usd / 2350) * 31.1034768);
                 });
 
                 const currentSats = dataSats[dataSats.length - 1];
@@ -159,9 +159,10 @@
                 document.getElementById("gold-val").className = "value";
 
                 document.getElementById("sats-val").innerText = currentSats + " SATS";
-                document.getElementById("usd-val").innerText = "$" + currentUsd.toFixed(4);
-                document.getElementById("vnd-val").innerText = Math.floor(currentVnd).toLocaleString('vi-VN') + " ₫";
-                document.getElementById("gold-val").innerText = currentGold.toFixed(6) + " oz";
+                document.getElementById("usd-val").innerText = "$" + currentUsd.toFixed(5);
+                document.getElementById("vnd-val").innerText = currentVnd.toFixed(2) + " ₫";
+                // Hiển thị độ mịn Gram với 7 chữ số thập phân để thấy rõ giá trị gia tăng
+                document.getElementById("gold-val").innerText = currentGold.toFixed(7) + " g";
 
                 chartSats.data.labels = labels; chartSats.data.datasets[0].data = dataSats; chartSats.update();
                 chartUsd.data.labels = labels; chartUsd.data.datasets[0].data = dataUsd; chartUsd.update();
@@ -169,7 +170,8 @@
                 chartGold.data.labels = labels; chartGold.data.datasets[0].data = dataGold; chartGold.update();
                 
                 let now = new Date();
-                document.getElementById("last-update").innerText = "DATALINK: MANUAL DECENTRAL | MEMPOOL SYNC: " + now.toLocaleTimeString();
+                // Làm sạch thanh trạng thái theo lệnh của Thuyền trưởng
+                document.getElementById("last-update").innerText = "MEMPOOL SYNC: " + now.toLocaleTimeString();
                 document.getElementById("last-update").style.color = "#555";
 
             } catch (error) {
@@ -183,7 +185,7 @@
                 document.getElementById("vnd-val").innerText = "ERROR";
                 document.getElementById("gold-val").innerText = "ERROR";
                 
-                document.getElementById("last-update").innerText = "DATALINK CRASH: " + error.message;
+                document.getElementById("last-update").innerText = "DATALINK ERROR: " + error.message;
                 document.getElementById("last-update").style.color = "#ff0000";
             }
         }
