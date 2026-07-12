@@ -88,7 +88,7 @@
             <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" class="btn btn-dotswap" target="_blank">FOR BEST PRICES PLEASE VISIT DOTSWAP</a>
         </div>
         
-        <div class="status" id="last-update">AWAITING BTC DATALINK...</div>
+        <div class="status" id="last-update">AWAITING DATALINK...</div>
     </div>
 
     <div class="brc-section">
@@ -108,8 +108,8 @@
             { date: "12/07/2026", sats: 0.08 }
         ];
 
-        // Mạch máu API của Binance - Tốc độ cao & Không chặn tường lửa
-        const BTC_API = "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT";
+        // Mạch máu tối thượng của Bitcoin Maximalist: Mempool.space
+        const BTC_API = "https://mempool.space/api/v1/prices";
 
         function createBrutalistChart(ctxId, color) {
             return new Chart(document.getElementById(ctxId).getContext('2d'), {
@@ -119,7 +119,6 @@
             });
         }
 
-        // Kích hoạt ngay lập tức, không chờ window.onload
         const chartSats = createBrutalistChart('satsChart', '#00ff41');
         const chartUsd = createBrutalistChart('usdChart', '#fff');
         const chartVnd = createBrutalistChart('vndChart', '#ff9900');
@@ -127,12 +126,12 @@
 
         async function engageOracle() {
             try {
-                // Rút giá nguyên khối từ Binance
+                // Rút giá Bitcoin nguyên khối từ Mempool
                 const btcRes = await fetch(BTC_API);
-                if (!btcRes.ok) throw new Error("BINANCE FIREWALL REJECTED");
+                if (!btcRes.ok) throw new Error("MEMPOOL CONNECTION FAILED");
                 
                 const btcData = await btcRes.json();
-                const btcUsd = parseFloat(btcData.price);
+                const btcUsd = parseFloat(btcData.USD); // Mempool trả thẳng giá USD sạch sẽ
 
                 const labels = PRICE_HISTORY.map(entry => entry.date);
                 const dataSats = [];
@@ -170,11 +169,10 @@
                 chartGold.data.labels = labels; chartGold.data.datasets[0].data = dataGold; chartGold.update();
                 
                 let now = new Date();
-                document.getElementById("last-update").innerText = "DATALINK: MANUAL DECENTRAL | BINANCE SYNC: " + now.toLocaleTimeString();
+                document.getElementById("last-update").innerText = "DATALINK: MANUAL DECENTRAL | MEMPOOL SYNC: " + now.toLocaleTimeString();
                 document.getElementById("last-update").style.color = "#555";
 
             } catch (error) {
-                // IN RA LỖI RÕ RÀNG ĐỂ CHÚNG TA BIẾT ĐƯỜNG ĐẬP VỠ NÓ
                 document.getElementById("sats-val").className = "value error-text";
                 document.getElementById("usd-val").className = "value error-text";
                 document.getElementById("vnd-val").className = "value error-text";
@@ -185,7 +183,7 @@
                 document.getElementById("vnd-val").innerText = "ERROR";
                 document.getElementById("gold-val").innerText = "ERROR";
                 
-                document.getElementById("last-update").innerText = "BTC API CRASH: " + error.message;
+                document.getElementById("last-update").innerText = "DATALINK CRASH: " + error.message;
                 document.getElementById("last-update").style.color = "#ff0000";
             }
         }
