@@ -105,43 +105,53 @@
 
         <div class="status" id="last-update">AWAITING DATALINK...</div>
         
-        <!-- Nút bấm dẫn thẳng về thanh khoản Nexus/DotSwap theo link Thuyền trưởng cấp -->
         <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" class="btn" target="_blank">LIQUIDITY PORTAL</a>
     </div>
 
     <script>
         const WORKER_PROXY = "https://misty-voice-3bd5.geminibrc9999-ba3.workers.dev/?api=";
-        // Phân giải link frontend của cậu thành link cấu trúc API
-        const DEX_API = "https://api.swap.on.nexus/api/v1/pools/R_BTC_NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND";
+        const DOTSWAP_API = "https://api.dotswap.app/brc20swap/swap_pools_info_v2";
         const BTC_API = "https://api.coindesk.com/v1/bpi/currentprice.json";
+
+        // Thuật toán bóc tách dữ liệu linh hoạt (Crystalline Scanner)
+        function extractNahPrice(data) {
+            let pools = data.data || data.pools || data.result || data;
+            if (Array.isArray(pools)) {
+                let nahPool = pools.find(p => JSON.stringify(p).includes("NAH"));
+                if (nahPool) {
+                    return nahPool.price || nahPool.last_price || nahPool.rate || null;
+                }
+            }
+            return null;
+        }
 
         async function engageOracle() {
             try {
-                // 1. Kéo giá BTC
+                // 1. Kéo giá BTC nguyên khối
                 const btcRes = await fetch(BTC_API);
                 const btcData = await btcRes.json();
                 const btcUsd = btcData.bpi.USD.rate_float;
 
-                // 2. Kéo dữ liệu thực từ Dex thông qua Bóng Ma
-                const dexRes = await fetch(WORKER_PROXY + encodeURIComponent(DEX_API));
-                if (!dexRes.ok) throw new Error("PROXY/API CONNECTION FAILED");
+                // 2. Kéo dữ liệu thực từ DotSwap qua Bóng Ma
+                const dexRes = await fetch(WORKER_PROXY + encodeURIComponent(DOTSWAP_API));
+                if (!dexRes.ok) throw new Error("PROXY CONNECTION FAILED");
                 
                 const dexData = await dexRes.json();
                 
-                // Trích xuất giá trị thực từ cấu trúc API (Không dùng giá ảo)
-                let nahBtcRate = dexData.price || (dexData.data && dexData.data.price);
+                // 3. Quét tìm NAH
+                let nahBtcRate = extractNahPrice(dexData);
                 
                 if (!nahBtcRate) {
-                    throw new Error("INVALID DATA STRUCTURE");
+                    throw new Error("NAH LIQUIDITY NOT FOUND IN LEDGER");
                 }
                 
-                // 3. Tính toán
+                // 4. Tính toán dựa trên giá thực
                 let satsVal = (nahBtcRate * 100000000).toFixed(2);
                 let usdVal = (nahBtcRate * btcUsd).toFixed(4);
                 let vndVal = Math.floor(usdVal * 25400).toLocaleString('vi-VN'); 
                 let goldVal = (usdVal / 2350).toFixed(6);
 
-                // 4. Kết xuất
+                // 5. Kết xuất bảng mạch
                 document.getElementById("sats-val").className = "value";
                 document.getElementById("usd-val").className = "value";
                 document.getElementById("vnd-val").className = "value";
@@ -157,7 +167,7 @@
                 document.getElementById("last-update").style.color = "#ff9900";
 
             } catch (error) {
-                // KÍCH HOẠT TRẠNG THÁI BÁO LỖI CHÂN THỰC
+                // TRẠNG THÁI BÁO LỖI CHÂN THỰC
                 document.getElementById("sats-val").className = "value error-text";
                 document.getElementById("usd-val").className = "value error-text";
                 document.getElementById("vnd-val").className = "value error-text";
@@ -178,4 +188,3 @@
     </script>
 </body>
 </html>
-
