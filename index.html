@@ -177,14 +177,12 @@
             <div class="slogan-2">world's hardest asset</div>
         </div>
 
-        <!-- SECTION 1: NAH PRICES -->
         <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">LOADING...</span></div>
         <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">LOADING...</span></div>
         <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">LOADING...</span></div>
         <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">LOADING...</span></div>
         <div class="data-row"><span class="label">GOLD (gram) / NAH</span><span class="value" id="gold-val">LOADING...</span></div>
 
-        <!-- SECTION 2: NAH TOKENOMICS & MARKET CAP -->
         <div class="sub-section">
             <div class="sub-title">NAH MARKET CAP & TOKENOMICS</div>
             <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION NAHs</span></div>
@@ -197,9 +195,8 @@
             <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
         </div>
 
-        <!-- SECTION 3: BTC & SAT REFERENCE DATA -->
         <div class="sub-section" style="border-left-color: #444;">
-            <div class="sub-title" style="color:#aaa;">BTC (SAT / DIGITAL GOLD) DATA</div>
+            <div class="sub-title" style="color:#aaa;">BTC (SAT DIGITAL GOLD) DATA</div>
             <div class="sub-row"><span class="label">USD / BTC</span><span class="value" id="btc-usd">LOADING...</span></div>
             <div class="sub-row"><span class="label">VND / BTC</span><span class="value" id="btc-vnd">LOADING...</span></div>
             <div class="sub-row"><span class="label">GOLD (gram) / BTC</span><span class="value" id="btc-gold">LOADING...</span></div>
@@ -208,7 +205,6 @@
             <div class="sub-row"><span class="label">GOLD (gram) / SAT</span><span class="value" id="sat-gold">LOADING...</span></div>
         </div>
 
-        <!-- INFO LINKS -->
         <div class="info-text">
             * Nah's price is updated based on the trading price on <a href="https://satflow.com" target="_blank">Satflow</a>.
         </div>
@@ -284,7 +280,7 @@
                 document.getElementById("mcap-vnd").innerText = mcapVnd.toLocaleString('vi-VN', {maximumFractionDigits: 0}) + " ₫";
                 document.getElementById("mcap-gold-pct").innerText = mcapGoldPct.toFixed(6) + "%";
 
-                // 3. TÍNH TOÁN BTC & SAT REFERENCE (CẬP NHẬT MỚI)
+                // 3. TÍNH TOÁN BTC & SAT REFERENCE
                 const btcVndVal = btcUsd * usdToVnd;
                 const btcGoldGram = (btcUsd / currentGoldPriceUsd) * 31.1034768; 
                 
