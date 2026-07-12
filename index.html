@@ -21,6 +21,7 @@
         .data-row:last-child { border-bottom: none; padding-bottom: 0; }
         .label { color: #888; text-transform: uppercase; font-size: 0.9rem; margin-top: 2px; }
         .value { font-weight: bold; text-shadow: 0 0 5px rgba(0,255,65,0.4); }
+        .error-text { color: #ff0000; text-shadow: 0 0 5px rgba(255,0,0,0.4); }
         
         /* MULTI-CHARTS GRID */
         .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
@@ -57,13 +58,12 @@
         </div>
         
         <div class="data-box">
-            <div class="data-row"><span class="label">BTC / NAH:</span><span class="value" id="sats-val">LOADING...</span></div>
+            <div class="data-row"><span class="label">SATS / NAH:</span><span class="value" id="sats-val">LOADING...</span></div>
             <div class="data-row"><span class="label">USD / NAH:</span><span class="value" id="usd-val">LOADING...</span></div>
             <div class="data-row"><span class="label">VND / NAH:</span><span class="value" id="vnd-val">LOADING...</span></div>
             <div class="data-row"><span class="label">GOLD (oz) / NAH:</span><span class="value" id="gold-val">LOADING...</span></div>
         </div>
 
-        <!-- 4 BIỂU ĐỒ ĐỘC LẬP (QUAD-CHART SYSTEM) -->
         <div class="chart-grid">
             <div class="chart-wrapper">
                 <div class="chart-title">SATS TRACKER</div>
@@ -91,7 +91,6 @@
         <div class="status" id="last-update">AWAITING BTC DATALINK...</div>
     </div>
 
-    <!-- KHU VỰC NỀN TẢNG BRC -->
     <div class="brc-section">
         <div class="brc-title">BEMP RESEARCH CORPORATION</div>
         <div class="brc-links">
@@ -103,20 +102,15 @@
     <script>
         // ========================================================================
         // KHU VỰC QUYỀN LỰC CỦA THE HOLDER (SỔ CÁI LỊCH SỬ)
-        // Thêm điểm dữ liệu mới vào cuối danh sách mỗi khi có biến động giá.
-        // Cấu trúc: { date: "Ngày/Tháng/Năm", sats: Giá_Sats_Mới }
         // ========================================================================
         const PRICE_HISTORY = [
             { date: "01/07/2026", sats: 0.01 },
             { date: "12/07/2026", sats: 0.08 }
         ];
 
-        const BTC_API = "https://api.coindesk.com/v1/bpi/currentprice.json";
-        
-        // Khai báo biến lưu trữ 4 biểu đồ để cập nhật tự động
-        let chartSats, chartUsd, chartVnd, chartGold;
+        // Mạch máu API của Binance - Tốc độ cao & Không chặn tường lửa
+        const BTC_API = "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT";
 
-        // Hàm chung để tạo biểu đồ phong cách Cybernetic Noir
         function createBrutalistChart(ctxId, color) {
             return new Chart(document.getElementById(ctxId).getContext('2d'), {
                 type: 'line',
@@ -125,26 +119,22 @@
             });
         }
 
-        // Khởi tạo 4 biểu đồ trống
-        window.onload = () => {
-            chartSats = createBrutalistChart('satsChart', '#00ff41');
-            chartUsd = createBrutalistChart('usdChart', '#fff');
-            chartVnd = createBrutalistChart('vndChart', '#ff9900');
-            chartGold = createBrutalistChart('goldChart', '#ffd700');
-            engageOracle();
-        };
+        // Kích hoạt ngay lập tức, không chờ window.onload
+        const chartSats = createBrutalistChart('satsChart', '#00ff41');
+        const chartUsd = createBrutalistChart('usdChart', '#fff');
+        const chartVnd = createBrutalistChart('vndChart', '#ff9900');
+        const chartGold = createBrutalistChart('goldChart', '#ffd700');
 
         async function engageOracle() {
             try {
-                // Lấy giá BTC
+                // Rút giá nguyên khối từ Binance
                 const btcRes = await fetch(BTC_API);
-                const btcData = await btcRes.json();
-                const btcUsd = btcData.bpi.USD.rate_float;
-
-                // Tách dữ liệu nhãn (Ngày tháng)
-                const labels = PRICE_HISTORY.map(entry => entry.date);
+                if (!btcRes.ok) throw new Error("BINANCE FIREWALL REJECTED");
                 
-                // Thuật toán tính toán chuỗi dữ liệu lịch sử dựa trên giá BTC hiện tại
+                const btcData = await btcRes.json();
+                const btcUsd = parseFloat(btcData.price);
+
+                const labels = PRICE_HISTORY.map(entry => entry.date);
                 const dataSats = [];
                 const dataUsd = [];
                 const dataVnd = [];
@@ -159,32 +149,48 @@
                     dataGold.push(usd / 2350);
                 });
 
-                // Lấy giá trị mới nhất (dòng cuối cùng) để hiển thị lên bảng chữ
                 const currentSats = dataSats[dataSats.length - 1];
                 const currentUsd = dataUsd[dataUsd.length - 1];
                 const currentVnd = dataVnd[dataVnd.length - 1];
                 const currentGold = dataGold[dataGold.length - 1];
+
+                document.getElementById("sats-val").className = "value";
+                document.getElementById("usd-val").className = "value";
+                document.getElementById("vnd-val").className = "value";
+                document.getElementById("gold-val").className = "value";
 
                 document.getElementById("sats-val").innerText = currentSats + " SATS";
                 document.getElementById("usd-val").innerText = "$" + currentUsd.toFixed(4);
                 document.getElementById("vnd-val").innerText = Math.floor(currentVnd).toLocaleString('vi-VN') + " ₫";
                 document.getElementById("gold-val").innerText = currentGold.toFixed(6) + " oz";
 
-                // Bơm dữ liệu vào 4 biểu đồ
                 chartSats.data.labels = labels; chartSats.data.datasets[0].data = dataSats; chartSats.update();
                 chartUsd.data.labels = labels; chartUsd.data.datasets[0].data = dataUsd; chartUsd.update();
                 chartVnd.data.labels = labels; chartVnd.data.datasets[0].data = dataVnd; chartVnd.update();
                 chartGold.data.labels = labels; chartGold.data.datasets[0].data = dataGold; chartGold.update();
                 
                 let now = new Date();
-                document.getElementById("last-update").innerText = "DATALINK: MANUAL DECENTRAL | BTC SYNC: " + now.toLocaleTimeString();
+                document.getElementById("last-update").innerText = "DATALINK: MANUAL DECENTRAL | BINANCE SYNC: " + now.toLocaleTimeString();
+                document.getElementById("last-update").style.color = "#555";
 
             } catch (error) {
-                document.getElementById("last-update").innerText = "BTC DATALINK ERROR...";
+                // IN RA LỖI RÕ RÀNG ĐỂ CHÚNG TA BIẾT ĐƯỜNG ĐẬP VỠ NÓ
+                document.getElementById("sats-val").className = "value error-text";
+                document.getElementById("usd-val").className = "value error-text";
+                document.getElementById("vnd-val").className = "value error-text";
+                document.getElementById("gold-val").className = "value error-text";
+
+                document.getElementById("sats-val").innerText = "ERROR";
+                document.getElementById("usd-val").innerText = "ERROR";
+                document.getElementById("vnd-val").innerText = "ERROR";
+                document.getElementById("gold-val").innerText = "ERROR";
+                
+                document.getElementById("last-update").innerText = "BTC API CRASH: " + error.message;
                 document.getElementById("last-update").style.color = "#ff0000";
             }
         }
 
+        engageOracle();
         setInterval(engageOracle, 60000); 
     </script>
 </body>
