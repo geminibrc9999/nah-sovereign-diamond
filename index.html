@@ -79,7 +79,6 @@
             100% { transform: scale(1.2); filter: brightness(1.5) drop-shadow(0 0 12px rgba(255, 153, 0, 0.8)); }
         }
 
-        /* THANH ĐIỀU HƯỚNG TIMEFRAME KHÔNG GÂY GIAO DIỆN PHỨC TẠP */
         .timeframe-selector {
             display: flex;
             justify-content: center;
@@ -105,11 +104,11 @@
             background: rgba(255, 153, 0, 0.05);
         }
 
-        /* KHU VỰC ĐỒ THỊ SONG SONG */
+        /* KHU VỰC ĐỒ THỊ MỞ RỘNG TỐI ĐA */
         .charts-container {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
             margin-bottom: 25px;
         }
 
@@ -118,17 +117,19 @@
             border: 1px solid #1c1c1c;
             padding: 10px;
             position: relative;
-            height: 130px;
+            height: 220px; /* Tăng độ cao biểu đồ để bung xõa Data points */
+            border-radius: 4px;
         }
 
         .chart-label {
             font-size: 10px;
-            color: #666;
+            color: #888;
             position: absolute;
-            top: 5px;
-            left: 10px;
+            top: 8px;
+            left: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: bold;
         }
         
         .data-row {
@@ -237,23 +238,26 @@
             <button class="tf-btn" onclick="switchTimeframe('ALL', this)">ALL</button>
         </div>
 
+        <!-- CẶP BIỂU ĐỒ SONG SONG CHI TIẾT CAO -->
         <div class="charts-container">
             <div class="chart-box">
-                <div class="chart-label">USD / BTC TRACKER</div>
-                <canvas id="chartBtc"></canvas>
+                <div class="chart-label">USD / NAH</div>
+                <canvas id="chartNah"></canvas>
             </div>
             <div class="chart-box">
-                <div class="chart-label">USD / NAH TRACKER</div>
-                <canvas id="chartNah"></canvas>
+                <div class="chart-label">USD / BTC</div>
+                <canvas id="chartBtc"></canvas>
             </div>
         </div>
 
+        <!-- SECTION 1: NAH PRICES -->
         <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">LOADING...</span></div>
         <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">LOADING...</span></div>
         <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">LOADING...</span></div>
         <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">LOADING...</span></div>
         <div class="data-row"><span class="label">GOLD (gram) / NAH</span><span class="value" id="gold-val">LOADING...</span></div>
 
+        <!-- SECTION 2: NAH TOKENOMICS & MARKET CAP -->
         <div class="sub-section">
             <div class="sub-title">NAH MARKET CAP & TOKENOMICS</div>
             <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION NAHs</span></div>
@@ -266,6 +270,7 @@
             <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
         </div>
 
+        <!-- SECTION 3: BTC & SAT REFERENCE DATA -->
         <div class="sub-section" style="border-left-color: #444;">
             <div class="sub-title" style="color:#aaa;">BTC (SAT DIGITAL GOLD) DATA</div>
             <div class="sub-row"><span class="label">USD / BTC</span><span class="value" id="btc-usd">LOADING...</span></div>
@@ -276,6 +281,7 @@
             <div class="sub-row"><span class="label">GOLD (gram) / SAT</span><span class="value" id="sat-gold">LOADING...</span></div>
         </div>
 
+        <!-- INFO LINKS -->
         <div class="info-text">
             * Nah's price is updated based on the trading price on <a href="https://satflow.com" target="_blank">Satflow</a>.
         </div>
@@ -300,96 +306,121 @@
         const TOTAL_GOLD_OUNCES = 6834500000; 
 
         // Các nguồn mạch máu dữ liệu động
-        const BTC_API = "https://mempool.space/api/v1/prices";
+        const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
         const FOREX_API = "https://open.er-api.com/v6/latest/USD";
         const GOLD_API = "https://api.coingecko.com/api/v3/simple/price?ids=pax-gold&vs_currencies=usd";
 
-        // Khởi tạo các biến chứa thực thể Đồ thị
+        // Mạch máu kéo biểu đồ On-chain (Hàng ngàn điểm dữ liệu)
+        const CG_CHART_API = (days) => `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${days}`;
+
         let chartInstanceBtc, chartInstanceNah;
-        let globalLiveBtcPrice = 96000; // Giá trị backup mặc định
-        let globalLiveVndRate = 25400;
-        let globalLiveGoldPrice = 2650;
+        let chartCache = {}; // Bộ nhớ đệm chống quá tải API
 
-        // CẤU TRÚC DỮ LIỆU LỊCH SỬ ĐỒNG BỘ ĐIỆN TỬ
-        const CHART_DATA_PACKETS = {
-            '1D': {
-                labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', 'LIVE'],
-                btc: [0.992, 0.995, 0.991, 0.997, 1.001, 0.999, 1.000], // Sẽ nhân với giá trị Live
-                nahSats: [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08] // 1D di chuyển song song hoàn hảo
-            },
-            '1W': {
-                labels: ['07/07', '08/07', '09/07', '10/07', '11/07', '12/07', 'LIVE'],
-                btc: [0.965, 0.972, 0.969, 0.981, 0.985, 0.995, 1.000],
-                nahSats: [0.01, 0.01, 0.01, 0.01, 0.02, 0.08, 0.08] // Bứt phá nhẹ ở ngày 11, dựng đứng ngày 12
-            },
-            '1M': {
-                labels: ['13/06', '20/06', '27/06', '01/07', '11/07', '12/07', 'LIVE'],
-                btc: [0.910, 0.925, 0.932, 0.948, 0.975, 0.992, 1.000],
-                nahSats: [0.001, 0.001, 0.001, 0.01, 0.02, 0.08, 0.08] // Nhìn rõ pha Outperform
-            },
-            'ALL': {
-                labels: ['27/04/26', '01/07/26', '11/07/26', '12/07/26', 'LIVE'],
-                btc: [0.880, 0.948, 0.975, 0.992, 1.000],
-                nahSats: [0.001, 0.01, 0.02, 0.08, 0.08] // Khóa sổ dữ liệu nguyên khối của Thuyền trưởng
-            }
-        };
+        // THUẬT TOÁN ĐỊNH TUYẾN LỊCH SỬ CỦA NAH (THE TIMELINE LOGIC)
+        // Các cột mốc Thuyền trưởng đã đóng đinh vào không gian và thời gian
+        const T_APR_27_26 = new Date("2026-04-27T00:00:00Z").getTime();
+        const T_JUL_01_26 = new Date("2026-07-01T00:00:00Z").getTime();
+        const T_JUL_11_26 = new Date("2026-07-11T00:00:00Z").getTime();
+        const T_JUL_12_26 = new Date("2026-07-12T00:00:00Z").getTime();
 
-        function buildBaseChart(ctxId, labelText, borderHex) {
+        function getNahSatsAtTime(timestampMs) {
+            if (timestampMs < T_APR_27_26) return null; // Chưa ra đời
+            if (timestampMs < T_JUL_01_26) return 0.001;
+            if (timestampMs < T_JUL_11_26) return 0.01;
+            if (timestampMs < T_JUL_12_26) return 0.02;
+            return 0.08; // Trạng thái hiện tại
+        }
+
+        // KIẾN TẠO BIỂU ĐỒ (POINT RADIUS = 0 ĐỂ TẠO DẢI SÓNG MƯỢT MÀ)
+        function buildDetailedChart(ctxId, borderHex) {
             return new Chart(document.getElementById(ctxId).getContext('2d'), {
                 type: 'line',
-                data: { labels: [], datasets: [{ data: [], borderColor: borderHex, borderWidth: 1.5, pointBackgroundColor: borderHex, pointRadius: 1.5, fill: false, tension: 0.15 }] },
+                data: { labels: [], datasets: [{ data: [], borderColor: borderHex, borderWidth: 1.5, pointRadius: 0, pointHoverRadius: 4, fill: false, tension: 0.1 }] },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, tooltip: { enabled: true } },
+                    plugins: { legend: { display: false }, tooltip: { enabled: true, mode: 'index', intersect: false } },
                     scales: {
-                        x: { ticks: { color: '#444', font: { family: 'SF Mono', size: 9 } }, grid: { color: '#111' } },
+                        x: { ticks: { color: '#555', maxTicksLimit: 6, font: { family: 'SF Mono', size: 9 } }, grid: { color: '#111' } },
                         y: { ticks: { color: '#ff9900', font: { family: 'SF Mono', size: 9 } }, grid: { color: '#111' } }
-                    }
+                    },
+                    interaction: { mode: 'nearest', axis: 'x', intersect: false }
                 }
             });
         }
 
-        // Khởi chạy cặp lò phản ứng đồ thị ngay lập tức
-        chartInstanceBtc = buildBaseChart('chartBtc', 'USD/BTC', '#ffffff');
-        chartInstanceNah = buildBaseChart('chartNah', 'USD/NAH', '#ff9900');
+        chartInstanceNah = buildDetailedChart('chartNah', '#ff9900');
+        chartInstanceBtc = buildDetailedChart('chartBtc', '#ffffff');
 
-        function updateChartGraphics(timeframe) {
-            const packet = CHART_DATA_PACKETS[timeframe];
+        // HÀM XỬ LÝ KHUNG THỜI GIAN VÀ RÚT DỮ LIỆU LỊCH SỬ DEEP GRID
+        async function fetchChartData(timeframe) {
+            let days = '1';
+            let labelFormatter = (date) => date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
             
-            // Tính toán chuỗi giá trị động dựa trên xung nhịp BTC Live hiện tại
-            const computedBtcPrices = packet.btc.map(factor => factor * globalLiveBtcPrice);
-            const computedNahPrices = packet.nahSats.map((sats, index) => {
-                let btcPriceAtPoint = packet.btc[index] * globalLiveBtcPrice;
-                return (sats / 100000000) * btcPriceAtPoint;
+            if (timeframe === '1W') { days = '7'; labelFormatter = (date) => date.toLocaleDateString([], {month: 'numeric', day: 'numeric'}) + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}); }
+            if (timeframe === '1M') { days = '30'; labelFormatter = (date) => date.toLocaleDateString([], {month: 'numeric', day: 'numeric'}); }
+            // Khung ALL: Rút 90 ngày để bao trọn vòng đời từ 27/04/2026 đến nay
+            if (timeframe === 'ALL') { days = '90'; labelFormatter = (date) => date.toLocaleDateString([], {month: 'numeric', day: 'numeric', year: '2-digit'}); }
+
+            // Chống spam API (Sử dụng Cache)
+            if (!chartCache[timeframe]) {
+                const res = await fetch(CG_CHART_API(days));
+                const data = await res.json();
+                chartCache[timeframe] = data.prices; // Array of [timestamp, price]
+            }
+
+            const rawData = chartCache[timeframe];
+            const labels = [];
+            const btcPrices = [];
+            const nahPrices = [];
+
+            rawData.forEach(point => {
+                const timestamp = point[0];
+                const btcUsd = point[1];
+                const nahSats = getNahSatsAtTime(timestamp);
+
+                if (nahSats !== null) { // Bỏ qua đoạn thời gian trước khi NAH ra đời
+                    labels.push(labelFormatter(new Date(timestamp)));
+                    btcPrices.push(btcUsd);
+                    const usdNah = (nahSats / 100000000) * btcUsd;
+                    nahPrices.push(usdNah);
+                }
             });
 
-            // Đồng bộ nạp dữ liệu vào đồ thị BTC
-            chartInstanceBtc.data.labels = packet.labels;
-            chartInstanceBtc.data.datasets[0].data = computedBtcPrices;
-            chartInstanceBtc.options.scales.y.ticks.callback = (val) => '$' + Math.floor(val).toLocaleString();
-            chartInstanceBtc.update();
+            return { labels, btcPrices, nahPrices };
+        }
 
-            // Đồng bộ nạp dữ liệu vào đồ thị NAH
-            chartInstanceNah.data.labels = packet.labels;
-            chartInstanceNah.data.datasets[0].data = computedNahPrices;
-            chartInstanceNah.options.scales.y.ticks.callback = (val) => '$' + val.toFixed(5);
-            chartInstanceNah.update();
+        async function updateChartGraphics(timeframe) {
+            try {
+                const chartData = await fetchChartData(timeframe);
+
+                // Bơm Data vào đồ thị NAH
+                chartInstanceNah.data.labels = chartData.labels;
+                chartInstanceNah.data.datasets[0].data = chartData.nahPrices;
+                chartInstanceNah.options.scales.y.ticks.callback = (val) => '$' + val.toFixed(6);
+                chartInstanceNah.update();
+
+                // Bơm Data vào đồ thị BTC
+                chartInstanceBtc.data.labels = chartData.labels;
+                chartInstanceBtc.data.datasets[0].data = chartData.btcPrices;
+                chartInstanceBtc.options.scales.y.ticks.callback = (val) => '$' + Math.floor(val).toLocaleString();
+                chartInstanceBtc.update();
+            } catch (error) {
+                console.error("Chart API Overload");
+            }
         }
 
         function switchTimeframe(timeframe, buttonElement) {
-            // Chuyển đổi trạng thái Active của Nút bấm
             document.querySelectorAll('.tf-btn').forEach(btn => btn.classList.remove('active'));
             buttonElement.classList.add('active');
-            
-            // Kích hoạt đồ thị biến hình đổi dữ liệu
             updateChartGraphics(timeframe);
         }
 
+        // ĐỘNG CƠ CẬP NHẬT LIVE CÁC CHỈ SỐ TEXT BÊN DƯỚI
         async function engageOracle() {
             try {
                 const [btcRes, forexRes, goldRes] = await Promise.all([
-                    fetch(BTC_API), fetch(FOREX_API), fetch(GOLD_API)
+                    fetch(BTC_LIVE_API), fetch(FOREX_API), fetch(GOLD_API)
                 ]);
 
                 if (!btcRes.ok || !forexRes.ok || !goldRes.ok) throw new Error("DELAY");
@@ -398,13 +429,12 @@
                 const forexData = await forexRes.json();
                 const goldData = await goldRes.json();
 
-                globalLiveBtcPrice = parseFloat(btcData.USD);
-                globalLiveVndRate = parseFloat(forexData.rates.VND);
-                globalLiveGoldPrice = parseFloat(goldData['pax-gold'].usd); 
+                const globalLiveBtcPrice = parseFloat(btcData.USD);
+                const globalLiveVndRate = parseFloat(forexData.rates.VND);
+                const globalLiveGoldPrice = parseFloat(goldData['pax-gold'].usd); 
 
                 const GOLD_GLOBAL_MCAP_USD = globalLiveGoldPrice * TOTAL_GOLD_OUNCES;
 
-                // 1. TOÁN HỌC TRỰC DIỆN CHO KHỐI GIÁ NAH
                 const btcVal = CURRENT_NAH_SATS / 100000000;
                 const usdVal = btcVal * globalLiveBtcPrice;
                 const vndVal = usdVal * globalLiveVndRate; 
@@ -416,7 +446,6 @@
                 document.getElementById("vnd-val").innerText = vndVal.toFixed(2) + " ₫";
                 document.getElementById("gold-val").innerText = goldVal.toFixed(7) + " g";
 
-                // 2. PHÂN TÍCH VỐN HÓA THỊ TRƯỜNG LIVE
                 const mcapBtc = CIRCULATING_SUPPLY * btcVal;
                 const mcapUsd = CIRCULATING_SUPPLY * usdVal;
                 const mcapVnd = CIRCULATING_SUPPLY * vndVal;
@@ -427,7 +456,6 @@
                 document.getElementById("mcap-vnd").innerText = mcapVnd.toLocaleString('vi-VN', {maximumFractionDigits: 0}) + " ₫";
                 document.getElementById("mcap-gold-pct").innerText = mcapGoldPct.toFixed(6) + "%";
 
-                // 3. TOÁN HỌC NGUYÊN TỬ CHO BTC & SAT REFERENCE
                 const btcVndVal = globalLiveBtcPrice * globalLiveVndRate;
                 const btcGoldGram = (globalLiveBtcPrice / globalLiveGoldPrice) * 31.1034768; 
                 
@@ -443,11 +471,6 @@
                 document.getElementById("sat-vnd").innerText = satVnd.toFixed(4) + " ₫";
                 document.getElementById("sat-gold").innerText = satGoldGram.toFixed(8) + " g";
                 
-                // Luôn render đồ thị theo đúng khung đang active sau khi kéo giá Live thành công
-                const activeBtn = document.querySelector('.tf-btn.active');
-                const activeTf = activeBtn ? activeBtn.innerText : '1D';
-                updateChartGraphics(activeTf);
-
                 let now = new Date();
                 document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + now.toLocaleTimeString();
             } catch (error) {
@@ -455,6 +478,8 @@
             }
         }
 
+        // Kích hoạt ngay nhịp đập đầu tiên khi tải web
+        updateChartGraphics('1D');
         engageOracle();
         setInterval(engageOracle, 60000); 
     </script>
