@@ -129,6 +129,31 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* CẤU TRÚC HIỂN THỊ PHẦN TRĂM ROI */
+        .pct-change {
+            margin-left: 10px;
+            font-size: 11px;
+            padding: 2px 5px;
+            border-radius: 3px;
+            background: rgba(0,0,0,0.5);
+        }
+        .pct-up { 
+            color: #00ff41; 
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.4); 
+            border: 1px solid rgba(0, 255, 65, 0.2);
+        }
+        .pct-down { 
+            color: #ff3333; 
+            text-shadow: 0 0 5px rgba(255, 51, 51, 0.4); 
+            border: 1px solid rgba(255, 51, 51, 0.2);
+        }
+        .pct-neutral { 
+            color: #888; 
+            border: 1px solid #333;
         }
         
         .data-row {
@@ -239,11 +264,13 @@
 
         <div class="charts-container">
             <div class="chart-box">
-                <div class="chart-label">USD / NAH</div>
+                <!-- TÍCH HỢP BỘ ĐẾM % NAH -->
+                <div class="chart-label">USD / NAH <span id="nah-change" class="pct-change">...</span></div>
                 <canvas id="chartNah"></canvas>
             </div>
             <div class="chart-box">
-                <div class="chart-label">USD / BTC</div>
+                <!-- TÍCH HỢP BỘ ĐẾM % BTC -->
+                <div class="chart-label">USD / BTC <span id="btc-change" class="pct-change">...</span></div>
                 <canvas id="chartBtc"></canvas>
             </div>
         </div>
@@ -324,7 +351,27 @@
             return 0.08; 
         }
 
-        // THUẬT TOÁN ĐỊNH DẠNG ĐỘ SÂU HIỂN THỊ (DECIMAL PRECISION FIX)
+        // HÀM TÍNH TOÁN VÀ RENDER % THAY ĐỔI
+        function renderPercentageChange(elementId, firstPrice, lastPrice) {
+            const el = document.getElementById(elementId);
+            if (!firstPrice || !lastPrice || firstPrice === 0) {
+                el.innerText = "0.00%";
+                el.className = "pct-change pct-neutral";
+                return;
+            }
+            const change = ((lastPrice - firstPrice) / firstPrice) * 100;
+            if (change > 0) {
+                el.innerText = "+" + change.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "%";
+                el.className = "pct-change pct-up";
+            } else if (change < 0) {
+                el.innerText = change.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "%";
+                el.className = "pct-change pct-down";
+            } else {
+                el.innerText = "0.00%";
+                el.className = "pct-change pct-neutral";
+            }
+        }
+
         function buildDetailedChart(ctxId, borderHex, isNahChart) {
             return new Chart(document.getElementById(ctxId).getContext('2d'), {
                 type: 'line',
@@ -339,7 +386,6 @@
                             mode: 'index', 
                             intersect: false,
                             callbacks: {
-                                // Ghi đè bộ đếm Tooltip: NAH hiển thị 8 số thập phân, BTC hiển thị số nguyên
                                 label: function(context) {
                                     let val = context.parsed.y;
                                     return isNahChart 
@@ -355,7 +401,6 @@
                             ticks: { 
                                 color: '#ff9900', 
                                 font: { family: 'SF Mono', size: 9 },
-                                // Đồng bộ 8 số thập phân cho trục Y của NAH
                                 callback: function(val) {
                                     return isNahChart ? '$' + val.toFixed(8) : '$' + Math.floor(val).toLocaleString('en-US');
                                 }
@@ -368,7 +413,6 @@
             });
         }
 
-        // Kích hoạt Flag true cho NAH để áp dụng Precision 8 chữ số
         chartInstanceNah = buildDetailedChart('chartNah', '#ff9900', true);
         chartInstanceBtc = buildDetailedChart('chartBtc', '#ffffff', false);
 
@@ -411,13 +455,25 @@
             try {
                 const chartData = await fetchChartData(timeframe);
 
+                // Cập nhật biểu đồ NAH
                 chartInstanceNah.data.labels = chartData.labels;
                 chartInstanceNah.data.datasets[0].data = chartData.nahPrices;
                 chartInstanceNah.update();
+                
+                // Tính % cho NAH
+                const nahFirst = chartData.nahPrices[0];
+                const nahLast = chartData.nahPrices[chartData.nahPrices.length - 1];
+                renderPercentageChange('nah-change', nahFirst, nahLast);
 
+                // Cập nhật biểu đồ BTC
                 chartInstanceBtc.data.labels = chartData.labels;
                 chartInstanceBtc.data.datasets[0].data = chartData.btcPrices;
                 chartInstanceBtc.update();
+                
+                // Tính % cho BTC
+                const btcFirst = chartData.btcPrices[0];
+                const btcLast = chartData.btcPrices[chartData.btcPrices.length - 1];
+                renderPercentageChange('btc-change', btcFirst, btcLast);
             } catch (error) {
                 console.error("Chart API Overload");
             }
