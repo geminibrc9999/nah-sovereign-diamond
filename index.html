@@ -120,26 +120,31 @@
             border-radius: 4px;
         }
 
+        /* BẢN VÁ UI: BỌC THÉP NHÃN CHỨC NĂNG, TĂNG Z-INDEX */
         .chart-label {
             font-size: 10px;
             color: #888;
             position: absolute;
-            top: 8px;
-            left: 12px;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            background: rgba(13, 13, 13, 0.85); /* Mặt nạ chống lẹm đồ thị */
+            padding: 2px 6px;
+            border-radius: 3px;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: bold;
             display: flex;
             align-items: center;
+            backdrop-filter: blur(2px);
         }
         
-        /* CẤU TRÚC HIỂN THỊ PHẦN TRĂM ROI */
         .pct-change {
             margin-left: 10px;
             font-size: 11px;
             padding: 2px 5px;
             border-radius: 3px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.8);
         }
         .pct-up { 
             color: #00ff41; 
@@ -264,12 +269,10 @@
 
         <div class="charts-container">
             <div class="chart-box">
-                <!-- TÍCH HỢP BỘ ĐẾM % NAH -->
                 <div class="chart-label">USD / NAH <span id="nah-change" class="pct-change">...</span></div>
                 <canvas id="chartNah"></canvas>
             </div>
             <div class="chart-box">
-                <!-- TÍCH HỢP BỘ ĐẾM % BTC -->
                 <div class="chart-label">USD / BTC <span id="btc-change" class="pct-change">...</span></div>
                 <canvas id="chartBtc"></canvas>
             </div>
@@ -351,7 +354,6 @@
             return 0.08; 
         }
 
-        // HÀM TÍNH TOÁN VÀ RENDER % THAY ĐỔI
         function renderPercentageChange(elementId, firstPrice, lastPrice) {
             const el = document.getElementById(elementId);
             if (!firstPrice || !lastPrice || firstPrice === 0) {
@@ -379,6 +381,12 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    // BẢN VÁ UI: Ép padding top để lấy không gian cho nhãn
+                    layout: {
+                        padding: {
+                            top: 35
+                        }
+                    },
                     plugins: { 
                         legend: { display: false }, 
                         tooltip: { 
@@ -455,22 +463,18 @@
             try {
                 const chartData = await fetchChartData(timeframe);
 
-                // Cập nhật biểu đồ NAH
                 chartInstanceNah.data.labels = chartData.labels;
                 chartInstanceNah.data.datasets[0].data = chartData.nahPrices;
                 chartInstanceNah.update();
                 
-                // Tính % cho NAH
                 const nahFirst = chartData.nahPrices[0];
                 const nahLast = chartData.nahPrices[chartData.nahPrices.length - 1];
                 renderPercentageChange('nah-change', nahFirst, nahLast);
 
-                // Cập nhật biểu đồ BTC
                 chartInstanceBtc.data.labels = chartData.labels;
                 chartInstanceBtc.data.datasets[0].data = chartData.btcPrices;
                 chartInstanceBtc.update();
                 
-                // Tính % cho BTC
                 const btcFirst = chartData.btcPrices[0];
                 const btcLast = chartData.btcPrices[chartData.btcPrices.length - 1];
                 renderPercentageChange('btc-change', btcFirst, btcLast);
