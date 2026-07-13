@@ -104,7 +104,6 @@
             background: rgba(255, 153, 0, 0.05);
         }
 
-        /* KHU VỰC ĐỒ THỊ MỞ RỘNG TỐI ĐA */
         .charts-container {
             display: flex;
             flex-direction: column;
@@ -117,7 +116,7 @@
             border: 1px solid #1c1c1c;
             padding: 10px;
             position: relative;
-            height: 220px; /* Tăng độ cao biểu đồ để bung xõa Data points */
+            height: 220px;
             border-radius: 4px;
         }
 
@@ -238,7 +237,6 @@
             <button class="tf-btn" onclick="switchTimeframe('ALL', this)">ALL</button>
         </div>
 
-        <!-- CẶP BIỂU ĐỒ SONG SONG CHI TIẾT CAO -->
         <div class="charts-container">
             <div class="chart-box">
                 <div class="chart-label">USD / NAH</div>
@@ -305,68 +303,87 @@
         const CIRCULATING_SUPPLY = 85300000000000; 
         const TOTAL_GOLD_OUNCES = 6834500000; 
 
-        // Các nguồn mạch máu dữ liệu động
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
         const FOREX_API = "https://open.er-api.com/v6/latest/USD";
         const GOLD_API = "https://api.coingecko.com/api/v3/simple/price?ids=pax-gold&vs_currencies=usd";
-
-        // Mạch máu kéo biểu đồ On-chain (Hàng ngàn điểm dữ liệu)
         const CG_CHART_API = (days) => `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${days}`;
 
         let chartInstanceBtc, chartInstanceNah;
-        let chartCache = {}; // Bộ nhớ đệm chống quá tải API
+        let chartCache = {}; 
 
-        // THUẬT TOÁN ĐỊNH TUYẾN LỊCH SỬ CỦA NAH (THE TIMELINE LOGIC)
-        // Các cột mốc Thuyền trưởng đã đóng đinh vào không gian và thời gian
         const T_APR_27_26 = new Date("2026-04-27T00:00:00Z").getTime();
         const T_JUL_01_26 = new Date("2026-07-01T00:00:00Z").getTime();
         const T_JUL_11_26 = new Date("2026-07-11T00:00:00Z").getTime();
         const T_JUL_12_26 = new Date("2026-07-12T00:00:00Z").getTime();
 
         function getNahSatsAtTime(timestampMs) {
-            if (timestampMs < T_APR_27_26) return null; // Chưa ra đời
+            if (timestampMs < T_APR_27_26) return null; 
             if (timestampMs < T_JUL_01_26) return 0.001;
             if (timestampMs < T_JUL_11_26) return 0.01;
             if (timestampMs < T_JUL_12_26) return 0.02;
-            return 0.08; // Trạng thái hiện tại
+            return 0.08; 
         }
 
-        // KIẾN TẠO BIỂU ĐỒ (POINT RADIUS = 0 ĐỂ TẠO DẢI SÓNG MƯỢT MÀ)
-        function buildDetailedChart(ctxId, borderHex) {
+        // THUẬT TOÁN ĐỊNH DẠNG ĐỘ SÂU HIỂN THỊ (DECIMAL PRECISION FIX)
+        function buildDetailedChart(ctxId, borderHex, isNahChart) {
             return new Chart(document.getElementById(ctxId).getContext('2d'), {
                 type: 'line',
                 data: { labels: [], datasets: [{ data: [], borderColor: borderHex, borderWidth: 1.5, pointRadius: 0, pointHoverRadius: 4, fill: false, tension: 0.1 }] },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, tooltip: { enabled: true, mode: 'index', intersect: false } },
+                    plugins: { 
+                        legend: { display: false }, 
+                        tooltip: { 
+                            enabled: true, 
+                            mode: 'index', 
+                            intersect: false,
+                            callbacks: {
+                                // Ghi đè bộ đếm Tooltip: NAH hiển thị 8 số thập phân, BTC hiển thị số nguyên
+                                label: function(context) {
+                                    let val = context.parsed.y;
+                                    return isNahChart 
+                                        ? '$' + val.toFixed(8) 
+                                        : '$' + Math.floor(val).toLocaleString('en-US');
+                                }
+                            }
+                        } 
+                    },
                     scales: {
                         x: { ticks: { color: '#555', maxTicksLimit: 6, font: { family: 'SF Mono', size: 9 } }, grid: { color: '#111' } },
-                        y: { ticks: { color: '#ff9900', font: { family: 'SF Mono', size: 9 } }, grid: { color: '#111' } }
+                        y: { 
+                            ticks: { 
+                                color: '#ff9900', 
+                                font: { family: 'SF Mono', size: 9 },
+                                // Đồng bộ 8 số thập phân cho trục Y của NAH
+                                callback: function(val) {
+                                    return isNahChart ? '$' + val.toFixed(8) : '$' + Math.floor(val).toLocaleString('en-US');
+                                }
+                            }, 
+                            grid: { color: '#111' } 
+                        }
                     },
                     interaction: { mode: 'nearest', axis: 'x', intersect: false }
                 }
             });
         }
 
-        chartInstanceNah = buildDetailedChart('chartNah', '#ff9900');
-        chartInstanceBtc = buildDetailedChart('chartBtc', '#ffffff');
+        // Kích hoạt Flag true cho NAH để áp dụng Precision 8 chữ số
+        chartInstanceNah = buildDetailedChart('chartNah', '#ff9900', true);
+        chartInstanceBtc = buildDetailedChart('chartBtc', '#ffffff', false);
 
-        // HÀM XỬ LÝ KHUNG THỜI GIAN VÀ RÚT DỮ LIỆU LỊCH SỬ DEEP GRID
         async function fetchChartData(timeframe) {
             let days = '1';
             let labelFormatter = (date) => date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
             
             if (timeframe === '1W') { days = '7'; labelFormatter = (date) => date.toLocaleDateString([], {month: 'numeric', day: 'numeric'}) + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}); }
             if (timeframe === '1M') { days = '30'; labelFormatter = (date) => date.toLocaleDateString([], {month: 'numeric', day: 'numeric'}); }
-            // Khung ALL: Rút 90 ngày để bao trọn vòng đời từ 27/04/2026 đến nay
             if (timeframe === 'ALL') { days = '90'; labelFormatter = (date) => date.toLocaleDateString([], {month: 'numeric', day: 'numeric', year: '2-digit'}); }
 
-            // Chống spam API (Sử dụng Cache)
             if (!chartCache[timeframe]) {
                 const res = await fetch(CG_CHART_API(days));
                 const data = await res.json();
-                chartCache[timeframe] = data.prices; // Array of [timestamp, price]
+                chartCache[timeframe] = data.prices; 
             }
 
             const rawData = chartCache[timeframe];
@@ -379,7 +396,7 @@
                 const btcUsd = point[1];
                 const nahSats = getNahSatsAtTime(timestamp);
 
-                if (nahSats !== null) { // Bỏ qua đoạn thời gian trước khi NAH ra đời
+                if (nahSats !== null) { 
                     labels.push(labelFormatter(new Date(timestamp)));
                     btcPrices.push(btcUsd);
                     const usdNah = (nahSats / 100000000) * btcUsd;
@@ -394,16 +411,12 @@
             try {
                 const chartData = await fetchChartData(timeframe);
 
-                // Bơm Data vào đồ thị NAH
                 chartInstanceNah.data.labels = chartData.labels;
                 chartInstanceNah.data.datasets[0].data = chartData.nahPrices;
-                chartInstanceNah.options.scales.y.ticks.callback = (val) => '$' + val.toFixed(6);
                 chartInstanceNah.update();
 
-                // Bơm Data vào đồ thị BTC
                 chartInstanceBtc.data.labels = chartData.labels;
                 chartInstanceBtc.data.datasets[0].data = chartData.btcPrices;
-                chartInstanceBtc.options.scales.y.ticks.callback = (val) => '$' + Math.floor(val).toLocaleString();
                 chartInstanceBtc.update();
             } catch (error) {
                 console.error("Chart API Overload");
@@ -416,7 +429,6 @@
             updateChartGraphics(timeframe);
         }
 
-        // ĐỘNG CƠ CẬP NHẬT LIVE CÁC CHỈ SỐ TEXT BÊN DƯỚI
         async function engageOracle() {
             try {
                 const [btcRes, forexRes, goldRes] = await Promise.all([
@@ -478,7 +490,6 @@
             }
         }
 
-        // Kích hoạt ngay nhịp đập đầu tiên khi tải web
         updateChartGraphics('1D');
         engageOracle();
         setInterval(engageOracle, 60000); 
