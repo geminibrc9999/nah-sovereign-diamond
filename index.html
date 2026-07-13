@@ -20,12 +20,10 @@
             flex-direction: column;
             align-items: center;
             position: relative;
-            /* Lớp Texture nhiễu hạt Analog cho toàn trang */
             background-image: radial-gradient(rgba(255, 153, 0, 0.03) 1px, transparent 1px);
             background-size: 4px 4px;
         }
 
-        /* KHUNG CHỨA CÁC TRANG CÓ MA SÁT CUỘN */
         .mainframe {
             width: 100%;
             display: flex;
@@ -46,7 +44,7 @@
             box-sizing: border-box;
         }
 
-        /* TRANSITION GATEWAY (LỚP MA SÁT GIỮA 2 TRANG) */
+        /* TRANSITION GATEWAY */
         .gateway-transition {
             width: 100%;
             max-width: 520px;
@@ -115,28 +113,40 @@
         .info-text a { color: #00ff41; text-decoration: none; border-bottom: 1px dotted #00ff41; transition: all 0.2s; font-weight: bold; }
         .info-text a:hover { color: #0a0a0a; background: #00ff41; box-shadow: 0 0 10px #00ff41; }
         
-        /* PHẦN REPORT KHOA HỌC: HIỆU ỨNG TƯƠNG TÁC LAYER */
+        /* PHẦN REPORT KHOA HỌC: HIỆU ỨNG & SO SÁNH KIẾN TRÚC */
         .report-block { border-left: 2px solid #333; padding-left: 15px; margin-bottom: 20px; }
         .report-heading { font-size: 14px; color: #fff; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 5px; }
         
-        .interactive-cell { display: flex; flex-direction: column; gap: 6px; margin: 20px 0; background: #050505; padding: 15px; border: 1px solid #222; border-radius: 4px; cursor: crosshair; }
-        .ic-title { font-size: 10px; color: #666; text-align: center; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 2px; }
-        .ic-layer { background: #0d0d0d; border: 1px solid #1c1c1c; padding: 10px; border-left: 4px solid #444; transition: all 0.3s ease; position: relative; }
-        .ic-layer:hover { background: #1a1a1a; transform: translateX(5px); border-color: #555; }
-        .ic-layer.cathode { border-left-color: #ff9900; }
-        .ic-layer.cathode:hover { border-color: #ff9900; box-shadow: 0 0 15px rgba(255, 153, 0, 0.1); }
-        .ic-layer.lithium { border-left-color: #00ff41; }
-        .ic-layer.lithium:hover { border-color: #00ff41; box-shadow: 0 0 15px rgba(0, 255, 65, 0.1); }
-        .ic-name { font-size: 12px; font-weight: bold; color: #ddd; }
-        .ic-desc { font-size: 11px; color: #888; margin-top: 4px; line-height: 1.4; opacity: 0.7; transition: opacity 0.3s; }
-        .ic-layer:hover .ic-desc { opacity: 1; color: #aaa; }
-        .ic-highlight { color: #ff9900; font-weight: bold; }
+        /* CẤU TRÚC SO SÁNH 2 CELL */
+        .blueprint-container { display: flex; gap: 10px; margin: 15px 0; }
+        .blueprint-card { flex: 1; background: #050505; border: 1px solid #222; padding: 12px; border-radius: 4px; display: flex; flex-direction: column; gap: 8px; }
+        .bp-header { font-size: 11px; font-weight: bold; color: #ff9900; text-align: center; border-bottom: 1px solid #222; padding-bottom: 5px; margin-bottom: 5px; text-transform: uppercase; }
+        .bp-layer { background: #0d0d0d; border-left: 3px solid #444; padding: 8px; font-size: 10px; color: #aaa; line-height: 1.3; }
+        .bp-layer strong { color: #ddd; display: block; margin-bottom: 2px; }
+        .bp-highlight { border-left-color: #ff9900; background: rgba(255, 153, 0, 0.03); }
+        .bp-highlight-green { border-left-color: #00ff41; background: rgba(0, 255, 65, 0.03); }
+
+        /* SƠ ĐỒ KINH TẾ TUẦN HOÀN (CIRCULAR ECONOMY) */
+        .flow-container { background: #050505; border: 1px solid #1c1c1c; padding: 15px; margin: 15px 0; border-radius: 4px; display: flex; flex-direction: column; gap: 10px; }
+        .flow-step { display: flex; align-items: flex-start; gap: 10px; background: #0a0a0a; padding: 10px; border: 1px solid #222; border-left: 3px solid #00ff41; }
+        .flow-num { background: #00ff41; color: #000; font-weight: bold; padding: 2px 6px; font-size: 10px; border-radius: 2px; }
+        .flow-text { font-size: 11px; color: #888; line-height: 1.4; }
+        .flow-text strong { color: #ddd; display: block; margin-bottom: 2px; text-transform: uppercase; }
+        .flow-arrow { text-align: center; color: #444; font-size: 14px; margin: -5px 0; }
+
+        .btn-link { display: block; text-align: center; background: #ff9900; color: #000; font-weight: bold; text-decoration: none; padding: 10px; font-size: 11px; text-transform: uppercase; border-radius: 2px; margin-top: 15px; transition: all 0.2s; }
+        .btn-link:hover { background: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
 
         .scanline { width: 100%; height: 70px; z-index: 10; position: absolute; left: 0; top: 0; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(255,153,0,0.03) 50%, rgba(0,0,0,0) 100%); animation: scanline 4s linear infinite; }
         @keyframes scanline { 0% { top: -70px; } 100% { top: 100%; } }
 
         .footer { margin-top: 40px; font-size: 11px; text-align: center; text-transform: uppercase; font-weight: bold; letter-spacing: 1.5px; color: #555; animation: blink 2s infinite; padding-bottom: 40px;}
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* Fix UI cho mobile */
+        @media (max-width: 480px) {
+            .blueprint-container { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
@@ -177,7 +187,6 @@
             <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">LOADING...</span></div>
             <div class="data-row"><span class="label">GOLD (gram) / NAH</span><span class="value" id="gold-val">LOADING...</span></div>
 
-            <!-- SECTION 2 & 3 BỎ QUA CHO GỌN CODE NHƯ YÊU CẦU TRƯỚC ĐÓ -->
             <div class="sub-section">
                 <div class="sub-title">NAH MARKET CAP & TOKENOMICS</div>
                 <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION NAHs</span></div>
@@ -213,81 +222,118 @@
             <div class="report-block">
                 <div class="report-heading">1. A "Zero to One" Fundamental Leap</div>
                 <div class="info-text">
-                    Bemp’s <strong>Li-S/B4C-Hemp architecture</strong> is not an incremental update to dying Lithium-ion models. It is a fundamental leap in physics and material science, akin to Nikola Tesla’s invention of alternating current (AC) or humanity's early mastery of fire. 
+                    Bemp’s <strong>Li-S/B4C-Hemp architecture</strong> is not an incremental update. It is a fundamental leap in physics and material science, akin to Nikola Tesla’s invention of alternating current (AC). 
                 </div>
                 <div class="info-text">
-                    <strong>Independently Verified:</strong> We do not have "just a concept." We hold a fully functional, working prototype that has been independently tested and verified by Dr. Deyang Qu and his team of experts at the University of Wisconsin-Milwaukee (UWM). To ensure absolute neutrality and no conflict of financial interests, UWM staff held zero equity in Bemp during the testing of our baseline cells. When assessing the prototype, Dr. Qu explicitly stated on the record: <em>"No one ever got this far."</em>
+                    <strong>Independently Verified:</strong> We do not have "just a concept." We hold functional prototypes independently verified by Dr. Deyang Qu and his team at the University of Wisconsin-Milwaukee (UWM). To ensure absolute neutrality, UWM staff held zero equity during testing. Upon reviewing the data, Dr. Qu stated: <em>"No one ever got this far."</em>
                 </div>
             </div>
 
             <div class="report-block">
-                <div class="report-heading">2. The Anatomy of Radical Simplicity</div>
+                <div class="report-heading">2. The Architectures: Cell #1 vs Cell #4</div>
                 <div class="info-text">
-                    Our supply chain is brutally simple and highly scalable. By relying on an inherently low-cost Bill of Materials (elemental sulfur, hemp, pure lithium foil), we project a disruptive weighted average cost of <strong>~$80 / kWh</strong>. Hover over the blueprint below to understand the exact mechanics of our invention.
+                    To understand our roadmap, you must understand the two distinct architectures we engineered from a radically simple, low-cost supply chain.
                 </div>
                 
-                <!-- BẢN VẼ TƯƠNG TÁC 3D (INTERACTIVE DIAGRAM) -->
-                <div class="interactive-cell">
-                    <div class="ic-title">Hover to inspect Cell Components</div>
-                    <div class="ic-layer">
-                        <div class="ic-name">Aluminum Foil</div>
-                        <div class="ic-desc">Acts as the standard current collector for the cathode side.</div>
+                <!-- BẢN VẼ SO SÁNH 2 CELL ARCHITECTURES -->
+                <div class="blueprint-container">
+                    <!-- CELL 1 -->
+                    <div class="blueprint-card">
+                        <div class="bp-header">Cell #1 (Commercial Baseline)</div>
+                        <div class="bp-layer">
+                            <strong>Cathode (No Boron)</strong>
+                            70% Sulfur, 30% Purely Carbonized Hemp (C-Hemp). Low cost, highly porous scaffold.
+                        </div>
+                        <div class="bp-layer bp-highlight">
+                            <strong>Electrolyte (E/S = 3)</strong>
+                            Ultra-lean 20μL liquid. Proves ultimate mass-production commercial viability.
+                        </div>
+                        <div class="bp-layer">
+                            <strong>Anode</strong>
+                            Pure Lithium Foil (maximizing energy density).
+                        </div>
                     </div>
-                    <div class="ic-layer cathode">
-                        <div class="ic-name">Cathode: The B4C-Hemp Matrix <span style="color:#ff9900">★ CORE INVENTION</span></div>
-                        <div class="ic-desc">Composed of 91% Bemp Material (70% Sulfur + 30% <span class="ic-highlight">Carbonized Hemp decorated with Boron Carbide</span>), 4% C65, and 5% PVDF. Hemp provides a durable, porous, and ultra-cheap carbon scaffold. The Boron locks down the "polysulfide shuttle" (the chemical cancer that degrades normal batteries), securing the capacity.</div>
-                    </div>
-                    <div class="ic-layer">
-                        <div class="ic-name">Celgard 2325 Separator</div>
-                        <div class="ic-desc">A standard, commercially viable separator preventing physical short circuits.</div>
-                    </div>
-                    <div class="ic-layer">
-                        <div class="ic-name">Ultra-Lean Liquid Electrolyte (E/S = 3)</div>
-                        <div class="ic-desc"><strong>E/S Ratio Explained:</strong> The ratio of liquid volume to sulfur weight. Many lab experiments cheat by "flooding" cells with liquid (E/S > 10). Bemp achieved success at a commercially scalable <strong>E/S ratio of 3 or less</strong> (using 1M LiTFSI + 0.2M LiNO3), proving mass-production viability.</div>
-                    </div>
-                    <div class="ic-layer lithium">
-                        <div class="ic-name">Anode: Pure Lithium Foil</div>
-                        <div class="ic-desc">Instead of heavy, dead-weight graphite, we use pure metallic lithium (30-250 μm thick), maximizing gravimetric energy density.</div>
+                    <!-- CELL 4 -->
+                    <div class="blueprint-card">
+                        <div class="bp-header">Cell #4 (Kinetic Armor)</div>
+                        <div class="bp-layer bp-highlight-green">
+                            <strong>Cathode (With Boron)</strong>
+                            70% Sulfur, 30% B4C-Hemp. Boron Carbide locks down the polysulfide shuttle.
+                        </div>
+                        <div class="bp-layer">
+                            <strong>Electrolyte (E/S ~ 12)</strong>
+                            Flooded 25μL liquid to accommodate heavy kinetic testing.
+                        </div>
+                        <div class="bp-layer">
+                            <strong>Anode</strong>
+                            Pure Lithium Foil (250 μm).
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="report-block">
-                <div class="report-heading">3. Cell #1: The Commercializable Baseline</div>
+                <div class="report-heading">3. The Off-Grid Genesis</div>
                 <div class="info-text">
-                    Tested using the ultra-lean E/S = 3 protocol, our team achieved a massive <strong>~1150-1200 mAh/g specific capacity</strong> at a slow 0.01C discharge rate. Proving functionality at this low liquid ratio is the ultimate proof that our chemistry can graduate from coin cells to commercially scalable pouch cells. Even with the standard kinetic drop-off to ~750 mAh/g at a 0.1C rate, this capacity absolutely crushes legacy Li-ion. Cell #1 in its current form is ready for static grid applications.
+                    Both Cell #1 and Cell #4 were cooked sequentially in the exact same location: a makeshift, off-grid warehouse with unstable 5G and zero running electricity. The entire process was powered by two small gas generators, feeding a small high-pressure furnace that never exceeded 1000°C. 
+                </div>
+                <div class="info-text">
+                    This proves the extreme, rugged scalability of Bemp's chemistry. If we can synthesize world-class battery materials in a literal shed, our future gigafactories powered by solar energy will completely disrupt global manufacturing costs.
+                </div>
+            </div>
+
+            <div class="report-block">
+                <div class="report-heading">4. Performance: Baseline vs Brutality</div>
+                <div class="info-text">
+                    <strong>Cell #1 (The Baseline):</strong> Achieved a massive <strong>~1150-1200 mAh/g</strong> specific capacity at a 0.01C rate, successfully utilizing the ultra-lean E/S = 3. Even dropping to ~750 mAh/g at 0.1C, it crushes legacy Li-ion.
                 </div>
                 <div class="chart-box" style="height: 180px; margin-top: 10px;">
-                    <div class="chart-label" style="background: rgba(0,0,0,0.8); border:none;">CELL #1 (CAPACITY VS VOLTAGE)</div>
+                    <div class="chart-label" style="background: rgba(0,0,0,0.8); border:none;">CELL #1 (E/S=3 CAPACITY)</div>
                     <canvas id="chartCell1"></canvas>
                 </div>
-            </div>
-
-            <div class="report-block">
-                <div class="report-heading">4. Cell #4: Kinetic Armor Built Off-Grid</div>
-                <div class="info-text">
-                    We built Cell #4 in a makeshift, off-grid warehouse with unstable 5G and no running water—proving the extreme, rugged scalability of this chemistry. The Boron Carbide-Hemp (B4C) scaffold inside the cathode acts as an incredible kinetic catalyst. 
-                </div>
-                <div class="info-text">
-                    <strong>3C Charging Explained:</strong> 3C means completely draining the battery in just 20 minutes—a brutal stress test. Under continuous 3C punishment, Cell #4 sustained <strong>~450 mAh/g</strong> and survived well beyond the 100-cycle threshold without structural collapse.
+                <div class="info-text" style="margin-top: 15px;">
+                    <strong>Cell #4 (The Brutality):</strong> We subjected it to 3C charging (draining the battery completely in 20 minutes). The Boron Carbide-Hemp armor sustained <strong>~450 mAh/g</strong> under this continuous punishment, surviving well past 100 cycles without structural collapse.
                 </div>
                 <div class="chart-box" style="height: 180px; margin-top: 10px;">
-                    <div class="chart-label" style="background: rgba(0,0,0,0.8); border:none;">CELL #4 (3C DEGRADATION OVER 100 CYCLES)</div>
+                    <div class="chart-label" style="background: rgba(0,0,0,0.8); border:none;">CELL #4 (3C OVER 100 CYCLES)</div>
                     <canvas id="chartCell4"></canvas>
                 </div>
             </div>
 
             <div class="report-block">
-                <div class="report-heading">5. The Dual-Core Sovereign Wheel & 95% Circular Economy</div>
+                <div class="report-heading">5. The Dual-Core Sovereign Wheel & Circular Economy</div>
                 <div class="info-text">
-                    By cross-pollinating the high capacity of Cell #1 with the kinetic armor of Cell #4, we engineered <strong>Cell #7 (The Energy Core, 462 Wh/kg)</strong> and <strong>Cell #8 (The Kinetic Core, 130 Wh/kg)</strong>. Integrated at a 90/10 ratio inside the <strong>NahKah Sovereign Wheel</strong> hub motor, it yields a targeted macro-pack density of ~428 Wh/kg. 
+                    Cell #4 has too much liquid (E/S=12), and Cell #1 is too slow (0.1C). The solution? <strong>We cross-pollinate them.</strong> 
                 </div>
                 <div class="info-text">
-                    Because our cells mathematically guarantee survival over 100 cycles, and because they use pure lithium instead of a toxic, mixed-metal soup (no Cobalt, no Nickel), our circular economy retrieval protocol can execute an industry-leading <strong>95% Lithium recycling rate</strong>. 
+                    By diluting the Boron from Cell #4 into the massive capacity of Cell #1, we engineered <strong>Cell #7 (Energy Core, 462 Wh/kg)</strong> and <strong>Cell #8 (Kinetic Core, 130 Wh/kg)</strong>—both operating strictly at the commercial E/S = 3 limit. Packaged at a 90/10 ratio into the <strong>NahKah Sovereign Wheel</strong>, it yields a targeted ~428 Wh/kg density.
                 </div>
-                <div class="info-text" style="color: #00ff41; font-weight: bold; text-align: center; margin-top: 15px;">
-                    RECYCLED 95% IN A FLAWLESS LOOP BEATS COMPLEX MULTI-METAL WASTE.
+                
+                <!-- SƠ ĐỒ KINH TẾ TUẦN HOÀN -->
+                <div class="flow-container">
+                    <div class="sub-title" style="text-align: center; margin-bottom: 0;">THE 95% LITHIUM RECYCLING PROTOCOL</div>
+                    <div class="flow-step">
+                        <div class="flow-num">1</div>
+                        <div class="flow-text"><strong>3-Min Hot Swap</strong>Modular wheels are swapped like an F1 pitstop. No complex under-chassis teardowns.</div>
+                    </div>
+                    <div class="flow-arrow">▼</div>
+                    <div class="flow-step">
+                        <div class="flow-num">2</div>
+                        <div class="flow-text"><strong>Seamless Isolation</strong>Because we use pure Lithium and Hemp (no Cobalt/Nickel toxic soup), tearing down the cell is radically simple.</div>
+                    </div>
+                    <div class="flow-arrow">▼</div>
+                    <div class="flow-step">
+                        <div class="flow-num">3</div>
+                        <div class="flow-text"><strong>95% Recovery Rate</strong>Metallic Lithium is safely extracted at an industry-leading >95% efficiency.</div>
+                    </div>
+                    <div class="flow-arrow">▼</div>
+                    <div class="flow-step">
+                        <div class="flow-num">4</div>
+                        <div class="flow-text"><strong>Infinite Loop</strong>Recovered Lithium is funneled directly back into fabricating new bendable Li-S/B4C-Hemp battery rings.</div>
+                    </div>
                 </div>
+
+                <a href="https://facebook.com/bempresearch" target="_blank" class="btn-link">VIEW FULL ENGINEERING INFOGRAPHICS ON FACEBOOK ↗</a>
             </div>
 
         </div>
@@ -380,7 +426,7 @@
         updateChartGraphics('1D'); engageOracle(); setInterval(engageOracle, 60000); 
 
         // ========================================================================
-        // KHU VỰC DỰNG HÌNH ĐỒ THỊ PIN (SCIENTIFIC REPORT)
+        // KHU VỰC DỰNG HÌNH ĐỒ THỊ PIN (BẢN VÁ UI - CHỐNG ĐÈ LEGEND)
         // ========================================================================
         
         // 1. Dựng biểu đồ mô phỏng CELL #1 (Đường cong xả điện)
@@ -388,7 +434,7 @@
         new Chart(ctxCell1, {
             type: 'line',
             data: {
-                labels: Array.from({length: 15}, (_, i) => i * 100), // X axis: 0 to 1500 mAh/g
+                labels: Array.from({length: 15}, (_, i) => i * 100), 
                 datasets: [
                     { label: '0.01C', data: [2.4, 2.3, 2.25, 2.24, 2.25, 2.26, 2.27, 2.28, 2.3, 2.31, 2.32, 2.35, null, null, null], borderColor: '#555', borderWidth: 1.5, pointRadius: 0, tension: 0.4 },
                     { label: '0.1C', data: [2.35, 2.2, 2.05, 1.78, 1.75, 1.76, 1.8, 1.75, null, null, null, null, null, null, null], borderColor: '#0055ff', borderWidth: 1.5, pointRadius: 0, tension: 0.4 },
@@ -397,7 +443,10 @@
             },
             options: {
                 responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { display: true, position: 'right', labels: { color: '#aaa', font: { size: 9 } } } },
+                // ÉP KHOẢNG KHÔNG CHO ĐỈNH ĐỒ THỊ ĐỂ KHÔNG ĐÈ LABEL
+                layout: { padding: { top: 40 } },
+                // ĐẨY CHÚ THÍCH XUỐNG DƯỚI CÙNG HOẶC SANG PHẢI
+                plugins: { legend: { display: true, position: 'right', labels: { color: '#aaa', font: { size: 9 }, boxWidth: 10 } } },
                 scales: {
                     x: { title: { display: true, text: 'Specific Capacity (mAh/g)', color: '#888', font: { size: 10 } }, ticks: { color: '#555' }, grid: { color: '#111' } },
                     y: { min: 1.6, max: 2.8, title: { display: true, text: 'Voltage (V)', color: '#888', font: { size: 10 } }, ticks: { color: '#ff9900' }, grid: { color: '#111' } }
@@ -408,11 +457,10 @@
         // 2. Dựng biểu đồ mô phỏng CELL #4 (Độ bền xả 3C qua 100 chu kỳ)
         const ctxCell4 = document.getElementById('chartCell4').getContext('2d');
         
-        // Thuật toán tạo hạt dữ liệu phân tán (Scatter) mô phỏng sạc/xả
         let cycleDataCharge = []; let cycleDataDischarge = [];
         for(let i = 1; i <= 100; i += 2) {
-            let baseCap = 480 - (i * 1.5); // Đường cong thoái hóa nhẹ, chốt ở ~300
-            if (i > 70 && i < 85) baseCap -= Math.random() * 40; // Mô phỏng nhiễu động vật lý
+            let baseCap = 480 - (i * 1.5); 
+            if (i > 70 && i < 85) baseCap -= Math.random() * 40; 
             cycleDataCharge.push({x: i, y: baseCap + (Math.random() * 10)});
             cycleDataDischarge.push({x: i, y: baseCap - (Math.random() * 15)});
         }
@@ -427,10 +475,13 @@
             },
             options: {
                 responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { display: true, labels: { color: '#aaa', font: { size: 9 } } } },
+                // ÉP KHOẢNG KHÔNG BÊN TRÊN ĐỂ KHÔNG ĐÈ CHỮ "CELL #4"
+                layout: { padding: { top: 40 } },
+                // ĐẨY CHÚ THÍCH XUỐNG ĐÁY ĐỂ CHỐNG COLLISION
+                plugins: { legend: { display: true, position: 'bottom', labels: { color: '#aaa', font: { size: 9 }, boxWidth: 10 } } },
                 scales: {
                     x: { min: 0, max: 100, title: { display: true, text: 'Cycle No.', color: '#888', font: { size: 10 } }, ticks: { color: '#555' }, grid: { color: '#111' } },
-                    y: { min: 0, max: 600, title: { display: true, text: 'Specific Capacity (mAh/g)', color: '#888', font: { size: 10 } }, ticks: { color: '#ff9900' }, grid: { color: '#111' } }
+                    y: { min: 0, max: 600, title: { display: true, text: 'Capacity (mAh/g)', color: '#888', font: { size: 10 } }, ticks: { color: '#ff9900' }, grid: { color: '#111' } }
                 }
             }
         });
