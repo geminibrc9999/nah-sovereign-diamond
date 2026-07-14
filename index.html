@@ -22,12 +22,12 @@
             position: relative; z-index: 2; margin: 40px 0; box-sizing: border-box;
         }
 
+        /* ĐƯỜNG PHÂN CÁCH GATEWAY TỐI GIẢN */
         .gateway-transition {
-            width: 100%; max-width: 580px; height: 80px; display: flex; align-items: center; justify-content: center;
+            width: 100%; max-width: 580px; height: 12px; display: flex; align-items: center; justify-content: center;
             border-top: 2px dashed #333; border-bottom: 2px dashed #333;
             background: repeating-linear-gradient(45deg, #050505, #050505 10px, #0a0a0a 10px, #0a0a0a 20px);
-            color: #555; font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
-            margin: 20px 0; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); position: relative; overflow: hidden; text-align: center; padding: 0 20px; box-sizing: border-box;
+            margin: 20px 0; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); position: relative; overflow: hidden;
         }
         .gateway-transition::after {
             content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
@@ -38,7 +38,7 @@
         .title-container { margin-bottom: 20px; text-align: center; }
         .title { font-family: 'Orbitron', sans-serif; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #ff9900; text-shadow: 0 0 12px rgba(255, 153, 0, 0.5); margin-bottom: 8px; line-height: 1.2; }
         .slogan-1 { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 1.5px; font-style: italic; margin-bottom: 5px; }
-        .slogan-2 { font-size: 12px; color: #ff9900; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; text-shadow: 0 0 5px rgba(255, 153, 0, 0.3); }
+        .slogan-2 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; line-height: 1.6; }
         .diamond { display: inline-block; animation: sparkle 1s infinite alternate; }
         @keyframes sparkle { 0% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 2px rgba(255,255,255,0.5)); } 100% { transform: scale(1.2); filter: brightness(1.5) drop-shadow(0 0 12px rgba(255, 153, 0, 0.8)); } }
 
@@ -55,8 +55,14 @@
         .pct-down { color: #ff3333; text-shadow: 0 0 5px rgba(255, 51, 51, 0.4); border: 1px solid rgba(255, 51, 51, 0.2); }
         .pct-neutral { color: #888; border: 1px solid #333; }
         
+        /* PHÂN TÁCH HARD MONEY & FIAT */
+        .parity-section { border-bottom: 2px solid #333; padding-bottom: 15px; margin-bottom: 20px; }
+        .parity-title { font-size: 10px; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; border-left: 3px solid; padding-left: 8px; }
+        .parity-hard { border-left-color: #ff9900; }
+        .parity-fiat { border-left-color: #ff3333; }
+
         .data-row { display: flex; justify-content: space-between; border-bottom: 1px dashed #222; padding: 10px 0; font-size: 14px; }
-        .data-row:last-of-type { border-bottom: 2px solid #333; padding-bottom: 15px; margin-bottom: 25px; }
+        .data-row:last-child { border-bottom: none; }
         .label { text-transform: uppercase; color: #aaa; }
         .value { font-weight: bold; color: #ff9900; text-shadow: 0 0 5px rgba(255, 153, 0, 0.3); text-align: right; }
 
@@ -69,11 +75,16 @@
         .sub-row .value.highlight { color: #ff9900; text-shadow: 0 0 4px rgba(255, 153, 0, 0.3); }
         .sub-row a { color: #ff9900; text-decoration: none; border-bottom: 1px dotted #ff9900; }
         
-        /* BÁO CÁO KHOA HỌC */
+        /* BÁO CÁO KHOA HỌC & LIÊN KẾT */
         .report-block { border-left: 2px solid #333; padding-left: 15px; margin-bottom: 30px; }
         .report-heading { font-size: 14px; color: #fff; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 5px; }
         .info-text { font-size: 12px; margin-bottom: 12px; line-height: 1.6; color: #888; text-align: justify; }
         .info-text strong { color: #ccc; }
+
+        .link-green { color: #00ff41; text-decoration: none; border-bottom: 1px dotted #00ff41; transition: all 0.2s; font-weight: bold; }
+        .link-green:hover { background: #00ff41; color: #0a0a0a; box-shadow: 0 0 10px #00ff41; }
+        .link-blue { color: #00ccff; text-decoration: none; border-bottom: 1px dotted #00ccff; transition: all 0.2s; font-weight: bold; }
+        .link-blue:hover { background: #00ccff; color: #0a0a0a; box-shadow: 0 0 10px #00ccff; }
         
         .blueprint-container { display: flex; flex-direction: column; gap: 15px; margin: 20px 0; }
         .blueprint-card { background: #050505; border: 1px solid #222; border-radius: 4px; overflow: hidden; }
@@ -111,7 +122,10 @@
             <div class="title-container">
                 <div class="title">NAH SOVEREIGN DIAMOND <span class="diamond">💎</span></div>
                 <div class="slogan-1">digital diamond etched on digital gold</div>
-                <div class="slogan-2">world's hardest asset</div>
+                <div class="slogan-2">
+                    <span style="color: #ff9900; text-shadow: 0 0 5px rgba(255, 153, 0, 0.3);">THE FUTURE OF BITCOIN MINING</span><br>
+                    <span style="color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);">AND ELECTRIC VEHICLE MANUFACTURING</span>
+                </div>
             </div>
 
             <div class="timeframe-selector">
@@ -132,11 +146,17 @@
                 </div>
             </div>
 
-            <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">LOADING...</span></div>
-            <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">LOADING...</span></div>
-            <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">LOADING...</span></div>
-            <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">LOADING...</span></div>
-            <div class="data-row"><span class="label">GOLD (gram) / NAH</span><span class="value" id="gold-val">LOADING...</span></div>
+            <div class="parity-section">
+                <div class="parity-title parity-hard">HARD MONEY PARITY</div>
+                <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">LOADING...</span></div>
+                <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">LOADING...</span></div>
+            </div>
+
+            <div class="parity-section" style="border-bottom: none;">
+                <div class="parity-title parity-fiat">FIAT CURRENCY PARITY</div>
+                <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">LOADING...</span></div>
+                <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">LOADING...</span></div>
+            </div>
 
             <div class="sub-section">
                 <div class="sub-title">NAH MARKET CAP & TOKENOMICS</div>
@@ -148,28 +168,21 @@
             </div>
 
             <div class="info-text" style="font-size: 10px;">
-                * Nah's price is updated based on the trading price on <a href="https://satflow.com" target="_blank">Satflow</a>. To view live BTC/NAH chart and get best prices, please visit <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">DotSwap</a>.
+                * Nah's price is updated based on the trading price on <a href="https://satflow.com" target="_blank" class="link-green">Satflow</a>. To view live BTC/NAH chart and get best prices, please visit <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank" class="link-green">DotSwap</a>.
             </div>
             <div class="info-text" style="font-size: 10px;">
-                * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank">Facebook</a> or <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank">LinkedIn</a>.
+                * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank" class="link-blue">Facebook</a> or <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank" class="link-blue">LinkedIn</a>.
             </div>
             <div class="status" id="last-update" style="color: #444; font-size: 10px; text-align: right; margin-top: 15px;">CONNECTING...</div>
         </div>
 
-        <!-- CỔNG CHUYỂN ĐỔI GIAO DIỆN -->
-        <div class="gateway-transition">
-            ▼ SYSTEM LINK ▼ ESTABLISHING CONNECTION TO ENGINEERING MAINFRAME ▼ SCROLL DOWN ▼
-        </div>
+        <!-- ĐƯỜNG CHỈ DẪN PHÂN TÁCH GIAO DIỆN MỚI -->
+        <div class="gateway-transition"></div>
 
         <!-- TRANG 2: BÁO CÁO KHOA HỌC CÔNG NGHỆ PIN -->
         <div class="terminal">
             <div class="scanline"></div>
             
-            <div class="title-container">
-                <div class="title" style="color: #fff; text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);">BATTERY CELL ENGINEERING</div>
-                <div class="slogan-2" style="color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);">THE FUTURE OF BITCOIN MINING AND ELECTRIC VEHICLE MANUFACTURING</div>
-            </div>
-
             <div class="report-block">
                 <div class="report-heading">1. A "Zero to One" Fundamental Leap</div>
                 <div class="info-text">
@@ -182,9 +195,6 @@
 
             <div class="report-block">
                 <div class="report-heading">2. The Genesis: Carbon Cooked Off-Grid</div>
-                <div class="info-text">
-                    A crucial distinction: <strong>We did not "cook" the batteries. We synthesized the core carbon matrix.</strong> 
-                </div>
                 <div class="info-text">
                     The carbon samples for Cell #1 (Pure Hemp) and Cell #4 (Hemp mixed with Boron via ultrasonic stirring) were synthesized in a makeshift, off-grid warehouse. Powered entirely by two small gas generators, our small high-pressure furnace never exceeded 1000°C. These raw materials were then sent to UWM, who assembled them into the 2032 coin cells detailed below.
                 </div>
@@ -211,7 +221,7 @@
                         </div>
                         <div class="bp-grid">
                             <div class="bp-label">Electrolyte</div>
-                            <div class="bp-value"><strong>Ultra-Lean (E/S ≤ 3).</strong> 20 μL liquid (1M LiTFSI + 0.2M LiNO3 in DOL/DME). Proves commercial mass-production viability.</div>
+                            <div class="bp-value"><strong>Ultra-Lean (E/S ≤ 3).</strong> 20 μL liquid (1M LiTFSI + 0.2M LiNO3 in DOL/DME). This extreme lean state is the deciding factor that allows Cell #1 to graduate to mass production immediately.</div>
                         </div>
                         <div class="bp-grid">
                             <div class="bp-label">Anode & Sep</div>
@@ -246,7 +256,6 @@
                     Why does a low discharge rate matter? Because it creates the ultimate static energy vault. This massive gravimetric density is designed to power Data Centers and capture intermittent Solar/Wind energy at scale. Ultimately, Cell #1 provides the economic foundation to completely <strong>decentralize the Bitcoin mining grid</strong> away from fossil fuels.
                 </div>
 
-                <!-- BIỂU ĐỒ CELL 1 VỚI VÒNG LẶP SẠC/XẢ CHUẨN XÁC -->
                 <div class="chart-box" style="height: 250px; margin-top: 15px;">
                     <div class="chart-label" style="background: rgba(0,0,0,0.8); border:none;">CELL #1 (E/S=3 CHARGE/DISCHARGE PROFILES)</div>
                     <canvas id="chartCell1"></canvas>
