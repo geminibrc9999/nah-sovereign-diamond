@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- TỐI ƯU HÓA SEO ĐA NGÔN NGỮ (BILINGUAL SEO ANCHORS) -->
+    <meta name="description" content="Live price and market cap of NAH Sovereign Diamond. Giá quy đổi VND, USD, BTC của NAH Sovereign Diamond trực tuyến chuẩn xác nhất.">
+    <meta name="keywords" content="giá vnd nah sovereign diamond, nah sovereign diamond price, nah rune price, satflow nah, btc, bitcoin, bemp research, nahkah motors">
+    <meta name="author" content="Bemp Research Corporation">
+    
     <title>NAH SOVEREIGN DIAMOND 💎 & BEMP LI-S ARCHITECTURE</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -146,16 +152,17 @@
                 </div>
             </div>
 
+            <!-- Gắn mồi tĩnh (Pre-loaded values) để Bot lười đọc ngay -->
             <div class="parity-section">
                 <div class="parity-title parity-hard">HARD MONEY PARITY</div>
-                <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">LOADING...</span></div>
-                <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">LOADING...</span></div>
+                <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">0.0000000009 BTC</span></div>
+                <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.09 SATS</span></div>
             </div>
 
             <div class="parity-section" style="border-bottom: none;">
                 <div class="parity-title parity-fiat">FIAT CURRENCY PARITY</div>
-                <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">LOADING...</span></div>
-                <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">LOADING...</span></div>
+                <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">$0.00006</span></div>
+                <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">1.53 ₫</span></div>
             </div>
 
             <div class="sub-section">
@@ -176,7 +183,6 @@
             <div class="status" id="last-update" style="color: #444; font-size: 10px; text-align: right; margin-top: 15px;">CONNECTING...</div>
         </div>
 
-        <!-- ĐƯỜNG CHỈ DẪN PHÂN TÁCH GIAO DIỆN MỚI -->
         <div class="gateway-transition"></div>
 
         <!-- TRANG 2: BÁO CÁO KHOA HỌC CÔNG NGHỆ PIN -->
@@ -342,7 +348,7 @@
 
     <script>
         // ========================================================================
-        // KHU VỰC ĐIỀU KHIỂN DỮ LIỆU TÀI CHÍNH (NAH)
+        // KHU VỰC ĐIỀU KHIỂN DỮ LIỆU TÀI CHÍNH (NAH) - TÍCH HỢP JSON-LD SEO BILINGUAL
         // ========================================================================
         const CURRENT_NAH_SATS = 0.09; 
         const CIRCULATING_SUPPLY = 85300000000000; 
@@ -358,7 +364,7 @@
         const T_JUL_01_26 = new Date("2026-07-01T00:00:00Z").getTime();
         const T_JUL_11_26 = new Date("2026-07-11T00:00:00Z").getTime();
         const T_JUL_12_26 = new Date("2026-07-12T00:00:00Z").getTime();
-        const T_AUG_08_26 = new Date("2026-08-08T04:30:00Z").getTime(); // Đỉnh cú Breakout 1 giờ trước
+        const T_AUG_08_26 = new Date("2026-08-08T04:30:00Z").getTime();
 
         function getNahSatsAtTime(timestampMs) {
             if (timestampMs < T_APR_27_26) return null; 
@@ -416,14 +422,57 @@
                 const btcData = await btcRes.json(), forexData = await forexRes.json();
                 const globalLiveBtcPrice = parseFloat(btcData.USD), globalLiveVndRate = parseFloat(forexData.rates.VND);
                 const btcVal = CURRENT_NAH_SATS / 100000000, usdVal = btcVal * globalLiveBtcPrice, vndVal = usdVal * globalLiveVndRate; 
+                
+                // Hiển thị ra màn hình cho con người
                 document.getElementById("btc-val").innerText = btcVal.toFixed(10) + " BTC";
                 document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " SATS";
                 document.getElementById("usd-val").innerText = "$" + usdVal.toFixed(5);
                 document.getElementById("vnd-val").innerText = vndVal.toFixed(2) + " ₫";
                 document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
-            } catch (error) {}
+
+                // KÍCH HOẠT MỎ NEO DỮ LIỆU ĐA NGÔN NGỮ CHO GOOGLE BOT (JSON-LD)
+                let schemaScript = document.getElementById('nah-financial-schema');
+                if (!schemaScript) {
+                    schemaScript = document.createElement('script');
+                    schemaScript.type = 'application/ld+json';
+                    schemaScript.id = 'nah-financial-schema';
+                    document.head.appendChild(schemaScript);
+                }
+                
+                // Đóng gói 3 mức giá (VND, USD, BTC) vào một cấu trúc chuẩn hóa toàn cầu
+                schemaScript.text = JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "FinancialProduct",
+                    "name": "NAH Sovereign Diamond",
+                    "alternateName": ["Kim Cương NAH", "NAH Rune"],
+                    "description": "Real-time price of NAH Sovereign Diamond. Giá trị quy đổi chính thức của NAH Sovereign Diamond sang VND, USD và BTC (Satoshi).",
+                    "offers": [
+                        {
+                            "@type": "Offer",
+                            "price": vndVal.toFixed(2),
+                            "priceCurrency": "VND",
+                            "name": "Giá VND NAH Sovereign Diamond"
+                        },
+                        {
+                            "@type": "Offer",
+                            "price": usdVal.toFixed(6),
+                            "priceCurrency": "USD",
+                            "name": "NAH Sovereign Diamond USD Price"
+                        },
+                        {
+                            "@type": "Offer",
+                            "price": btcVal.toFixed(10),
+                            "priceCurrency": "BTC",
+                            "name": "NAH Sovereign Diamond BTC Price"
+                        }
+                    ]
+                });
+            } catch (error) {
+                console.error("Oracle Connection Failed: ", error);
+            }
         }
+        
         updateChartGraphics('1D'); engageOracle(); setInterval(engageOracle, 60000); 
 
         // ========================================================================
