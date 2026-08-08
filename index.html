@@ -10,6 +10,38 @@
     <meta name="author" content="Bemp Research Corporation">
     
     <title>NAH SOVEREIGN DIAMOND 💎 & BEMP LI-S ARCHITECTURE</title>
+
+    <!-- KHỐI BÁO CÁO TĨNH CHO GOOGLE AI OVERVIEW (CẬP NHẬT THỦ CÔNG KHI CẦN) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FinancialProduct",
+        "name": "NAH Sovereign Diamond",
+        "alternateName": ["Kim Cương NAH", "NAH Rune"],
+        "description": "Giá quy đổi chính thức của NAH Sovereign Diamond sang VND, USD và BTC (Satoshi).",
+        "offers": [
+            {
+                "@type": "Offer",
+                "price": "1.53",
+                "priceCurrency": "VND",
+                "name": "Giá VND NAH Sovereign Diamond"
+            },
+            {
+                "@type": "Offer",
+                "price": "0.00006",
+                "priceCurrency": "USD",
+                "name": "NAH Sovereign Diamond USD Price"
+            },
+            {
+                "@type": "Offer",
+                "price": "0.0000000009",
+                "priceCurrency": "BTC",
+                "name": "NAH Sovereign Diamond BTC Price"
+            }
+        ]
+    }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap');
@@ -152,7 +184,7 @@
                 </div>
             </div>
 
-            <!-- Gắn mồi tĩnh (Pre-loaded values) để Bot lười đọc ngay -->
+            <!-- Gắn mồi tĩnh (Pre-loaded values) -->
             <div class="parity-section">
                 <div class="parity-title parity-hard">HARD MONEY PARITY</div>
                 <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">0.0000000009 BTC</span></div>
@@ -348,8 +380,10 @@
 
     <script>
         // ========================================================================
-        // KHU VỰC ĐIỀU KHIỂN DỮ LIỆU TÀI CHÍNH (NAH) - TÍCH HỢP JSON-LD SEO BILINGUAL
+        // KHU VỰC ĐIỀU KHIỂN DỮ LIỆU TÀI CHÍNH (NAH)
         // ========================================================================
+        
+        // CẬP NHẬT ĐỘNG CƠ TẠI ĐÂY KHI GIÁ TĂNG (Sẽ tự tính toán cho người dùng thật xem)
         const CURRENT_NAH_SATS = 0.09; 
         const CIRCULATING_SUPPLY = 85300000000000; 
 
@@ -431,43 +465,6 @@
                 document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
 
-                // KÍCH HOẠT MỎ NEO DỮ LIỆU ĐA NGÔN NGỮ CHO GOOGLE BOT (JSON-LD)
-                let schemaScript = document.getElementById('nah-financial-schema');
-                if (!schemaScript) {
-                    schemaScript = document.createElement('script');
-                    schemaScript.type = 'application/ld+json';
-                    schemaScript.id = 'nah-financial-schema';
-                    document.head.appendChild(schemaScript);
-                }
-                
-                // Đóng gói 3 mức giá (VND, USD, BTC) vào một cấu trúc chuẩn hóa toàn cầu
-                schemaScript.text = JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "FinancialProduct",
-                    "name": "NAH Sovereign Diamond",
-                    "alternateName": ["Kim Cương NAH", "NAH Rune"],
-                    "description": "Real-time price of NAH Sovereign Diamond. Giá trị quy đổi chính thức của NAH Sovereign Diamond sang VND, USD và BTC (Satoshi).",
-                    "offers": [
-                        {
-                            "@type": "Offer",
-                            "price": vndVal.toFixed(2),
-                            "priceCurrency": "VND",
-                            "name": "Giá VND NAH Sovereign Diamond"
-                        },
-                        {
-                            "@type": "Offer",
-                            "price": usdVal.toFixed(6),
-                            "priceCurrency": "USD",
-                            "name": "NAH Sovereign Diamond USD Price"
-                        },
-                        {
-                            "@type": "Offer",
-                            "price": btcVal.toFixed(10),
-                            "priceCurrency": "BTC",
-                            "name": "NAH Sovereign Diamond BTC Price"
-                        }
-                    ]
-                });
             } catch (error) {
                 console.error("Oracle Connection Failed: ", error);
             }
