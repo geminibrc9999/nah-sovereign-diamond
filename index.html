@@ -358,12 +358,14 @@
         const T_JUL_01_26 = new Date("2026-07-01T00:00:00Z").getTime();
         const T_JUL_11_26 = new Date("2026-07-11T00:00:00Z").getTime();
         const T_JUL_12_26 = new Date("2026-07-12T00:00:00Z").getTime();
+        const T_AUG_08_26 = new Date("2026-08-08T04:30:00Z").getTime(); // Đỉnh cú Breakout 1 giờ trước
 
         function getNahSatsAtTime(timestampMs) {
             if (timestampMs < T_APR_27_26) return null; 
             if (timestampMs < T_JUL_01_26) return 0.001;
             if (timestampMs < T_JUL_11_26) return 0.01;
             if (timestampMs < T_JUL_12_26) return 0.02;
+            if (timestampMs < T_AUG_08_26) return 0.08; 
             return 0.09; 
         }
 
