@@ -344,7 +344,7 @@
         // ========================================================================
         // KHU VỰC ĐIỀU KHIỂN DỮ LIỆU TÀI CHÍNH (NAH)
         // ========================================================================
-        const CURRENT_NAH_SATS = 0.08; 
+        const CURRENT_NAH_SATS = 0.09; 
         const CIRCULATING_SUPPLY = 85300000000000; 
 
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
@@ -364,7 +364,7 @@
             if (timestampMs < T_JUL_01_26) return 0.001;
             if (timestampMs < T_JUL_11_26) return 0.01;
             if (timestampMs < T_JUL_12_26) return 0.02;
-            return 0.08; 
+            return 0.09; 
         }
 
         function renderPercentageChange(elementId, firstPrice, lastPrice) {
