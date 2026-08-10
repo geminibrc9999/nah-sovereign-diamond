@@ -22,19 +22,19 @@
         "offers": [
             {
                 "@type": "Offer",
-                "price": "1.53",
+                "price": "3.57",
                 "priceCurrency": "VND",
                 "name": "Giá VND NAH Sovereign Diamond"
             },
             {
                 "@type": "Offer",
-                "price": "0.00006",
+                "price": "0.00014",
                 "priceCurrency": "USD",
                 "name": "NAH Sovereign Diamond USD Price"
             },
             {
                 "@type": "Offer",
-                "price": "0.0000000009",
+                "price": "0.0000000021",
                 "priceCurrency": "BTC",
                 "name": "NAH Sovereign Diamond BTC Price"
             }
@@ -187,14 +187,14 @@
             <!-- Gắn mồi tĩnh (Pre-loaded values) -->
             <div class="parity-section">
                 <div class="parity-title parity-hard">HARD MONEY PARITY</div>
-                <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">0.0000000009 BTC</span></div>
-                <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.09 SATS</span></div>
+                <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">0.0000000021 BTC</span></div>
+                <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.21 SATS</span></div>
             </div>
 
             <div class="parity-section" style="border-bottom: none;">
                 <div class="parity-title parity-fiat">FIAT CURRENCY PARITY</div>
-                <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">$0.00006</span></div>
-                <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">1.53 ₫</span></div>
+                <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">$0.00014</span></div>
+                <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">3.57 ₫</span></div>
             </div>
 
             <div class="sub-section">
@@ -384,7 +384,7 @@
         // ========================================================================
         
         // CẬP NHẬT ĐỘNG CƠ TẠI ĐÂY KHI GIÁ TĂNG (Sẽ tự tính toán cho người dùng thật xem)
-        const CURRENT_NAH_SATS = 0.09; 
+        const CURRENT_NAH_SATS = 0.21; 
         const CIRCULATING_SUPPLY = 85300000000000; 
 
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
@@ -399,6 +399,7 @@
         const T_JUL_11_26 = new Date("2026-07-11T00:00:00Z").getTime();
         const T_JUL_12_26 = new Date("2026-07-12T00:00:00Z").getTime();
         const T_AUG_08_26 = new Date("2026-08-08T04:30:00Z").getTime();
+        const T_AUG_10_26 = new Date("2026-08-10T12:00:00Z").getTime(); // Cắm mốc cú bứt phá
 
         function getNahSatsAtTime(timestampMs) {
             if (timestampMs < T_APR_27_26) return null; 
@@ -406,7 +407,8 @@
             if (timestampMs < T_JUL_11_26) return 0.01;
             if (timestampMs < T_JUL_12_26) return 0.02;
             if (timestampMs < T_AUG_08_26) return 0.08; 
-            return 0.09; 
+            if (timestampMs < T_AUG_10_26) return 0.09;
+            return 0.21; 
         }
 
         function renderPercentageChange(elementId, firstPrice, lastPrice) {
