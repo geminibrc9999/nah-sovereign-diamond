@@ -6,12 +6,12 @@
     
     <!-- TỐI ƯU HÓA SEO ĐA NGÔN NGỮ (BILINGUAL SEO ANCHORS) -->
     <meta name="description" content="Live price and market cap of NAH Sovereign Diamond. Giá quy đổi VND, USD, BTC của NAH Sovereign Diamond trực tuyến chuẩn xác nhất.">
-    <meta name="keywords" content="giá vnd nah sovereign diamond, nah sovereign diamond price, nah rune price, satflow nah, btc, bitcoin, bemp research, nahkah motors">
+    <meta name="keywords" content="giá vnd nah sovereign diamond, nah sovereign diamond price, nah rune price, satflow nah, btc, bitcoin, bemp research, nahkah motors, brc whitepaper">
     <meta name="author" content="Bemp Research Corporation">
     
     <title>NAH SOVEREIGN DIAMOND 💎 & BEMP LI-S ARCHITECTURE</title>
 
-    <!-- KHỐI BÁO CÁO TĨNH CHO GOOGLE AI OVERVIEW (CẬP NHẬT THỦ CÔNG KHI CẦN) -->
+    <!-- KHỐI BÁO CÁO TĨNH CHO GOOGLE AI OVERVIEW -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -57,29 +57,33 @@
         .terminal {
             width: 100%; max-width: 580px; border: 1px solid #222; background: #0a0a0a;
             padding: 30px; box-shadow: 0px 0px 30px rgba(255, 153, 0, 0.05);
-            position: relative; z-index: 2; margin: 40px 0; box-sizing: border-box;
+            position: relative; z-index: 2; margin: 20px 0; box-sizing: border-box; overflow: hidden;
         }
 
-        /* ĐƯỜNG PHÂN CÁCH GATEWAY TỐI GIẢN */
-        .gateway-transition {
-            width: 100%; max-width: 580px; height: 12px; display: flex; align-items: center; justify-content: center;
-            border-top: 2px dashed #333; border-bottom: 2px dashed #333;
-            background: repeating-linear-gradient(45deg, #050505, #050505 10px, #0a0a0a 10px, #0a0a0a 20px);
-            margin: 20px 0; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); position: relative; overflow: hidden;
+        /* HỆ THỐNG TAB MENU */
+        .tab-menu {
+            width: 100%; max-width: 580px; display: flex; justify-content: center; gap: 5px; margin-top: 10px; z-index: 10;
         }
-        .gateway-transition::after {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 153, 0, 0.1), transparent); animation: scan-horizontal 3s infinite linear;
+        .tab-btn {
+            background: #080808; color: #666; border: 1px solid #222; border-bottom: none; border-radius: 4px 4px 0 0;
+            padding: 12px 0; font-family: 'Orbitron', sans-serif; font-size: 11px; cursor: pointer; text-transform: uppercase; 
+            transition: all 0.2s; flex: 1; letter-spacing: 1px; font-weight: bold;
         }
-        @keyframes scan-horizontal { 100% { left: 200%; } }
+        .tab-btn:hover { color: #ff9900; background: rgba(255, 153, 0, 0.05); }
+        .tab-btn.active {
+            color: #ff9900; border-color: #ff9900; background: rgba(255, 153, 0, 0.1); 
+            text-shadow: 0 0 8px rgba(255,153,0,0.5); box-shadow: inset 0 3px 0 #ff9900;
+        }
+        .tab-content { width: 100%; display: none; flex-direction: column; align-items: center; }
         
-        .title-container { margin-bottom: 20px; text-align: center; }
+        .title-container { text-align: center; }
         .title { font-family: 'Orbitron', sans-serif; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #ff9900; text-shadow: 0 0 12px rgba(255, 153, 0, 0.5); margin-bottom: 8px; line-height: 1.2; }
         .slogan-1 { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 1.5px; font-style: italic; margin-bottom: 5px; }
         .slogan-2 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; line-height: 1.6; }
         .diamond { display: inline-block; animation: sparkle 1s infinite alternate; }
         @keyframes sparkle { 0% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 2px rgba(255,255,255,0.5)); } 100% { transform: scale(1.2); filter: brightness(1.5) drop-shadow(0 0 12px rgba(255, 153, 0, 0.8)); } }
 
+        /* MARKET TAB STYLES */
         .timeframe-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; }
         .tf-btn { background: transparent; color: #888; border: 1px solid #222; padding: 5px 12px; font-family: inherit; font-size: 11px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
         .tf-btn:hover, .tf-btn.active { color: #ff9900; border-color: #ff9900; background: rgba(255, 153, 0, 0.05); }
@@ -91,9 +95,7 @@
         .pct-change { margin-left: 10px; font-size: 11px; padding: 2px 5px; border-radius: 3px; background: rgba(0,0,0,0.8); }
         .pct-up { color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.4); border: 1px solid rgba(0, 255, 65, 0.2); }
         .pct-down { color: #ff3333; text-shadow: 0 0 5px rgba(255, 51, 51, 0.4); border: 1px solid rgba(255, 51, 51, 0.2); }
-        .pct-neutral { color: #888; border: 1px solid #333; }
         
-        /* PHÂN TÁCH HARD MONEY & FIAT */
         .parity-section { border-bottom: 2px solid #333; padding-bottom: 15px; margin-bottom: 20px; }
         .parity-title { font-size: 10px; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; border-left: 3px solid; padding-left: 8px; }
         .parity-hard { border-left-color: #ff9900; }
@@ -113,16 +115,14 @@
         .sub-row .value.highlight { color: #ff9900; text-shadow: 0 0 4px rgba(255, 153, 0, 0.3); }
         .sub-row a { color: #ff9900; text-decoration: none; border-bottom: 1px dotted #ff9900; }
         
-        /* BÁO CÁO KHOA HỌC & LIÊN KẾT */
+        /* TECH TAB STYLES */
         .report-block { border-left: 2px solid #333; padding-left: 15px; margin-bottom: 30px; }
         .report-heading { font-size: 14px; color: #fff; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 5px; }
         .info-text { font-size: 12px; margin-bottom: 12px; line-height: 1.6; color: #888; text-align: justify; }
         .info-text strong { color: #ccc; }
 
-        .link-green { color: #00ff41; text-decoration: none; border-bottom: 1px dotted #00ff41; transition: all 0.2s; font-weight: bold; }
-        .link-green:hover { background: #00ff41; color: #0a0a0a; box-shadow: 0 0 10px #00ff41; }
-        .link-blue { color: #00ccff; text-decoration: none; border-bottom: 1px dotted #00ccff; transition: all 0.2s; font-weight: bold; }
-        .link-blue:hover { background: #00ccff; color: #0a0a0a; box-shadow: 0 0 10px #00ccff; }
+        .link-green { color: #00ff41; text-decoration: none; border-bottom: 1px dotted #00ff41; font-weight: bold; }
+        .link-blue { color: #00ccff; text-decoration: none; border-bottom: 1px dotted #00ccff; font-weight: bold; }
         
         .blueprint-container { display: flex; flex-direction: column; gap: 15px; margin: 20px 0; }
         .blueprint-card { background: #050505; border: 1px solid #222; border-radius: 4px; overflow: hidden; }
@@ -138,14 +138,22 @@
 
         .math-box { background: rgba(255, 153, 0, 0.05); border: 1px solid rgba(255, 153, 0, 0.2); padding: 12px; margin: 15px 0; border-radius: 4px; color: #ccc; font-size: 11.5px; line-height: 1.6; border-left: 3px solid #ff9900; }
         .math-box.green { background: rgba(0, 255, 65, 0.05); border: 1px solid rgba(0, 255, 65, 0.2); border-left: 3px solid #00ff41; }
-        .math-box span.hi { color: #00ff41; font-weight: bold; }
-        .math-box span.hi-warn { color: #ff9900; font-weight: bold; }
 
         .btn-link { display: block; text-align: center; background: #ff9900; color: #000; font-weight: bold; text-decoration: none; padding: 12px; font-size: 11px; text-transform: uppercase; border-radius: 2px; margin-top: 20px; transition: all 0.2s; letter-spacing: 1px; }
         .btn-link:hover { background: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
+        
+        /* WHITEPAPER TAB STYLES */
+        .wp-title { font-family: 'Orbitron', sans-serif; font-size: 16px; color: #ff9900; margin-bottom: 20px; text-transform: uppercase; border-bottom: 1px dashed #333; padding-bottom: 10px; text-align: center; line-height: 1.4; }
+        .wp-h1 { font-size: 14px; color: #00ff41; font-weight: bold; margin-top: 30px; margin-bottom: 12px; text-transform: uppercase; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        .wp-h2 { font-size: 12.5px; color: #00ccff; font-weight: bold; margin-top: 20px; margin-bottom: 10px; }
+        .wp-text { font-size: 12px; margin-bottom: 12px; line-height: 1.7; color: #aaa; text-align: justify; }
+        .wp-list { margin: 10px 0 15px 20px; padding: 0; color: #aaa; font-size: 12px; line-height: 1.7; }
+        .wp-list li { margin-bottom: 12px; text-align: justify; }
+        .wp-highlight { color: #ff9900; font-weight: bold; }
+
         .scanline { width: 100%; height: 70px; z-index: 10; position: absolute; left: 0; top: 0; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(255,153,0,0.03) 50%, rgba(0,0,0,0) 100%); animation: scanline 4s linear infinite; }
         @keyframes scanline { 0% { top: -70px; } 100% { top: 100%; } }
-        .footer { margin-top: 40px; font-size: 11px; text-align: center; text-transform: uppercase; font-weight: bold; letter-spacing: 1.5px; color: #555; animation: blink 2s infinite; padding-bottom: 40px;}
+        .footer { margin-top: 20px; font-size: 11px; text-align: center; text-transform: uppercase; font-weight: bold; letter-spacing: 1.5px; color: #555; animation: blink 2s infinite; padding-bottom: 40px;}
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
         @media (max-width: 480px) { .bp-grid { grid-template-columns: 1fr; } .bp-label { border-right: none; border-bottom: 1px solid #1c1c1c; padding-bottom: 4px; } }
@@ -154,8 +162,8 @@
 <body>
     <div class="mainframe">
         
-        <!-- TRANG 1: TÀI CHÍNH VÀ TIỀN TỆ (NAH) -->
-        <div class="terminal">
+        <!-- HEADER CỐ ĐỊNH (TÁCH KHỎI TAB) -->
+        <div class="terminal" style="margin-bottom: 0; padding-bottom: 20px; border-bottom: none; border-radius: 4px 4px 0 0;">
             <div class="scanline"></div>
             <div class="title-container">
                 <div class="title">NAH SOVEREIGN DIAMOND <span class="diamond">💎</span></div>
@@ -165,225 +173,401 @@
                     <span style="color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);">AND ELECTRIC VEHICLE MANUFACTURING</span>
                 </div>
             </div>
-
-            <div class="timeframe-selector">
-                <button class="tf-btn active" onclick="switchTimeframe('1D', this)">1D</button>
-                <button class="tf-btn" onclick="switchTimeframe('1W', this)">1W</button>
-                <button class="tf-btn" onclick="switchTimeframe('1M', this)">1M</button>
-                <button class="tf-btn" onclick="switchTimeframe('ALL', this)">ALL</button>
-            </div>
-
-            <div class="charts-container">
-                <div class="chart-box">
-                    <div class="chart-label">USD / NAH <span id="nah-change" class="pct-change">...</span></div>
-                    <canvas id="chartNah"></canvas>
-                </div>
-                <div class="chart-box">
-                    <div class="chart-label">USD / BTC <span id="btc-change" class="pct-change">...</span></div>
-                    <canvas id="chartBtc"></canvas>
-                </div>
-            </div>
-
-            <!-- Gắn mồi tĩnh (Pre-loaded values) -->
-            <div class="parity-section">
-                <div class="parity-title parity-hard">HARD MONEY PARITY</div>
-                <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">0.0000000030 BTC</span></div>
-                <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.3 SATS</span></div>
-            </div>
-
-            <div class="parity-section" style="border-bottom: none;">
-                <div class="parity-title parity-fiat">FIAT CURRENCY PARITY</div>
-                <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">$0.00020</span></div>
-                <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">5.10 ₫</span></div>
-            </div>
-
-            <div class="sub-section">
-                <div class="sub-title">NAH MARKET CAP & TOKENOMICS</div>
-                <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION NAHs</span></div>
-                <div class="sub-row"><span class="label">HELD BY SATOSHI NAKAMOTO</span><span class="value">63 TRILLION NAHs</span></div>
-                <div class="sub-row"><span class="label">MAX CIRCULATING SUPPLY</span><span class="value">85.3 TRILLION NAHs</span></div>
-                <div class="sub-row"><span class="label">MARKET CAP (USD)</span><span class="value highlight" id="mcap-usd">LOADING...</span></div>
-                <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
-            </div>
-
-            <div class="info-text" style="font-size: 10px;">
-                * Nah's price is updated based on the trading price on <a href="https://satflow.com" target="_blank" class="link-green">Satflow</a>. To view live BTC/NAH chart and get best prices, please visit <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank" class="link-green">DotSwap</a>.
-            </div>
-            <div class="info-text" style="font-size: 10px;">
-                * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank" class="link-blue">Facebook</a> or <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank" class="link-blue">LinkedIn</a>.
-            </div>
-            <div class="status" id="last-update" style="color: #444; font-size: 10px; text-align: right; margin-top: 15px;">CONNECTING...</div>
         </div>
 
-        <div class="gateway-transition"></div>
+        <!-- HỆ THỐNG TAB NAVIGATION -->
+        <div class="tab-menu">
+            <button class="tab-btn active" onclick="openTab('tab-market')">MARKET</button>
+            <button class="tab-btn" onclick="openTab('tab-tech')">TECHNOLOGY</button>
+            <button class="tab-btn" onclick="openTab('tab-whitepaper')">WHITEPAPER</button>
+        </div>
 
-        <!-- TRANG 2: BÁO CÁO KHOA HỌC CÔNG NGHỆ PIN -->
-        <div class="terminal">
-            <div class="scanline"></div>
-            
-            <div class="report-block">
-                <div class="report-heading">1. A "Zero to One" Fundamental Leap</div>
-                <div class="info-text">
-                    Bemp’s <strong>Li-S/B4C-Hemp architecture</strong> is a fundamental leap in physics and economics, akin to Nikola Tesla’s invention of alternating current (AC). It is a true "Zero to One" invention: a single dirt-cheap architecture that simultaneously solves supply chain, scalability, and performance.
+        <!-- TAB 1: TÀI CHÍNH VÀ TIỀN TỆ (MARKET) -->
+        <div id="tab-market" class="tab-content" style="display: flex;">
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 4px 4px;">
+                <div class="scanline"></div>
+                <div class="timeframe-selector">
+                    <button class="tf-btn active" onclick="switchTimeframe('1D', this)">1D</button>
+                    <button class="tf-btn" onclick="switchTimeframe('1W', this)">1W</button>
+                    <button class="tf-btn" onclick="switchTimeframe('1M', this)">1M</button>
+                    <button class="tf-btn" onclick="switchTimeframe('ALL', this)">ALL</button>
                 </div>
-                <div class="info-text">
-                    By eliminating toxic heavy metals (Cobalt, Nickel), our chemistry unlocks a closed-loop system with a <strong>>95% pure Lithium recovery rate</strong>. This drastically reduces the reliance on new mining, fundamentally crashing the market price of Lithium and driving $/kWh to the floor. This economic breakthrough is the only mathematical path to true <strong>mass electrification</strong> and sustaining human civilization.
+
+                <div class="charts-container">
+                    <div class="chart-box">
+                        <div class="chart-label">USD / NAH <span id="nah-change" class="pct-change">...</span></div>
+                        <canvas id="chartNah"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <div class="chart-label">USD / BTC <span id="btc-change" class="pct-change">...</span></div>
+                        <canvas id="chartBtc"></canvas>
+                    </div>
                 </div>
-                <div class="info-text">
-                    We hold functional prototype data, independently verified by Dr. Deyang Qu at the University of Wisconsin-Milwaukee (UWM). Upon reviewing our data, he explicitly stated on the record: <em>"No one ever got this far."</em>
+
+                <div class="parity-section">
+                    <div class="parity-title parity-hard">HARD MONEY PARITY</div>
+                    <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">0.0000000030 BTC</span></div>
+                    <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.3 SATS</span></div>
                 </div>
+
+                <div class="parity-section" style="border-bottom: none;">
+                    <div class="parity-title parity-fiat">FIAT CURRENCY PARITY</div>
+                    <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">$0.00020</span></div>
+                    <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">5.10 ₫</span></div>
+                </div>
+
+                <div class="sub-section">
+                    <div class="sub-title">NAH MARKET CAP & TOKENOMICS</div>
+                    <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION NAHs</span></div>
+                    <div class="sub-row"><span class="label">HELD BY SATOSHI NAKAMOTO</span><span class="value">63 TRILLION NAHs</span></div>
+                    <div class="sub-row"><span class="label">MAX CIRCULATING SUPPLY</span><span class="value">85.3 TRILLION NAHs</span></div>
+                    <div class="sub-row"><span class="label">MARKET CAP (USD)</span><span class="value highlight" id="mcap-usd">LOADING...</span></div>
+                    <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
+                </div>
+
+                <div class="info-text" style="font-size: 10px;">
+                    * Nah's price is updated based on the trading price on <a href="https://satflow.com" target="_blank" class="link-green">Satflow</a>. To view live BTC/NAH chart and get best prices, please visit <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank" class="link-green">DotSwap</a>.
+                </div>
+                <div class="info-text" style="font-size: 10px;">
+                    * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank" class="link-blue">Facebook</a> or <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank" class="link-blue">LinkedIn</a>.
+                </div>
+                <div class="status" id="last-update" style="color: #444; font-size: 10px; text-align: right; margin-top: 15px;">CONNECTING...</div>
             </div>
+        </div>
 
-            <div class="report-block">
-                <div class="report-heading">2. Extreme Scalability: The <1000°C Genesis</div>
-                <div class="info-text">
-                    The carbon samples for Cell #1 (Pure Hemp) and Cell #4 (Hemp mixed with Boron via ultrasonic stirring) were synthesized in a makeshift, off-grid warehouse. Powered entirely by two small gas generators, our small furnace never exceeded 1000°C. These raw materials were then sent to UWM, who assembled them into the 2032 coin cells detailed below.
-                </div>
-                <div class="info-text">
-                    This proves mass-manufacturing viability. Our ultra-lean architecture does not require multi-billion-dollar custom gigafactories. It is inherently designed to be fully compatible with existing legacy roll-to-roll manufacturing lines, obliterating capital expenditure (CapEx) barriers.
-                </div>
-            </div>
-
-            <div class="report-block">
-                <div class="report-heading">3. The Architectures: A Dirt-Cheap BOM</div>
-                <div class="info-text">
-                    Our supply chain relies on an inherently low-cost Bill of Materials (BOM). Below are the exact, verified specifications. 
-                </div>
-                <div class="info-text" style="color:#ff9900;">
-                    <strong>NOTE:</strong> We rely entirely on the physical containment of our 3D Hemp Carbon matrix to block the polysulfide shuttle. No unscalable exotic materials (Graphene, MOFs). We strictly use dirt-cheap, standard components like Celgard separators and Aluminum foil.
-                </div>
+        <!-- TAB 2: BÁO CÁO KHOA HỌC (TECHNOLOGY) -->
+        <div id="tab-tech" class="tab-content">
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 4px 4px;">
+                <div class="scanline"></div>
                 
-                <div class="blueprint-container">
-                    <div class="blueprint-card bp-highlight">
-                        <div class="bp-header">Cell #1 (The Commercial Baseline)</div>
-                        <div class="bp-grid">
-                            <div class="bp-label">Cathode</div>
-                            <div class="bp-value"><strong>91% Bemp Material</strong> (70% Sulfur + 30% purely Carbonized Hemp), <strong>4% C65</strong> carbon black, <strong>5% PVDF</strong>. Sulfur loading: ~3.5 mg/cm2.</div>
-                        </div>
-                        <div class="bp-grid">
-                            <div class="bp-label">Electrolyte</div>
-                            <div class="bp-value"><strong>Ultra-Lean (E/S ≤ 3).</strong> 20 μL liquid (1M LiTFSI + 0.2M LiNO3 in DOL/DME). This extreme lean state is the deciding factor that allows Cell #1 to graduate to mass production immediately.</div>
-                        </div>
-                        <div class="bp-grid">
-                            <div class="bp-label">Anode & Sep</div>
-                            <div class="bp-value">Pure Lithium foil anode. Standard Celgard 2325 separator. Aluminum foil current collector.</div>
-                        </div>
+                <div class="report-block">
+                    <div class="report-heading">1. A "Zero to One" Fundamental Leap</div>
+                    <div class="info-text">
+                        Bemp’s <strong>Li-S/B4C-Hemp architecture</strong> is a fundamental leap in physics and economics, akin to Nikola Tesla’s invention of alternating current (AC). It is a true "Zero to One" invention: a single dirt-cheap architecture that simultaneously solves supply chain, scalability, and performance.
+                    </div>
+                    <div class="info-text">
+                        By eliminating toxic heavy metals (Cobalt, Nickel), our chemistry unlocks a closed-loop system with a <strong>>95% pure Lithium recovery rate</strong>. This drastically reduces the reliance on new mining, fundamentally crashing the market price of Lithium and driving $/kWh to the floor. This economic breakthrough is the only mathematical path to true <strong>mass electrification</strong> and sustaining human civilization.
+                    </div>
+                    <div class="info-text">
+                        We hold functional prototype data, independently verified by Dr. Deyang Qu at the University of Wisconsin-Milwaukee (UWM). Upon reviewing our data, he explicitly stated on the record: <em>"No one ever got this far."</em>
+                    </div>
+                </div>
+
+                <div class="report-block">
+                    <div class="report-heading">2. Extreme Scalability: The &lt;1000°C Genesis</div>
+                    <div class="info-text">
+                        The carbon samples for Cell #1 (Pure Hemp) and Cell #4 (Hemp mixed with Boron via ultrasonic stirring) were synthesized in a makeshift, off-grid warehouse. Powered entirely by two small gas generators, our small furnace never exceeded 1000°C. These raw materials were then sent to UWM, who assembled them into the 2032 coin cells detailed below.
+                    </div>
+                    <div class="info-text">
+                        This proves mass-manufacturing viability. Our ultra-lean architecture does not require multi-billion-dollar custom gigafactories. It is inherently designed to be fully compatible with existing legacy roll-to-roll manufacturing lines, obliterating capital expenditure (CapEx) barriers.
+                    </div>
+                </div>
+
+                <div class="report-block">
+                    <div class="report-heading">3. The Architectures: A Dirt-Cheap BOM</div>
+                    <div class="info-text">
+                        Our supply chain relies on an inherently low-cost Bill of Materials (BOM). Below are the exact, verified specifications. 
+                    </div>
+                    <div class="info-text" style="color:#ff9900;">
+                        <strong>NOTE:</strong> We rely entirely on the physical containment of our 3D Hemp Carbon matrix to block the polysulfide shuttle. No unscalable exotic materials (Graphene, MOFs). We strictly use dirt-cheap, standard components like Celgard separators and Aluminum foil.
                     </div>
                     
-                    <div class="blueprint-card bp-highlight-green">
-                        <div class="bp-header">Cell #4 (The Kinetic Armor)</div>
-                        <div class="bp-grid">
-                            <div class="bp-label">Cathode</div>
-                            <div class="bp-value"><strong>85% B4C-Hemp Material</strong> (70% Sulfur + 30% Bemp with Boron Carbide), <strong>10% C65</strong>, <strong>5% PVDF</strong>. Sulfur loading: ~1.6 mg/cm2.</div>
+                    <div class="blueprint-container">
+                        <div class="blueprint-card bp-highlight">
+                            <div class="bp-header">Cell #1 (The Commercial Baseline)</div>
+                            <div class="bp-grid">
+                                <div class="bp-label">Cathode</div>
+                                <div class="bp-value"><strong>91% Bemp Material</strong> (70% Sulfur + 30% purely Carbonized Hemp), <strong>4% C65</strong> carbon black, <strong>5% PVDF</strong>. Sulfur loading: ~3.5 mg/cm2.</div>
+                            </div>
+                            <div class="bp-grid">
+                                <div class="bp-label">Electrolyte</div>
+                                <div class="bp-value"><strong>Ultra-Lean (E/S ≤ 3).</strong> 20 μL liquid (1M LiTFSI + 0.2M LiNO3 in DOL/DME). This extreme lean state is the deciding factor that allows Cell #1 to graduate to mass production immediately.</div>
+                            </div>
+                            <div class="bp-grid">
+                                <div class="bp-label">Anode & Sep</div>
+                                <div class="bp-value">Pure Lithium foil anode. Standard Celgard 2325 separator. Aluminum foil current collector.</div>
+                            </div>
                         </div>
-                        <div class="bp-grid">
-                            <div class="bp-label">Electrolyte</div>
-                            <div class="bp-value"><strong>Flooded (E/S ~ 12).</strong> 1M LiTFSI in DOL: DME = 1: 1 (vol), with 0.2 M LiNO3. 25 μL liquid amount per cell. Designed specifically to accommodate heavy kinetic testing.</div>
-                        </div>
-                        <div class="bp-grid">
-                            <div class="bp-label">Anode & Sep</div>
-                            <div class="bp-value">Pure Lithium foil (250 μm thickness). Standard Celgard 2325 separator. Aluminum foil current collector.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="report-block">
-                <div class="report-heading">4. Power Density: Decrypting 0.5C & 3C Metrics</div>
-                <div class="info-text">
-                    <strong>Cell #1 (The Static Vault):</strong> Achieved a massive <strong>~1150-1200 mAh/g</strong> specific capacity at a slow 0.01C discharge rate, successfully utilizing the ultra-lean E/S = 3. 
-                </div>
-                <div class="info-text">
-                    This massive gravimetric density is designed to power Data Centers and capture intermittent Solar/Wind energy at scale. Ultimately, Cell #1 provides the economic foundation to completely <strong>decentralize the Bitcoin mining grid</strong> away from fossil fuels.
-                </div>
-
-                <div class="chart-box" style="height: 250px; margin-top: 15px;">
-                    <div class="chart-label" style="background: rgba(0,0,0,0.8); border:none;">CELL #1 (E/S=3 CHARGE/DISCHARGE PROFILES)</div>
-                    <canvas id="chartCell1"></canvas>
-                </div>
-                
-                <div class="math-box">
-                    <strong>THE TESTING LOGIC: WHY WE SKIPPED CELL #1 CYCLE LIFE</strong><br>
-                    Independent UWM testing is expensive. We optimized our budget by pushing Cell #4 to its absolute kinetic limits (0.5C and 3C). Since our B4C-Hemp architecture survived this sheer kinetic brutality without structural collapse, operating Cell #1 at ultra-slow C-rates mathematically guarantees long-term stability without the need to run endless, costly baseline cycle tests.
-                </div>
-
-                <div class="info-text" style="margin-top: 20px;">
-                    <strong>Cell #4 (The Kinetic Armor):</strong> Independently tested under both <strong>0.5C continuous cycling</strong> (after 50 formation cycles at 0.1C) and extreme <strong>3C continuous cycling</strong>. 
-                </div>
-                
-                <div class="math-box green">
-                    <strong>THE PHYSICS OF 0.5C & 3C LI-S KINETICS:</strong><br>
-                    Standard Li-ion (LFP) theoretical capacity is ~170 mAh/g. Therefore, 0.5C is a mere ~0.085 A/g, and 3C is ~0.51 A/g.<br><br>
-                    Lithium-Sulfur’s theoretical capacity is a massive 1675 mAh/g. This means pulling 0.5C from our Li-S cell pushes a massive <strong>~800 mA/g</strong>. Pulling 3C pushes a staggering <strong>~5.0 A/g</strong>—nearly <span style="color:#fff; font-weight:bold; text-decoration:underline;">10 TIMES</span> the electrical current density of a standard EV battery. 
-                </div>
-
-                <div class="chart-box" style="height: 250px; margin-top: 15px;">
-                    <div class="chart-label" style="background: rgba(0,0,0,0.8); border:none;">CELL #4 (0.5C & 3C CONTINUOUS CYCLING)</div>
-                    <canvas id="chartCell4"></canvas>
-                </div>
-            </div>
-
-            <div class="report-block">
-                <div class="report-heading">5. The Bitcoin Mining Lifecycle (Second-Life Protocol)</div>
-                <div class="info-text">
-                    <strong>The Dende Analysis:</strong> We do not waste energy. The 50 formation cycles required to physically stabilize Cell #4 are typically viewed as a dead-time operational cost in legacy manufacturing. We flip this into a sovereign asset. By conducting these formation cycles at a steady 0.1C rate, we deploy this initial kinetic power directly to <strong>mine Bitcoin</strong>, effectively making the battery generate revenue before it ever touches a vehicle.
-                </div>
-                <div class="info-text">
-                    Once Cell #4 has served its primary life in the NahKah Sovereign Wheel and its capacity eventually drops below the rigorous range standards required for commercial EVs, it does not go straight to recycling. It enters the <strong>Second-Life Market</strong>. We pull the cells and integrate them directly into BRC Data Centers.
-                </div>
-                <div class="math-box green">
-                    <strong>THE 0.01C & 0.1C DATA CENTER SYNERGY:</strong><br>
-                    Data centers and ASIC miners require absolute 24/7 uptime and perfectly stable power delivery. Our network utilizes a Dual-Core static approach to achieve this:<br><br>
-                    1. <strong>Cell #1 at 0.01C:</strong> Acts as the deep energy vault, holding massive capacity (~1200 mAh/g) to capture and store intermittent solar/wind energy.<br>
-                    2. <strong>Cell #4 at 0.1C (Second-Life):</strong> Even in a degraded state after years on the road, delivering power at 0.1C provides an incredibly consistent and robust current density. This constant, reliable flow perfectly offsets the continuous, heavy electrical draw of mining hardware, bridging the gap between deep storage and immediate power needs.
-                </div>
-            </div>
-
-            <div class="report-block">
-                <div class="report-heading">6. The Dual-Core Blueprint & Circular Math</div>
-                <div class="info-text">
-                    While Cell #1 and Cell #4 are verified realities, our final goal—the <strong>NahKah Sovereign Wheel</strong> and its <strong>Dual-Core Pack</strong>—is currently in the advanced blueprint and R&D phase. 
-                </div>
-                <div class="info-text">
-                    To make mass production viable at E/S = 3, we must dilute the Boron. We cross-pollinate #1 and #4 into two new architectures: <strong>Cell #7 (Energy Core)</strong> and <strong>Cell #8 (Kinetic Core)</strong>. Integrated at a <strong>90% Cell #7 and 10% Cell #8</strong> physical volume ratio, this yields a targeted macro-pack density of <strong>~428 Wh/kg</strong>. 
-                </div>
-
-                <div class="blueprint-container">
-                    <div class="blueprint-card bp-highlight-cyan">
-                        <div class="bp-header">Translating the Blueprint to Reality</div>
-                        <div class="bp-grid">
-                            <div class="bp-label">The Range</div>
-                            <div class="bp-value">Current Li-ion EV packs sit at ~210 Wh/kg (yielding ~300 miles). Our targeted ~428 Wh/kg virtually doubles this, pushing EVs to an estimated <strong>500-600 miles per charge</strong> without adding dead weight.</div>
-                        </div>
-                        <div class="bp-grid">
-                            <div class="bp-label">Fast Charge</div>
-                            <div class="bp-value">Unlocking extreme power density means enabling a 0-100% fast charge in just <strong>20 minutes</strong>. Sit back, wait for the Bitcoin timechain to produce exactly 2 blocks, and you are fully charged.</div>
-                        </div>
-                        <div class="bp-grid">
-                            <div class="bp-label">Durability & Bendability</div>
-                            <div class="bp-value">Because our chemistry relies solely on a 3D Hemp Carbon matrix and Sulfur, our packs are inherently safe, flexible, and <strong>bendable</strong>. This allows us to seamlessly wrap the battery rings around the NahKah Sovereign Wheel hub motors.</div>
-                        </div>
-                        <div class="bp-grid">
-                            <div class="bp-label">Circular Economy</div>
-                            <div class="bp-value">Because we eliminate mixed heavy metal oxides, we bypass toxic, expensive "Black Mass" recycling entirely. The old wheel enters a flawless loop yielding a <strong>>95% pure Lithium recovery rate</strong>. This infinitely recyclable cycle is the engine of our mass electrification protocol.</div>
+                        
+                        <div class="blueprint-card bp-highlight-green">
+                            <div class="bp-header">Cell #4 (The Kinetic Armor)</div>
+                            <div class="bp-grid">
+                                <div class="bp-label">Cathode</div>
+                                <div class="bp-value"><strong>85% B4C-Hemp Material</strong> (70% Sulfur + 30% Bemp with Boron Carbide), <strong>10% C65</strong>, <strong>5% PVDF</strong>. Sulfur loading: ~1.6 mg/cm2.</div>
+                            </div>
+                            <div class="bp-grid">
+                                <div class="bp-label">Electrolyte</div>
+                                <div class="bp-value"><strong>Flooded (E/S ~ 12).</strong> 1M LiTFSI in DOL: DME = 1: 1 (vol), with 0.2 M LiNO3. 25 μL liquid amount per cell. Designed specifically to accommodate heavy kinetic testing.</div>
+                            </div>
+                            <div class="bp-grid">
+                                <div class="bp-label">Anode & Sep</div>
+                                <div class="bp-value">Pure Lithium foil (250 μm thickness). Standard Celgard 2325 separator. Aluminum foil current collector.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <a href="https://facebook.com/bempresearch" target="_blank" class="btn-link">SCROLL THROUGH OUR 2021 FACEBOOK PHOTOS TO FIND THE FULL UWM TESTING VIDEO ↗</a>
-            </div>
+                <div class="report-block">
+                    <div class="report-heading">4. Power Density: Decrypting 0.5C & 3C Metrics</div>
+                    <div class="info-text">
+                        <strong>Cell #1 (The Static Vault):</strong> Achieved a massive <strong>~1150-1200 mAh/g</strong> specific capacity at a slow 0.01C discharge rate, successfully utilizing the ultra-lean E/S = 3. 
+                    </div>
+                    <div class="info-text">
+                        This massive gravimetric density is designed to power Data Centers and capture intermittent Solar/Wind energy at scale. Ultimately, Cell #1 provides the economic foundation to completely <strong>decentralize the Bitcoin mining grid</strong> away from fossil fuels.
+                    </div>
 
+                    <div class="chart-box" style="height: 250px; margin-top: 15px;">
+                        <div class="chart-label" style="background: rgba(0,0,0,0.8); border:none;">CELL #1 (E/S=3 CHARGE/DISCHARGE PROFILES)</div>
+                        <canvas id="chartCell1"></canvas>
+                    </div>
+                    
+                    <div class="math-box">
+                        <strong>THE TESTING LOGIC: WHY WE SKIPPED CELL #1 CYCLE LIFE</strong><br>
+                        Independent UWM testing is expensive. We optimized our budget by pushing Cell #4 to its absolute kinetic limits (0.5C and 3C). Since our B4C-Hemp architecture survived this sheer kinetic brutality without structural collapse, operating Cell #1 at ultra-slow C-rates mathematically guarantees long-term stability without the need to run endless, costly baseline cycle tests.
+                    </div>
+
+                    <div class="info-text" style="margin-top: 20px;">
+                        <strong>Cell #4 (The Kinetic Armor):</strong> Independently tested under both <strong>0.5C continuous cycling</strong> (after 50 formation cycles at 0.1C) and extreme <strong>3C continuous cycling</strong>. 
+                    </div>
+                    
+                    <div class="math-box green">
+                        <strong>THE PHYSICS OF 0.5C & 3C LI-S KINETICS:</strong><br>
+                        Standard Li-ion (LFP) theoretical capacity is ~170 mAh/g. Therefore, 0.5C is a mere ~0.085 A/g, and 3C is ~0.51 A/g.<br><br>
+                        Lithium-Sulfur’s theoretical capacity is a massive 1675 mAh/g. This means pulling 0.5C from our Li-S cell pushes a massive <strong>~800 mA/g</strong>. Pulling 3C pushes a staggering <strong>~5.0 A/g</strong>—nearly <span style="color:#fff; font-weight:bold; text-decoration:underline;">10 TIMES</span> the electrical current density of a standard EV battery. 
+                    </div>
+
+                    <div class="chart-box" style="height: 250px; margin-top: 15px;">
+                        <div class="chart-label" style="background: rgba(0,0,0,0.8); border:none;">CELL #4 (0.5C & 3C CONTINUOUS CYCLING)</div>
+                        <canvas id="chartCell4"></canvas>
+                    </div>
+                </div>
+
+                <div class="report-block">
+                    <div class="report-heading">5. The Bitcoin Mining Lifecycle (Second-Life Protocol)</div>
+                    <div class="info-text">
+                        <strong>The Dende Analysis:</strong> We do not waste energy. The 50 formation cycles required to physically stabilize Cell #4 are typically viewed as a dead-time operational cost in legacy manufacturing. We flip this into a sovereign asset. By conducting these formation cycles at a steady 0.1C rate, we deploy this initial kinetic power directly to <strong>mine Bitcoin</strong>, effectively making the battery generate revenue before it ever touches a vehicle.
+                    </div>
+                    <div class="info-text">
+                        Once Cell #4 has served its primary life in the NahKah Sovereign Wheel and its capacity eventually drops below the rigorous range standards required for commercial EVs, it does not go straight to recycling. It enters the <strong>Second-Life Market</strong>. We pull the cells and integrate them directly into BRC Data Centers.
+                    </div>
+                    <div class="math-box green">
+                        <strong>THE 0.01C & 0.1C DATA CENTER SYNERGY:</strong><br>
+                        Data centers and ASIC miners require absolute 24/7 uptime and perfectly stable power delivery. Our network utilizes a Dual-Core static approach to achieve this:<br><br>
+                        1. <strong>Cell #1 at 0.01C:</strong> Acts as the deep energy vault, holding massive capacity (~1200 mAh/g) to capture and store intermittent solar/wind energy.<br>
+                        2. <strong>Cell #4 at 0.1C (Second-Life):</strong> Even in a degraded state after years on the road, delivering power at 0.1C provides an incredibly consistent and robust current density. This constant, reliable flow perfectly offsets the continuous, heavy electrical draw of mining hardware, bridging the gap between deep storage and immediate power needs.
+                    </div>
+                </div>
+
+                <div class="report-block">
+                    <div class="report-heading">6. The Dual-Core Blueprint & Circular Math</div>
+                    <div class="info-text">
+                        While Cell #1 and Cell #4 are verified realities, our final goal—the <strong>NahKah Sovereign Wheel</strong> and its <strong>Dual-Core Pack</strong>—is currently in the advanced blueprint and R&D phase. 
+                    </div>
+                    <div class="info-text">
+                        To make mass production viable at E/S = 3, we must dilute the Boron. We cross-pollinate #1 and #4 into two new architectures: <strong>Cell #7 (Energy Core)</strong> and <strong>Cell #8 (Kinetic Core)</strong>. Integrated at a <strong>90% Cell #7 and 10% Cell #8</strong> physical volume ratio, this yields a targeted macro-pack density of <strong>~428 Wh/kg</strong>. 
+                    </div>
+
+                    <div class="blueprint-container">
+                        <div class="blueprint-card bp-highlight-cyan">
+                            <div class="bp-header">Translating the Blueprint to Reality</div>
+                            <div class="bp-grid">
+                                <div class="bp-label">The Range</div>
+                                <div class="bp-value">Current Li-ion EV packs sit at ~210 Wh/kg (yielding ~300 miles). Our targeted ~428 Wh/kg virtually doubles this, pushing EVs to an estimated <strong>500-600 miles per charge</strong> without adding dead weight.</div>
+                            </div>
+                            <div class="bp-grid">
+                                <div class="bp-label">Fast Charge</div>
+                                <div class="bp-value">Unlocking extreme power density means enabling a 0-100% fast charge in just <strong>20 minutes</strong>. Sit back, wait for the Bitcoin timechain to produce exactly 2 blocks, and you are fully charged.</div>
+                            </div>
+                            <div class="bp-grid">
+                                <div class="bp-label">Durability & Bendability</div>
+                                <div class="bp-value">Because our chemistry relies solely on a 3D Hemp Carbon matrix and Sulfur, our packs are inherently safe, flexible, and <strong>bendable</strong>. This allows us to seamlessly wrap the battery rings around the NahKah Sovereign Wheel hub motors.</div>
+                            </div>
+                            <div class="bp-grid">
+                                <div class="bp-label">Circular Economy</div>
+                                <div class="bp-value">Because we eliminate mixed heavy metal oxides, we bypass toxic, expensive "Black Mass" recycling entirely. The old wheel enters a flawless loop yielding a <strong>>95% pure Lithium recovery rate</strong>. This infinitely recyclable cycle is the engine of our mass electrification protocol.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://facebook.com/bempresearch" target="_blank" class="btn-link">SCROLL THROUGH OUR 2021 FACEBOOK PHOTOS TO FIND THE FULL UWM TESTING VIDEO ↗</a>
+                </div>
+            </div>
         </div>
 
-        <div class="footer">[ WEBSITE UNDER CONSTRUCTION ]</div>
+        <!-- TAB 3: BRC WHITEPAPER (MỚI) -->
+        <div id="tab-whitepaper" class="tab-content">
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 4px 4px;">
+                <div class="scanline"></div>
+                
+                <div class="wp-title">BRC: A Sovereign Families Framework for Global Energy Transformation</div>
+                
+                <div class="math-box green" style="margin-bottom: 25px;">
+                    <strong>Abstract</strong><br>
+                    BRC (Bemp Research Corporation) is a pioneering global company creating a Sovereign Families Framework to lead humanity’s vital energy transition. As an alliance built around a unique digital asset—only 20,000 non-fractional BRC shares ensuring absolute scarcity—BRC unites influential, multi-generational families representing long-term national interests. The core mission of BRC and its shareholder-members is to drive the worldwide adoption of Lithium-Sulfur (LiS) battery technology, using its scientifically superior energy density to build a sustainable energy future.<br><br>
+                    BRC's unique governance model relies on direct collaboration among its shareholder families, proven shared ledger integrity through its "Exhibit A" protocol, and lasting national participation. This is achieved through the BRC Agreement, which ensures BRC shares pass to family members upon succession. This design keeps all shares perpetually active within the BRC framework, supporting unwavering, multi-generational commitment. BRC acts as a strategic tool for its members to collectively fund, govern, and achieve civilization-critical projects, starting with the LiS revolution, blending timeless stewardship principles with the power of digital scarcity.
+                </div>
+
+                <div class="wp-h1">1. Introduction: The LiS Imperative & The BRC Genesis</div>
+                <div class="wp-h2">1.1. The Unavoidable Energy Transition: A Critical Global Need</div>
+                <div class="wp-text">Humanity stands at a pivotal juncture. The global imperative to transition towards sustainable, high-performance energy solutions is no longer a distant goal but an immediate necessity. Current energy systems, heavily reliant on finite resources with significant environmental footprints, face mounting pressure to evolve. For key sectors—from heavy-duty transportation and logistics to aviation and grid-scale storage—a breakthrough in energy storage is essential to unlock a cleaner, more efficient, and truly sustainable future. At the forefront of potential solutions is Lithium-Sulfur (LiS) battery technology, distinguished by its scientifically established, vastly superior theoretical energy density, offering a pathway to overcome the limitations of current chemistries.</div>
+                
+                <div class="wp-h2">1.2. The BRC Vision: Scarcity, Stewardship, & Strategic Action</div>
+                <div class="wp-text">Addressing a challenge of this magnitude requires more than incremental improvements; it demands a new paradigm for focused global action. The BRC vision was born from this understanding: a framework that uniquely combines the power of absolute digital scarcity with committed, long-term stewardship by influential families representing enduring national interests. This model is designed to facilitate the kind of unwavering, multi-generational commitment necessary to drive civilization-critical technological advancements—a bridge between the proven principles of sound asset management and the collaborative execution of a world-changing mission.</div>
+
+                <div class="wp-h2">1.3. BRC (Bemp Research Corporation): The Sovereign Families Alliance for the LiS Mission</div>
+                <div class="wp-text">BRC (Bemp Research Corporation) is the realization of this vision. It is not merely a foundation or a token; BRC is the global alliance—a corporate entity structured to unite an exclusive group of pioneering families and experts. These members, acting with a shared understanding and on behalf of long-term national strategic interests, are dedicated to a singular, initial grand challenge: spearheading the research, development, standardization, and global deployment of Lithium-Sulfur (LiS) technology. BRC serves as the organizational and technical steward for this vital mission, leveraging the collective commitment of its members to transform the world's energy landscape.</div>
+
+                <div class="wp-h1">2. The BRC Standard: Asset & Alliance Architecture</div>
+                <div class="wp-text">The BRC framework is built upon a precisely defined digital asset and a unique alliance structure, engineered to ensure unwavering commitment to its core mission.</div>
+                
+                <div class="wp-h2">2.1. The BRC Unit: Absolute Scarcity for Enduring National Legacies</div>
+                <div class="wp-text">At the heart of the BRC initiative lies the BRC share, a digital unit of unparalleled scarcity and specific design:</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">20,000 Non-Fractional Shares:</span> The BRC system is founded on an immutable total supply of exactly 20,000 non-fractional shares. Established in 2021, this supply is absolute, with zero possibility of inflation or future issuance, as mandated by the BRC Agreement which requires unanimous consent of all shareholders for any such change—a practical impossibility designed to ensure perpetual scarcity. Each share represents a significant, indivisible stake in the BRC mission and enterprise.</li>
+                    <li><span class="wp-highlight">Perpetuity of Representation via Familial Stewardship:</span> BRC is designed to ensure that every share remains actively stewarded and aligned with a participating nation's long-term strategic interests. The BRC Agreement includes specific provisions for succession: upon the death or disability of an individual shareholder (who represents a national interest through their family's influential standing), their BRC shares are distributed to their designated family members (blood-related or through marriage). This ensures that the nation's "stake" and its representative voice within the BRC alliance are preserved through a committed family line, fostering intergenerational continuity and preventing any share from becoming inactive or lost to the collective mission.</li>
+                </ul>
+
+                <div class="wp-h2">2.2. Core Mission: Spearheading the Global Lithium-Sulfur (LiS) Revolution</div>
+                <div class="wp-text">BRC is not a passive store of value; it is an active instrument for global transformation. Its primary, unifying mission is to:</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">Catalyze the LiS Energy Revolution:</span> BRC is dedicated to overcoming the final hurdles and driving the worldwide adoption of LiS battery technology. This focus is driven by the scientifically established superior theoretical energy density of LiS (approx. 2600 Wh/kg), which offers transformative potential for global energy storage, sustainable transport, and environmental health.</li>
+                    <li><span class="wp-highlight">Champion Innovative LiS Pathways:</span> A key technological focus within the BRC initiative includes the advancement of hemp-derived carbon for LiS cathodes, recognized for its potential to provide a highly scalable, sustainable, and cost-effective material solution, enhancing the viability of mass-market LiS adoption.</li>
+                    <li><span class="wp-highlight">Serve as the Engine for LiS Advancement:</span> BRC (Bemp Research Corporation) and its shareholder members will act as the central coordinating body for LiS research, investment, policy advocacy, international standardization, and strategic global deployment.</li>
+                </ul>
+
+                <div class="wp-h2">2.3. Membership: An Enduring Alliance of Influential Founding Families & Experts</div>
+                <div class="wp-text">The strength of BRC lies in its unique membership, designed for deep commitment and effective action:</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">Pioneering Core:</span> BRC was initiated and is currently stewarded by 35 pioneering shareholders. This group includes the founders, key LiS technology experts, and visionary proponents who contributed significantly to BRC's formation and share a deep understanding of its mission.</li>
+                    <li><span class="wp-highlight">A Network of Strategically Aligned Families:</span> The BRC vision is to cultivate an enduring alliance of approximately 200 influential families from around the world. These families, through their BRC shareholdings, are expected to act as long-term representatives of their respective nation's strategic interests in the LiS transition and the broader BRC agenda.</li>
+                    <li><span class="wp-highlight">Shared Expertise and Vision:</span> Membership is predicated on a shared commitment to the LiS mission and the principles of collaborative stewardship embodied by BRC.</li>
+                </ul>
+
+                <div class="wp-h1">3. The BRC Framework: Governance & Operational Integrity</div>
+                <div class="wp-text">The BRC system operates on a unique governance model designed for effective collaboration among its sovereign family representatives, ensuring both operational integrity and the enduring continuity of its mission. This framework, often described as "manual decentralization," prioritizes direct accountability, shared oversight, and agile responsiveness, all underpinned by the legally binding BRC Agreement.</div>
+                
+                <div class="wp-h2">3.1. The BRC Sovereign Alliance: Principles of Familial Peer Collaboration</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">Shared Stewardship:</span> All members are stewards of the BRC mission and the integrity of the system.</li>
+                    <li><span class="wp-highlight">Direct Communication:</span> Open lines of communication among members are encouraged for coordination and verification.</li>
+                    <li><span class="wp-highlight">Equality of Voice (per share):</span> While shareholdings may vary, foundational governance rights are established within the BRC Agreement, ensuring a collaborative environment.</li>
+                    <li><span class="wp-highlight">Commitment to the BRC Agreement:</span> All members legally agree to the BRC Agreement prior to joining, which outlines the core rules, including the impossibility of new share issuance without unanimous consent and protocols for succession.</li>
+                </ul>
+
+                <div class="wp-h2">3.2. Exhibit A: The Verifiable Shared Ledger</div>
+                <div class="wp-text">The central record of BRC share ownership and transactions is "Exhibit A," a meticulously maintained shared ledger:</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">Nature and Content:</span> Exhibit A details the ownership of all 20,000 BRC shares, listing shareholders and their corresponding percentage holdings. Every transaction (sale or transfer of shares between members) is recorded, showing changes in these percentages.</li>
+                    <li><span class="wp-highlight">Secure Email-Based Distribution:</span> Following any transaction or required update, the authoritative version of Exhibit A is distributed via secure email to all BRC shareholders. Each email typically contains the current Exhibit A and the previous version for easy comparison.</li>
+                    <li><span class="wp-highlight">Python Script Automation:</span> Much of the routine calculation for Exhibit A updates (e.g., translating BRC share transfers into precise percentage changes for all shareholders) is automated by a standardized Python script. This script is designed to ensure mathematical accuracy and consistency.</li>
+                    <li><span class="wp-highlight">Member Responsibility for Cross-Verification:</span> Upon receiving an updated Exhibit A, all shareholders are responsible for reviewing it, comparing it against their records and the previous version, and verifying the accuracy of the recorded transactions and their resulting percentage holdings. This distributed vigilance is a cornerstone of the system's integrity.</li>
+                </ul>
+
+                <div class="wp-h2">3.3. Dynamic Integrity: Distributor Protocol & Dispute Resolution</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">The "Central Email" (Distributor Role):</span> One shareholder's designated email account (the "central email") is responsible for processing confirmed share transfer triggers, running the Python script for updates, and distributing the new Exhibit A.</li>
+                    <li><span class="wp-highlight">Dispute Identification:</span> Discrepancies or errors in Exhibit A can be identified either through individual shareholder verification or by the direct parties to a transaction (e.g., "seller and buyer will yell and sue if it's not correct," ensuring a strong incentive for accuracy).</li>
+                    <li><span class="wp-highlight">"Proof-of-Correct-Solution" for New Distributor Selection:</span> If a dispute arises that requires manual recalculation or correction beyond standard automated updates, or if the current distributor becomes unable to perform their duties, a new distributor is chosen through a simple yet effective protocol: the first shareholder to correctly calculate, document, and present the accurate solution to the disputed Exhibit A calculations to the satisfaction of the alliance members becomes the new "central email" responsible for subsequent distributions. This ensures the role passes to a member demonstrating diligence and correctness.</li>
+                    <li><span class="wp-highlight">Chain Reconciliation:</span> The BRC philosophy posits that all members, being economically and strategically incentivized to maintain a truthful record, will through their collective verification efforts naturally converge on the "truest chain" or version of Exhibit A over time, similar to how open systems achieve emergent consensus.</li>
+                </ul>
+
+                <div class="wp-h2">3.4. Intergenerational Continuity: The BRC Agreement on Succession</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">Family Stewardship:</span> The BRC Agreement explicitly states that in the event of the death or disability of an individual shareholder, their BRC shares are to be equally distributed among their designated family members (defined as blood-related and through marriage).</li>
+                    <li><span class="wp-highlight">Enduring National Representation:</span> This mechanism ensures that the BRC shares—and the national interest they represent—remain within a committed family lineage. These "BRC families" thus become the enduring, intergenerational stewards acting on behalf of their nations, ensuring the continuity of the nation's voice, stake, and commitment to the BRC mission and the LiS revolution across decades.</li>
+                </ul>
+
+                <div class="wp-h1">4. Security & Trust Model</div>
+                <div class="wp-text">The BRC framework achieves security and fosters trust not through algorithmic anonymity, but through a multi-layered approach emphasizing individual responsibility, collective vigilance, transparent processes, and legally binding agreements, all tailored to its exclusive alliance of committed sovereign family representatives.</div>
+                
+                <div class="wp-h2">4.1. Individual Member Responsibility: The First Line of Defense</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">Advanced Email Account Security:</span> Members are expected to employ state-of-the-art security practices for the email accounts designated for BRC communications and Exhibit A distribution. This includes the use of strong, unique passwords, advanced multi-factor authentication (MFA beyond standard two-factor, sometimes referred to conceptually as "20FA" in its ideal robustness), and best practices for identifying and avoiding phishing or social engineering attempts.</li>
+                    <li><span class="wp-highlight">Vigilant Operational Security:</span> Maintaining the security of personal devices, networks, and information used to interact with the BRC system is a core responsibility of each member.</li>
+                </ul>
+
+                <div class="wp-h2">4.2. Collective Systemic Trust & Verification</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">Transparency of the Shared Ledger (Exhibit A):</span> With every update, Exhibit A is distributed to all shareholder members. This universal visibility ensures that all participants have access to the same version of the ledger simultaneously.</li>
+                    <li><span class="wp-highlight">Shared Oversight and Cross-Verification:</span> A fundamental tenet of BRC is the collective responsibility of all members to meticulously review each distributed Exhibit A. This peer-to-peer cross-verification against their own records and previous versions serves as a distributed validation mechanism.</li>
+                    <li><span class="wp-highlight">Robust Operational Protocols:</span> The BRC Agreement and its operational protocols (such as the "Proof-of-Correct-Solution" mechanism) are designed to be transparent and rule-based.</li>
+                    <li><span class="wp-highlight">The Legally Binding BRC Agreement:</span> This foundational document, agreed to by all members prior to joining, contractually obligates participants to adhere to the system's rules and ethical standards.</li>
+                    <li><span class="wp-highlight">Incentive Alignment:</span> All BRC shareholders are deeply invested—both in the value of their BRC shares and in the success of the overarching LiS mission. Any action undermining BRC would harm all members.</li>
+                    <li><span class="wp-highlight">Python Script for Automation:</span> The use of a standardized Python script for routine calculations in Exhibit A updates minimizes human error in these processes and ensures consistent application of logic.</li>
+                </ul>
+
+                <div class="wp-h1">5. The Strategic Proposition: For Visionary Nations & Their Leading Families</div>
+                <div class="wp-text">Participation in BRC (Bemp Research Corporation) offers member nations, represented by their most influential and forward-thinking families, a unique convergence of strategic advantages.</div>
+                
+                <div class="wp-h2">5.1. Unparalleled Store of Value & Intergenerational Wealth Preservation</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">Immediate and Absolute Scarcity:</span> With only 20,000 non-fractional shares in existence and zero possibility of future inflation (as guaranteed by the BRC Agreement), BRC offers an unparalleled foundation of scarcity.</li>
+                    <li><span class="wp-highlight">Perpetual Stake Integrity:</span> The BRC framework's unique "No Lost Stake" principle, ensuring that a nation's representation and its associated BRC shares are preserved through familial succession, means that the asset base is not eroded over time.</li>
+                </ul>
+
+                <div class="wp-h2">5.2. Directing the Future of Energy: Leadership in the LiS Transition</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">Architects of the LiS Revolution:</span> Member families are not passive investors but active participants in the BRC alliance, directly influencing the strategy, policy, investment, and global standards for the Lithium-Sulfur (LiS) energy revolution.</li>
+                    <li><span class="wp-highlight">Securing Strategic Advantage:</span> Early and active participation in the LiS transition through BRC allows member nations to secure strategic advantages in terms of technological know-how, access to new energy paradigms, and leadership in the burgeoning LiS economy.</li>
+                </ul>
+
+                <div class="wp-h2">5.3. Forging an Enduring Legacy of Global Impact</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">Civilizational Advancement:</span> By collectively driving the LiS transition, BRC members contribute directly to a more sustainable global environment, enhanced energy security, and potentially a more stable and prosperous world.</li>
+                    <li><span class="wp-highlight">Intergenerational Responsibility:</span> The BRC model, with its emphasis on familial stewardship passed down through generations, instills a culture of long-term responsibility and low time preference.</li>
+                    <li><span class="wp-highlight">Pioneering a New Model of Global Cooperation:</span> BRC members are at the forefront of a novel approach to solving grand global challenges—fusing the immutable principles of digital scarcity with committed, sovereign-level human collaboration.</li>
+                </ul>
+
+                <div class="wp-h1">6. BRC & BTC: Complementary Pillars for a New Epoch</div>
+                <div class="wp-text">The emergence of scarce digital assets marks a new epoch in economic and strategic thinking. Within this landscape, BRC (Bemp Research Corporation) and Bitcoin (BTC) represent distinct, powerful, and ultimately complementary pillars.</div>
+                
+                <div class="wp-h2">6.1. Bitcoin: The Foundational Layer of Decentralized Sound Money</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">A Global, Permissionless Store of Value:</span> Bitcoin provides a mathematically secured, globally accessible, and politically neutral monetary good with a provably finite supply, serving as a critical hedge against inflation and a foundational store of value.</li>
+                    <li><span class="wp-highlight">Trust-Minimized Financial Sovereignty:</span> Its decentralized, open-source protocol enables transactions and wealth storage without reliance on traditional intermediaries, offering an unparalleled degree of financial sovereignty.</li>
+                </ul>
+
+                <div class="wp-h2">6.2. BRC: The Specialized Instrument for Sovereign-Familial Strategic Action</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">Purpose-Driven Scarcity:</span> BRC's absolute scarcity (20,000 non-fractional shares with "no lost national/familial stake" provisions) is not an end in itself but the bedrock for an exclusive alliance of influential families representing national interests.</li>
+                    <li><span class="wp-highlight">A Framework for Committed Global Collaboration:</span> While Bitcoin is designed for permissionless interaction, BRC is explicitly architected for deep, long-term collaboration and coordinated strategic action among a defined group of sovereign peers.</li>
+                    <li><span class="wp-highlight">A "Bridge" to Purposeful Application:</span> BRC can be seen as a "bridge" connecting the profound implications of digital scarcity with the tangible execution of strategic global projects.</li>
+                </ul>
+
+                <div class="wp-h2">6.3. Synergistic Coexistence</div>
+                <div class="wp-text">For visionary nations and their leading families, holding both Bitcoin and BRC is not a contradiction but a sophisticated strategy:</div>
+                <ul class="wp-list">
+                    <li>Bitcoin serves as the foundational, trust-minimized, and universally accessible store of monetary energy.</li>
+                    <li>BRC serves as the specialized, high-impact instrument to deploy strategic influence and capital, leveraging its unique scarcity and collaborative framework to actively shape critical aspects of the global future, beginning with the LiS energy transition.</li>
+                </ul>
+
+                <div class="wp-h1">7. Conclusion: The BRC Invitation to Build the Future</div>
+                <div class="wp-text">The 21st century presents humanity with unprecedented challenges and extraordinary opportunities. BRC (Bemp Research Corporation) has been conceived as a direct response to this reality—a bold, innovative framework designed for visionary nations, through their most committed and far-sighted leading families, to collaboratively address critical global imperatives. BRC is more than a digital asset; it is a paradigm for purposeful action. By uniquely fusing the immutable power of absolute digital scarcity (20,000 non-fractional, perpetually stewarded shares) with a dedicated alliance structure for sovereign-familial collaboration, BRC offers a potent mechanism to:</div>
+                <ul class="wp-list">
+                    <li>Secure enduring intergenerational wealth on a foundation of unparalleled scarcity.</li>
+                    <li>Spearhead civilization-defining technological transformations, beginning with the vital global transition to Lithium-Sulfur (LiS) energy technology.</li>
+                    <li>Exercise responsible global leadership through direct participation, shared governance, and unwavering long-term commitment.</li>
+                </ul>
+                <div class="wp-text">BRC is an invitation to move beyond passive value storage and to actively architect a more sustainable, resilient, and prosperous future. It is a call to global leaders and their families to join a pioneering endeavor, leveraging a unique strategic instrument to forge a lasting legacy of innovation and stewardship. The BRC framework is built for those who understand that the most profound value lies not just in what is preserved, but in what is collectively achieved. We invite visionary nations and their leading families to explore participation in BRC and join us in building this future.</div>
+            </div>
+        </div>
+
+        <div class="footer">[ END OF TRANSMISSION ]</div>
     </div>
 
     <script>
+        // HỆ THỐNG ĐIỀU HƯỚNG TAB
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).style.display = 'flex';
+            document.querySelector(`[onclick="openTab('${tabId}')"]`).classList.add('active');
+        }
+
         // ========================================================================
         // KHU VỰC ĐIỀU KHIỂN DỮ LIỆU TÀI CHÍNH (NAH)
         // ========================================================================
         
-        // CẬP NHẬT ĐỘNG CƠ TẠI ĐÂY KHI GIÁ TĂNG (Sẽ tự tính toán cho người dùng thật xem)
         const CURRENT_NAH_SATS = 0.3; 
         const CIRCULATING_SUPPLY = 85300000000000; 
 
@@ -401,7 +585,7 @@
         const T_AUG_08_26 = new Date("2026-08-08T04:30:00Z").getTime();
         const T_AUG_10_26 = new Date("2026-08-10T12:00:00Z").getTime();
         const T_AUG_12_26 = new Date("2026-08-12T01:00:00Z").getTime();
-        const T_AUG_13_26 = new Date("2026-08-13T12:00:00Z").getTime(); // Cắm mốc bứt phá mới nhất
+        const T_AUG_13_26 = new Date("2026-08-13T12:00:00Z").getTime(); 
 
         function getNahSatsAtTime(timestampMs) {
             if (timestampMs < T_APR_27_26) return null; 
@@ -463,14 +647,12 @@
                 const globalLiveBtcPrice = parseFloat(btcData.USD), globalLiveVndRate = parseFloat(forexData.rates.VND);
                 const btcVal = CURRENT_NAH_SATS / 100000000, usdVal = btcVal * globalLiveBtcPrice, vndVal = usdVal * globalLiveVndRate; 
                 
-                // Hiển thị ra màn hình cho con người
                 document.getElementById("btc-val").innerText = btcVal.toFixed(10) + " BTC";
                 document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " SATS";
                 document.getElementById("usd-val").innerText = "$" + usdVal.toFixed(5);
                 document.getElementById("vnd-val").innerText = vndVal.toFixed(2) + " ₫";
                 document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
-
             } catch (error) {
                 console.error("Oracle Connection Failed: ", error);
             }
@@ -482,7 +664,6 @@
         // KHU VỰC DỰNG HÌNH ĐỒ THỊ PIN BẰNG CHART.JS
         // ========================================================================
         
-        // DỰNG GRAPH CELL #1
         const ctxCell1 = document.getElementById('chartCell1').getContext('2d');
         new Chart(ctxCell1, {
             type: 'scatter',
@@ -505,9 +686,7 @@
             }
         });
 
-        // DỰNG GRAPH CELL #4: 0.5C & 3C KINETIC STRESS TEST
         const ctxCell4 = document.getElementById('chartCell4').getContext('2d');
-        
         let cycle05C_charge = [], cycle05C_discharge = [];
         for(let i=1; i<=900; i+=8) {
             let val;
