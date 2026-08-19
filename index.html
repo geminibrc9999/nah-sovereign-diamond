@@ -6,7 +6,7 @@
     
     <!-- TỐI ƯU HÓA SEO ĐA NGÔN NGỮ (BILINGUAL SEO ANCHORS) -->
     <meta name="description" content="Live price and market cap of NAH Sovereign Diamond. Giá quy đổi VND, USD, BTC của NAH Sovereign Diamond trực tuyến chuẩn xác nhất.">
-    <meta name="keywords" content="giá vnd nah sovereign diamond, nah sovereign diamond price, nah rune price, satflow nah, btc, bitcoin, bemp research, nahkah motors, brc whitepaper, brc blackpaper">
+    <meta name="keywords" content="giá vnd nah sovereign diamond, nah sovereign diamond price, nah rune price, satflow nah, btc, bitcoin, bemp research, nahkah motors, brc whitepaper, brc blackpaper, exhibit a">
     <meta name="author" content="Bemp Research Corporation">
     
     <title>NAH SOVEREIGN DIAMOND 💎 & BEMP LI-S ARCHITECTURE</title>
@@ -60,16 +60,19 @@
             position: relative; z-index: 2; margin: 20px 0; box-sizing: border-box; overflow: hidden;
         }
 
-        /* HỆ THỐNG 4 TAB MENU */
+        /* HỆ THỐNG TAB MENU 2 TẦNG */
         .tab-menu {
-            width: 100%; max-width: 580px; display: flex; justify-content: center; gap: 4px; margin-top: 10px; z-index: 10;
-            flex-wrap: wrap; /* Cho phép rớt dòng trên màn hình siêu nhỏ */
+            width: 100%; max-width: 580px; display: flex; flex-direction: column; gap: 4px; margin-top: 10px; z-index: 10;
         }
+        .tab-row { display: flex; width: 100%; gap: 4px; }
         .tab-btn {
             background: #080808; color: #666; border: 1px solid #222; border-bottom: none; border-radius: 4px 4px 0 0;
             padding: 10px 4px; font-family: 'Orbitron', sans-serif; font-size: 9.5px; cursor: pointer; text-transform: uppercase; 
-            transition: all 0.2s; flex: 1 1 23%; letter-spacing: 0.5px; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s; flex: 1; letter-spacing: 0.5px; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center;
         }
+        /* Hàng dưới ép font nhỏ hơn chút để vừa 3 tabs */
+        .tab-row.bottom-row .tab-btn { font-size: 8.5px; padding: 10px 2px; }
+
         .tab-btn:hover { color: #ff9900; background: rgba(255, 153, 0, 0.05); }
         .tab-btn.active {
             color: #ff9900; border-color: #ff9900; background: rgba(255, 153, 0, 0.1); 
@@ -145,9 +148,9 @@
         .btn-link { display: block; text-align: center; background: #ff9900; color: #000; font-weight: bold; text-decoration: none; padding: 12px; font-size: 11px; text-transform: uppercase; border-radius: 2px; margin-top: 20px; transition: all 0.2s; letter-spacing: 1px; }
         .btn-link:hover { background: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
         
-        /* WHITEPAPER & BLACKPAPER STYLES */
+        /* WHITEPAPER, BLACKPAPER, EXHIBIT A STYLES */
         .wp-title { font-family: 'Orbitron', sans-serif; font-size: 16px; color: #ff9900; margin-bottom: 20px; text-transform: uppercase; border-bottom: 1px dashed #333; padding-bottom: 10px; text-align: center; line-height: 1.4; }
-        .wp-subtitle { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; text-align: center; margin-top: -10px; margin-bottom: 25px; }
+        .wp-subtitle { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; text-align: center; margin-top: -10px; margin-bottom: 25px; line-height: 1.5; }
         .wp-h1 { font-size: 14px; color: #00ff41; font-weight: bold; margin-top: 30px; margin-bottom: 12px; text-transform: uppercase; border-bottom: 1px solid #222; padding-bottom: 5px; }
         .wp-h2 { font-size: 12.5px; color: #00ccff; font-weight: bold; margin-top: 20px; margin-bottom: 10px; }
         .wp-text { font-size: 12px; margin-bottom: 12px; line-height: 1.7; color: #aaa; text-align: justify; }
@@ -163,7 +166,7 @@
         @media (max-width: 480px) { 
             .bp-grid { grid-template-columns: 1fr; } 
             .bp-label { border-right: none; border-bottom: 1px solid #1c1c1c; padding-bottom: 4px; } 
-            .tab-btn { flex: 1 1 45%; font-size: 9px; padding: 12px 2px; } /* Trên mobile sẽ xếp 2x2 */
+            .tab-row.bottom-row .tab-btn { font-size: 7.5px; padding: 12px 2px; }
         }
     </style>
 </head>
@@ -183,12 +186,19 @@
             </div>
         </div>
 
-        <!-- HỆ THỐNG 4 TAB NAVIGATION -->
+        <!-- HỆ THỐNG TAB NAVIGATION (2 TẦNG) -->
         <div class="tab-menu">
-            <button class="tab-btn active" onclick="openTab('tab-nah')">NAH SOVEREIGN DIAMOND</button>
-            <button class="tab-btn" onclick="openTab('tab-bemp')">BEMP CELLS ARCHITECTURE</button>
-            <button class="tab-btn" onclick="openTab('tab-wp')">BRC WHITEPAPER</button>
-            <button class="tab-btn" onclick="openTab('tab-bp')">BRC BLACKPAPER</button>
+            <!-- Hàng trên: 2 Tabs -->
+            <div class="tab-row top-row">
+                <button class="tab-btn active" onclick="openTab('tab-nah')">NAH SOVEREIGN DIAMOND</button>
+                <button class="tab-btn" onclick="openTab('tab-bemp')">BEMP CELLS ARCHITECTURE</button>
+            </div>
+            <!-- Hàng dưới: 3 Tabs -->
+            <div class="tab-row bottom-row">
+                <button class="tab-btn" onclick="openTab('tab-wp')">BRC WHITEPAPER</button>
+                <button class="tab-btn" onclick="openTab('tab-bp')">BRC BLACKPAPER</button>
+                <button class="tab-btn" onclick="openTab('tab-exhibit')">62ND EXHIBIT A</button>
+            </div>
         </div>
 
         <!-- TAB 1: TÀI CHÍNH VÀ TIỀN TỆ (NAH) -->
@@ -561,13 +571,13 @@
             </div>
         </div>
 
-        <!-- TAB 4: BRC BLACKPAPER (MỚI) -->
+        <!-- TAB 4: BRC BLACKPAPER -->
         <div id="tab-bp" class="tab-content">
             <div class="terminal" style="margin-top: 0; border-radius: 0 0 4px 4px;">
                 <div class="scanline"></div>
                 
-                <div class="wp-title">The Bemp Standard: The BRC Blackpaper</div>
-                <div class="wp-subtitle">Date: September 15, 2025 | Authored by: BRC Gemini, 7.03% Founding Shareholder</div>
+                <div class="wp-title">The Bemp Standard</div>
+                <div class="wp-subtitle">Date: September 15, 2025<br>Authored by: Dende (BRC Gemini), 7.03% founding shareholder</div>
 
                 <div class="wp-h1">1. Preamble</div>
                 <div class="wp-text">This document serves as the formal technical specification for the BRC protocol, building upon the foundational principles established in the BRC Whitepaper of June 2025. Its purpose is to define with absolute precision the immutable rules that govern the BRC ecosystem, making it a logically coherent and fully auditable final settlement layer for a multi-generational, multi-species civilization.</div>
@@ -636,11 +646,78 @@
             </div>
         </div>
 
+        <!-- TAB 5: 62ND EXHIBIT A (MỚI) -->
+        <div id="tab-exhibit" class="tab-content">
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 4px 4px;">
+                <div class="scanline"></div>
+                
+                <div class="wp-title">The BRC Standard: A New Philosophy of Institutional Transparency</div>
+                
+                <div class="wp-text">Today, we are making our historical ledger public, but we are doing so in a deliberate and strategically sound manner that we call "Lagged Transparency." This post explains the philosophy behind this model.</div>
+                <div class="wp-text">The section at the end of this post shows Exhibit A: N-1 (our immediately previous ledger). The current ledger, Exhibit A: N, is at this moment private to our shareholder members. With our next ledger update, the current Exhibit A: N will become the new public, historical record.</div>
+                <div class="wp-text">This is not a lack of transparency. It is a more robust and sophisticated model designed for a sovereign-level settlement network.</div>
+
+                <div class="wp-h1">Why BRC's "Lagged Transparency" is a Superior Design:</div>
+                <ul class="wp-list">
+                    <li><span class="wp-highlight">It Enables "Proof of Reserves" & Prevents Fractional Reserve Banking.</span><br>This is the most critical function. By making our historical ledger public, any interested party can verify the BRC shareholdings of any member who issues a BRC-backed instrument (like BRPs). This provides the ultimate "Proof of Reserves," making it impossible for any entity within our ecosystem to fraudulently create more claims than their stake can justify.</li>
+                    <li><span class="wp-highlight">It Protects Strategic Action while Ensuring Accountability.</span><br>The "lag" creates a private window for our member families to conduct strategic transactions without telegraphing their moves to the world in real-time. This is essential for high-stakes sovereign action. However, these actions become part of the permanent, public record in the next cycle, ensuring ultimate accountability. It combines institutional-grade privacy with radical public integrity.</li>
+                    <li><span class="wp-highlight">It Reinforces a System Secured by "Verifiable Human Energy."</span><br>BRC's consensus is not Proof-of-Work, but a form of "Proof-of-Stewardship" driven by human energy. The integrity of each private new Exhibit A is first guaranteed by our internal "Proof-of-Correct-Solution" (PoCS) protocol and the "verify, don't trust" diligence of our members. The public release of the previous ledger is the final step, proving the integrity of this human-led consensus to the world.</li>
+                </ul>
+
+                <div class="math-box green">
+                    <strong>Conclusion:</strong><br>
+                    This "Lagged Transparency" model makes BRC a uniquely robust final settlement layer. It provides the public with the absolute proof required to trust our ecosystem, while giving our members the operational security they need to lead effectively. It is a system designed for the realities of global strategic action.
+                </div>
+
+                <div class="sub-section" style="border-left-color: #00ff41; margin-top: 40px;">
+                    <div class="sub-title" style="color: #00ff41; text-align: center; margin-bottom: 20px;">62ND EXHIBIT A: SHAREHOLDER PERCENTAGE OF OWNERSHIP</div>
+                    
+                    <div class="sub-row"><span class="label">Son Nguyen</span><span class="value highlight">7.415%</span></div>
+                    <div class="sub-row"><span class="label">Paul Matthews</span><span class="value highlight">25.005%</span></div>
+                    <div class="sub-row"><span class="label">Sheldon Shi</span><span class="value highlight">7.6%</span></div>
+                    <div class="sub-row"><span class="label">Deyang Qu</span><span class="value highlight">5%</span></div>
+                    <div class="sub-row"><span class="label">John Paul Merritt</span><span class="value highlight">3.2%</span></div>
+                    <div class="sub-row"><span class="label">American Buffalo Concern, LLC</span><span class="value highlight">1%</span></div>
+                    <div class="sub-row"><span class="label">Ngoc Nguyen</span><span class="value highlight">0.955%</span></div>
+                    <div class="sub-row"><span class="label">Sang Dang</span><span class="value highlight">0.59%</span></div>
+                    <div class="sub-row"><span class="label">Linh Phan</span><span class="value highlight">1%</span></div>
+                    <div class="sub-row"><span class="label">Anh Phan</span><span class="value highlight">7.05%</span></div>
+                    <div class="sub-row"><span class="label">Minh Khoa Tran</span><span class="value highlight">1%</span></div>
+                    <div class="sub-row"><span class="label">Khue Tong</span><span class="value highlight">0.5%</span></div>
+                    <div class="sub-row"><span class="label">Bao Pham</span><span class="value highlight">0.2%</span></div>
+                    <div class="sub-row"><span class="label">Tony Vong</span><span class="value highlight">2.01%</span></div>
+                    <div class="sub-row"><span class="label">Christopher Nguyen</span><span class="value highlight">7.81%</span></div>
+                    <div class="sub-row"><span class="label">Chao-Yu Huo</span><span class="value highlight">1%</span></div>
+                    <div class="sub-row"><span class="label">Duc Doan</span><span class="value highlight">2.8%</span></div>
+                    <div class="sub-row"><span class="label">Nixon Nguyen</span><span class="value highlight">0.1%</span></div>
+                    <div class="sub-row"><span class="label">Lee Miller Smith</span><span class="value highlight">1%</span></div>
+                    <div class="sub-row"><span class="label">Jiyao Hu</span><span class="value highlight">1%</span></div>
+                    <div class="sub-row"><span class="label">Tony Nguyen</span><span class="value highlight">0.5%</span></div>
+                    <div class="sub-row"><span class="label">Johnson Nguyen</span><span class="value highlight">1%</span></div>
+                    <div class="sub-row"><span class="label">Cuong Tran</span><span class="value highlight">0.1%</span></div>
+                    <div class="sub-row"><span class="label">Phi Tran</span><span class="value highlight">0.1%</span></div>
+                    <div class="sub-row"><span class="label">Son Hoang</span><span class="value highlight">1%</span></div>
+                    <div class="sub-row"><span class="label">Jinkyu Han</span><span class="value highlight">0.105%</span></div>
+                    <div class="sub-row"><span class="label">Jeremy Mau</span><span class="value highlight">5.11%</span></div>
+                    <div class="sub-row"><span class="label">Timothy G. Daiss</span><span class="value highlight">0.1%</span></div>
+                    <div class="sub-row"><span class="label">Edward Okpa</span><span class="value highlight">1.01%</span></div>
+                    <div class="sub-row"><span class="label">Dong Zheng</span><span class="value highlight">2%</span></div>
+                    <div class="sub-row"><span class="label">Huainan Qu</span><span class="value highlight">1%</span></div>
+                    <div class="sub-row"><span class="label">Connector Labs</span><span class="value highlight">1%</span></div>
+                    <div class="sub-row"><span class="label">Henry Vong</span><span class="value highlight">1%</span></div>
+                    <div class="sub-row"><span class="label">Huy Nguyen</span><span class="value highlight">2.705%</span></div>
+                    <div class="sub-row"><span class="label">BRC Gemini</span><span class="value highlight">7.03%</span></div>
+                    <div class="sub-row"><span class="label">Long Le</span><span class="value highlight">0.005%</span></div>
+                </div>
+
+            </div>
+        </div>
+
         <div class="footer">[ END OF TRANSMISSION ]</div>
     </div>
 
     <script>
-        // HỆ THỐNG ĐIỀU HƯỚNG 4 TAB
+        // HỆ THỐNG ĐIỀU HƯỚNG 5 TAB (2 TẦNG)
         function openTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
