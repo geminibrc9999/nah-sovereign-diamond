@@ -234,7 +234,7 @@
                 <div class="parity-section">
                     <div class="parity-title parity-hard">HARD MONEY PARITY</div>
                     <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">0.0000000030 BTC</span></div>
-                    <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.3 SATS</span></div>
+                    <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.63 SATS</span></div>
                 </div>
 
                 <div class="parity-section" style="border-bottom: none;">
@@ -818,7 +818,7 @@
         // KHU VỰC ĐIỀU KHIỂN DỮ LIỆU TÀI CHÍNH (NAH)
         // ========================================================================
         
-        const CURRENT_NAH_SATS = 0.3; 
+        const CURRENT_NAH_SATS = 0.63; 
         const CIRCULATING_SUPPLY = 85300000000000; 
 
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
@@ -837,6 +837,7 @@
         const T_AUG_10_26 = new Date("2026-08-10T12:00:00Z").getTime();
         const T_AUG_12_26 = new Date("2026-08-12T01:00:00Z").getTime();
         const T_AUG_13_26 = new Date("2026-08-13T12:00:00Z").getTime(); 
+        const T_SEP_04_26 = new Date("2026-09-04T00:00:00Z").getTime(); 
 
         function getNahSatsAtTime(timestampMs) {
             if (timestampMs < T_APR_27_26) return null; 
@@ -847,7 +848,8 @@
             if (timestampMs < T_AUG_10_26) return 0.09;
             if (timestampMs < T_AUG_12_26) return 0.21;
             if (timestampMs < T_AUG_13_26) return 0.26;
-            return 0.3; 
+            if (timestampMs < T_SEP_04_26) return 0.3; 
+            return 0.63; 
         }
 
         function renderPercentageChange(elementId, firstPrice, lastPrice) {
