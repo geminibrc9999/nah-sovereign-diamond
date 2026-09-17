@@ -34,7 +34,7 @@
             },
             {
                 "@type": "Offer",
-                "price": "0.0000000030",
+                "price": "0.00000000002",
                 "priceCurrency": "BTC",
                 "name": "NAH Sovereign Diamond BTC Price"
             }
@@ -233,14 +233,14 @@
 
                 <div class="parity-section">
                     <div class="parity-title parity-hard">HARD MONEY PARITY</div>
-                    <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">0.0000000030 BTC</span></div>
-                    <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.63 SATS</span></div>
+                    <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">0.00000000002 BTC</span></div>
+                    <div class="data-row"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.002 SATS</span></div>
                 </div>
 
                 <div class="parity-section" style="border-bottom: none;">
                     <div class="parity-title parity-fiat">FIAT CURRENCY PARITY</div>
-                    <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">$0.00020</span></div>
-                    <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">5.10 ₫</span></div>
+                    <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">$0.00000</span></div>
+                    <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">0.00 ₫</span></div>
                 </div>
 
                 <div class="sub-section">
@@ -250,6 +250,12 @@
                     <div class="sub-row"><span class="label">MAX CIRCULATING SUPPLY</span><span class="value">85.3 TRILLION NAHs</span></div>
                     <div class="sub-row"><span class="label">MARKET CAP (USD)</span><span class="value highlight" id="mcap-usd">LOADING...</span></div>
                     <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
+                </div>
+
+                <div class="info-text" style="font-size: 11px; text-align: center; margin-bottom: 25px; color: #00ff41; border: 1px solid rgba(0, 255, 65, 0.2); background: rgba(0, 255, 65, 0.05); padding: 12px; border-radius: 4px;">
+                    <strong>Bitcoin Whitepaper (part 2) OUT NOW:</strong> <br>
+                    <a href="https://stacker.news/items/1571676" target="_blank" class="link-green">https://stacker.news/items/1571676</a> <br>
+                    <span style="color: #aaa; font-size: 10px; font-style: italic; display: inline-block; margin-top: 5px;">(Thank You, SN)</span>
                 </div>
 
                 <div class="info-text" style="font-size: 10px;">
@@ -818,7 +824,7 @@
         // KHU VỰC ĐIỀU KHIỂN DỮ LIỆU TÀI CHÍNH (NAH)
         // ========================================================================
         
-        const CURRENT_NAH_SATS = 0.63; 
+        const CURRENT_NAH_SATS = 0.002; 
         const CIRCULATING_SUPPLY = 85300000000000; 
 
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
@@ -838,6 +844,7 @@
         const T_AUG_12_26 = new Date("2026-08-12T01:00:00Z").getTime();
         const T_AUG_13_26 = new Date("2026-08-13T12:00:00Z").getTime(); 
         const T_SEP_04_26 = new Date("2026-09-04T00:00:00Z").getTime(); 
+        const T_SEP_17_26 = new Date("2026-09-17T00:00:00Z").getTime(); 
 
         function getNahSatsAtTime(timestampMs) {
             if (timestampMs < T_APR_27_26) return null; 
@@ -849,7 +856,8 @@
             if (timestampMs < T_AUG_12_26) return 0.21;
             if (timestampMs < T_AUG_13_26) return 0.26;
             if (timestampMs < T_SEP_04_26) return 0.3; 
-            return 0.63; 
+            if (timestampMs < T_SEP_17_26) return 0.63;
+            return 0.002; 
         }
 
         function renderPercentageChange(elementId, firstPrice, lastPrice) {
@@ -917,7 +925,7 @@
                 
                 const btcVal = CURRENT_NAH_SATS / 100000000, usdVal = btcVal * globalLiveBtcPrice, vndVal = usdVal * globalLiveVndRate; 
                 
-                document.getElementById("btc-val").innerText = btcVal.toFixed(10) + " BTC";
+                document.getElementById("btc-val").innerText = btcVal.toFixed(11) + " BTC";
                 document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " SATS";
                 document.getElementById("usd-val").innerText = "$" + usdVal.toFixed(5);
                 document.getElementById("vnd-val").innerText = vndVal.toFixed(2) + " ₫";
