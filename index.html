@@ -95,6 +95,9 @@
         .chart-box { background: #0d0d0d; border: 1px solid #1c1c1c; padding: 8px; position: relative; height: 180px; border-radius: 4px; overflow: hidden; }
         .chart-label { font-size: 9px; color: #888; position: absolute; top: 8px; left: 8px; z-index: 10; background: rgba(13, 13, 13, 0.85); padding: 2px 5px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; display: flex; align-items: center; backdrop-filter: blur(2px); border: 1px solid #222; }
         
+        .live-price-overlay { position: absolute; bottom: 8px; right: 8px; z-index: 10; font-size: 10px; color: #888; background: rgba(0, 0, 0, 0.85); padding: 3px 6px; border-radius: 3px; font-weight: bold; border: 1px dashed #333; backdrop-filter: blur(2px); letter-spacing: 0.5px; }
+        .live-price-overlay span { color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.4); }
+
         .pct-change { margin-left: 6px; font-size: 9px; padding: 2px 4px; border-radius: 3px; background: rgba(0,0,0,0.8); }
         .pct-up { color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.4); border: 1px solid rgba(0, 255, 65, 0.2); }
         .pct-down { color: #ff3333; text-shadow: 0 0 5px rgba(255, 51, 51, 0.4); border: 1px solid rgba(255, 51, 51, 0.2); }
@@ -211,22 +214,26 @@
                     <button class="tf-btn" onclick="switchTimeframe('ALL', this)">ALL</button>
                 </div>
 
-                <!-- 4 CHARTS GRID -->
+                <!-- 4 CHARTS GRID VỚI OVERLAY REAL-TIME -->
                 <div class="charts-container">
                     <div class="chart-box">
                         <div class="chart-label">USD / NAH <span id="nah-change" class="pct-change">...</span></div>
+                        <div class="live-price-overlay" id="overlay-nah-usd">LIVE: <span>...</span></div>
                         <canvas id="chartNah"></canvas>
                     </div>
                     <div class="chart-box">
                         <div class="chart-label">VND / NAH <span id="nah-vnd-change" class="pct-change">...</span></div>
+                        <div class="live-price-overlay" id="overlay-nah-vnd">LIVE: <span>...</span></div>
                         <canvas id="chartNahVnd"></canvas>
                     </div>
                     <div class="chart-box">
                         <div class="chart-label">USD / BTC <span id="btc-change" class="pct-change">...</span></div>
+                        <div class="live-price-overlay" id="overlay-btc-usd">LIVE: <span>...</span></div>
                         <canvas id="chartBtc"></canvas>
                     </div>
                     <div class="chart-box">
                         <div class="chart-label">VND / SAT <span id="sat-vnd-change" class="pct-change">...</span></div>
+                        <div class="live-price-overlay" id="overlay-sat-vnd">LIVE: <span>...</span></div>
                         <canvas id="chartSatVnd"></canvas>
                     </div>
                 </div>
@@ -239,8 +246,8 @@
 
                 <div class="parity-section" style="border-bottom: none;">
                     <div class="parity-title parity-fiat">FIAT CURRENCY PARITY</div>
-                    <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">$0.00000</span></div>
-                    <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">0.00 ₫</span></div>
+                    <div class="data-row"><span class="label">USD / NAH</span><span class="value" id="usd-val">$0.00000000</span></div>
+                    <div class="data-row"><span class="label">VND / NAH</span><span class="value" id="vnd-val">0.0000 ₫</span></div>
                 </div>
 
                 <div class="sub-section">
@@ -833,7 +840,7 @@
 
         let chartInstanceBtc, chartInstanceNah, chartInstanceNahVnd, chartInstanceSatVnd;
         let chartCache = {}; 
-        let globalLiveVndRate = 25500; // Mặc định ban đầu
+        let globalLiveVndRate = 25500; 
 
         const T_APR_27_26 = new Date("2026-04-27T00:00:00Z").getTime();
         const T_JUL_01_26 = new Date("2026-07-01T00:00:00Z").getTime();
@@ -881,9 +888,9 @@
             });
         }
 
-        chartInstanceNah = buildFinancialChart('chartNah', '#ff9900', '$', 6);
+        chartInstanceNah = buildFinancialChart('chartNah', '#ff9900', '$', 8);
         chartInstanceBtc = buildFinancialChart('chartBtc', '#ffffff', '$', 0);
-        chartInstanceNahVnd = buildFinancialChart('chartNahVnd', '#00ff41', '₫', 2);
+        chartInstanceNahVnd = buildFinancialChart('chartNahVnd', '#00ff41', '₫', 4);
         chartInstanceSatVnd = buildFinancialChart('chartSatVnd', '#00ccff', '₫', 2);
 
         async function updateChartGraphics(timeframe) {
@@ -924,12 +931,20 @@
                 globalLiveVndRate = parseFloat(forexData.rates.VND);
                 
                 const btcVal = CURRENT_NAH_SATS / 100000000, usdVal = btcVal * globalLiveBtcPrice, vndVal = usdVal * globalLiveVndRate; 
+                const satVnd = (globalLiveBtcPrice / 100000000) * globalLiveVndRate;
                 
                 document.getElementById("btc-val").innerText = btcVal.toFixed(11) + " BTC";
                 document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " SATS";
-                document.getElementById("usd-val").innerText = "$" + usdVal.toFixed(5);
-                document.getElementById("vnd-val").innerText = vndVal.toFixed(2) + " ₫";
+                document.getElementById("usd-val").innerText = "$" + usdVal.toFixed(8);
+                document.getElementById("vnd-val").innerText = vndVal.toFixed(4) + " ₫";
                 document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
+                
+                // Live Overlays Update
+                document.getElementById("overlay-nah-usd").innerHTML = "LIVE: <span>$" + usdVal.toFixed(8) + "</span>";
+                document.getElementById("overlay-nah-vnd").innerHTML = "LIVE: <span>" + vndVal.toFixed(4) + " ₫</span>";
+                document.getElementById("overlay-btc-usd").innerHTML = "LIVE: <span>$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "</span>";
+                document.getElementById("overlay-sat-vnd").innerHTML = "LIVE: <span>" + satVnd.toFixed(2) + " ₫</span>";
+
                 document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
                 
                 // Refresh charts with actual VND rate
