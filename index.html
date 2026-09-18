@@ -82,7 +82,6 @@
         .title-container { text-align: center; }
         .title { font-family: 'Orbitron', sans-serif; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #ff9900; text-shadow: 0 0 12px rgba(255, 153, 0, 0.5); margin-bottom: 8px; line-height: 1.2; }
         .slogan-1 { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 1.5px; font-style: italic; margin-bottom: 5px; }
-        .slogan-2 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; line-height: 1.6; }
         .diamond { display: inline-block; animation: sparkle 1s infinite alternate; }
         @keyframes sparkle { 0% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 2px rgba(255,255,255,0.5)); } 100% { transform: scale(1.2); filter: brightness(1.5) drop-shadow(0 0 12px rgba(255, 153, 0, 0.8)); } }
 
@@ -91,7 +90,8 @@
         .tf-btn { background: transparent; color: #888; border: 1px solid #222; padding: 5px 12px; font-family: inherit; font-size: 11px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
         .tf-btn:hover, .tf-btn.active { color: #ff9900; border-color: #ff9900; background: rgba(255, 153, 0, 0.05); }
 
-        .charts-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+        .charts-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .charts-container.full-width { grid-template-columns: 1fr; margin-bottom: 25px; }
         .chart-box { background: #0d0d0d; border: 1px solid #1c1c1c; padding: 8px; position: relative; height: 210px; border-radius: 4px; overflow: hidden; }
         .chart-label { font-size: 9px; color: #888; position: absolute; top: 8px; left: 8px; z-index: 10; background: rgba(13, 13, 13, 0.85); padding: 2px 5px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; display: flex; align-items: center; backdrop-filter: blur(2px); border: 1px solid #222; }
         
@@ -181,10 +181,6 @@
             <div class="title-container">
                 <div class="title">NAH SOVEREIGN DIAMOND <span class="diamond">💎</span></div>
                 <div class="slogan-1">digital diamond etched on digital gold</div>
-                <div class="slogan-2">
-                    <span style="color: #ff9900; text-shadow: 0 0 5px rgba(255, 153, 0, 0.3);">THE FUTURE OF BITCOIN MINING</span><br>
-                    <span style="color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);">AND ELECTRIC VEHICLE MANUFACTURING</span>
-                </div>
             </div>
         </div>
 
@@ -215,11 +211,11 @@
 
                 <!-- CHARTS GRID -->
                 <div class="charts-container">
-                    <!-- 1. USD / NAH -->
+                    <!-- 1. SAT / NAH (THE KING) -->
                     <div class="chart-box">
-                        <div class="chart-label">USD / NAH <span id="nah-change" class="pct-change">...</span></div>
-                        <div class="live-price-overlay" id="overlay-nah-usd">LIVE: <span>...</span></div>
-                        <canvas id="chartNah"></canvas>
+                        <div class="chart-label">SAT / NAH <span id="sat-nah-change" class="pct-change">...</span></div>
+                        <div class="live-price-overlay" id="overlay-sat-nah">LIVE: <span>...</span></div>
+                        <canvas id="chartSatNah"></canvas>
                     </div>
                     <!-- 2. USD / BTC -->
                     <div class="chart-box">
@@ -227,13 +223,22 @@
                         <div class="live-price-overlay" id="overlay-btc-usd">LIVE: <span>...</span></div>
                         <canvas id="chartBtc"></canvas>
                     </div>
-                    <!-- 3. VND / NAH -->
+                    <!-- 3. USD / NAH -->
+                    <div class="chart-box">
+                        <div class="chart-label">USD / NAH <span id="nah-change" class="pct-change">...</span></div>
+                        <div class="live-price-overlay" id="overlay-nah-usd">LIVE: <span>...</span></div>
+                        <canvas id="chartNah"></canvas>
+                    </div>
+                    <!-- 4. VND / NAH -->
                     <div class="chart-box">
                         <div class="chart-label">VND / NAH <span id="nah-vnd-change" class="pct-change">...</span></div>
                         <div class="live-price-overlay" id="overlay-nah-vnd">LIVE: <span>...</span></div>
                         <canvas id="chartNahVnd"></canvas>
                     </div>
-                    <!-- 4. VND / SAT -->
+                </div>
+
+                <!-- 5. VND / SAT (FULL WIDTH ROW BELOW) -->
+                <div class="charts-container full-width">
                     <div class="chart-box">
                         <div class="chart-label">VND / SAT <span id="sat-vnd-change" class="pct-change">...</span></div>
                         <div class="live-price-overlay" id="overlay-sat-vnd">LIVE: <span>...</span></div>
@@ -243,8 +248,7 @@
 
                 <div class="parity-section">
                     <div class="parity-title parity-hard">HARD MONEY PARITY</div>
-                    <div class="data-row"><span class="label">BTC / NAH</span><span class="value" id="btc-val">0.00000000002 BTC</span></div>
-                    <div class="data-row" style="border-bottom: none;"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.002 SATS</span></div>
+                    <div class="data-row" style="border-bottom: none;"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.002 SAT</span></div>
                 </div>
 
                 <div class="sub-section">
@@ -836,7 +840,7 @@
         const FOREX_API = "https://open.er-api.com/v6/latest/USD";
         const CG_CHART_API = (days) => `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${days}`;
 
-        let chartInstanceBtc, chartInstanceNah, chartInstanceNahVnd, chartInstanceSatVnd;
+        let chartInstanceSatNah, chartInstanceBtc, chartInstanceNah, chartInstanceNahVnd, chartInstanceSatVnd;
         let chartCache = {}; 
         let globalLiveVndRate = 25500; 
 
@@ -873,34 +877,36 @@
             else if (change < 0) { el.innerText = change.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "%"; el.className = "pct-change pct-down"; }
         }
 
-        function buildFinancialChart(ctxId, borderHex, labelPrefix, formatDecimals) {
+        function buildFinancialChart(ctxId, borderHex, labelPrefix, labelSuffix, formatDecimals) {
             return new Chart(document.getElementById(ctxId).getContext('2d'), {
                 type: 'line',
                 data: { labels: [], datasets: [{ data: [], borderColor: borderHex, borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0.1 }] },
                 options: {
                     responsive: true, maintainAspectRatio: false, layout: { padding: { top: 40 } },
-                    plugins: { legend: { display: false }, tooltip: { enabled: true, mode: 'index', intersect: false, callbacks: { label: function(c) { return labelPrefix + c.parsed.y.toLocaleString('en-US', {minimumFractionDigits: formatDecimals, maximumFractionDigits: formatDecimals}); } } } },
-                    scales: { x: { ticks: { color: '#555', font: { size: 9 } }, grid: { color: '#111' } }, y: { ticks: { color: '#ff9900', font: { size: 9 }, callback: function(v) { return labelPrefix + v.toLocaleString('en-US', {maximumFractionDigits: formatDecimals}); } }, grid: { color: '#111' } } },
+                    plugins: { legend: { display: false }, tooltip: { enabled: true, mode: 'index', intersect: false, callbacks: { label: function(c) { return labelPrefix + c.parsed.y.toLocaleString('en-US', {minimumFractionDigits: formatDecimals, maximumFractionDigits: formatDecimals}) + labelSuffix; } } } },
+                    scales: { x: { ticks: { color: '#555', font: { size: 9 } }, grid: { color: '#111' } }, y: { ticks: { color: '#ff9900', font: { size: 9 }, callback: function(v) { return labelPrefix + v.toLocaleString('en-US', {maximumFractionDigits: formatDecimals}) + labelSuffix; } }, grid: { color: '#111' } } },
                     interaction: { mode: 'nearest', axis: 'x', intersect: false }
                 }
             });
         }
 
-        chartInstanceNah = buildFinancialChart('chartNah', '#ff9900', '$', 8);
-        chartInstanceBtc = buildFinancialChart('chartBtc', '#ffffff', '$', 0);
-        chartInstanceNahVnd = buildFinancialChart('chartNahVnd', '#00ff41', '₫', 4);
-        chartInstanceSatVnd = buildFinancialChart('chartSatVnd', '#00ccff', '₫', 2);
+        chartInstanceSatNah = buildFinancialChart('chartSatNah', '#ff9900', '', ' SAT', 3);
+        chartInstanceBtc = buildFinancialChart('chartBtc', '#ffffff', '$', '', 0);
+        chartInstanceNah = buildFinancialChart('chartNah', '#ff9900', '$', '', 8);
+        chartInstanceNahVnd = buildFinancialChart('chartNahVnd', '#00ff41', '₫', '', 4);
+        chartInstanceSatVnd = buildFinancialChart('chartSatVnd', '#00ccff', '₫', '', 2);
 
         async function updateChartGraphics(timeframe) {
             let days = timeframe === '1D' ? '1' : timeframe === '1W' ? '7' : timeframe === '1M' ? '30' : '90';
             if (!chartCache[timeframe]) { const res = await fetch(CG_CHART_API(days)); const data = await res.json(); chartCache[timeframe] = data.prices; }
             const rawData = chartCache[timeframe];
-            const labels = [], btcUsdPrices = [], nahUsdPrices = [], satVndPrices = [], nahVndPrices = [];
+            const labels = [], satNahPrices = [], btcUsdPrices = [], nahUsdPrices = [], satVndPrices = [], nahVndPrices = [];
             
             rawData.forEach(p => {
                 const ts = p[0], btcUsd = p[1], nahSats = getNahSatsAtTime(ts);
                 if (nahSats !== null) { 
                     labels.push(new Date(ts).toLocaleDateString()); 
+                    satNahPrices.push(nahSats);
                     btcUsdPrices.push(btcUsd); 
                     nahUsdPrices.push((nahSats / 100000000) * btcUsd); 
                     satVndPrices.push((btcUsd / 100000000) * globalLiveVndRate);
@@ -908,11 +914,13 @@
                 }
             });
             
+            chartInstanceSatNah.data.labels = labels; chartInstanceSatNah.data.datasets[0].data = satNahPrices; chartInstanceSatNah.update();
             chartInstanceNah.data.labels = labels; chartInstanceNah.data.datasets[0].data = nahUsdPrices; chartInstanceNah.update();
             chartInstanceBtc.data.labels = labels; chartInstanceBtc.data.datasets[0].data = btcUsdPrices; chartInstanceBtc.update();
             chartInstanceNahVnd.data.labels = labels; chartInstanceNahVnd.data.datasets[0].data = nahVndPrices; chartInstanceNahVnd.update();
             chartInstanceSatVnd.data.labels = labels; chartInstanceSatVnd.data.datasets[0].data = satVndPrices; chartInstanceSatVnd.update();
             
+            renderPercentageChange('sat-nah-change', satNahPrices[0], satNahPrices[satNahPrices.length - 1]);
             renderPercentageChange('nah-change', nahUsdPrices[0], nahUsdPrices[nahUsdPrices.length - 1]);
             renderPercentageChange('btc-change', btcUsdPrices[0], btcUsdPrices[btcUsdPrices.length - 1]);
             renderPercentageChange('nah-vnd-change', nahVndPrices[0], nahVndPrices[nahVndPrices.length - 1]);
@@ -928,18 +936,19 @@
                 const globalLiveBtcPrice = parseFloat(btcData.USD);
                 globalLiveVndRate = parseFloat(forexData.rates.VND);
                 
-                const btcVal = CURRENT_NAH_SATS / 100000000, usdVal = btcVal * globalLiveBtcPrice, vndVal = usdVal * globalLiveVndRate; 
+                const usdVal = (CURRENT_NAH_SATS / 100000000) * globalLiveBtcPrice;
+                const vndVal = usdVal * globalLiveVndRate; 
                 const satVnd = (globalLiveBtcPrice / 100000000) * globalLiveVndRate;
                 const mcapBtc = (CIRCULATING_SUPPLY * CURRENT_NAH_SATS) / 100000000;
                 
-                document.getElementById("btc-val").innerText = btcVal.toFixed(11) + " BTC";
-                document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " SATS";
+                document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " SAT";
                 document.getElementById("mcap-btc").innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " BTC";
                 document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 
                 // Live Overlays Update
-                document.getElementById("overlay-nah-usd").innerHTML = "LIVE: <span>$" + usdVal.toFixed(8) + "</span>";
+                document.getElementById("overlay-sat-nah").innerHTML = "LIVE: <span>" + CURRENT_NAH_SATS + " SAT</span>";
                 document.getElementById("overlay-btc-usd").innerHTML = "LIVE: <span>$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "</span>";
+                document.getElementById("overlay-nah-usd").innerHTML = "LIVE: <span>$" + usdVal.toFixed(8) + "</span>";
                 document.getElementById("overlay-nah-vnd").innerHTML = "LIVE: <span>" + vndVal.toFixed(4) + " ₫</span>";
                 document.getElementById("overlay-sat-vnd").innerHTML = "LIVE: <span>" + satVnd.toFixed(2) + " ₫</span>";
 
