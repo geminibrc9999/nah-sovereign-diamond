@@ -90,12 +90,12 @@
         .tf-btn { background: transparent; color: #888; border: 1px solid #222; padding: 5px 12px; font-family: inherit; font-size: 11px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
         .tf-btn:hover, .tf-btn.active { color: #ff9900; border-color: #ff9900; background: rgba(255, 153, 0, 0.05); }
 
-        .charts-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+        .charts-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .charts-container.full-width { grid-template-columns: 1fr; margin-bottom: 25px; }
         .chart-box { background: #0d0d0d; border: 1px solid #1c1c1c; padding: 8px; position: relative; height: 210px; border-radius: 4px; overflow: hidden; }
         .chart-label { font-size: 9px; color: #888; position: absolute; top: 8px; left: 8px; z-index: 10; background: rgba(13, 13, 13, 0.85); padding: 2px 5px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; display: flex; align-items: center; backdrop-filter: blur(2px); border: 1px solid #222; }
         
         .live-price-overlay { position: absolute; top: 8px; right: 8px; z-index: 10; font-size: 10px; color: #888; background: rgba(0, 0, 0, 0.85); padding: 3px 6px; border-radius: 3px; font-weight: bold; border: 1px dashed #333; backdrop-filter: blur(2px); letter-spacing: 0.5px; }
-        .live-price-overlay span { color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.4); }
 
         .pct-change { margin-left: 6px; font-size: 9px; padding: 2px 4px; border-radius: 3px; background: rgba(0,0,0,0.8); }
         .pct-up { color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.4); border: 1px solid rgba(0, 255, 65, 0.2); }
@@ -213,25 +213,25 @@
                     <!-- 1. USD / NAH -->
                     <div class="chart-box">
                         <div class="chart-label">USD / NAH <span id="nah-change" class="pct-change">...</span></div>
-                        <div class="live-price-overlay" id="overlay-nah-usd">LIVE: <span>...</span></div>
+                        <div class="live-price-overlay" id="overlay-nah-usd">LIVE: <span style="color: #00ccff;">...</span></div>
                         <canvas id="chartNah"></canvas>
                     </div>
                     <!-- 2. USD / BTC -->
                     <div class="chart-box">
                         <div class="chart-label">USD / BTC <span id="btc-change" class="pct-change">...</span></div>
-                        <div class="live-price-overlay" id="overlay-btc-usd">LIVE: <span>...</span></div>
+                        <div class="live-price-overlay" id="overlay-btc-usd">LIVE: <span style="color: #ff9900;">...</span></div>
                         <canvas id="chartBtc"></canvas>
                     </div>
                     <!-- 3. VND / NAH -->
                     <div class="chart-box">
                         <div class="chart-label">VND / NAH <span id="nah-vnd-change" class="pct-change">...</span></div>
-                        <div class="live-price-overlay" id="overlay-nah-vnd">LIVE: <span>...</span></div>
+                        <div class="live-price-overlay" id="overlay-nah-vnd">LIVE: <span style="color: #00ff41;">...</span></div>
                         <canvas id="chartNahVnd"></canvas>
                     </div>
                     <!-- 4. VND / SAT -->
                     <div class="chart-box">
                         <div class="chart-label">VND / SAT <span id="sat-vnd-change" class="pct-change">...</span></div>
-                        <div class="live-price-overlay" id="overlay-sat-vnd">LIVE: <span>...</span></div>
+                        <div class="live-price-overlay" id="overlay-sat-vnd">LIVE: <span style="color: #ffffff;">...</span></div>
                         <canvas id="chartSatVnd"></canvas>
                     </div>
                 </div>
@@ -251,9 +251,10 @@
                     <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
                 </div>
 
-                <div class="info-text" style="font-size: 11px; text-align: center; margin-bottom: 25px; color: #00ff41; border: 1px solid rgba(0, 255, 65, 0.2); background: rgba(0, 255, 65, 0.05); padding: 12px; border-radius: 4px;">
-                    <strong>Bitcoin Whitepaper (part 2) OUT NOW:</strong> <br>
-                    <a href="https://stacker.news/items/1571676" target="_blank" class="link-green">https://stacker.news/items/1571676</a> <br>
+                <!-- BẢNG WHITE PAPER PHA MÀU CAM & XANH DƯƠNG -->
+                <div class="info-text" style="font-size: 11px; text-align: center; margin-bottom: 25px; color: #ff9900; border: 1px solid rgba(255, 153, 0, 0.3); border-left: 3px solid #ff9900; border-right: 3px solid #00ccff; background: linear-gradient(90deg, rgba(255, 153, 0, 0.05) 0%, rgba(0, 204, 255, 0.05) 100%); padding: 12px; border-radius: 4px;">
+                    <strong style="text-shadow: 0 0 5px rgba(255, 153, 0, 0.3);">Bitcoin Whitepaper (part 2) OUT NOW:</strong> <br>
+                    <a href="https://stacker.news/items/1571676" target="_blank" style="color: #00ccff; text-decoration: none; border-bottom: 1px dotted #00ccff; font-weight: bold; display: inline-block; margin-top: 4px; text-shadow: 0 0 5px rgba(0, 204, 255, 0.3);">https://stacker.news/items/1571676</a> <br>
                     <span style="color: #aaa; font-size: 10px; font-style: italic; display: inline-block; margin-top: 5px;">(Thank You, SN)</span>
                 </div>
 
@@ -880,11 +881,11 @@
             });
         }
 
-        // Lưới biểu đồ hiển thị theo đúng thứ tự 1-2-3-4
-        chartInstanceNah = buildFinancialChart('chartNah', '#ff9900', '$', 8);
-        chartInstanceBtc = buildFinancialChart('chartBtc', '#ffffff', '$', 0);
-        chartInstanceNahVnd = buildFinancialChart('chartNahVnd', '#00ff41', '₫', 4);
-        chartInstanceSatVnd = buildFinancialChart('chartSatVnd', '#00ccff', '₫', 2);
+        // Khởi tạo đồ thị với màu sắc đã tinh chỉnh
+        chartInstanceNah = buildFinancialChart('chartNah', '#00ccff', '$', 8); // Xanh dương
+        chartInstanceBtc = buildFinancialChart('chartBtc', '#ff9900', '$', 0); // Cam
+        chartInstanceNahVnd = buildFinancialChart('chartNahVnd', '#00ff41', '₫', 4); // Xanh lục
+        chartInstanceSatVnd = buildFinancialChart('chartSatVnd', '#ffffff', '₫', 2); // Trắng
 
         async function updateChartGraphics(timeframe) {
             let days = timeframe === '1D' ? '1' : timeframe === '1W' ? '7' : timeframe === '1M' ? '30' : '90';
@@ -932,11 +933,11 @@
                 document.getElementById("mcap-btc").innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " BTC";
                 document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 
-                // Live Overlays Update
-                document.getElementById("overlay-nah-usd").innerHTML = "LIVE: <span>$" + usdVal.toFixed(8) + "</span>";
-                document.getElementById("overlay-btc-usd").innerHTML = "LIVE: <span>$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "</span>";
-                document.getElementById("overlay-nah-vnd").innerHTML = "LIVE: <span>" + vndVal.toFixed(4) + " ₫</span>";
-                document.getElementById("overlay-sat-vnd").innerHTML = "LIVE: <span>" + satVnd.toFixed(2) + " ₫</span>";
+                // Live Overlays Update (Đồng bộ màu với đường đồ thị)
+                document.getElementById("overlay-nah-usd").innerHTML = "LIVE: <span style='color: #00ccff; text-shadow: 0 0 5px rgba(0, 204, 255, 0.4);'>$" + usdVal.toFixed(8) + "</span>";
+                document.getElementById("overlay-btc-usd").innerHTML = "LIVE: <span style='color: #ff9900; text-shadow: 0 0 5px rgba(255, 153, 0, 0.4);'>$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "</span>";
+                document.getElementById("overlay-nah-vnd").innerHTML = "LIVE: <span style='color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.4);'>" + vndVal.toFixed(4) + " ₫</span>";
+                document.getElementById("overlay-sat-vnd").innerHTML = "LIVE: <span style='color: #ffffff; text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);'>" + satVnd.toFixed(2) + " ₫</span>";
 
                 document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
                 
