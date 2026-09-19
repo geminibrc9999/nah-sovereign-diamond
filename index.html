@@ -109,11 +109,11 @@
         .label { text-transform: uppercase; color: #aaa; }
         .value { font-weight: bold; color: #ff9900; text-shadow: 0 0 5px rgba(255, 153, 0, 0.3); text-align: right; }
 
-        /* TÙY CHỈNH Ô CONVERTER */
+        /* TÙY CHỈNH Ô CONVERTER - ĐÃ ĐỒNG BỘ MÀU */
         .converter-section { margin-bottom: 25px; padding: 15px; background: #080808; border: 1px solid #1c1c1c; border-left: 3px solid #ff9900; border-radius: 4px; }
         .converter-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; background: rgba(0,0,0,0.5); border: 1px dashed #222; padding: 6px 12px; border-radius: 3px; transition: all 0.2s; }
         .converter-row:hover { border-color: #444; background: rgba(255, 255, 255, 0.02); }
-        .converter-row:last-child { margin-bottom: 0; border: 1px solid #ff3333; background: rgba(255, 51, 51, 0.05); }
+        .converter-row:last-child { margin-bottom: 0; border: 1px solid #00ccff; background: rgba(0, 204, 255, 0.05); }
         .converter-label { font-size: 11px; font-weight: bold; color: #888; width: 40px; }
         .converter-input { flex: 1; background: transparent; border: none; font-family: 'SF Mono', 'Consolas', monospace; font-size: 14px; font-weight: bold; text-align: right; outline: none; width: 100%; }
         .converter-input::placeholder { color: #333; }
@@ -246,23 +246,23 @@
                     <div class="sub-title" style="margin-bottom: 12px; color: #888;">REAL-TIME OMNI CONVERTER</div>
                     <div class="converter-row">
                         <span class="converter-label">VND</span>
-                        <input type="number" id="conv-vnd" class="converter-input" style="color: #00ccff;" placeholder="0">
+                        <input type="number" step="any" id="conv-vnd" class="converter-input" style="color: #00ff41;" placeholder="0">
                     </div>
                     <div class="converter-row">
                         <span class="converter-label">USD</span>
-                        <input type="number" id="conv-usd" class="converter-input" style="color: #00ff41;" placeholder="0">
+                        <input type="number" step="any" id="conv-usd" class="converter-input" style="color: #ff3333;" placeholder="0">
                     </div>
                     <div class="converter-row">
                         <span class="converter-label">BTC</span>
-                        <input type="number" id="conv-btc" class="converter-input" style="color: #ff9900;" placeholder="0">
+                        <input type="number" step="any" id="conv-btc" class="converter-input" style="color: #ff9900;" placeholder="0">
                     </div>
                     <div class="converter-row">
                         <span class="converter-label">SAT</span>
-                        <input type="number" id="conv-sat" class="converter-input" style="color: #ffffff;" placeholder="0">
+                        <input type="number" step="any" id="conv-sat" class="converter-input" style="color: #ffffff;" placeholder="0">
                     </div>
                     <div class="converter-row" style="margin-bottom: 0;">
                         <span class="converter-label">NAH</span>
-                        <input type="number" id="conv-nah" class="converter-input" style="color: #ff3333; text-shadow: 0 0 5px rgba(255, 51, 51, 0.4);" placeholder="0">
+                        <input type="number" step="any" id="conv-nah" class="converter-input" style="color: #00ccff; text-shadow: 0 0 5px rgba(0, 204, 255, 0.4);" placeholder="0">
                     </div>
                 </div>
 
@@ -975,10 +975,13 @@
             }
         }
         
-        async function bootSystem() {
-            await engageOracle(); 
-            setInterval(engageOracle, 60000); 
-            setupOmniConverter();
+        // HÀM ÉP KIỂU SỐ ĐỂ CẤM TRÌNH DUYỆT DÙNG DẠNG SCIENTIFIC NOTATION (e-7)
+        function formatConvert(val, decimals) {
+            let str = val.toFixed(decimals);
+            if (str.includes('.')) {
+                str = str.replace(/0+$/, '').replace(/\.$/, '');
+            }
+            return str;
         }
 
         // ========================================================================
@@ -1008,14 +1011,14 @@
                     if(currency === 'sat') btc_val = val / 100000000;
                     if(currency === 'nah') btc_val = (val * sat_nah) / 100000000;
 
-                    // Tính toán chéo
-                    const out_vnd = parseFloat((btc_val * btc_vnd).toFixed(2));
-                    const out_usd = parseFloat((btc_val * btc_usd).toFixed(6));
-                    const out_btc = parseFloat(btc_val.toFixed(10));
-                    const out_sat = parseFloat((btc_val * 100000000).toFixed(2));
-                    const out_nah = parseFloat(((btc_val * 100000000) / sat_nah).toFixed(2));
+                    // Tính toán chéo và ép định dạng
+                    const out_vnd = formatConvert(btc_val * btc_vnd, 2);
+                    const out_usd = formatConvert(btc_val * btc_usd, 6);
+                    const out_btc = formatConvert(btc_val, 10);
+                    const out_sat = formatConvert(btc_val * 100000000, 2);
+                    const out_nah = formatConvert((btc_val * 100000000) / sat_nah, 2);
 
-                    // Cập nhật các ô còn lại (bỏ qua khoảng trắng thừa)
+                    // Cập nhật các ô còn lại
                     if(currency !== 'vnd') document.getElementById('conv-vnd').value = out_vnd;
                     if(currency !== 'usd') document.getElementById('conv-usd').value = out_usd;
                     if(currency !== 'btc') document.getElementById('conv-btc').value = out_btc;
@@ -1025,6 +1028,11 @@
             });
         }
 
+        async function bootSystem() {
+            await engageOracle(); 
+            setInterval(engageOracle, 60000); 
+            setupOmniConverter();
+        }
         bootSystem();
 
         // ========================================================================
