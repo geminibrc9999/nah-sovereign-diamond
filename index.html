@@ -90,8 +90,7 @@
         .tf-btn { background: transparent; color: #888; border: 1px solid #222; padding: 5px 12px; font-family: inherit; font-size: 11px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
         .tf-btn:hover, .tf-btn.active { color: #ff9900; border-color: #ff9900; background: rgba(255, 153, 0, 0.05); }
 
-        .charts-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-        .charts-container.full-width { grid-template-columns: 1fr; margin-bottom: 25px; }
+        .charts-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
         .chart-box { background: #0d0d0d; border: 1px solid #1c1c1c; padding: 8px; position: relative; height: 210px; border-radius: 4px; overflow: hidden; }
         .chart-label { font-size: 9px; color: #888; position: absolute; top: 8px; left: 8px; z-index: 10; background: rgba(13, 13, 13, 0.85); padding: 2px 5px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; display: flex; align-items: center; backdrop-filter: blur(2px); border: 1px solid #222; }
         
@@ -101,7 +100,7 @@
         .pct-up { color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.4); border: 1px solid rgba(0, 255, 65, 0.2); }
         .pct-down { color: #ff3333; text-shadow: 0 0 5px rgba(255, 51, 51, 0.4); border: 1px solid rgba(255, 51, 51, 0.2); }
         
-        .parity-section { border-bottom: none; padding-bottom: 0; margin-bottom: 25px; }
+        .parity-section { border-bottom: none; padding-bottom: 0; margin-bottom: 10px; }
         .parity-title { font-size: 10px; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; border-left: 3px solid; padding-left: 8px; }
         .parity-hard { border-left-color: #ff9900; }
 
@@ -109,6 +108,18 @@
         .data-row:last-child { border-bottom: none; }
         .label { text-transform: uppercase; color: #aaa; }
         .value { font-weight: bold; color: #ff9900; text-shadow: 0 0 5px rgba(255, 153, 0, 0.3); text-align: right; }
+
+        /* TÙY CHỈNH Ô CONVERTER */
+        .converter-section { margin-bottom: 25px; padding: 15px; background: #080808; border: 1px solid #1c1c1c; border-left: 3px solid #ff9900; border-radius: 4px; }
+        .converter-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; background: rgba(0,0,0,0.5); border: 1px dashed #222; padding: 6px 12px; border-radius: 3px; transition: all 0.2s; }
+        .converter-row:hover { border-color: #444; background: rgba(255, 255, 255, 0.02); }
+        .converter-row:last-child { margin-bottom: 0; border: 1px solid #ff3333; background: rgba(255, 51, 51, 0.05); }
+        .converter-label { font-size: 11px; font-weight: bold; color: #888; width: 40px; }
+        .converter-input { flex: 1; background: transparent; border: none; font-family: 'SF Mono', 'Consolas', monospace; font-size: 14px; font-weight: bold; text-align: right; outline: none; width: 100%; }
+        .converter-input::placeholder { color: #333; }
+        /* Ẩn mũi tên cuộn của input type number */
+        .converter-input::-webkit-outer-spin-button, .converter-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .converter-input[type=number] { -moz-appearance: textfield; }
 
         .sub-section { margin-top: 5px; margin-bottom: 25px; padding: 15px; background: #0d0d0d; border: 1px solid #1c1c1c; border-left: 3px solid #ff9900; }
         .sub-title { font-size: 11px; font-weight: bold; color: #ff9900; letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase; }
@@ -167,7 +178,7 @@
             .bp-label { border-right: none; border-bottom: 1px solid #1c1c1c; padding-bottom: 4px; } 
             .tab-btn { font-size: 8px; padding: 10px 2px; }
             .tab-row.bottom-row .tab-btn { font-size: 7.5px; padding: 10px 1px; }
-            .charts-container { grid-template-columns: 1fr; gap: 15px; } /* Màn hình nhỏ thì 1 cột chart */
+            .charts-container { grid-template-columns: 1fr; gap: 15px; } 
         }
     </style>
 </head>
@@ -209,13 +220,13 @@
                     <button class="tf-btn" onclick="switchTimeframe('ALL', this)">ALL</button>
                 </div>
 
-                <!-- CHARTS GRID -->
+                <!-- 2 CHARTS DUY NHẤT VÀ QUYỀN LỰC NHẤT -->
                 <div class="charts-container">
-                    <!-- 1. USD / NAH -->
+                    <!-- 1. VND / NAH -->
                     <div class="chart-box">
-                        <div class="chart-label">USD / NAH <span id="nah-change" class="pct-change">...</span></div>
-                        <div class="live-price-overlay" id="overlay-nah-usd">LIVE: <span style="color: #00ccff;">...</span></div>
-                        <canvas id="chartNah"></canvas>
+                        <div class="chart-label">VND / NAH <span id="nah-vnd-change" class="pct-change">...</span></div>
+                        <div class="live-price-overlay" id="overlay-nah-vnd">LIVE: <span style="color: #00ccff;">...</span></div>
+                        <canvas id="chartNahVnd"></canvas>
                     </div>
                     <!-- 2. USD / BTC -->
                     <div class="chart-box">
@@ -223,23 +234,36 @@
                         <div class="live-price-overlay" id="overlay-btc-usd">LIVE: <span style="color: #ff9900;">...</span></div>
                         <canvas id="chartBtc"></canvas>
                     </div>
-                    <!-- 3. VND / SAT -->
-                    <div class="chart-box">
-                        <div class="chart-label">VND / SAT <span id="sat-vnd-change" class="pct-change">...</span></div>
-                        <div class="live-price-overlay" id="overlay-sat-vnd">LIVE: <span style="color: #ffffff;">...</span></div>
-                        <canvas id="chartSatVnd"></canvas>
-                    </div>
-                    <!-- 4. VND / NAH -->
-                    <div class="chart-box">
-                        <div class="chart-label">VND / NAH <span id="nah-vnd-change" class="pct-change">...</span></div>
-                        <div class="live-price-overlay" id="overlay-nah-vnd">LIVE: <span style="color: #00ff41;">...</span></div>
-                        <canvas id="chartNahVnd"></canvas>
-                    </div>
                 </div>
 
                 <div class="parity-section">
                     <div class="parity-title parity-hard">HARD MONEY PARITY</div>
                     <div class="data-row" style="border-bottom: none;"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.002 SAT</span></div>
+                </div>
+
+                <!-- OMNI-CONVERTER TOOL -->
+                <div class="converter-section">
+                    <div class="sub-title" style="margin-bottom: 12px; color: #888;">REAL-TIME OMNI CONVERTER</div>
+                    <div class="converter-row">
+                        <span class="converter-label">VND</span>
+                        <input type="number" id="conv-vnd" class="converter-input" style="color: #00ccff;" placeholder="0">
+                    </div>
+                    <div class="converter-row">
+                        <span class="converter-label">USD</span>
+                        <input type="number" id="conv-usd" class="converter-input" style="color: #00ff41;" placeholder="0">
+                    </div>
+                    <div class="converter-row">
+                        <span class="converter-label">BTC</span>
+                        <input type="number" id="conv-btc" class="converter-input" style="color: #ff9900;" placeholder="0">
+                    </div>
+                    <div class="converter-row">
+                        <span class="converter-label">SAT</span>
+                        <input type="number" id="conv-sat" class="converter-input" style="color: #ffffff;" placeholder="0">
+                    </div>
+                    <div class="converter-row" style="margin-bottom: 0;">
+                        <span class="converter-label">NAH</span>
+                        <input type="number" id="conv-nah" class="converter-input" style="color: #ff3333; text-shadow: 0 0 5px rgba(255, 51, 51, 0.4);" placeholder="0">
+                    </div>
                 </div>
 
                 <div class="sub-section">
@@ -832,9 +856,10 @@
         const FOREX_API = "https://open.er-api.com/v6/latest/USD";
         const CG_CHART_API = (days) => `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${days}`;
 
-        let chartInstanceBtc, chartInstanceNah, chartInstanceNahVnd, chartInstanceSatVnd;
+        let chartInstanceBtc, chartInstanceNahVnd;
         let chartCache = {}; 
         let globalLiveVndRate = 25500; 
+        let globalLiveBtcPrice = 60000; // Khởi tạo mặc định
 
         const T_APR_27_26 = new Date("2026-04-27T00:00:00Z").getTime();
         const T_JUL_01_26 = new Date("2026-07-01T00:00:00Z").getTime();
@@ -882,11 +907,9 @@
             });
         }
 
-        // Khởi tạo đồ thị với màu sắc đã tinh chỉnh
-        chartInstanceNah = buildFinancialChart('chartNah', '#00ccff', '$', 8); // Xanh dương
+        // Khởi tạo 2 đồ thị duy nhất
+        chartInstanceNahVnd = buildFinancialChart('chartNahVnd', '#00ccff', '₫', 4); // Xanh dương
         chartInstanceBtc = buildFinancialChart('chartBtc', '#ff9900', '$', 0); // Cam
-        chartInstanceSatVnd = buildFinancialChart('chartSatVnd', '#ffffff', '₫', 2); // Trắng (Giờ nằm ở ô số 3)
-        chartInstanceNahVnd = buildFinancialChart('chartNahVnd', '#00ff41', '₫', 4); // Xanh lục (Giờ nằm ở ô số 4)
 
         async function updateChartGraphics(timeframe) {
             let days;
@@ -895,7 +918,7 @@
             else if (timeframe === '1M') days = '30';
             else if (timeframe === '3M') days = '90';
             else {
-                // ALL: Tính số ngày từ 21/06/2026 đến hiện tại
+                // ALL: Tính số ngày từ Genesis của NAH (21/06/2026) đến hiện tại
                 const startMs = new Date("2026-06-21T00:00:00Z").getTime();
                 days = Math.ceil((Date.now() - startMs) / 86400000).toString();
                 if (parseInt(days) < 1) days = '1';
@@ -903,28 +926,22 @@
 
             if (!chartCache[timeframe]) { const res = await fetch(CG_CHART_API(days)); const data = await res.json(); chartCache[timeframe] = data.prices; }
             const rawData = chartCache[timeframe];
-            const labels = [], btcUsdPrices = [], nahUsdPrices = [], satVndPrices = [], nahVndPrices = [];
+            const labels = [], btcUsdPrices = [], nahVndPrices = [];
             
             rawData.forEach(p => {
                 const ts = p[0], btcUsd = p[1], nahSats = getNahSatsAtTime(ts);
                 if (nahSats !== null) { 
                     labels.push(new Date(ts).toLocaleDateString()); 
                     btcUsdPrices.push(btcUsd); 
-                    nahUsdPrices.push((nahSats / 100000000) * btcUsd); 
-                    satVndPrices.push((btcUsd / 100000000) * globalLiveVndRate);
                     nahVndPrices.push((nahSats / 100000000) * btcUsd * globalLiveVndRate);
                 }
             });
             
-            chartInstanceNah.data.labels = labels; chartInstanceNah.data.datasets[0].data = nahUsdPrices; chartInstanceNah.update();
-            chartInstanceBtc.data.labels = labels; chartInstanceBtc.data.datasets[0].data = btcUsdPrices; chartInstanceBtc.update();
-            chartInstanceSatVnd.data.labels = labels; chartInstanceSatVnd.data.datasets[0].data = satVndPrices; chartInstanceSatVnd.update();
             chartInstanceNahVnd.data.labels = labels; chartInstanceNahVnd.data.datasets[0].data = nahVndPrices; chartInstanceNahVnd.update();
+            chartInstanceBtc.data.labels = labels; chartInstanceBtc.data.datasets[0].data = btcUsdPrices; chartInstanceBtc.update();
             
-            renderPercentageChange('nah-change', nahUsdPrices[0], nahUsdPrices[nahUsdPrices.length - 1]);
-            renderPercentageChange('btc-change', btcUsdPrices[0], btcUsdPrices[btcUsdPrices.length - 1]);
-            renderPercentageChange('sat-vnd-change', satVndPrices[0], satVndPrices[satVndPrices.length - 1]);
             renderPercentageChange('nah-vnd-change', nahVndPrices[0], nahVndPrices[nahVndPrices.length - 1]);
+            renderPercentageChange('btc-change', btcUsdPrices[0], btcUsdPrices[btcUsdPrices.length - 1]);
         }
 
         function switchTimeframe(timeframe, btn) { document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); updateChartGraphics(timeframe); }
@@ -933,22 +950,20 @@
             try {
                 const [btcRes, forexRes] = await Promise.all([ fetch(BTC_LIVE_API), fetch(FOREX_API) ]);
                 const btcData = await btcRes.json(), forexData = await forexRes.json();
-                const globalLiveBtcPrice = parseFloat(btcData.USD);
+                globalLiveBtcPrice = parseFloat(btcData.USD);
                 globalLiveVndRate = parseFloat(forexData.rates.VND);
                 
                 const usdVal = (CURRENT_NAH_SATS / 100000000) * globalLiveBtcPrice;
                 const vndVal = usdVal * globalLiveVndRate; 
-                const satVnd = (globalLiveBtcPrice / 100000000) * globalLiveVndRate;
                 const mcapBtc = (CIRCULATING_SUPPLY * CURRENT_NAH_SATS) / 100000000;
                 
+                document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " SAT";
                 document.getElementById("mcap-btc").innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " BTC";
                 document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 
-                // Live Overlays Update (Đồng bộ màu với đường đồ thị)
-                document.getElementById("overlay-nah-usd").innerHTML = "LIVE: <span style='color: #00ccff; text-shadow: 0 0 5px rgba(0, 204, 255, 0.4);'>$" + usdVal.toFixed(8) + "</span>";
+                // Live Overlays Update
+                document.getElementById("overlay-nah-vnd").innerHTML = "LIVE: <span style='color: #00ccff; text-shadow: 0 0 5px rgba(0, 204, 255, 0.4);'>" + vndVal.toFixed(4) + " ₫</span>";
                 document.getElementById("overlay-btc-usd").innerHTML = "LIVE: <span style='color: #ff9900; text-shadow: 0 0 5px rgba(255, 153, 0, 0.4);'>$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "</span>";
-                document.getElementById("overlay-sat-vnd").innerHTML = "LIVE: <span style='color: #ffffff; text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);'>" + satVnd.toFixed(2) + " ₫</span>";
-                document.getElementById("overlay-nah-vnd").innerHTML = "LIVE: <span style='color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.4);'>" + vndVal.toFixed(4) + " ₫</span>";
 
                 document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
                 
@@ -963,13 +978,58 @@
         async function bootSystem() {
             await engageOracle(); 
             setInterval(engageOracle, 60000); 
+            setupOmniConverter();
         }
+
+        // ========================================================================
+        // HỆ THỐNG CHUYỂN ĐỔI ĐA CHIỀU (OMNI-CONVERTER)
+        // ========================================================================
+        function setupOmniConverter() {
+            const inputs = ['vnd', 'usd', 'btc', 'sat', 'nah'];
+            inputs.forEach(currency => {
+                document.getElementById(`conv-${currency}`).addEventListener('input', function(e) {
+                    if(e.target.value === '') {
+                        inputs.forEach(id => { if(id !== currency) document.getElementById(`conv-${id}`).value = ''; });
+                        return;
+                    }
+                    const val = parseFloat(e.target.value);
+                    if(isNaN(val)) return;
+
+                    // Lấy tỷ giá Real-time
+                    const btc_usd = globalLiveBtcPrice;
+                    const usd_vnd = globalLiveVndRate;
+                    const btc_vnd = btc_usd * usd_vnd;
+                    const sat_nah = CURRENT_NAH_SATS; 
+
+                    let btc_val = 0;
+                    if(currency === 'vnd') btc_val = val / btc_vnd;
+                    if(currency === 'usd') btc_val = val / btc_usd;
+                    if(currency === 'btc') btc_val = val;
+                    if(currency === 'sat') btc_val = val / 100000000;
+                    if(currency === 'nah') btc_val = (val * sat_nah) / 100000000;
+
+                    // Tính toán chéo
+                    const out_vnd = parseFloat((btc_val * btc_vnd).toFixed(2));
+                    const out_usd = parseFloat((btc_val * btc_usd).toFixed(6));
+                    const out_btc = parseFloat(btc_val.toFixed(10));
+                    const out_sat = parseFloat((btc_val * 100000000).toFixed(2));
+                    const out_nah = parseFloat(((btc_val * 100000000) / sat_nah).toFixed(2));
+
+                    // Cập nhật các ô còn lại (bỏ qua khoảng trắng thừa)
+                    if(currency !== 'vnd') document.getElementById('conv-vnd').value = out_vnd;
+                    if(currency !== 'usd') document.getElementById('conv-usd').value = out_usd;
+                    if(currency !== 'btc') document.getElementById('conv-btc').value = out_btc;
+                    if(currency !== 'sat') document.getElementById('conv-sat').value = out_sat;
+                    if(currency !== 'nah') document.getElementById('conv-nah').value = out_nah;
+                });
+            });
+        }
+
         bootSystem();
 
         // ========================================================================
         // KHU VỰC DỰNG HÌNH ĐỒ THỊ PIN BẰNG CHART.JS
         // ========================================================================
-        
         const ctxCell1 = document.getElementById('chartCell1').getContext('2d');
         new Chart(ctxCell1, {
             type: 'scatter',
