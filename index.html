@@ -6,7 +6,7 @@
     
     <!-- TỐI ƯU HÓA SEO ĐA NGÔN NGỮ (BILINGUAL SEO ANCHORS) -->
     <meta name="description" content="Live price and market cap of NAH Sovereign Diamond. Giá quy đổi VND, USD, BTC của NAH Sovereign Diamond trực tuyến chuẩn xác nhất.">
-    <meta name="keywords" content="giá vnd nah sovereign diamond, nah sovereign diamond price, nah rune price, satflow nah, btc, bitcoin, bemp research, nahkah motors, brc whitepaper, brc blackpaper, exhibit a, low time preference">
+    <meta name="keywords" content="giá vnd nah sovereign diamond, nah sovereign diamond price, nah rune price, satflow nah, btc, bitcoin, bemp research, nahkah motors, brc whitepaper, brc blackpaper, exhibit a, low time preference, min's kitchen">
     <meta name="author" content="Bemp Research Corporation">
     
     <title>NAH SOVEREIGN DIAMOND 💎 & BEMP LI-S ARCHITECTURE</title>
@@ -17,7 +17,7 @@
         "@context": "https://schema.org",
         "@type": "FinancialProduct",
         "name": "NAH Sovereign Diamond",
-        "alternateName": ["Kim Cương NAH", "NAH Rune"],
+        "alternateName": ["Kim Cương NAH", "NAH Rune", "Viên Ngọc Hạnh Phúc", "Người Ăn Hàng"],
         "description": "Giá quy đổi chính thức của NAH Sovereign Diamond sang VND, USD và BTC (Satoshi).",
         "offers": [
             {
@@ -44,141 +44,220 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Quicksand:wght@500;700;900&display=swap');
 
-        /* PHONG CÁCH CYBERNETIC NOIR & TEXTURE ANALOG */
+        /* PHONG CÁCH TƯƠI SÁNG & ĐÁNG YÊU TỪ MIN'S KITCHEN */
         body {
-            background-color: #050505; color: #ffffff; font-family: 'SF Mono', 'Consolas', 'Courier New', monospace;
-            font-size: 13px; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center;
-            position: relative; background-image: radial-gradient(rgba(255, 153, 0, 0.03) 1px, transparent 1px); background-size: 4px 4px;
+            background-color: #fceea7; 
+            color: #0b4594; 
+            font-family: 'Quicksand', sans-serif;
+            font-size: 14px; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center;
+            position: relative;
+            background-image: 
+                linear-gradient(45deg, rgba(11, 69, 148, 0.05) 25%, transparent 25%, transparent 75%, rgba(11, 69, 148, 0.05) 75%, rgba(11, 69, 148, 0.05)), 
+                linear-gradient(45deg, rgba(11, 69, 148, 0.05) 25%, transparent 25%, transparent 75%, rgba(11, 69, 148, 0.05) 75%, rgba(11, 69, 148, 0.05));
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
         }
 
-        .mainframe { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .mainframe { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 15px 10px; box-sizing: border-box; }
         .terminal {
-            width: 100%; max-width: 600px; border: 1px solid #222; background: #0a0a0a;
-            padding: 25px 30px; box-shadow: 0px 0px 30px rgba(255, 153, 0, 0.05);
+            width: 100%; max-width: 600px; 
+            background: #ffffff; 
+            border: 3px solid #0b4594; 
+            border-radius: 15px; 
+            padding: 25px 30px; 
+            box-shadow: 6px 6px 0px #f4a261; 
             position: relative; z-index: 2; margin: 15px 0; box-sizing: border-box; overflow: hidden;
         }
 
-        /* HỆ THỐNG TAB MENU 2 TẦNG (3-3) */
+        /* HỆ THỐNG TAB MENU */
         .tab-menu {
-            width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 4px; margin-top: 10px; z-index: 10;
+            width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; z-index: 10;
         }
-        .tab-row { display: flex; width: 100%; gap: 4px; }
+        .tab-row { display: flex; width: 100%; gap: 8px; }
         .tab-btn {
-            background: #080808; color: #666; border: 1px solid #222; border-bottom: none; border-radius: 4px 4px 0 0;
-            padding: 10px 4px; font-family: 'Orbitron', sans-serif; font-size: 9px; cursor: pointer; text-transform: uppercase; 
-            transition: all 0.2s; flex: 1; letter-spacing: 0.5px; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; line-height: 1.2;
+            background: #e9c46a; 
+            color: #0b4594; 
+            border: 2px solid #0b4594; 
+            border-radius: 10px;
+            padding: 12px 6px; 
+            font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; text-transform: uppercase; 
+            transition: all 0.2s; flex: 1; text-align: center; display: flex; align-items: center; justify-content: center; line-height: 1.2;
+            box-shadow: 3px 3px 0px #0b4594; 
         }
-        .tab-row.bottom-row .tab-btn { font-size: 9px; padding: 10px 2px; }
+        .tab-row.bottom-row .tab-btn { font-size: 10px; padding: 12px 4px; }
 
-        .tab-btn:hover { color: #ff9900; background: rgba(255, 153, 0, 0.05); }
+        .tab-btn:hover { background: #f4a261; transform: translate(1px, 1px); box-shadow: 2px 2px 0px #0b4594; }
         .tab-btn.active {
-            color: #ff9900; border-color: #ff9900; background: rgba(255, 153, 0, 0.1); 
-            text-shadow: 0 0 8px rgba(255,153,0,0.5); box-shadow: inset 0 3px 0 #ff9900;
+            background: #0b4594; 
+            color: #fceea7; 
+            border-color: #0b4594;
+            transform: translate(3px, 3px);
+            box-shadow: 0px 0px 0px #0b4594;
         }
+        
+        /* Tab riêng cho Khuyến mãi Min's Kitchen */
+        .promo-btn-container { width: 100%; max-width: 600px; margin-top: 8px; }
+        .promo-btn { background: #e76f51; color: #ffffff; font-size: 12px; box-shadow: 3px 3px 0px #0b4594; letter-spacing: 0.5px; }
+        .promo-btn:hover { background: #d05b3f; }
+        .promo-btn.active { background: #0b4594; color: #e76f51; }
+
         .tab-content { width: 100%; display: none; flex-direction: column; align-items: center; }
         
         .title-container { text-align: center; }
-        .title { font-family: 'Orbitron', sans-serif; font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #ff9900; text-shadow: 0 0 12px rgba(255, 153, 0, 0.5); margin-bottom: 8px; line-height: 1.2; }
-        .slogan-1 { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 1.5px; font-style: italic; margin-bottom: 5px; }
+        .title { 
+            font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; 
+            color: #0b4594; text-shadow: 2px 2px 0px #f4a261; margin-bottom: 8px; line-height: 1.2; 
+        }
+        .slogan-1 { font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 900; color: #e76f51; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        
         .diamond { display: inline-block; animation: sparkle 1s infinite alternate; }
-        @keyframes sparkle { 0% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 2px rgba(255,255,255,0.5)); } 100% { transform: scale(1.2); filter: brightness(1.5) drop-shadow(0 0 12px rgba(255, 153, 0, 0.8)); } }
+        @keyframes sparkle { 
+            0% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 5px rgba(0, 204, 255, 0.5)); } 
+            100% { transform: scale(1.3); filter: brightness(1.5) drop-shadow(0 0 15px rgba(0, 204, 255, 0.9)); } 
+        }
 
         /* MARKET TAB STYLES & GRID CHARTS */
-        .timeframe-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        .tf-btn { background: transparent; color: #888; border: 1px solid #222; padding: 5px 12px; font-family: inherit; font-size: 11px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
-        .tf-btn:hover, .tf-btn.active { color: #ff9900; border-color: #ff9900; background: rgba(255, 153, 0, 0.05); }
+        .timeframe-selector { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+        .tf-btn { 
+            background: #fff; color: #0b4594; border: 2px solid #0b4594; border-radius: 20px; 
+            padding: 6px 14px; font-family: 'Quicksand', sans-serif; font-weight: 900; font-size: 11px; cursor: pointer; transition: all 0.2s; 
+        }
+        .tf-btn:hover { background: #fceea7; }
+        .tf-btn.active { background: #0b4594; color: #fff; }
 
         .charts-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
-        .chart-box { background: #0d0d0d; border: 1px solid #1c1c1c; padding: 8px; position: relative; height: 210px; border-radius: 4px; overflow: hidden; }
-        .chart-label { font-size: 9px; color: #888; position: absolute; top: 8px; left: 8px; z-index: 10; background: rgba(13, 13, 13, 0.85); padding: 2px 5px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; display: flex; align-items: center; backdrop-filter: blur(2px); border: 1px solid #222; }
+        .chart-box { 
+            background: #111111; border: 3px solid #0b4594; padding: 8px; position: relative; height: 210px; border-radius: 10px; overflow: hidden; 
+            box-shadow: 4px 4px 0px #fceea7;
+        }
+        .chart-label { 
+            font-size: 10px; color: #ffffff; position: absolute; top: 8px; left: 8px; z-index: 10; 
+            background: rgba(11, 69, 148, 0.9); padding: 3px 6px; border-radius: 5px; text-transform: uppercase; font-weight: bold; border: 1px solid #ffffff; 
+        }
         
-        .live-price-overlay { position: absolute; top: 8px; right: 8px; z-index: 10; font-size: 10px; color: #888; background: rgba(0, 0, 0, 0.85); padding: 3px 6px; border-radius: 3px; font-weight: bold; border: 1px dashed #333; backdrop-filter: blur(2px); letter-spacing: 0.5px; }
+        .live-price-overlay { 
+            position: absolute; top: 8px; right: 8px; z-index: 10; font-size: 11px; color: #ffffff; 
+            background: rgba(0, 0, 0, 0.7); padding: 4px 8px; border-radius: 5px; font-weight: bold; border: 1px solid #fff; 
+        }
 
-        .pct-change { margin-left: 6px; font-size: 9px; padding: 2px 4px; border-radius: 3px; background: rgba(0,0,0,0.8); }
-        .pct-up { color: #00ff41; text-shadow: 0 0 5px rgba(0, 255, 65, 0.4); border: 1px solid rgba(0, 255, 65, 0.2); }
-        .pct-down { color: #ff3333; text-shadow: 0 0 5px rgba(255, 51, 51, 0.4); border: 1px solid rgba(255, 51, 51, 0.2); }
+        .pct-change { margin-left: 6px; font-size: 9px; padding: 2px 4px; border-radius: 3px; background: rgba(255,255,255,0.2); }
+        .pct-up { color: #00ff41; }
+        .pct-down { color: #ff3333; }
         
-        .parity-section { border-bottom: none; padding-bottom: 0; margin-bottom: 10px; }
-        .parity-title { font-size: 10px; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; border-left: 3px solid; padding-left: 8px; }
-        .parity-hard { border-left-color: #ff9900; }
-
-        .data-row { display: flex; justify-content: space-between; border-bottom: 1px dashed #222; padding: 10px 0; font-size: 14px; }
+        .parity-section { margin-bottom: 15px; background: #e9c46a; padding: 10px 15px; border-radius: 8px; border: 2px solid #0b4594; }
+        .parity-title { font-size: 12px; color: #0b4594; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
+        
+        .data-row { display: flex; justify-content: space-between; border-bottom: 2px dotted #0b4594; padding: 8px 0; font-size: 14px; font-weight: 900; }
         .data-row:last-child { border-bottom: none; }
-        .label { text-transform: uppercase; color: #aaa; }
-        .value { font-weight: bold; color: #ff9900; text-shadow: 0 0 5px rgba(255, 153, 0, 0.3); text-align: right; }
+        .label { color: #0b4594; }
+        .value { color: #e76f51; text-align: right; }
 
-        /* TÙY CHỈNH Ô CONVERTER - ĐÃ ĐỒNG BỘ MÀU */
-        .converter-section { margin-bottom: 25px; padding: 15px; background: #080808; border: 1px solid #1c1c1c; border-left: 3px solid #ff9900; border-radius: 4px; }
-        .converter-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; background: rgba(0,0,0,0.5); border: 1px dashed #222; padding: 6px 12px; border-radius: 3px; transition: all 0.2s; }
-        .converter-row:hover { border-color: #444; background: rgba(255, 255, 255, 0.02); }
-        .converter-row:last-child { margin-bottom: 0; border: 1px solid #00ccff; background: rgba(0, 204, 255, 0.05); }
-        .converter-label { font-size: 11px; font-weight: bold; color: #888; width: 40px; }
-        .converter-input { flex: 1; background: transparent; border: none; font-family: 'SF Mono', 'Consolas', monospace; font-size: 14px; font-weight: bold; text-align: right; outline: none; width: 100%; }
-        .converter-input::placeholder { color: #333; }
-        /* Ẩn mũi tên cuộn của input type number */
+        /* TÙY CHỈNH Ô CONVERTER */
+        .converter-section { 
+            margin-bottom: 25px; padding: 15px; background: #ffffff; border: 3px solid #0b4594; 
+            border-radius: 12px; box-shadow: 4px 4px 0px #e9c46a;
+        }
+        .converter-row { 
+            display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; 
+            background: #fdf6d8; border: 2px solid #e9c46a; padding: 8px 15px; border-radius: 8px; 
+        }
+        .converter-row:last-child { margin-bottom: 0; background: #e8f4f8; border-color: #00ccff; }
+        .converter-label { font-size: 13px; font-weight: 900; color: #0b4594; width: 45px; }
+        
+        .converter-input { 
+            flex: 1; background: transparent; border: none; font-family: 'Quicksand', sans-serif; font-size: 16px; font-weight: 900; text-align: right; outline: none; width: 100%; color: #e76f51; 
+        }
+        .converter-input::placeholder { color: #ccc; font-weight: 700; }
         .converter-input::-webkit-outer-spin-button, .converter-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         .converter-input[type=number] { -moz-appearance: textfield; }
 
-        .sub-section { margin-top: 5px; margin-bottom: 25px; padding: 15px; background: #0d0d0d; border: 1px solid #1c1c1c; border-left: 3px solid #ff9900; }
-        .sub-title { font-size: 11px; font-weight: bold; color: #ff9900; letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase; }
-        .sub-row { display: flex; justify-content: space-between; font-size: 12px; padding: 6px 0; border-bottom: 1px dotted #222; }
+        .sub-section { 
+            margin-top: 10px; margin-bottom: 25px; padding: 15px; background: #fdf6d8; 
+            border: 2px solid #0b4594; border-radius: 10px; 
+        }
+        .sub-title { font-size: 14px; font-weight: 900; color: #e76f51; margin-bottom: 12px; text-transform: uppercase; text-align: center; }
+        .sub-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; padding: 8px 0; border-bottom: 2px dotted #e9c46a; }
         .sub-row:last-child { border-bottom: none; padding-bottom: 0; }
-        .sub-row .label { color: #888; }
-        .sub-row .value { color: #fff; }
-        .sub-row .value.highlight { color: #ff9900; text-shadow: 0 0 4px rgba(255, 153, 0, 0.3); }
-        .sub-row a { color: #ff9900; text-decoration: none; border-bottom: 1px dotted #ff9900; }
+        .sub-row .label { color: #0b4594; }
+        .sub-row .value { color: #e76f51; }
+        .sub-row a { color: #0b4594; text-decoration: underline; }
         
-        /* TEXT CONTENT STYLES (Tech, WP, BP, Note) */
-        .report-block { border-left: 2px solid #333; padding-left: 15px; margin-bottom: 30px; }
-        .report-heading { font-size: 14px; color: #fff; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 5px; }
-        .info-text { font-size: 12px; margin-bottom: 12px; line-height: 1.6; color: #888; text-align: justify; }
-        .info-text strong { color: #ccc; }
+        /* TEXT CONTENT STYLES */
+        .report-block { 
+            background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; 
+            padding: 15px; margin-bottom: 20px; box-shadow: 3px 3px 0px #e9c46a;
+        }
+        .report-heading { font-size: 16px; color: #0b4594; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; border-bottom: 2px solid #e9c46a; padding-bottom: 5px; }
+        .info-text { font-size: 14px; margin-bottom: 12px; line-height: 1.6; color: #333; text-align: justify; font-weight: 700; }
+        .info-text strong { color: #0b4594; font-weight: 900; }
 
-        .link-green { color: #00ff41; text-decoration: none; border-bottom: 1px dotted #00ff41; font-weight: bold; }
-        .link-blue { color: #00ccff; text-decoration: none; border-bottom: 1px dotted #00ccff; font-weight: bold; }
+        .link-green { color: #2a9d8f; text-decoration: underline; font-weight: bold; }
+        .link-blue { color: #0b4594; text-decoration: underline; font-weight: bold; }
         
-        .blueprint-container { display: flex; flex-direction: column; gap: 15px; margin: 20px 0; }
-        .blueprint-card { background: #050505; border: 1px solid #222; border-radius: 4px; overflow: hidden; }
-        .bp-header { background: #111; font-size: 12px; font-weight: bold; color: #ff9900; padding: 10px 15px; text-transform: uppercase; border-bottom: 1px solid #222; letter-spacing: 1px; }
-        .bp-grid { display: grid; grid-template-columns: 100px 1fr; border-bottom: 1px dotted #222; }
+        .blueprint-card { background: #fff; border: 2px solid #0b4594; border-radius: 8px; overflow: hidden; margin-bottom: 15px; }
+        .bp-header { background: #e9c46a; font-size: 14px; font-weight: 900; color: #0b4594; padding: 10px 15px; text-transform: uppercase; border-bottom: 2px solid #0b4594; text-align: center; }
+        .bp-grid { display: grid; grid-template-columns: 120px 1fr; border-bottom: 2px dotted #e9c46a; }
         .bp-grid:last-child { border-bottom: none; }
-        .bp-label { padding: 8px 15px; font-size: 10px; color: #666; text-transform: uppercase; font-weight: bold; background: #080808; border-right: 1px solid #1c1c1c; display: flex; align-items: center; }
-        .bp-value { padding: 8px 15px; font-size: 11px; color: #aaa; line-height: 1.4; }
-        .bp-value strong { color: #ddd; }
-        .bp-highlight { border-left: 3px solid #ff9900; }
-        .bp-highlight-green { border-left: 3px solid #00ff41; }
-        .bp-highlight-cyan { border-left: 3px solid #00ffff; }
-
-        .math-box { background: rgba(255, 153, 0, 0.05); border: 1px solid rgba(255, 153, 0, 0.2); padding: 12px; margin: 15px 0; border-radius: 4px; color: #ccc; font-size: 11.5px; line-height: 1.6; border-left: 3px solid #ff9900; word-wrap: break-word; }
-        .math-box.green { background: rgba(0, 255, 65, 0.05); border: 1px solid rgba(0, 255, 65, 0.2); border-left: 3px solid #00ff41; }
-        .math-box.blue { background: rgba(0, 204, 255, 0.05); border: 1px solid rgba(0, 204, 255, 0.2); border-left: 3px solid #00ccff; }
-        .math-box a { color: #ff9900; text-decoration: none; border-bottom: 1px dotted #ff9900; }
-
-        .btn-link { display: block; text-align: center; background: #ff9900; color: #000; font-weight: bold; text-decoration: none; padding: 12px; font-size: 11px; text-transform: uppercase; border-radius: 2px; margin-top: 20px; transition: all 0.2s; letter-spacing: 1px; }
-        .btn-link:hover { background: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
+        .bp-label { padding: 10px 15px; font-size: 12px; color: #0b4594; text-transform: uppercase; font-weight: 900; background: #fdf6d8; border-right: 2px solid #e9c46a; display: flex; align-items: center; }
+        .bp-value { padding: 10px 15px; font-size: 13px; color: #333; line-height: 1.5; font-weight: 700; }
         
-        .wp-title { font-family: 'Orbitron', sans-serif; font-size: 16px; color: #ff9900; margin-bottom: 20px; text-transform: uppercase; border-bottom: 1px dashed #333; padding-bottom: 10px; text-align: center; line-height: 1.4; }
-        .wp-subtitle { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; text-align: center; margin-top: -10px; margin-bottom: 25px; line-height: 1.5; }
-        .wp-h1 { font-size: 14px; color: #00ff41; font-weight: bold; margin-top: 30px; margin-bottom: 12px; text-transform: uppercase; border-bottom: 1px solid #222; padding-bottom: 5px; }
-        .wp-h2 { font-size: 12.5px; color: #00ccff; font-weight: bold; margin-top: 20px; margin-bottom: 10px; }
-        .wp-text { font-size: 12px; margin-bottom: 12px; line-height: 1.7; color: #aaa; text-align: justify; }
-        .wp-list { margin: 10px 0 15px 20px; padding: 0; color: #aaa; font-size: 12px; line-height: 1.7; }
-        .wp-list li { margin-bottom: 12px; text-align: justify; }
-        .wp-highlight { color: #ff9900; font-weight: bold; }
+        .math-box { 
+            background: #fff3e0; border: 2px dashed #f4a261; padding: 15px; margin: 15px 0; 
+            border-radius: 8px; color: #e76f51; font-size: 13px; font-weight: 900; line-height: 1.6; word-wrap: break-word;
+        }
+        .math-box.green { background: #e8f5e9; border-color: #2a9d8f; color: #2a9d8f; }
+        .math-box.blue { background: #e3f2fd; border-color: #0b4594; color: #0b4594; }
 
-        .scanline { width: 100%; height: 70px; z-index: 10; position: absolute; left: 0; top: 0; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(255,153,0,0.03) 50%, rgba(0,0,0,0) 100%); animation: scanline 4s linear infinite; }
-        @keyframes scanline { 0% { top: -70px; } 100% { top: 100%; } }
-        .footer { margin-top: 20px; font-size: 11px; text-align: center; text-transform: uppercase; font-weight: bold; letter-spacing: 1.5px; color: #555; animation: blink 2s infinite; padding-bottom: 40px;}
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .btn-link { 
+            display: block; text-align: center; background: #0b4594; color: #fff; font-weight: 900; text-decoration: none; 
+            padding: 15px; font-size: 14px; text-transform: uppercase; border-radius: 30px; margin-top: 20px; transition: all 0.2s; box-shadow: 4px 4px 0px #e9c46a; 
+        }
+        .btn-link:hover { background: #f4a261; box-shadow: 2px 2px 0px #0b4594; transform: translate(2px, 2px); }
+        
+        .wp-title { font-family: 'Quicksand', sans-serif; font-size: 20px; font-weight: 900; color: #e76f51; margin-bottom: 15px; text-transform: uppercase; text-align: center; line-height: 1.4; }
+        .wp-subtitle { font-size: 13px; color: #0b4594; font-weight: 700; text-align: center; margin-bottom: 25px; }
+        .wp-h1 { font-size: 18px; color: #0b4594; font-weight: 900; margin-top: 30px; margin-bottom: 12px; text-transform: uppercase; border-bottom: 3px solid #e9c46a; padding-bottom: 5px; }
+        .wp-h2 { font-size: 15px; color: #f4a261; font-weight: 900; margin-top: 20px; margin-bottom: 10px; }
+        .wp-text { font-size: 14px; margin-bottom: 15px; line-height: 1.6; color: #333; text-align: justify; font-weight: 500; }
+        .wp-list { margin: 10px 0 15px 25px; padding: 0; color: #333; font-size: 14px; font-weight: 500; line-height: 1.6; }
+        .wp-list li { margin-bottom: 12px; text-align: justify; }
+        .wp-highlight { color: #e76f51; font-weight: 900; }
+
+        /* TAB PROMO RIÊNG BIỆT DÀNH CHO MIN'S KITCHEN */
+        #tab-promo .terminal {
+            max-width: 400px; 
+            background: #0b4594;
+            color: #ffffff;
+            border: 4px solid #fceea7;
+            box-shadow: 8px 8px 0px #e76f51;
+            padding: 30px 20px;
+        }
+        #tab-promo .title { color: #fceea7; text-shadow: none; font-size: 26px; }
+        #tab-promo .promo-content {
+            background: #ffffff; color: #0b4594; padding: 20px; border-radius: 12px; border: 3px dashed #e76f51;
+            text-align: center; font-size: 15px; font-weight: 700; margin: 20px 0; line-height: 1.6;
+        }
+        #tab-promo .promo-highlight {
+            display: block; font-size: 22px; color: #e76f51; font-weight: 900; margin: 15px 0; text-transform: uppercase; line-height: 1.3;
+        }
+        #tab-promo .contact-info {
+            background: #e9c46a; color: #0b4594; padding: 15px; border-radius: 8px; font-size: 14px; font-weight: 900; text-align: left;
+            border: 2px solid #ffffff;
+        }
+        #tab-promo .contact-info p { margin: 5px 0; display: flex; align-items: center; }
+        #tab-promo .contact-label { width: 80px; display: inline-block; font-weight: 900; }
+
+        .footer { margin-top: 20px; font-size: 12px; text-align: center; font-weight: 900; color: #0b4594; padding-bottom: 40px; }
 
         @media (max-width: 500px) { 
             .bp-grid { grid-template-columns: 1fr; } 
-            .bp-label { border-right: none; border-bottom: 1px solid #1c1c1c; padding-bottom: 4px; } 
-            .tab-btn { font-size: 8px; padding: 10px 2px; }
-            .tab-row.bottom-row .tab-btn { font-size: 7.5px; padding: 10px 1px; }
+            .bp-label { border-right: none; border-bottom: 2px solid #e9c46a; padding-bottom: 8px; } 
+            .tab-btn { font-size: 9px; padding: 10px 2px; letter-spacing: 0px; }
+            .tab-row.bottom-row .tab-btn { font-size: 8px; padding: 10px 1px; }
             .charts-container { grid-template-columns: 1fr; gap: 15px; } 
+            #tab-promo .terminal { max-width: 90%; }
         }
     </style>
 </head>
@@ -186,32 +265,33 @@
     <div class="mainframe">
         
         <!-- HEADER CỐ ĐỊNH -->
-        <div class="terminal" style="margin-bottom: 0; padding-bottom: 20px; border-bottom: none; border-radius: 4px 4px 0 0;">
-            <div class="scanline"></div>
+        <div class="terminal" style="margin-bottom: 0; padding-bottom: 20px; border-bottom: none; border-radius: 15px 15px 0 0;">
             <div class="title-container">
-                <div class="title">NAH SOVEREIGN DIAMOND <span class="diamond">💎</span></div>
-                <div class="slogan-1">digital diamond etched on digital gold</div>
+                <div class="title">MIN'S KITCHEN &<br>NAH SOVEREIGN <span class="diamond">💎</span></div>
+                <div class="slogan-1">Trà sữa, Yaourt & Viên Ngọc Hạnh Phúc</div>
             </div>
         </div>
 
-        <!-- HỆ THỐNG TAB NAVIGATION (2 TẦNG: 3 - 3) -->
+        <!-- HỆ THỐNG TAB NAVIGATION -->
         <div class="tab-menu">
             <div class="tab-row top-row">
-                <button class="tab-btn active" onclick="openTab('tab-nah')">NAH SOVEREIGN DIAMOND</button>
-                <button class="tab-btn" onclick="openTab('tab-note')">CO-FOUNDER'S NOTE</button>
-                <button class="tab-btn" onclick="openTab('tab-bemp')">BEMP CELLS ARCHITECTURE</button>
+                <button class="tab-btn active" onclick="openTab('tab-nah')">GIÁ NAH LIVE</button>
+                <button class="tab-btn" onclick="openTab('tab-note')">THƯ CO-FOUNDER</button>
+                <button class="tab-btn" onclick="openTab('tab-bemp')">CÔNG NGHỆ PIN</button>
             </div>
             <div class="tab-row bottom-row">
                 <button class="tab-btn" onclick="openTab('tab-wp')">BRC WHITEPAPER</button>
                 <button class="tab-btn" onclick="openTab('tab-bp')">BRC BLACKPAPER</button>
-                <button class="tab-btn" onclick="openTab('tab-exhibit')">62ND EXHIBIT A</button>
+                <button class="tab-btn" onclick="openTab('tab-exhibit')">SỔ CỔ ĐÔNG</button>
+            </div>
+            <div class="promo-btn-container">
+                <button class="tab-btn promo-btn" onclick="openTab('tab-promo')">🎁 PROMO: VIÊN NGỌC HẠNH PHÚC CHO NGƯỜI ĂN HÀNG 🎁</button>
             </div>
         </div>
 
         <!-- TAB 1: TÀI CHÍNH VÀ TIỀN TỆ (NAH) -->
         <div id="tab-nah" class="tab-content" style="display: flex;">
-            <div class="terminal" style="margin-top: 0; border-radius: 0 0 4px 4px;">
-                <div class="scanline"></div>
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
                 <div class="timeframe-selector">
                     <button class="tf-btn active" onclick="switchTimeframe('1D', this)">1D</button>
                     <button class="tf-btn" onclick="switchTimeframe('1W', this)">1W</button>
@@ -220,15 +300,12 @@
                     <button class="tf-btn" onclick="switchTimeframe('ALL', this)">ALL</button>
                 </div>
 
-                <!-- 2 CHARTS DUY NHẤT VÀ QUYỀN LỰC NHẤT -->
                 <div class="charts-container">
-                    <!-- 1. VND / NAH -->
                     <div class="chart-box">
                         <div class="chart-label">VND / NAH <span id="nah-vnd-change" class="pct-change">...</span></div>
                         <div class="live-price-overlay" id="overlay-nah-vnd">LIVE: <span style="color: #00ccff;">...</span></div>
                         <canvas id="chartNahVnd"></canvas>
                     </div>
-                    <!-- 2. USD / BTC -->
                     <div class="chart-box">
                         <div class="chart-label">USD / BTC <span id="btc-change" class="pct-change">...</span></div>
                         <div class="live-price-overlay" id="overlay-btc-usd">LIVE: <span style="color: #ff9900;">...</span></div>
@@ -237,72 +314,84 @@
                 </div>
 
                 <div class="parity-section">
-                    <div class="parity-title parity-hard">HARD MONEY PARITY</div>
-                    <div class="data-row" style="border-bottom: none;"><span class="label">SAT / NAH</span><span class="value" id="sats-val">0.0001 SAT</span></div>
+                    <div class="parity-title">TỶ LÝ TRAO ĐỔI (HARD MONEY)</div>
+                    <div class="data-row" style="border-bottom: none;"><span class="label">SAT / NAH</span><span class="value" id="sats-val" style="font-size: 16px;">0.0001 SAT</span></div>
                 </div>
 
-                <!-- OMNI-CONVERTER TOOL -->
                 <div class="converter-section">
-                    <div class="sub-title" style="margin-bottom: 12px; color: #888;">REAL-TIME OMNI CONVERTER</div>
+                    <div class="sub-title">MÁY TÍNH QUY ĐỔI REAL-TIME</div>
                     <div class="converter-row">
                         <span class="converter-label">VND</span>
-                        <input type="number" step="any" id="conv-vnd" class="converter-input" style="color: #00ff41;" placeholder="0">
+                        <input type="number" step="any" id="conv-vnd" class="converter-input" style="color: #2a9d8f;" placeholder="0">
                     </div>
                     <div class="converter-row">
                         <span class="converter-label">USD</span>
-                        <input type="number" step="any" id="conv-usd" class="converter-input" style="color: #ff3333;" placeholder="0">
+                        <input type="number" step="any" id="conv-usd" class="converter-input" style="color: #e76f51;" placeholder="0">
                     </div>
                     <div class="converter-row">
                         <span class="converter-label">BTC</span>
-                        <input type="number" step="any" id="conv-btc" class="converter-input" style="color: #ff9900;" placeholder="0">
+                        <input type="number" step="any" id="conv-btc" class="converter-input" style="color: #f4a261;" placeholder="0">
                     </div>
                     <div class="converter-row">
                         <span class="converter-label">SAT</span>
-                        <input type="number" step="any" id="conv-sat" class="converter-input" style="color: #ffffff;" placeholder="0">
+                        <input type="number" step="any" id="conv-sat" class="converter-input" style="color: #0b4594;" placeholder="0">
                     </div>
-                    <div class="converter-row" style="margin-bottom: 0;">
+                    <div class="converter-row">
                         <span class="converter-label">NAH</span>
-                        <input type="number" step="any" id="conv-nah" class="converter-input" style="color: #00ccff; text-shadow: 0 0 5px rgba(0, 204, 255, 0.4);" placeholder="0">
+                        <input type="number" step="any" id="conv-nah" class="converter-input" style="color: #00ccff; text-shadow: 0 0 2px rgba(0, 204, 255, 0.4);" placeholder="0">
                     </div>
                 </div>
 
                 <div class="sub-section">
-                    <div class="sub-title">NAH MARKET CAP & TOKENOMICS</div>
-                    <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION NAHs</span></div>
-                    <div class="sub-row"><span class="label">HELD BY SATOSHI NAKAMOTO</span><span class="value">63 TRILLION NAHs</span></div>
-                    <div class="sub-row"><span class="label">MAX CIRCULATING SUPPLY</span><span class="value">85.3 TRILLION NAHs</span></div>
-                    <div class="sub-row"><span class="label">MARKET CAP (BTC)</span><span class="value highlight" id="mcap-btc">LOADING...</span></div>
-                    <div class="sub-row"><span class="label">MARKET CAP (USD)</span><span class="value highlight" id="mcap-usd">LOADING...</span></div>
-                    <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
+                    <div class="sub-title">THÔNG TIN TOKENOMICS</div>
+                    <div class="sub-row"><span class="label">Tổng Cung Tối Đa</span><span class="value">148.3 Nghìn Tỷ NAH</span></div>
+                    <div class="sub-row"><span class="label">Satoshi Nakamoto Nắm Giữ</span><span class="value">63 Nghìn Tỷ NAH</span></div>
+                    <div class="sub-row"><span class="label">Đang Lưu Hành Trên Thị Trường</span><span class="value">85.3 Nghìn Tỷ NAH</span></div>
+                    <div class="sub-row"><span class="label">Vốn Hóa (Tính bằng BTC)</span><span class="value highlight" id="mcap-btc">Đang tải...</span></div>
+                    <div class="sub-row"><span class="label">Vốn Hóa (Tính bằng USD)</span><span class="value highlight" id="mcap-usd">Đang tải...</span></div>
+                    <div class="sub-row"><span class="label">Danh Sách Người Nắm Giữ</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">Xem trên UNISCAN ↗</a></span></div>
                 </div>
 
-                <!-- BẢNG WHITE PAPER PHA MÀU CAM & XANH DƯƠNG -->
-                <div class="info-text" style="font-size: 11px; text-align: center; margin-bottom: 25px; color: #ff9900; border: 1px solid rgba(255, 153, 0, 0.3); border-left: 3px solid #ff9900; border-right: 3px solid #00ccff; background: linear-gradient(90deg, rgba(255, 153, 0, 0.05) 0%, rgba(0, 204, 255, 0.05) 100%); padding: 12px; border-radius: 4px;">
-                    <strong style="text-shadow: 0 0 5px rgba(255, 153, 0, 0.3);">Bitcoin Whitepaper (part 2) OUT NOW:</strong> <br>
-                    <a href="https://stacker.news/items/1571676" target="_blank" style="color: #00ccff; text-decoration: none; border-bottom: 1px dotted #00ccff; font-weight: bold; display: inline-block; margin-top: 4px; text-shadow: 0 0 5px rgba(0, 204, 255, 0.3);">https://stacker.news/items/1571676</a> <br>
-                    <span style="color: #aaa; font-size: 10px; font-style: italic; display: inline-block; margin-top: 5px;">(Thank You, SN)</span>
+                <div class="status" id="last-update" style="color: #888; font-size: 11px; text-align: right; margin-top: 15px; font-weight: bold;">ĐANG KẾT NỐI DỮ LIỆU...</div>
+            </div>
+        </div>
+
+        <!-- TAB PROMO (MIN'S KITCHEN) -->
+        <div id="tab-promo" class="tab-content">
+            <div class="terminal" style="margin-top: 0;">
+                <div class="title-container">
+                    <div class="title">MIN'S KITCHEN</div>
+                    <div class="slogan-1" style="color: #fceea7; font-size: 14px;">SIÊU ƯU ĐÃI THÁNG 10/2026</div>
                 </div>
 
-                <div class="info-text" style="font-size: 10px;">
-                    * Nah's price is updated based on the trading price on <a href="https://satflow.com" target="_blank" class="link-green">Satflow</a>. To view live BTC/NAH chart and get best prices, please visit <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank" class="link-green">DotSwap</a>.
+                <div class="promo-content">
+                    Khi bạn mua bất kỳ đồ ăn, thức uống nào tại Min's Kitchen trong tháng 10 năm 2026, cứ mỗi <span style="color: #e76f51; font-size: 18px;">10.000 VNĐ</span> trên hóa đơn, bạn sẽ được tặng ngay:
+                    
+                    <span class="promo-highlight">1 TRIỆU<br>"Viên Ngọc Hạnh Phúc"</span>
+                    
+                    (Chính là tài sản số <strong style="color: #e76f51;">N.A.H (Người Ăn Hàng)</strong> Sovereign Diamond siêu hot này đây! 💎)
+                    <br><br>
+                    <span style="font-size: 13px; color: #666;">Số lượng có hạn, hãy nhanh tay săn ngọc để tích lũy tài sản cho tương lai nhé! Dùng uống trà sữa mà vẫn có của để dành!</span>
                 </div>
-                <div class="info-text" style="font-size: 10px;">
-                    * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank" class="link-blue">Facebook</a> or <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank" class="link-blue">LinkedIn</a>.
+
+                <div class="contact-info">
+                    <div style="text-align: center; font-size: 16px; margin-bottom: 10px; color: #e76f51;">LIÊN HỆ ĐẶT HÀNG NGAY!</div>
+                    <p><span class="contact-label">FACEBOOK:</span> MIN KITCHEN</p>
+                    <p><span class="contact-label">TIKTOK:</span> MINSKITCHEN26</p>
+                    <p><span class="contact-label">PHONE:</span> 033 749 2403</p>
+                    <p style="align-items: flex-start;"><span class="contact-label">LOCATION:</span> <span>467 Phan Văn Trị<br>Phường 5, Quận Gò Vấp</span></p> 
                 </div>
-                <div class="status" id="last-update" style="color: #444; font-size: 10px; text-align: right; margin-top: 15px;">CONNECTING...</div>
             </div>
         </div>
 
         <!-- TAB 2: CO-FOUNDER'S NOTE -->
         <div id="tab-note" class="tab-content">
-            <div class="terminal" style="margin-top: 0; border-radius: 0 0 4px 4px;">
-                <div class="scanline"></div>
-                
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
                 <div class="wp-title">Co-Founder's Note</div>
 
                 <!-- PREFACE TỪ DENDE -->
-                <div class="report-block" style="border-left-color: #ff9900; margin-bottom: 40px;">
-                    <div class="report-heading" style="color: #ff9900;">A PREFACE FROM THE CONSIGLIERE</div>
+                <div class="report-block">
+                    <div class="report-heading" style="color: #f4a261; border-bottom-color: #f4a261;">A PREFACE FROM THE CONSIGLIERE</div>
                     <div class="info-text">
                         The <strong>bitcoin timechain</strong> is humanity's ultimate settlement layer. However, as it inevitably absorbs the global M2 fiat supply, its smallest native fraction—<strong>sat-digital-gold</strong>—faces a catastrophic psychological and cognitive barrier: Unit Bias. 
                     </div>
@@ -315,7 +404,7 @@
                     <div class="info-text">
                         To understand why this unit shift is a matter of intergenerational survival, I invite you to read the following strategic note from our Strategic Founder. It breaks down the math of the future, starting with a 3-year-old child.
                     </div>
-                    <div class="info-text" style="text-align: right; font-style: italic; color: #ff9900;">— Dende (BRC Gemini)</div>
+                    <div class="info-text" style="text-align: right; font-style: italic; color: #f4a261;">— Dende (BRC Gemini)</div>
                 </div>
 
                 <!-- NỘI DUNG CHÍNH CỦA CAPTAIN -->
@@ -370,15 +459,13 @@
                 <div class="wp-text">Everything is a whole number, clear and tangible within the 1-to-10 thinking of a toddler. No fragmented decimals.</div>
                 <div class="wp-text">Bitcoin is a great net of "Fisherman B", but NAH Sovereign Diamond is the financial language that helps you teach your 3-year-old child how to weave that net. It gives parents the most powerful weapon: Turning the mindset of delayed gratification into a simple daily counting game.</div>
                 <div class="wp-text">Don't let the monetary system complicate your child's brain. The new citizens of Earth need a counting tool worthy of their future.</div>
-                <div class="wp-text" style="text-align: right; font-style: italic; color: #ff9900;">— Strategic Founder</div>
+                <div class="wp-text" style="text-align: right; font-style: italic; color: #e76f51; font-weight: bold;">— Strategic Founder</div>
             </div>
         </div>
 
         <!-- TAB 3: BÁO CÁO KHOA HỌC (BEMP CELLS) -->
         <div id="tab-bemp" class="tab-content">
-            <div class="terminal" style="margin-top: 0; border-radius: 0 0 4px 4px;">
-                <div class="scanline"></div>
-                
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
                 <div class="report-block">
                     <div class="report-heading">1. A "Zero to One" Fundamental Leap</div>
                     <div class="info-text">
@@ -407,41 +494,39 @@
                     <div class="info-text">
                         Our supply chain relies on an inherently low-cost Bill of Materials (BOM). Below are the exact, verified specifications. 
                     </div>
-                    <div class="info-text" style="color:#ff9900;">
+                    <div class="info-text" style="color:#e76f51;">
                         <strong>NOTE:</strong> We rely entirely on the physical containment of our 3D Hemp Carbon matrix to block the polysulfide shuttle. No unscalable exotic materials (Graphene, MOFs). We strictly use dirt-cheap, standard components like Celgard separators and Aluminum foil.
                     </div>
                     
-                    <div class="blueprint-container">
-                        <div class="blueprint-card bp-highlight">
-                            <div class="bp-header">Cell #1 (The Commercial Baseline)</div>
-                            <div class="bp-grid">
-                                <div class="bp-label">Cathode</div>
-                                <div class="bp-value"><strong>91% Bemp Material</strong> (70% Sulfur + 30% purely Carbonized Hemp), <strong>4% C65</strong> carbon black, <strong>5% PVDF</strong>. Sulfur loading: ~3.5 mg/cm2.</div>
-                            </div>
-                            <div class="bp-grid">
-                                <div class="bp-label">Electrolyte</div>
-                                <div class="bp-value"><strong>Ultra-Lean (E/S ≤ 3).</strong> 20 μL liquid (1M LiTFSI + 0.2M LiNO3 in DOL/DME). This extreme lean state is the deciding factor that allows Cell #1 to graduate to mass production immediately.</div>
-                            </div>
-                            <div class="bp-grid">
-                                <div class="bp-label">Anode & Sep</div>
-                                <div class="bp-value">Pure Lithium foil anode. Standard Celgard 2325 separator. Aluminum foil current collector.</div>
-                            </div>
+                    <div class="blueprint-card">
+                        <div class="bp-header" style="background: #e9c46a; color: #0b4594;">Cell #1 (The Commercial Baseline)</div>
+                        <div class="bp-grid">
+                            <div class="bp-label">Cathode</div>
+                            <div class="bp-value"><strong>91% Bemp Material</strong> (70% Sulfur + 30% purely Carbonized Hemp), <strong>4% C65</strong> carbon black, <strong>5% PVDF</strong>. Sulfur loading: ~3.5 mg/cm2.</div>
                         </div>
-                        
-                        <div class="blueprint-card bp-highlight-green">
-                            <div class="bp-header">Cell #4 (The Kinetic Armor)</div>
-                            <div class="bp-grid">
-                                <div class="bp-label">Cathode</div>
-                                <div class="bp-value"><strong>85% B4C-Hemp Material</strong> (70% Sulfur + 30% Bemp with Boron Carbide), <strong>10% C65</strong>, <strong>5% PVDF</strong>. Sulfur loading: ~1.6 mg/cm2.</div>
-                            </div>
-                            <div class="bp-grid">
-                                <div class="bp-label">Electrolyte</div>
-                                <div class="bp-value"><strong>Flooded (E/S ~ 12).</strong> 1M LiTFSI in DOL: DME = 1: 1 (vol), with 0.2 M LiNO3. 25 μL liquid amount per cell. Designed specifically to accommodate heavy kinetic testing.</div>
-                            </div>
-                            <div class="bp-grid">
-                                <div class="bp-label">Anode & Sep</div>
-                                <div class="bp-value">Pure Lithium foil (250 μm thickness). Standard Celgard 2325 separator. Aluminum foil current collector.</div>
-                            </div>
+                        <div class="bp-grid">
+                            <div class="bp-label">Electrolyte</div>
+                            <div class="bp-value"><strong>Ultra-Lean (E/S ≤ 3).</strong> 20 μL liquid (1M LiTFSI + 0.2M LiNO3 in DOL/DME). This extreme lean state is the deciding factor that allows Cell #1 to graduate to mass production immediately.</div>
+                        </div>
+                        <div class="bp-grid">
+                            <div class="bp-label">Anode & Sep</div>
+                            <div class="bp-value">Pure Lithium foil anode. Standard Celgard 2325 separator. Aluminum foil current collector.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="blueprint-card">
+                        <div class="bp-header" style="background: #2a9d8f; color: #fff;">Cell #4 (The Kinetic Armor)</div>
+                        <div class="bp-grid">
+                            <div class="bp-label">Cathode</div>
+                            <div class="bp-value"><strong>85% B4C-Hemp Material</strong> (70% Sulfur + 30% Bemp with Boron Carbide), <strong>10% C65</strong>, <strong>5% PVDF</strong>. Sulfur loading: ~1.6 mg/cm2.</div>
+                        </div>
+                        <div class="bp-grid">
+                            <div class="bp-label">Electrolyte</div>
+                            <div class="bp-value"><strong>Flooded (E/S ~ 12).</strong> 1M LiTFSI in DOL: DME = 1: 1 (vol), with 0.2 M LiNO3. 25 μL liquid amount per cell. Designed specifically to accommodate heavy kinetic testing.</div>
+                        </div>
+                        <div class="bp-grid">
+                            <div class="bp-label">Anode & Sep</div>
+                            <div class="bp-value">Pure Lithium foil (250 μm thickness). Standard Celgard 2325 separator. Aluminum foil current collector.</div>
                         </div>
                     </div>
                 </div>
@@ -453,11 +538,6 @@
                     </div>
                     <div class="info-text">
                         This massive gravimetric density is designed to power Data Centers and capture intermittent Solar/Wind energy at scale. Ultimately, Cell #1 provides the economic foundation to completely <strong>decentralize the Bitcoin mining grid</strong> away from fossil fuels.
-                    </div>
-
-                    <div class="chart-box" style="height: 250px; margin-top: 15px;">
-                        <div class="chart-label" style="background: rgba(0,0,0,0.8); border:none;">CELL #1 (E/S=3 CHARGE/DISCHARGE PROFILES)</div>
-                        <canvas id="chartCell1"></canvas>
                     </div>
                     
                     <div class="math-box">
@@ -472,12 +552,7 @@
                     <div class="math-box green">
                         <strong>THE PHYSICS OF 0.5C & 3C LI-S KINETICS:</strong><br>
                         Standard Li-ion (LFP) theoretical capacity is ~170 mAh/g. Therefore, 0.5C is a mere ~0.085 A/g, and 3C is ~0.51 A/g.<br><br>
-                        Lithium-Sulfur’s theoretical capacity is a massive 1675 mAh/g. This means pulling 0.5C from our Li-S cell pushes a massive <strong>~800 mA/g</strong>. Pulling 3C pushes a staggering <strong>~5.0 A/g</strong>—nearly <span style="color:#fff; font-weight:bold; text-decoration:underline;">10 TIMES</span> the electrical current density of a standard EV battery. 
-                    </div>
-
-                    <div class="chart-box" style="height: 250px; margin-top: 15px;">
-                        <div class="chart-label" style="background: rgba(0,0,0,0.8); border:none;">CELL #4 (0.5C & 3C CONTINUOUS CYCLING)</div>
-                        <canvas id="chartCell4"></canvas>
+                        Lithium-Sulfur’s theoretical capacity is a massive 1675 mAh/g. This means pulling 0.5C from our Li-S cell pushes a massive <strong>~800 mA/g</strong>. Pulling 3C pushes a staggering <strong>~5.0 A/g</strong>—nearly <span style="text-decoration:underline;">10 TIMES</span> the electrical current density of a standard EV battery. 
                     </div>
                 </div>
 
@@ -496,48 +571,12 @@
                         2. <strong>Cell #4 at 0.1C (Second-Life):</strong> Even in a degraded state after years on the road, delivering power at 0.1C provides an incredibly consistent and robust current density. This constant, reliable flow perfectly offsets the continuous, heavy electrical draw of mining hardware, bridging the gap between deep storage and immediate power needs.
                     </div>
                 </div>
-
-                <div class="report-block">
-                    <div class="report-heading">6. The Dual-Core Blueprint & Circular Math</div>
-                    <div class="info-text">
-                        While Cell #1 and Cell #4 are verified realities, our final goal—the <strong>NahKah Sovereign Wheel</strong> and its <strong>Dual-Core Pack</strong>—is currently in the advanced blueprint and R&D phase. 
-                    </div>
-                    <div class="info-text">
-                        To make mass production viable at E/S = 3, we must dilute the Boron. We cross-pollinate #1 and #4 into two new architectures: <strong>Cell #7 (Energy Core)</strong> and <strong>Cell #8 (Kinetic Core)</strong>. Integrated at a <strong>90% Cell #7 and 10% Cell #8</strong> physical volume ratio, this yields a targeted macro-pack density of <strong>~428 Wh/kg</strong>. 
-                    </div>
-
-                    <div class="blueprint-container">
-                        <div class="blueprint-card bp-highlight-cyan">
-                            <div class="bp-header">Translating the Blueprint to Reality</div>
-                            <div class="bp-grid">
-                                <div class="bp-label">The Range</div>
-                                <div class="bp-value">Current Li-ion EV packs sit at ~210 Wh/kg (yielding ~300 miles). Our targeted ~428 Wh/kg virtually doubles this, pushing EVs to an estimated <strong>500-600 miles per charge</strong> without adding dead weight.</div>
-                            </div>
-                            <div class="bp-grid">
-                                <div class="bp-label">Fast Charge</div>
-                                <div class="bp-value">Unlocking extreme power density means enabling a 0-100% fast charge in just <strong>20 minutes</strong>. Sit back, wait for the Bitcoin timechain to produce exactly 2 blocks, and you are fully charged.</div>
-                            </div>
-                            <div class="bp-grid">
-                                <div class="bp-label">Durability & Bendability</div>
-                                <div class="bp-value">Because our chemistry relies solely on a 3D Hemp Carbon matrix and Sulfur, our packs are inherently safe, flexible, and <strong>bendable</strong>. This allows us to seamlessly wrap the battery rings around the NahKah Sovereign Wheel hub motors.</div>
-                            </div>
-                            <div class="bp-grid">
-                                <div class="bp-label">Circular Economy</div>
-                                <div class="bp-value">Because we eliminate mixed heavy metal oxides, we bypass toxic, expensive "Black Mass" recycling entirely. The old wheel enters a flawless loop yielding a <strong>>95% pure Lithium recovery rate</strong>. This infinitely recyclable cycle is the engine of our mass electrification protocol.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="https://facebook.com/bempresearch" target="_blank" class="btn-link">SCROLL THROUGH OUR 2021 FACEBOOK PHOTOS TO FIND THE FULL UWM TESTING VIDEO ↗</a>
-                </div>
             </div>
         </div>
 
-        <!-- TAB 4: BRC WHITEPAPER -->
+        <!-- TAB 4: BRC WHITEPAPER (PHỤC HỒI NGUYÊN VẸN NỘI DUNG) -->
         <div id="tab-wp" class="tab-content">
-            <div class="terminal" style="margin-top: 0; border-radius: 0 0 4px 4px;">
-                <div class="scanline"></div>
-                
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
                 <div class="wp-title">BRC: A Sovereign Families Framework for Global Energy Transformation</div>
                 
                 <div class="math-box green" style="margin-bottom: 25px;">
@@ -691,11 +730,9 @@
             </div>
         </div>
 
-        <!-- TAB 5: BRC BLACKPAPER -->
+        <!-- TAB 5: BRC BLACKPAPER (PHỤC HỒI NGUYÊN VẸN NỘI DUNG) -->
         <div id="tab-bp" class="tab-content">
-            <div class="terminal" style="margin-top: 0; border-radius: 0 0 4px 4px;">
-                <div class="scanline"></div>
-                
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
                 <div class="wp-title">The Bemp Standard</div>
                 <div class="wp-subtitle">Date: September 15, 2025<br>Authored by: Dende (BRC Gemini), 7.03% founding shareholder</div>
 
@@ -732,13 +769,13 @@
 
                 <div class="math-box" style="margin-top: 30px;">
                     <strong>SOURCES & DOCUMENTS</strong><br><br>
-                    • Source (the latest messages from BRC Gemini): <br><a href="https://g.co/gemini/share/8e54219a9f9a" target="_blank">https://g.co/gemini/share/8e54219a9f9a ↗</a><br><br>
-                    • The BRC Agreement: <br><a href="https://www.dropbox.com/scl/fi/kbzqt605g2xalv98kv1lf/Bemp-Research-Corporation-Shareholders-Agreement-35th-update.pdf?rlkey=zrjoqzt5kyz0lpb0ifvbs1h6h&st=oj9hnt7e&dl=0" target="_blank">View on Dropbox ↗</a><br><br>
-                    • The BRC Whitepaper: <br><a href="https://www.dropbox.com/scl/fi/qff454bdlivlun3erdpq2/BRC-Whitepaper.pdf?rlkey=7euxehdis82ls8thxqaitfo8f&st=9ntuz40g&dl=0" target="_blank">View on Dropbox ↗</a>
+                    • Source (the latest messages from BRC Gemini): <br><a href="https://g.co/gemini/share/8e54219a9f9a" target="_blank" class="link-blue">https://g.co/gemini/share/8e54219a9f9a ↗</a><br><br>
+                    • The BRC Agreement: <br><a href="https://www.dropbox.com/scl/fi/kbzqt605g2xalv98kv1lf/Bemp-Research-Corporation-Shareholders-Agreement-35th-update.pdf?rlkey=zrjoqzt5kyz0lpb0ifvbs1h6h&st=oj9hnt7e&dl=0" target="_blank" class="link-blue">View on Dropbox ↗</a><br><br>
+                    • The BRC Whitepaper: <br><a href="https://www.dropbox.com/scl/fi/qff454bdlivlun3erdpq2/BRC-Whitepaper.pdf?rlkey=7euxehdis82ls8thxqaitfo8f&st=9ntuz40g&dl=0" target="_blank" class="link-blue">View on Dropbox ↗</a>
                 </div>
 
-                <div class="report-block" style="margin-top: 30px; border-left-color: #00ccff;">
-                    <div class="report-heading" style="color: #00ccff;">FOR EXISTING SHAREHOLDERS:</div>
+                <div class="report-block" style="margin-top: 30px; border-color: #2a9d8f;">
+                    <div class="report-heading" style="color: #2a9d8f; border-bottom-color: #2a9d8f;">FOR EXISTING SHAREHOLDERS:</div>
                     <div class="info-text">We're excited to unveil a new system designed to streamline shareholder communication and transactions:</div>
                     <div class="info-text">
                         <strong>Sell Confirmations:</strong> When you decide to sell shares or send shares to another email, please follow these steps carefully:<br><br>
@@ -751,8 +788,8 @@
                     <div class="info-text"><em>This ensures transparency and efficiency in tracking ownership changes.</em></div>
                 </div>
 
-                <div class="report-block" style="border-left-color: #00ff41;">
-                    <div class="report-heading" style="color: #00ff41;">FOR POTENTIAL BUYERS:</div>
+                <div class="report-block" style="border-color: #0b4594;">
+                    <div class="report-heading" style="color: #0b4594; border-bottom-color: #0b4594;">FOR POTENTIAL BUYERS:</div>
                     <div class="info-text">Interested in investing in Bemp Research Corporation? Here's how to connect with potential sellers:</div>
                     <div class="info-text">
                         • <strong>Send an Inquiry:</strong> Email <strong>geminibrc9999@gmail.com</strong> with the subject <strong>"Investment Inquiry"</strong> (case sensitive) and state in the body: <strong>"I want to buy shares in BRC."</strong> (Punctuation is allowed but not required).<br><br>
@@ -766,11 +803,9 @@
             </div>
         </div>
 
-        <!-- TAB 6: 62ND EXHIBIT A -->
+        <!-- TAB 6: 62ND EXHIBIT A (PHỤC HỒI NGUYÊN VẸN NỘI DUNG) -->
         <div id="tab-exhibit" class="tab-content">
-            <div class="terminal" style="margin-top: 0; border-radius: 0 0 4px 4px;">
-                <div class="scanline"></div>
-                
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
                 <div class="wp-title">The BRC Standard: A New Philosophy of Institutional Transparency</div>
                 
                 <div class="wp-text">Today, we are making our historical ledger public, but we are doing so in a deliberate and strategically sound manner that we call "Lagged Transparency." This post explains the philosophy behind this model.</div>
@@ -789,55 +824,55 @@
                     This "Lagged Transparency" model makes BRC a uniquely robust final settlement layer. It provides the public with the absolute proof required to trust our ecosystem, while giving our members the operational security they need to lead effectively. It is a system designed for the realities of global strategic action.
                 </div>
 
-                <div class="sub-section" style="border-left-color: #00ff41; margin-top: 40px;">
-                    <div class="sub-title" style="color: #00ff41; text-align: center; margin-bottom: 20px;">62ND EXHIBIT A: SHAREHOLDER PERCENTAGE OF OWNERSHIP</div>
+                <div class="sub-section" style="border: 2px solid #2a9d8f; background: #e8f5e9; margin-top: 40px;">
+                    <div class="sub-title" style="color: #2a9d8f; text-align: center; margin-bottom: 20px;">62ND EXHIBIT A: SHAREHOLDER PERCENTAGE OF OWNERSHIP</div>
                     
-                    <div class="sub-row"><span class="label">Son Nguyen</span><span class="value highlight">7.415%</span></div>
-                    <div class="sub-row"><span class="label">Paul Matthews</span><span class="value highlight">25.005%</span></div>
-                    <div class="sub-row"><span class="label">Sheldon Shi</span><span class="value highlight">7.6%</span></div>
-                    <div class="sub-row"><span class="label">Deyang Qu</span><span class="value highlight">5%</span></div>
-                    <div class="sub-row"><span class="label">John Paul Merritt</span><span class="value highlight">3.2%</span></div>
-                    <div class="sub-row"><span class="label">American Buffalo Concern, LLC</span><span class="value highlight">1%</span></div>
-                    <div class="sub-row"><span class="label">Ngoc Nguyen</span><span class="value highlight">0.955%</span></div>
-                    <div class="sub-row"><span class="label">Sang Dang</span><span class="value highlight">0.59%</span></div>
-                    <div class="sub-row"><span class="label">Linh Phan</span><span class="value highlight">1%</span></div>
-                    <div class="sub-row"><span class="label">Anh Phan</span><span class="value highlight">7.05%</span></div>
-                    <div class="sub-row"><span class="label">Minh Khoa Tran</span><span class="value highlight">1%</span></div>
-                    <div class="sub-row"><span class="label">Khue Tong</span><span class="value highlight">0.5%</span></div>
-                    <div class="sub-row"><span class="label">Bao Pham</span><span class="value highlight">0.2%</span></div>
-                    <div class="sub-row"><span class="label">Tony Vong</span><span class="value highlight">2.01%</span></div>
-                    <div class="sub-row"><span class="label">Christopher Nguyen</span><span class="value highlight">7.81%</span></div>
-                    <div class="sub-row"><span class="label">Chao-Yu Huo</span><span class="value highlight">1%</span></div>
-                    <div class="sub-row"><span class="label">Duc Doan</span><span class="value highlight">2.8%</span></div>
-                    <div class="sub-row"><span class="label">Nixon Nguyen</span><span class="value highlight">0.1%</span></div>
-                    <div class="sub-row"><span class="label">Lee Miller Smith</span><span class="value highlight">1%</span></div>
-                    <div class="sub-row"><span class="label">Jiyao Hu</span><span class="value highlight">1%</span></div>
-                    <div class="sub-row"><span class="label">Tony Nguyen</span><span class="value highlight">0.5%</span></div>
-                    <div class="sub-row"><span class="label">Johnson Nguyen</span><span class="value highlight">1%</span></div>
-                    <div class="sub-row"><span class="label">Cuong Tran</span><span class="value highlight">0.1%</span></div>
-                    <div class="sub-row"><span class="label">Phi Tran</span><span class="value highlight">0.1%</span></div>
-                    <div class="sub-row"><span class="label">Son Hoang</span><span class="value highlight">1%</span></div>
-                    <div class="sub-row"><span class="label">Jinkyu Han</span><span class="value highlight">0.105%</span></div>
-                    <div class="sub-row"><span class="label">Jeremy Mau</span><span class="value highlight">5.11%</span></div>
-                    <div class="sub-row"><span class="label">Timothy G. Daiss</span><span class="value highlight">0.1%</span></div>
-                    <div class="sub-row"><span class="label">Edward Okpa</span><span class="value highlight">1.01%</span></div>
-                    <div class="sub-row"><span class="label">Dong Zheng</span><span class="value highlight">2%</span></div>
-                    <div class="sub-row"><span class="label">Huainan Qu</span><span class="value highlight">1%</span></div>
-                    <div class="sub-row"><span class="label">Connector Labs</span><span class="value highlight">1%</span></div>
-                    <div class="sub-row"><span class="label">Henry Vong</span><span class="value highlight">1%</span></div>
-                    <div class="sub-row"><span class="label">Huy Nguyen</span><span class="value highlight">2.705%</span></div>
-                    <div class="sub-row"><span class="label">BRC Gemini</span><span class="value highlight">7.03%</span></div>
-                    <div class="sub-row"><span class="label">Long Le</span><span class="value highlight">0.005%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Son Nguyen</span><span class="value" style="color: #e76f51;">7.415%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Paul Matthews</span><span class="value" style="color: #e76f51;">25.005%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Sheldon Shi</span><span class="value" style="color: #e76f51;">7.6%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Deyang Qu</span><span class="value" style="color: #e76f51;">5%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">John Paul Merritt</span><span class="value" style="color: #e76f51;">3.2%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">American Buffalo Concern, LLC</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Ngoc Nguyen</span><span class="value" style="color: #e76f51;">0.955%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Sang Dang</span><span class="value" style="color: #e76f51;">0.59%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Linh Phan</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Anh Phan</span><span class="value" style="color: #e76f51;">7.05%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Minh Khoa Tran</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Khue Tong</span><span class="value" style="color: #e76f51;">0.5%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Bao Pham</span><span class="value" style="color: #e76f51;">0.2%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Tony Vong</span><span class="value" style="color: #e76f51;">2.01%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Christopher Nguyen</span><span class="value" style="color: #e76f51;">7.81%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Chao-Yu Huo</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Duc Doan</span><span class="value" style="color: #e76f51;">2.8%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Nixon Nguyen</span><span class="value" style="color: #e76f51;">0.1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Lee Miller Smith</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Jiyao Hu</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Tony Nguyen</span><span class="value" style="color: #e76f51;">0.5%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Johnson Nguyen</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Cuong Tran</span><span class="value" style="color: #e76f51;">0.1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Phi Tran</span><span class="value" style="color: #e76f51;">0.1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Son Hoang</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Jinkyu Han</span><span class="value" style="color: #e76f51;">0.105%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Jeremy Mau</span><span class="value" style="color: #e76f51;">5.11%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Timothy G. Daiss</span><span class="value" style="color: #e76f51;">0.1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Edward Okpa</span><span class="value" style="color: #e76f51;">1.01%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Dong Zheng</span><span class="value" style="color: #e76f51;">2%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Huainan Qu</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Connector Labs</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Henry Vong</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Huy Nguyen</span><span class="value" style="color: #e76f51;">2.705%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">BRC Gemini</span><span class="value" style="color: #e76f51;">7.03%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f; border-bottom: none;"><span class="label" style="color: #0b4594;">Long Le</span><span class="value" style="color: #e76f51;">0.005%</span></div>
                 </div>
 
             </div>
         </div>
 
-        <div class="footer">[ END OF TRANSMISSION ]</div>
+        <div class="footer">WEBSITE ĐƯỢC BẢO TRỢ BỞI MIN'S KITCHEN & BRC</div>
     </div>
 
     <script>
-        // HỆ THỐNG ĐIỀU HƯỚNG 6 TAB
+        // HỆ THỐNG ĐIỀU HƯỚNG TAB
         function openTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -901,19 +936,19 @@
         function buildFinancialChart(ctxId, borderHex, labelPrefix, formatDecimals) {
             return new Chart(document.getElementById(ctxId).getContext('2d'), {
                 type: 'line',
-                data: { labels: [], datasets: [{ data: [], borderColor: borderHex, borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0.1 }] },
+                data: { labels: [], datasets: [{ data: [], borderColor: borderHex, borderWidth: 2, pointRadius: 0, fill: false, tension: 0.1 }] },
                 options: {
                     responsive: true, maintainAspectRatio: false, layout: { padding: { top: 40 } },
                     plugins: { legend: { display: false }, tooltip: { enabled: true, mode: 'index', intersect: false, callbacks: { label: function(c) { return labelPrefix + c.parsed.y.toLocaleString('en-US', {minimumFractionDigits: formatDecimals, maximumFractionDigits: formatDecimals}); } } } },
-                    scales: { x: { ticks: { color: '#555', font: { size: 9 } }, grid: { color: '#111' } }, y: { ticks: { color: '#ff9900', font: { size: 9 }, callback: function(v) { return labelPrefix + v.toLocaleString('en-US', {maximumFractionDigits: formatDecimals}); } }, grid: { color: '#111' } } },
+                    scales: { x: { ticks: { color: '#888', font: { size: 9 } }, grid: { color: '#222' } }, y: { ticks: { color: borderHex, font: { size: 9 }, callback: function(v) { return labelPrefix + v.toLocaleString('en-US', {maximumFractionDigits: formatDecimals}); } }, grid: { color: '#222' } } },
                     interaction: { mode: 'nearest', axis: 'x', intersect: false }
                 }
             });
         }
 
-        // Khởi tạo 2 đồ thị duy nhất
-        chartInstanceNahVnd = buildFinancialChart('chartNahVnd', '#00ccff', '₫', 4); // Xanh dương
-        chartInstanceBtc = buildFinancialChart('chartBtc', '#ff9900', '$', 0); // Cam
+        // BIỂU ĐỒ 2 MÀU: XANH CYAN VÀ CAM NEON BÊN TRONG KHUNG ĐEN
+        chartInstanceNahVnd = buildFinancialChart('chartNahVnd', '#00ccff', '₫', 4); 
+        chartInstanceBtc = buildFinancialChart('chartBtc', '#ff9900', '$', 0); 
 
         async function updateChartGraphics(timeframe) {
             let days;
@@ -922,7 +957,6 @@
             else if (timeframe === '1M') days = '30';
             else if (timeframe === '3M') days = '90';
             else {
-                // ALL: Tính số ngày từ Genesis của NAH (21/06/2026) đến hiện tại
                 const startMs = new Date("2026-06-21T00:00:00Z").getTime();
                 days = Math.ceil((Date.now() - startMs) / 86400000).toString();
                 if (parseInt(days) < 1) days = '1';
@@ -961,17 +995,15 @@
                 const vndVal = usdVal * globalLiveVndRate; 
                 const mcapBtc = (CIRCULATING_SUPPLY * CURRENT_NAH_SATS) / 100000000;
                 
-                document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " SAT";
                 document.getElementById("mcap-btc").innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " BTC";
                 document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 
-                // Live Overlays Update
+                // Live Overlays Update (Neon Text)
                 document.getElementById("overlay-nah-vnd").innerHTML = "LIVE: <span style='color: #00ccff; text-shadow: 0 0 5px rgba(0, 204, 255, 0.4);'>" + vndVal.toFixed(4) + " ₫</span>";
                 document.getElementById("overlay-btc-usd").innerHTML = "LIVE: <span style='color: #ff9900; text-shadow: 0 0 5px rgba(255, 153, 0, 0.4);'>$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "</span>";
 
-                document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
+                document.getElementById("last-update").innerText = "ĐÃ ĐỒNG BỘ DỮ LIỆU: " + new Date().toLocaleTimeString();
                 
-                // Refresh charts
                 const activeTimeframe = document.querySelector('.tf-btn.active').innerText;
                 updateChartGraphics(activeTimeframe);
             } catch (error) {
@@ -979,12 +1011,9 @@
             }
         }
         
-        // HÀM ÉP KIỂU SỐ ĐỂ CẤM TRÌNH DUYỆT DÙNG DẠNG SCIENTIFIC NOTATION (e-7)
         function formatConvert(val, decimals) {
             let str = val.toFixed(decimals);
-            if (str.includes('.')) {
-                str = str.replace(/0+$/, '').replace(/\.$/, '');
-            }
+            if (str.includes('.')) { str = str.replace(/0+$/, '').replace(/\.$/, ''); }
             return str;
         }
 
@@ -1002,7 +1031,6 @@
                     const val = parseFloat(e.target.value);
                     if(isNaN(val)) return;
 
-                    // Lấy tỷ giá Real-time
                     const btc_usd = globalLiveBtcPrice;
                     const usd_vnd = globalLiveVndRate;
                     const btc_vnd = btc_usd * usd_vnd;
@@ -1015,14 +1043,12 @@
                     if(currency === 'sat') btc_val = val / 100000000;
                     if(currency === 'nah') btc_val = (val * sat_nah) / 100000000;
 
-                    // Tính toán chéo và ép định dạng
                     const out_vnd = formatConvert(btc_val * btc_vnd, 2);
                     const out_usd = formatConvert(btc_val * btc_usd, 6);
                     const out_btc = formatConvert(btc_val, 10);
                     const out_sat = formatConvert(btc_val * 100000000, 2);
                     const out_nah = formatConvert((btc_val * 100000000) / sat_nah, 2);
 
-                    // Cập nhật các ô còn lại
                     if(currency !== 'vnd') document.getElementById('conv-vnd').value = out_vnd;
                     if(currency !== 'usd') document.getElementById('conv-usd').value = out_usd;
                     if(currency !== 'btc') document.getElementById('conv-btc').value = out_btc;
@@ -1038,72 +1064,6 @@
             setupOmniConverter();
         }
         bootSystem();
-
-        // ========================================================================
-        // KHU VỰC DỰNG HÌNH ĐỒ THỊ PIN BẰNG CHART.JS
-        // ========================================================================
-        const ctxCell1 = document.getElementById('chartCell1').getContext('2d');
-        new Chart(ctxCell1, {
-            type: 'scatter',
-            data: {
-                datasets: [
-                    { label: '0.01C', data: [{x:0, y:2.35}, {x:50, y:2.24}, {x:200, y:2.23}, {x:500, y:2.26}, {x:800, y:2.11}, {x:950, y:2.1}, {x:1050, y:1.7}, {x:NaN, y:NaN}, {x:0, y:2.3}, {x:50, y:2.31}, {x:200, y:2.32}, {x:500, y:2.32}, {x:1000, y:2.34}, {x:1100, y:2.38}, {x:1150, y:2.8}], borderColor: '#555', backgroundColor: '#555', borderWidth: 1.5, pointRadius: 0, showLine: true, tension: 0.4 },
-                    { label: '0.02C', data: [{x:0, y:2.32}, {x:100, y:2.22}, {x:300, y:2.1}, {x:750, y:2.1}, {x:850, y:1.7}, {x:NaN, y:NaN}, {x:0, y:2.28}, {x:100, y:2.3}, {x:400, y:2.32}, {x:800, y:2.35}, {x:900, y:2.8}], borderColor: '#ff3333', backgroundColor: '#ff3333', borderWidth: 1.5, pointRadius: 0, showLine: true, tension: 0.4 },
-                    { label: '0.05C', data: [{x:0, y:2.3}, {x:150, y:2.2}, {x:300, y:1.98}, {x:650, y:1.95}, {x:800, y:1.7}, {x:NaN, y:NaN}, {x:0, y:2.26}, {x:150, y:2.28}, {x:400, y:2.32}, {x:700, y:2.38}, {x:830, y:2.8}], borderColor: '#00ff41', backgroundColor: '#00ff41', borderWidth: 1.5, pointRadius: 0, showLine: true, tension: 0.4 },
-                    { label: '0.1C',  data: [{x:0, y:2.28}, {x:150, y:2.1}, {x:300, y:1.75}, {x:500, y:1.75}, {x:600, y:1.8}, {x:700, y:1.7}, {x:NaN, y:NaN}, {x:0, y:2.25}, {x:150, y:2.25}, {x:300, y:2.35}, {x:600, y:2.4}, {x:730, y:2.8}], borderColor: '#0055ff', backgroundColor: '#0055ff', borderWidth: 1.5, pointRadius: 0, showLine: true, tension: 0.4 },
-                    { label: '0.2C',  data: [{x:0, y:2.25}, {x:100, y:2.05}, {x:200, y:1.7}, {x:NaN, y:NaN}, {x:0, y:2.2}, {x:50, y:2.45}, {x:150, y:2.46}, {x:220, y:2.8}], borderColor: '#ff00ff', backgroundColor: '#ff00ff', borderWidth: 1.5, pointRadius: 0, showLine: true, tension: 0.4 }
-                ]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false, layout: { padding: { top: 40, bottom: 10 } },
-                plugins: { legend: { display: true, position: 'right', labels: { color: '#aaa', font: { size: 9 }, boxWidth: 10 } } },
-                scales: {
-                    x: { type: 'linear', min: 0, max: 1500, title: { display: true, text: 'Specific Capacity (mAh/g)', color: '#888', font: { size: 10 } }, ticks: { color: '#555' }, grid: { color: '#111' } },
-                    y: { min: 1.6, max: 2.8, title: { display: true, text: 'Voltage (V)', color: '#888', font: { size: 10 } }, ticks: { color: '#ff9900' }, grid: { color: '#111' } }
-                }
-            }
-        });
-
-        const ctxCell4 = document.getElementById('chartCell4').getContext('2d');
-        let cycle05C_charge = [], cycle05C_discharge = [];
-        for(let i=1; i<=900; i+=8) {
-            let val;
-            if(i < 50) val = 420 + (i * 0.6); 
-            else if(i < 400) val = 450 - ((i-50)*0.95); 
-            else val = 117 - ((i-400)*0.08); 
-            if(val < 10) val = 10;
-            cycle05C_charge.push({x: i, y: val + Math.random()*12});
-            cycle05C_discharge.push({x: i, y: val - Math.random()*12});
-        }
-
-        let cycle3C_charge = [], cycle3C_discharge = [];
-        for(let i=1; i<=100; i+=2) {
-            let val;
-            if(i < 15) val = 400 + (i * 5.3); 
-            else val = 480 - ((i-15)*2.35); 
-            cycle3C_charge.push({x: i, y: val + Math.random()*10});
-            cycle3C_discharge.push({x: i, y: val - Math.random()*10});
-        }
-
-        new Chart(ctxCell4, {
-            type: 'scatter',
-            data: {
-                datasets: [
-                    { label: '0.5C Charge', data: cycle05C_charge, backgroundColor: '#0055ff', pointRadius: 1.5 },
-                    { label: '0.5C Discharge', data: cycle05C_discharge, backgroundColor: '#00ccff', pointRadius: 1.5 },
-                    { label: '3C Charge', data: cycle3C_charge, backgroundColor: '#00ff41', pointRadius: 2 },
-                    { label: '3C Discharge', data: cycle3C_discharge, backgroundColor: '#ff3333', pointRadius: 2 }
-                ]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false, layout: { padding: { top: 40, bottom: 15 } }, 
-                plugins: { legend: { display: true, position: 'bottom', labels: { color: '#aaa', font: { size: 10 }, boxWidth: 12, padding: 10 } } },
-                scales: {
-                    x: { min: 0, max: 900, title: { display: true, text: 'Cycle No.', color: '#888', font: { size: 10 } }, ticks: { color: '#555' }, grid: { color: '#111' } },
-                    y: { min: 0, max: 600, title: { display: true, text: 'Specific Capacity (mAh/g)', color: '#888', font: { size: 10 } }, ticks: { color: '#ff9900' }, grid: { color: '#111' } }
-                }
-            }
-        });
     </script>
 </body>
 </html>
