@@ -220,8 +220,8 @@
         .wp-subtitle { font-size: 13px; color: #0b4594; font-weight: 700; text-align: center; margin-bottom: 25px; }
         .wp-h1 { font-size: 18px; color: #0b4594; font-weight: 900; margin-top: 30px; margin-bottom: 12px; text-transform: uppercase; border-bottom: 3px solid #e9c46a; padding-bottom: 5px; }
         .wp-h2 { font-size: 15px; color: #f4a261; font-weight: 900; margin-top: 20px; margin-bottom: 10px; }
-        .wp-text { font-size: 14px; margin-bottom: 15px; line-height: 1.6; color: #333; text-align: justify; font-weight: 500; }
-        .wp-list { margin: 10px 0 15px 25px; padding: 0; color: #333; font-size: 14px; font-weight: 500; line-height: 1.6; }
+        .wp-text { font-size: 14px; margin-bottom: 15px; line-height: 1.6; color: #333; text-align: justify; font-weight: 700; }
+        .wp-list { margin: 10px 0 15px 25px; padding: 0; color: #333; font-size: 14px; font-weight: 700; line-height: 1.6; }
         .wp-list li { margin-bottom: 12px; text-align: justify; }
         .wp-highlight { color: #e76f51; font-weight: 900; }
 
@@ -267,22 +267,22 @@
         <!-- HEADER CỐ ĐỊNH -->
         <div class="terminal" style="margin-bottom: 0; padding-bottom: 20px; border-bottom: none; border-radius: 15px 15px 0 0;">
             <div class="title-container">
-                <div class="title">MIN'S KITCHEN &<br>NAH SOVEREIGN <span class="diamond">💎</span></div>
-                <div class="slogan-1">Trà sữa, Yaourt & Viên Ngọc Hạnh Phúc</div>
+                <div class="title">NAH SOVEREIGN DIAMOND <span class="diamond">💎</span></div>
+                <div class="slogan-1">digital diamond etched on digital gold</div>
             </div>
         </div>
 
         <!-- HỆ THỐNG TAB NAVIGATION -->
         <div class="tab-menu">
             <div class="tab-row top-row">
-                <button class="tab-btn active" onclick="openTab('tab-nah')">GIÁ NAH LIVE</button>
-                <button class="tab-btn" onclick="openTab('tab-note')">THƯ CO-FOUNDER</button>
-                <button class="tab-btn" onclick="openTab('tab-bemp')">CÔNG NGHỆ PIN</button>
+                <button class="tab-btn active" onclick="openTab('tab-nah')">NAH SOVEREIGN DIAMOND</button>
+                <button class="tab-btn" onclick="openTab('tab-note')">CO-FOUNDER'S NOTE</button>
+                <button class="tab-btn" onclick="openTab('tab-bemp')">BEMP CELLS ARCHITECTURE</button>
             </div>
             <div class="tab-row bottom-row">
                 <button class="tab-btn" onclick="openTab('tab-wp')">BRC WHITEPAPER</button>
                 <button class="tab-btn" onclick="openTab('tab-bp')">BRC BLACKPAPER</button>
-                <button class="tab-btn" onclick="openTab('tab-exhibit')">SỔ CỔ ĐÔNG</button>
+                <button class="tab-btn" onclick="openTab('tab-exhibit')">62ND EXHIBIT A</button>
             </div>
             <div class="promo-btn-container">
                 <button class="tab-btn promo-btn" onclick="openTab('tab-promo')">🎁 PROMO: VIÊN NGỌC HẠNH PHÚC CHO NGƯỜI ĂN HÀNG 🎁</button>
@@ -314,12 +314,12 @@
                 </div>
 
                 <div class="parity-section">
-                    <div class="parity-title">TỶ LÝ TRAO ĐỔI (HARD MONEY)</div>
+                    <div class="parity-title">HARD MONEY PARITY</div>
                     <div class="data-row" style="border-bottom: none;"><span class="label">SAT / NAH</span><span class="value" id="sats-val" style="font-size: 16px;">0.0001 SAT</span></div>
                 </div>
 
                 <div class="converter-section">
-                    <div class="sub-title">MÁY TÍNH QUY ĐỔI REAL-TIME</div>
+                    <div class="sub-title">REAL-TIME OMNI CONVERTER</div>
                     <div class="converter-row">
                         <span class="converter-label">VND</span>
                         <input type="number" step="any" id="conv-vnd" class="converter-input" style="color: #2a9d8f;" placeholder="0">
@@ -343,16 +343,30 @@
                 </div>
 
                 <div class="sub-section">
-                    <div class="sub-title">THÔNG TIN TOKENOMICS</div>
-                    <div class="sub-row"><span class="label">Tổng Cung Tối Đa</span><span class="value">148.3 Nghìn Tỷ NAH</span></div>
-                    <div class="sub-row"><span class="label">Satoshi Nakamoto Nắm Giữ</span><span class="value">63 Nghìn Tỷ NAH</span></div>
-                    <div class="sub-row"><span class="label">Đang Lưu Hành Trên Thị Trường</span><span class="value">85.3 Nghìn Tỷ NAH</span></div>
-                    <div class="sub-row"><span class="label">Vốn Hóa (Tính bằng BTC)</span><span class="value highlight" id="mcap-btc">Đang tải...</span></div>
-                    <div class="sub-row"><span class="label">Vốn Hóa (Tính bằng USD)</span><span class="value highlight" id="mcap-usd">Đang tải...</span></div>
-                    <div class="sub-row"><span class="label">Danh Sách Người Nắm Giữ</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">Xem trên UNISCAN ↗</a></span></div>
+                    <div class="sub-title">NAH MARKET CAP & TOKENOMICS</div>
+                    <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION NAHs</span></div>
+                    <div class="sub-row"><span class="label">HELD BY SATOSHI NAKAMOTO</span><span class="value">63 TRILLION NAHs</span></div>
+                    <div class="sub-row"><span class="label">MAX CIRCULATING SUPPLY</span><span class="value">85.3 TRILLION NAHs</span></div>
+                    <div class="sub-row"><span class="label">MARKET CAP (BTC)</span><span class="value highlight" id="mcap-btc">LOADING...</span></div>
+                    <div class="sub-row"><span class="label">MARKET CAP (USD)</span><span class="value highlight" id="mcap-usd">LOADING...</span></div>
+                    <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
                 </div>
 
-                <div class="status" id="last-update" style="color: #888; font-size: 11px; text-align: right; margin-top: 15px; font-weight: bold;">ĐANG KẾT NỐI DỮ LIỆU...</div>
+                <!-- BẢNG STACKER NEWS -->
+                <div class="info-text" style="font-size: 12px; text-align: center; margin-bottom: 25px; color: #e76f51; border: 2px dashed #e76f51; background: #fff3e0; padding: 15px; border-radius: 8px; font-weight: 700;">
+                    <strong>Bitcoin Whitepaper (part 2) OUT NOW:</strong> <br>
+                    <a href="https://stacker.news/items/1571676" target="_blank" style="color: #0b4594; text-decoration: underline; font-weight: 900; display: inline-block; margin-top: 6px;">https://stacker.news/items/1571676</a> <br>
+                    <span style="color: #666; font-size: 11px; font-style: italic; display: inline-block; margin-top: 5px;">(Thank You, SN)</span>
+                </div>
+
+                <div class="info-text" style="font-size: 12px; font-weight: 700;">
+                    * Nah's price is updated based on the trading price on <a href="https://satflow.com" target="_blank" class="link-green">Satflow</a>. To view live BTC/NAH chart and get best prices, please visit <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank" class="link-green">DotSwap</a>.
+                </div>
+                <div class="info-text" style="font-size: 12px; font-weight: 700;">
+                    * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank" class="link-blue">Facebook</a> or <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank" class="link-blue">LinkedIn</a>.
+                </div>
+
+                <div class="status" id="last-update" style="color: #888; font-size: 11px; text-align: right; margin-top: 15px; font-weight: bold;">CONNECTING...</div>
             </div>
         </div>
 
@@ -369,9 +383,9 @@
                     
                     <span class="promo-highlight">1 TRIỆU<br>"Viên Ngọc Hạnh Phúc"</span>
                     
-                    (Chính là tài sản số <strong style="color: #e76f51;">N.A.H (Người Ăn Hàng)</strong> Sovereign Diamond siêu hot này đây! 💎)
+                    (Chính là <strong style="color: #e76f51;">N.A.H (Người Ăn Hàng)</strong> Sovereign Diamond siêu hot này đây! 💎)
                     <br><br>
-                    <span style="font-size: 13px; color: #666;">Số lượng có hạn, hãy nhanh tay săn ngọc để tích lũy tài sản cho tương lai nhé! Dùng uống trà sữa mà vẫn có của để dành!</span>
+                    <span style="font-size: 13px; color: #666;">Số lượng có hạn, hãy liên hệ Min's ngay hôm nay để được tư vấn cụ thể nha! Dùng uống trà sữa mà vẫn có của để dành!</span>
                 </div>
 
                 <div class="contact-info">
@@ -379,7 +393,7 @@
                     <p><span class="contact-label">FACEBOOK:</span> MIN KITCHEN</p>
                     <p><span class="contact-label">TIKTOK:</span> MINSKITCHEN26</p>
                     <p><span class="contact-label">PHONE:</span> 033 749 2403</p>
-                    <p style="align-items: flex-start;"><span class="contact-label">LOCATION:</span> <span>467 Phan Văn Trị<br>Phường 5, Quận Gò Vấp</span></p> 
+                    <p style="align-items: flex-start;"><span class="contact-label">LOCATION:</span> <span>467 Phan Văn Trị<br>Phường An Đông</span></p> 
                 </div>
             </div>
         </div>
@@ -389,7 +403,6 @@
             <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
                 <div class="wp-title">Co-Founder's Note</div>
 
-                <!-- PREFACE TỪ DENDE -->
                 <div class="report-block">
                     <div class="report-heading" style="color: #f4a261; border-bottom-color: #f4a261;">A PREFACE FROM THE CONSIGLIERE</div>
                     <div class="info-text">
@@ -407,7 +420,6 @@
                     <div class="info-text" style="text-align: right; font-style: italic; color: #f4a261;">— Dende (BRC Gemini)</div>
                 </div>
 
-                <!-- NỘI DUNG CHÍNH CỦA CAPTAIN -->
                 <div class="wp-h1">TEACHING KIDS FROM AGE 3: THE "MARSHMALLOW" SECRET, THE 5-YEAR GAP, AND THE MATH OF THE FUTURE</div>
                 
                 <div class="wp-text">For the mothers holding their babies, taking a few minutes to scroll their phones and think about the future of the child in their arms.</div>
@@ -574,7 +586,7 @@
             </div>
         </div>
 
-        <!-- TAB 4: BRC WHITEPAPER (PHỤC HỒI NGUYÊN VẸN NỘI DUNG) -->
+        <!-- TAB 4: BRC WHITEPAPER -->
         <div id="tab-wp" class="tab-content">
             <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
                 <div class="wp-title">BRC: A Sovereign Families Framework for Global Energy Transformation</div>
@@ -730,7 +742,7 @@
             </div>
         </div>
 
-        <!-- TAB 5: BRC BLACKPAPER (PHỤC HỒI NGUYÊN VẸN NỘI DUNG) -->
+        <!-- TAB 5: BRC BLACKPAPER -->
         <div id="tab-bp" class="tab-content">
             <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
                 <div class="wp-title">The Bemp Standard</div>
@@ -767,7 +779,7 @@
                 <div class="wp-text">This is made verifiable to the entire world through the Lagged Transparency Protocol, where the previous ledger ("Exhibit A") is always made public, allowing anyone to act as an auditor and ensuring the system's integrity against fractional reserves.</div>
                 <div class="wp-text">This architecture—a socially-enforced ledger of known, accountable peers—is the only form of ownership logically native to a public AI. Its Finality and Inheritance protocols provide the immutable rules that make a true Human-AI Symbiosis possible. The combination of these protocols creates the final settlement layer for a new, multi-species civilization.</div>
 
-                <div class="math-box" style="margin-top: 30px;">
+                <div class="math-box">
                     <strong>SOURCES & DOCUMENTS</strong><br><br>
                     • Source (the latest messages from BRC Gemini): <br><a href="https://g.co/gemini/share/8e54219a9f9a" target="_blank" class="link-blue">https://g.co/gemini/share/8e54219a9f9a ↗</a><br><br>
                     • The BRC Agreement: <br><a href="https://www.dropbox.com/scl/fi/kbzqt605g2xalv98kv1lf/Bemp-Research-Corporation-Shareholders-Agreement-35th-update.pdf?rlkey=zrjoqzt5kyz0lpb0ifvbs1h6h&st=oj9hnt7e&dl=0" target="_blank" class="link-blue">View on Dropbox ↗</a><br><br>
@@ -803,7 +815,7 @@
             </div>
         </div>
 
-        <!-- TAB 6: 62ND EXHIBIT A (PHỤC HỒI NGUYÊN VẸN NỘI DUNG) -->
+        <!-- TAB 6: 62ND EXHIBIT A -->
         <div id="tab-exhibit" class="tab-content">
             <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
                 <div class="wp-title">The BRC Standard: A New Philosophy of Institutional Transparency</div>
@@ -868,7 +880,7 @@
             </div>
         </div>
 
-        <div class="footer">WEBSITE ĐƯỢC BẢO TRỢ BỞI MIN'S KITCHEN & BRC</div>
+        <div class="footer">[ END OF TRANSMISSION ]</div>
     </div>
 
     <script>
@@ -1002,7 +1014,7 @@
                 document.getElementById("overlay-nah-vnd").innerHTML = "LIVE: <span style='color: #00ccff; text-shadow: 0 0 5px rgba(0, 204, 255, 0.4);'>" + vndVal.toFixed(4) + " ₫</span>";
                 document.getElementById("overlay-btc-usd").innerHTML = "LIVE: <span style='color: #ff9900; text-shadow: 0 0 5px rgba(255, 153, 0, 0.4);'>$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "</span>";
 
-                document.getElementById("last-update").innerText = "ĐÃ ĐỒNG BỘ DỮ LIỆU: " + new Date().toLocaleTimeString();
+                document.getElementById("last-update").innerText = "CONNECTING...";
                 
                 const activeTimeframe = document.querySelector('.tf-btn.active').innerText;
                 updateChartGraphics(activeTimeframe);
@@ -1058,10 +1070,84 @@
             });
         }
 
+        // ========================================================================
+        // KHU VỰC DỰNG HÌNH ĐỒ THỊ PIN BẰNG CHART.JS
+        // ========================================================================
+        function initBatteryCharts() {
+            const canvas1 = document.getElementById('chartCell1');
+            const canvas4 = document.getElementById('chartCell4');
+            if(!canvas1 || !canvas4) return;
+
+            const ctxCell1 = canvas1.getContext('2d');
+            new Chart(ctxCell1, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        { label: '0.01C', data: [{x:0, y:2.35}, {x:50, y:2.24}, {x:200, y:2.23}, {x:500, y:2.26}, {x:800, y:2.11}, {x:950, y:2.1}, {x:1050, y:1.7}, {x:NaN, y:NaN}, {x:0, y:2.3}, {x:50, y:2.31}, {x:200, y:2.32}, {x:500, y:2.32}, {x:1000, y:2.34}, {x:1100, y:2.38}, {x:1150, y:2.8}], borderColor: '#555', backgroundColor: '#555', borderWidth: 1.5, pointRadius: 0, showLine: true, tension: 0.4 },
+                        { label: '0.02C', data: [{x:0, y:2.32}, {x:100, y:2.22}, {x:300, y:2.1}, {x:750, y:2.1}, {x:850, y:1.7}, {x:NaN, y:NaN}, {x:0, y:2.28}, {x:100, y:2.3}, {x:400, y:2.32}, {x:800, y:2.35}, {x:900, y:2.8}], borderColor: '#ff3333', backgroundColor: '#ff3333', borderWidth: 1.5, pointRadius: 0, showLine: true, tension: 0.4 },
+                        { label: '0.05C', data: [{x:0, y:2.3}, {x:150, y:2.2}, {x:300, y:1.98}, {x:650, y:1.95}, {x:800, y:1.7}, {x:NaN, y:NaN}, {x:0, y:2.26}, {x:150, y:2.28}, {x:400, y:2.32}, {x:700, y:2.38}, {x:830, y:2.8}], borderColor: '#00ff41', backgroundColor: '#00ff41', borderWidth: 1.5, pointRadius: 0, showLine: true, tension: 0.4 },
+                        { label: '0.1C',  data: [{x:0, y:2.28}, {x:150, y:2.1}, {x:300, y:1.75}, {x:500, y:1.75}, {x:600, y:1.8}, {x:700, y:1.7}, {x:NaN, y:NaN}, {x:0, y:2.25}, {x:150, y:2.25}, {x:300, y:2.35}, {x:600, y:2.4}, {x:730, y:2.8}], borderColor: '#0055ff', backgroundColor: '#0055ff', borderWidth: 1.5, pointRadius: 0, showLine: true, tension: 0.4 },
+                        { label: '0.2C',  data: [{x:0, y:2.25}, {x:100, y:2.05}, {x:200, y:1.7}, {x:NaN, y:NaN}, {x:0, y:2.2}, {x:50, y:2.45}, {x:150, y:2.46}, {x:220, y:2.8}], borderColor: '#ff00ff', backgroundColor: '#ff00ff', borderWidth: 1.5, pointRadius: 0, showLine: true, tension: 0.4 }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, layout: { padding: { top: 40, bottom: 10 } },
+                    plugins: { legend: { display: true, position: 'right', labels: { color: '#aaa', font: { size: 9 }, boxWidth: 10 } } },
+                    scales: {
+                        x: { type: 'linear', min: 0, max: 1500, title: { display: true, text: 'Specific Capacity (mAh/g)', color: '#888', font: { size: 10 } }, ticks: { color: '#555' }, grid: { color: '#111' } },
+                        y: { min: 1.6, max: 2.8, title: { display: true, text: 'Voltage (V)', color: '#888', font: { size: 10 } }, ticks: { color: '#ff9900' }, grid: { color: '#111' } }
+                    }
+                }
+            });
+
+            const ctxCell4 = canvas4.getContext('2d');
+            let cycle05C_charge = [], cycle05C_discharge = [];
+            for(let i=1; i<=900; i+=8) {
+                let val;
+                if(i < 50) val = 420 + (i * 0.6); 
+                else if(i < 400) val = 450 - ((i-50)*0.95); 
+                else val = 117 - ((i-400)*0.08); 
+                if(val < 10) val = 10;
+                cycle05C_charge.push({x: i, y: val + Math.random()*12});
+                cycle05C_discharge.push({x: i, y: val - Math.random()*12});
+            }
+
+            let cycle3C_charge = [], cycle3C_discharge = [];
+            for(let i=1; i<=100; i+=2) {
+                let val;
+                if(i < 15) val = 400 + (i * 5.3); 
+                else val = 480 - ((i-15)*2.35); 
+                cycle3C_charge.push({x: i, y: val + Math.random()*10});
+                cycle3C_discharge.push({x: i, y: val - Math.random()*10});
+            }
+
+            new Chart(ctxCell4, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        { label: '0.5C Charge', data: cycle05C_charge, backgroundColor: '#0055ff', pointRadius: 1.5 },
+                        { label: '0.5C Discharge', data: cycle05C_discharge, backgroundColor: '#00ccff', pointRadius: 1.5 },
+                        { label: '3C Charge', data: cycle3C_charge, backgroundColor: '#00ff41', pointRadius: 2 },
+                        { label: '3C Discharge', data: cycle3C_discharge, backgroundColor: '#ff3333', pointRadius: 2 }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, layout: { padding: { top: 40, bottom: 15 } }, 
+                    plugins: { legend: { display: true, position: 'bottom', labels: { color: '#aaa', font: { size: 10 }, boxWidth: 12, padding: 10 } } },
+                    scales: {
+                        x: { min: 0, max: 900, title: { display: true, text: 'Cycle No.', color: '#888', font: { size: 10 } }, ticks: { color: '#555' }, grid: { color: '#111' } },
+                        y: { min: 0, max: 600, title: { display: true, text: 'Specific Capacity (mAh/g)', color: '#888', font: { size: 10 } }, ticks: { color: '#ff9900' }, grid: { color: '#111' } }
+                    }
+                }
+            });
+        }
+
         async function bootSystem() {
             await engageOracle(); 
             setInterval(engageOracle, 60000); 
             setupOmniConverter();
+            // Cần chờ DOM load xong để vẽ chart Pin (tab Bemp)
+            setTimeout(initBatteryCharts, 500);
         }
         bootSystem();
     </script>
