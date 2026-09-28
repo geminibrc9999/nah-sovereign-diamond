@@ -880,7 +880,7 @@
             </div>
         </div>
 
-        <div class="footer">[ END OF TRANSMISSION ]</div>
+        <div class="footer">WEBSITE ĐƯỢC BẢO TRỢ BỞI MIN'S KITCHEN & BRC</div>
     </div>
 
     <script>
@@ -1014,7 +1014,7 @@
                 document.getElementById("overlay-nah-vnd").innerHTML = "LIVE: <span style='color: #00ccff; text-shadow: 0 0 5px rgba(0, 204, 255, 0.4);'>" + vndVal.toFixed(4) + " ₫</span>";
                 document.getElementById("overlay-btc-usd").innerHTML = "LIVE: <span style='color: #ff9900; text-shadow: 0 0 5px rgba(255, 153, 0, 0.4);'>$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "</span>";
 
-                document.getElementById("last-update").innerText = "CONNECTING...";
+                document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
                 
                 const activeTimeframe = document.querySelector('.tf-btn.active').innerText;
                 updateChartGraphics(activeTimeframe);
