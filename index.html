@@ -315,7 +315,7 @@
 
                 <div class="parity-section">
                     <div class="parity-title">HARD MONEY PARITY</div>
-                    <div class="data-row" style="border-bottom: none;"><span class="label">SAT / NAH</span><span class="value" id="sats-val" style="font-size: 16px;">0.0001 SAT</span></div>
+                    <div class="data-row" style="border-bottom: none;"><span class="label">SAT / NAH</span><span class="value" id="sats-val" style="font-size: 16px;">0.00001 SAT</span></div>
                 </div>
 
                 <div class="converter-section">
@@ -903,7 +903,7 @@
         // KHU VỰC ĐIỀU KHIỂN DỮ LIỆU TÀI CHÍNH (NAH)
         // ========================================================================
         
-        const CURRENT_NAH_SATS = 0.0001; 
+        const CURRENT_NAH_SATS = 0.00001; 
         const CIRCULATING_SUPPLY = 85300000000000; 
 
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
@@ -941,7 +941,8 @@
             if (timestampMs < T_SEP_17_26) return 0.63;
             if (timestampMs < T_SEP_20_26) return 0.002;
             if (timestampMs < T_SEP_27_26) return 0.00042;
-            return 0.0001; 
+            if (timestampMs < new Date("2026-10-05T00:00:00Z").getTime()) return 0.0001;
+            return 0.00001; 
         }
 
         function renderPercentageChange(elementId, firstPrice, lastPrice) {
