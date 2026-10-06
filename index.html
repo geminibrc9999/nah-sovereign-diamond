@@ -42,6 +42,7 @@
     }
     </script>
 
+    <!-- Giữ lại Chart.js ĐỂ DÙNG CHO BIỂU ĐỒ PIN (BEMP CELLS) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Quicksand:wght@500;700;900&display=swap');
@@ -118,33 +119,13 @@
             100% { transform: scale(1.3); filter: brightness(1.5) drop-shadow(0 0 15px rgba(0, 204, 255, 0.9)); } 
         }
 
-        /* MARKET TAB STYLES & GRID CHARTS */
-        .timeframe-selector { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
-        .tf-btn { 
-            background: #fff; color: #0b4594; border: 2px solid #0b4594; border-radius: 20px; 
-            padding: 6px 14px; font-family: 'Quicksand', sans-serif; font-weight: 900; font-size: 11px; cursor: pointer; transition: all 0.2s; 
+        /* TÙY CHỈNH BẢNG ĐIỆN TỬ HIỂN THỊ GIÁ LIVE */
+        .live-dash-container { display: flex; gap: 15px; margin-bottom: 25px; width: 100%; }
+        .live-box { 
+            flex: 1; background: #111111; border: 3px solid #0b4594; padding: 15px 10px; border-radius: 10px; 
+            box-shadow: 4px 4px 0px #fceea7; display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
-        .tf-btn:hover { background: #fceea7; }
-        .tf-btn.active { background: #0b4594; color: #fff; }
-
-        .charts-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
-        .chart-box { 
-            background: #111111; border: 3px solid #0b4594; padding: 8px; position: relative; height: 210px; border-radius: 10px; overflow: hidden; 
-            box-shadow: 4px 4px 0px #fceea7;
-        }
-        .chart-label { 
-            font-size: 10px; color: #ffffff; position: absolute; top: 8px; left: 8px; z-index: 10; 
-            background: rgba(11, 69, 148, 0.9); padding: 3px 6px; border-radius: 5px; text-transform: uppercase; font-weight: bold; border: 1px solid #ffffff; 
-        }
-        
-        .live-price-overlay { 
-            position: absolute; top: 8px; right: 8px; z-index: 10; font-size: 11px; color: #ffffff; 
-            background: rgba(0, 0, 0, 0.7); padding: 4px 8px; border-radius: 5px; font-weight: bold; border: 1px solid #fff; 
-        }
-
-        .pct-change { margin-left: 6px; font-size: 9px; padding: 2px 4px; border-radius: 3px; background: rgba(255,255,255,0.2); }
-        .pct-up { color: #00ff41; }
-        .pct-down { color: #ff3333; }
+        .live-box-label { font-size: 12px; color: #888; font-weight: bold; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
         
         .parity-section { margin-bottom: 15px; background: #e9c46a; padding: 10px 15px; border-radius: 8px; border: 2px solid #0b4594; }
         .parity-title { font-size: 12px; color: #0b4594; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
@@ -157,7 +138,7 @@
         /* TÙY CHỈNH Ô CONVERTER */
         .converter-section { 
             margin-bottom: 25px; padding: 15px; background: #ffffff; border: 3px solid #0b4594; 
-            border-radius: 12px; box-shadow: 4px 4px 0px #e9c46a;
+            border-radius: 12px; box-shadow: 4px 4px 0px #e9c46a; width: 100%; box-sizing: border-box;
         }
         .converter-row { 
             display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; 
@@ -175,7 +156,7 @@
 
         .sub-section { 
             margin-top: 10px; margin-bottom: 25px; padding: 15px; background: #fdf6d8; 
-            border: 2px solid #0b4594; border-radius: 10px; 
+            border: 2px solid #0b4594; border-radius: 10px; width: 100%; box-sizing: border-box;
         }
         .sub-title { font-size: 14px; font-weight: 900; color: #e76f51; margin-bottom: 12px; text-transform: uppercase; text-align: center; }
         .sub-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; padding: 8px 0; border-bottom: 2px dotted #e9c46a; }
@@ -210,12 +191,6 @@
         .math-box.green { background: #e8f5e9; border-color: #2a9d8f; color: #2a9d8f; }
         .math-box.blue { background: #e3f2fd; border-color: #0b4594; color: #0b4594; }
 
-        .btn-link { 
-            display: block; text-align: center; background: #0b4594; color: #fff; font-weight: 900; text-decoration: none; 
-            padding: 15px; font-size: 14px; text-transform: uppercase; border-radius: 30px; margin-top: 20px; transition: all 0.2s; box-shadow: 4px 4px 0px #e9c46a; 
-        }
-        .btn-link:hover { background: #f4a261; box-shadow: 2px 2px 0px #0b4594; transform: translate(2px, 2px); }
-        
         .wp-title { font-family: 'Quicksand', sans-serif; font-size: 20px; font-weight: 900; color: #e76f51; margin-bottom: 15px; text-transform: uppercase; text-align: center; line-height: 1.4; }
         .wp-subtitle { font-size: 13px; color: #0b4594; font-weight: 700; text-align: center; margin-bottom: 25px; }
         .wp-h1 { font-size: 18px; color: #0b4594; font-weight: 900; margin-top: 30px; margin-bottom: 12px; text-transform: uppercase; border-bottom: 3px solid #e9c46a; padding-bottom: 5px; }
@@ -256,7 +231,7 @@
             .bp-label { border-right: none; border-bottom: 2px solid #e9c46a; padding-bottom: 8px; } 
             .tab-btn { font-size: 9px; padding: 10px 2px; letter-spacing: 0px; }
             .tab-row.bottom-row .tab-btn { font-size: 8px; padding: 10px 1px; }
-            .charts-container { grid-template-columns: 1fr; gap: 15px; } 
+            .live-dash-container { flex-direction: column; gap: 10px; }
             #tab-promo .terminal { max-width: 90%; }
         }
     </style>
@@ -289,33 +264,25 @@
             </div>
         </div>
 
-        <!-- TAB 1: TÀI CHÍNH VÀ TIỀN TỆ (NAH) -->
+        <!-- TAB 1: TÀI CHÍNH VÀ TIỀN TỆ (NAH) - TỐI GIẢN HÓA -->
         <div id="tab-nah" class="tab-content" style="display: flex;">
-            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
-                <div class="timeframe-selector">
-                    <button class="tf-btn active" onclick="switchTimeframe('1D', this)">1D</button>
-                    <button class="tf-btn" onclick="switchTimeframe('1W', this)">1W</button>
-                    <button class="tf-btn" onclick="switchTimeframe('1M', this)">1M</button>
-                    <button class="tf-btn" onclick="switchTimeframe('3M', this)">3M</button>
-                    <button class="tf-btn" onclick="switchTimeframe('ALL', this)">ALL</button>
-                </div>
-
-                <div class="charts-container">
-                    <div class="chart-box">
-                        <div class="chart-label">VND / NAH <span id="nah-vnd-change" class="pct-change">...</span></div>
-                        <div class="live-price-overlay" id="overlay-nah-vnd">LIVE: <span style="color: #00ccff;">...</span></div>
-                        <canvas id="chartNahVnd"></canvas>
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px; width: 100%;">
+                
+                <!-- BẢNG ĐIỆN TỬ HIỂN THỊ GIÁ LIVE -->
+                <div class="live-dash-container">
+                    <div class="live-box">
+                        <div class="live-box-label">LIVE VND / NAH</div>
+                        <div id="live-vnd-nah" style="font-size: 24px; color: #00ccff; font-weight: 900; text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);">CONNECTING...</div>
                     </div>
-                    <div class="chart-box">
-                        <div class="chart-label">USD / BTC <span id="btc-change" class="pct-change">...</span></div>
-                        <div class="live-price-overlay" id="overlay-btc-usd">LIVE: <span style="color: #ff9900;">...</span></div>
-                        <canvas id="chartBtc"></canvas>
+                    <div class="live-box">
+                        <div class="live-box-label">LIVE USD / BTC</div>
+                        <div id="live-usd-btc" style="font-size: 24px; color: #ff9900; font-weight: 900; text-shadow: 0 0 10px rgba(255, 153, 0, 0.5);">CONNECTING...</div>
                     </div>
                 </div>
 
-                <div class="parity-section">
+                <div class="parity-section" style="width: 100%; box-sizing: border-box;">
                     <div class="parity-title">HARD MONEY PARITY</div>
-                    <div class="data-row" style="border-bottom: none;"><span class="label">SAT / NAH</span><span class="value" id="sats-val" style="font-size: 16px;">0.00001 SAT</span></div>
+                    <div class="data-row" style="border-bottom: none;"><span class="label">SAT / NAH</span><span class="value" id="sats-val" style="font-size: 16px;">... SAT</span></div>
                 </div>
 
                 <div class="converter-section">
@@ -367,7 +334,7 @@
                 </div>
 
                 <div class="info-text" style="font-size: 12px; font-weight: 700;">
-                    * Nah's price is updated based on the trading price on <a href="https://satflow.com" target="_blank" class="link-green">Satflow</a>. To view live BTC/NAH chart and get best prices, please visit <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank" class="link-green">DotSwap</a>.
+                    * Nah's historical chart can be viewed on <a href="https://satflow.com" target="_blank" class="link-green">Satflow</a>. To trade live BTC/NAH pairs, please visit <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank" class="link-green">DotSwap</a>.
                 </div>
                 <div class="info-text" style="font-size: 12px; font-weight: 700;">
                     * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank" class="link-blue">Facebook</a> or <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank" class="link-blue">LinkedIn</a>.
@@ -900,109 +867,19 @@
         }
 
         // ========================================================================
-        // KHU VỰC ĐIỀU KHIỂN DỮ LIỆU TÀI CHÍNH (NAH)
+        // KHU VỰC ĐIỀU KHIỂN DỮ LIỆU TÀI CHÍNH (NAH) - TỐI GIẢN HÓA
         // ========================================================================
         
-        const CURRENT_NAH_SATS = 0.00001; 
+        // CHỈ CẦN CẬP NHẬT MỖI BIẾN NÀY KHI GIÁ THAY ĐỔI
+        const CURRENT_NAH_SATS = 0.00008; 
+        
         const CIRCULATING_SUPPLY = 85300000000000; 
 
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
         const FOREX_API = "https://open.er-api.com/v6/latest/USD";
-        const CG_CHART_API = (days) => `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${days}`;
 
-        let chartInstanceBtc, chartInstanceNahVnd;
-        let chartCache = {}; 
         let globalLiveVndRate = 25500; 
         let globalLiveBtcPrice = 60000;
-
-        const T_APR_27_26 = new Date("2026-04-27T00:00:00Z").getTime();
-        const T_JUL_01_26 = new Date("2026-07-01T00:00:00Z").getTime();
-        const T_JUL_11_26 = new Date("2026-07-11T00:00:00Z").getTime();
-        const T_JUL_12_26 = new Date("2026-07-12T00:00:00Z").getTime();
-        const T_AUG_08_26 = new Date("2026-08-08T04:30:00Z").getTime();
-        const T_AUG_10_26 = new Date("2026-08-10T12:00:00Z").getTime();
-        const T_AUG_12_26 = new Date("2026-08-12T01:00:00Z").getTime();
-        const T_AUG_13_26 = new Date("2026-08-13T12:00:00Z").getTime(); 
-        const T_SEP_04_26 = new Date("2026-09-04T00:00:00Z").getTime(); 
-        const T_SEP_17_26 = new Date("2026-09-17T00:00:00Z").getTime(); 
-        const T_SEP_20_26 = new Date("2026-09-20T00:00:00Z").getTime();
-        const T_SEP_27_26 = new Date("2026-09-27T00:00:00Z").getTime();
-
-        function getNahSatsAtTime(timestampMs) {
-            if (timestampMs < T_APR_27_26) return null; 
-            if (timestampMs < T_JUL_01_26) return 0.001;
-            if (timestampMs < T_JUL_11_26) return 0.01;
-            if (timestampMs < T_JUL_12_26) return 0.02;
-            if (timestampMs < T_AUG_08_26) return 0.08; 
-            if (timestampMs < T_AUG_10_26) return 0.09;
-            if (timestampMs < T_AUG_12_26) return 0.21;
-            if (timestampMs < T_AUG_13_26) return 0.26;
-            if (timestampMs < T_SEP_04_26) return 0.3; 
-            if (timestampMs < T_SEP_17_26) return 0.63;
-            if (timestampMs < T_SEP_20_26) return 0.002;
-            if (timestampMs < T_SEP_27_26) return 0.00042;
-            if (timestampMs < new Date("2026-10-05T00:00:00Z").getTime()) return 0.0001;
-            return 0.00001; 
-        }
-
-        function renderPercentageChange(elementId, firstPrice, lastPrice) {
-            const el = document.getElementById(elementId);
-            if (!firstPrice || !lastPrice || firstPrice === 0) return;
-            const change = ((lastPrice - firstPrice) / firstPrice) * 100;
-            if (change > 0) { el.innerText = "+" + change.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "%"; el.className = "pct-change pct-up"; } 
-            else if (change < 0) { el.innerText = change.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "%"; el.className = "pct-change pct-down"; }
-        }
-
-        function buildFinancialChart(ctxId, borderHex, labelPrefix, formatDecimals) {
-            return new Chart(document.getElementById(ctxId).getContext('2d'), {
-                type: 'line',
-                data: { labels: [], datasets: [{ data: [], borderColor: borderHex, borderWidth: 2, pointRadius: 0, fill: false, tension: 0.1 }] },
-                options: {
-                    responsive: true, maintainAspectRatio: false, layout: { padding: { top: 40 } },
-                    plugins: { legend: { display: false }, tooltip: { enabled: true, mode: 'index', intersect: false, callbacks: { label: function(c) { return labelPrefix + c.parsed.y.toLocaleString('en-US', {minimumFractionDigits: formatDecimals, maximumFractionDigits: formatDecimals}); } } } },
-                    scales: { x: { ticks: { color: '#888', font: { size: 9 } }, grid: { color: '#222' } }, y: { ticks: { color: borderHex, font: { size: 9 }, callback: function(v) { return labelPrefix + v.toLocaleString('en-US', {maximumFractionDigits: formatDecimals}); } }, grid: { color: '#222' } } },
-                    interaction: { mode: 'nearest', axis: 'x', intersect: false }
-                }
-            });
-        }
-
-        // BIỂU ĐỒ 2 MÀU: XANH CYAN VÀ CAM NEON BÊN TRONG KHUNG ĐEN
-        chartInstanceNahVnd = buildFinancialChart('chartNahVnd', '#00ccff', '₫', 4); 
-        chartInstanceBtc = buildFinancialChart('chartBtc', '#ff9900', '$', 0); 
-
-        async function updateChartGraphics(timeframe) {
-            let days;
-            if (timeframe === '1D') days = '1';
-            else if (timeframe === '1W') days = '7';
-            else if (timeframe === '1M') days = '30';
-            else if (timeframe === '3M') days = '90';
-            else {
-                const startMs = new Date("2026-06-21T00:00:00Z").getTime();
-                days = Math.ceil((Date.now() - startMs) / 86400000).toString();
-                if (parseInt(days) < 1) days = '1';
-            }
-
-            if (!chartCache[timeframe]) { const res = await fetch(CG_CHART_API(days)); const data = await res.json(); chartCache[timeframe] = data.prices; }
-            const rawData = chartCache[timeframe];
-            const labels = [], btcUsdPrices = [], nahVndPrices = [];
-            
-            rawData.forEach(p => {
-                const ts = p[0], btcUsd = p[1], nahSats = getNahSatsAtTime(ts);
-                if (nahSats !== null) { 
-                    labels.push(new Date(ts).toLocaleDateString()); 
-                    btcUsdPrices.push(btcUsd); 
-                    nahVndPrices.push((nahSats / 100000000) * btcUsd * globalLiveVndRate);
-                }
-            });
-            
-            chartInstanceNahVnd.data.labels = labels; chartInstanceNahVnd.data.datasets[0].data = nahVndPrices; chartInstanceNahVnd.update();
-            chartInstanceBtc.data.labels = labels; chartInstanceBtc.data.datasets[0].data = btcUsdPrices; chartInstanceBtc.update();
-            
-            renderPercentageChange('nah-vnd-change', nahVndPrices[0], nahVndPrices[nahVndPrices.length - 1]);
-            renderPercentageChange('btc-change', btcUsdPrices[0], btcUsdPrices[btcUsdPrices.length - 1]);
-        }
-
-        function switchTimeframe(timeframe, btn) { document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); updateChartGraphics(timeframe); }
 
         async function engageOracle() {
             try {
@@ -1015,17 +892,19 @@
                 const vndVal = usdVal * globalLiveVndRate; 
                 const mcapBtc = (CIRCULATING_SUPPLY * CURRENT_NAH_SATS) / 100000000;
                 
+                // Cập nhật Market Cap
                 document.getElementById("mcap-btc").innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " BTC";
                 document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 
-                // Live Overlays Update (Neon Text)
-                document.getElementById("overlay-nah-vnd").innerHTML = "LIVE: <span style='color: #00ccff; text-shadow: 0 0 5px rgba(0, 204, 255, 0.4);'>" + vndVal.toFixed(4) + " ₫</span>";
-                document.getElementById("overlay-btc-usd").innerHTML = "LIVE: <span style='color: #ff9900; text-shadow: 0 0 5px rgba(255, 153, 0, 0.4);'>$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "</span>";
+                // Cập nhật Parity SAT
+                document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " SAT";
+
+                // Cập nhật Bảng Live Dashboard
+                document.getElementById("live-vnd-nah").innerText = vndVal.toFixed(4) + " ₫";
+                document.getElementById("live-usd-btc").innerText = "$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
                 document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
                 
-                const activeTimeframe = document.querySelector('.tf-btn.active').innerText;
-                updateChartGraphics(activeTimeframe);
             } catch (error) {
                 console.error("Oracle Connection Failed: ", error);
             }
@@ -1079,7 +958,7 @@
         }
 
         // ========================================================================
-        // KHU VỰC DỰNG HÌNH ĐỒ THỊ PIN BẰNG CHART.JS
+        // KHU VỰC DỰNG HÌNH ĐỒ THỊ PIN BẰNG CHART.JS (GIỮ NGUYÊN CHO BEMP CELLS)
         // ========================================================================
         function initBatteryCharts() {
             const canvas1 = document.getElementById('chartCell1');
