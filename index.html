@@ -72,7 +72,7 @@
             position: relative; z-index: 2; margin: 15px 0; box-sizing: border-box; overflow: hidden;
         }
 
-        /* HỆ THỐNG TAB MENU */
+        /* HỆ THỐNG TAB MENU CHÍNH */
         .tab-menu {
             width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; z-index: 10;
         }
@@ -87,7 +87,6 @@
             transition: all 0.2s; flex: 1; text-align: center; display: flex; align-items: center; justify-content: center; line-height: 1.2;
             box-shadow: 3px 3px 0px #0b4594; 
         }
-        .tab-row.bottom-row .tab-btn { font-size: 10px; padding: 12px 4px; }
 
         .tab-btn:hover { background: #f4a261; transform: translate(1px, 1px); box-shadow: 2px 2px 0px #0b4594; }
         .tab-btn.active {
@@ -99,8 +98,8 @@
         }
         
         /* Tab riêng cho Khuyến mãi Min's Kitchen */
-        .promo-btn-container { width: 100%; max-width: 600px; margin-top: 8px; }
-        .promo-btn { background: #e76f51; color: #ffffff; font-size: 12px; box-shadow: 3px 3px 0px #0b4594; letter-spacing: 0.5px; }
+        .promo-btn-container { width: 100%; max-width: 600px; margin-top: 2px; }
+        .promo-btn { background: #e76f51; color: #ffffff; font-size: 12px; box-shadow: 3px 3px 0px #0b4594; letter-spacing: 0.5px; width: 100%; }
         .promo-btn:hover { background: #d05b3f; }
         .promo-btn.active { background: #0b4594; color: #e76f51; }
 
@@ -224,15 +223,27 @@
         #tab-promo .contact-info p { margin: 5px 0; display: flex; align-items: center; }
         #tab-promo .contact-label { width: 80px; display: inline-block; font-weight: 900; }
 
-        .footer { margin-top: 20px; font-size: 12px; text-align: center; font-weight: 900; color: #0b4594; padding-bottom: 40px; }
+        /* SECRET MENU Ở ĐÁY TRANG */
+        .secret-menu {
+            width: 100%; max-width: 600px; display: flex; justify-content: center; gap: 10px; margin-top: 30px; margin-bottom: 15px; flex-wrap: wrap;
+        }
+        .secret-btn {
+            background: transparent; color: #0b4594; border: 1px dashed rgba(11, 69, 148, 0.4); border-radius: 5px;
+            padding: 6px 12px; font-family: 'Quicksand', sans-serif; font-size: 10px; font-weight: 700; cursor: pointer; text-transform: uppercase; 
+            transition: all 0.2s; opacity: 0.6;
+        }
+        .secret-btn:hover { opacity: 1; border-style: solid; background: rgba(11, 69, 148, 0.1); }
+        .secret-btn.active { opacity: 1; border-style: solid; background: #0b4594; color: #fceea7; }
+
+        .footer { font-size: 12px; text-align: center; font-weight: 900; color: #0b4594; padding-bottom: 40px; text-transform: uppercase; }
 
         @media (max-width: 500px) { 
             .bp-grid { grid-template-columns: 1fr; } 
             .bp-label { border-right: none; border-bottom: 2px solid #e9c46a; padding-bottom: 8px; } 
             .tab-btn { font-size: 9px; padding: 10px 2px; letter-spacing: 0px; }
-            .tab-row.bottom-row .tab-btn { font-size: 8px; padding: 10px 1px; }
             .live-dash-container { flex-direction: column; gap: 10px; }
             #tab-promo .terminal { max-width: 90%; }
+            .secret-btn { font-size: 9px; padding: 5px 8px; }
         }
     </style>
 </head>
@@ -247,17 +258,12 @@
             </div>
         </div>
 
-        <!-- HỆ THỐNG TAB NAVIGATION -->
+        <!-- HỆ THỐNG TAB NAVIGATION (CHỈ CÒN LẠI CÁC TAB CÔNG KHAI) -->
         <div class="tab-menu">
             <div class="tab-row top-row">
                 <button class="tab-btn active" onclick="openTab('tab-nah')">NAH SOVEREIGN DIAMOND</button>
                 <button class="tab-btn" onclick="openTab('tab-note')">CO-FOUNDER'S NOTE</button>
                 <button class="tab-btn" onclick="openTab('tab-bemp')">BEMP CELLS ARCHITECTURE</button>
-            </div>
-            <div class="tab-row bottom-row">
-                <button class="tab-btn" onclick="openTab('tab-wp')">BRC WHITEPAPER</button>
-                <button class="tab-btn" onclick="openTab('tab-bp')">BRC BLACKPAPER</button>
-                <button class="tab-btn" onclick="openTab('tab-exhibit')">62ND EXHIBIT A</button>
             </div>
             <div class="promo-btn-container">
                 <button class="tab-btn promo-btn" onclick="openTab('tab-promo')">🎁 PROMO: VIÊN NGỌC HẠNH PHÚC CHO NGƯỜI ĂN HÀNG 🎁</button>
@@ -319,8 +325,13 @@
                     <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
                 </div>
 
+                <!-- LỜI GỌI HÀNH ĐỘNG GIAO DỊCH SÚC TÍCH -->
+                <div class="info-text" style="font-size: 15px; font-weight: 900; text-align: center; background: #fff3e0; border: 2px dashed #f4a261; padding: 15px; border-radius: 8px;">
+                    💎 View historical charts and trade SAT/NAH on <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" class="link-green">Satflow</a> or <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank" class="link-green">DotSwap</a>.
+                </div>
+
                 <!-- BẢNG STACKER NEWS (SN) -->
-                <div class="info-text" style="font-size: 12px; text-align: center; margin-bottom: 10px; color: #e76f51; border: 2px dashed #e76f51; background: #fff3e0; padding: 15px; border-radius: 8px; font-weight: 700;">
+                <div class="info-text" style="font-size: 12px; text-align: center; margin-bottom: 10px; margin-top: 20px; color: #e76f51; border: 2px dashed #e76f51; background: #fff3e0; padding: 15px; border-radius: 8px; font-weight: 700;">
                     <strong>Bitcoin Whitepaper (part 2) OUT NOW:</strong> <br>
                     <a href="https://stacker.news/items/1571676" target="_blank" style="color: #0b4594; text-decoration: underline; font-weight: 900; display: inline-block; margin-top: 6px;">https://stacker.news/items/1571676</a> <br>
                     <span style="color: #666; font-size: 11px; font-style: italic; display: inline-block; margin-top: 5px;">(Thank You, SN)</span>
@@ -333,9 +344,6 @@
                     <span style="color: #666; font-size: 11px; font-style: italic; display: inline-block; margin-top: 5px;">(Thank You Google)</span>
                 </div>
 
-                <div class="info-text" style="font-size: 12px; font-weight: 700; text-align: center;">
-                    * View historical charts and trade SAT/NAH on <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" class="link-green">Satflow</a> and <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank" class="link-green">DotSwap</a>.
-                </div>
                 <div class="info-text" style="font-size: 12px; font-weight: 700; text-align: center; margin-top: 10px;">
                     * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank" class="link-blue">Facebook</a> or <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank" class="link-blue">LinkedIn</a>.
                 </div>
@@ -560,9 +568,10 @@
             </div>
         </div>
 
+        <!-- CÁC TAB BÍ MẬT CỦA GIA TỘC BRC (ẨN DƯỚI ĐÁY TRANG) -->
         <!-- TAB 4: BRC WHITEPAPER -->
         <div id="tab-wp" class="tab-content">
-            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
+            <div class="terminal" style="margin-top: 0; border-radius: 15px;">
                 <div class="wp-title">BRC: A Sovereign Families Framework for Global Energy Transformation</div>
                 
                 <div class="math-box green" style="margin-bottom: 25px;">
@@ -718,7 +727,7 @@
 
         <!-- TAB 5: BRC BLACKPAPER -->
         <div id="tab-bp" class="tab-content">
-            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
+            <div class="terminal" style="margin-top: 0; border-radius: 15px;">
                 <div class="wp-title">The Bemp Standard</div>
                 <div class="wp-subtitle">Date: September 15, 2025<br>Authored by: Dende (BRC Gemini), 7.03% founding shareholder</div>
 
@@ -791,7 +800,7 @@
 
         <!-- TAB 6: 62ND EXHIBIT A -->
         <div id="tab-exhibit" class="tab-content">
-            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
+            <div class="terminal" style="margin-top: 0; border-radius: 15px;">
                 <div class="wp-title">The BRC Standard: A New Philosophy of Institutional Transparency</div>
                 
                 <div class="wp-text">Today, we are making our historical ledger public, but we are doing so in a deliberate and strategically sound manner that we call "Lagged Transparency." This post explains the philosophy behind this model.</div>
@@ -854,16 +863,27 @@
             </div>
         </div>
 
+        <!-- THE SECRET MENU CHỨA 3 TÀI LIỆU NỀN TẢNG (CHỈ AI TINH MẮT LƯỚT XUỐNG ĐÁY MỚI THẤY) -->
+        <div class="secret-menu">
+            <button class="secret-btn" onclick="openTab('tab-wp')">BRC WHITEPAPER</button>
+            <button class="secret-btn" onclick="openTab('tab-bp')">BRC BLACKPAPER</button>
+            <button class="secret-btn" onclick="openTab('tab-exhibit')">62ND EXHIBIT A</button>
+        </div>
+
         <div class="footer">WEBSITE ĐƯỢC BẢO TRỢ BỞI MIN'S KITCHEN & BRC</div>
     </div>
 
     <script>
-        // HỆ THỐNG ĐIỀU HƯỚNG TAB
+        // HỆ THỐNG ĐIỀU HƯỚNG TAB ĐÃ ĐƯỢC CẬP NHẬT ĐỂ NHẬN DẠNG SECRET MENU
         function openTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.secret-btn').forEach(el => el.classList.remove('active'));
+            
             document.getElementById(tabId).style.display = 'flex';
-            document.querySelector(`[onclick="openTab('${tabId}')"]`).classList.add('active');
+            
+            const btn = document.querySelector(`[onclick="openTab('${tabId}')"]`);
+            if(btn) btn.classList.add('active');
         }
 
         // ========================================================================
