@@ -126,7 +126,7 @@
         }
         .live-box-label { font-size: 12px; color: #888; font-weight: bold; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
         
-        .parity-section { margin-bottom: 15px; background: #e9c46a; padding: 10px 15px; border-radius: 8px; border: 2px solid #0b4594; }
+        .parity-section { margin-bottom: 8px; background: #e9c46a; padding: 10px 15px; border-radius: 8px; border: 2px solid #0b4594; }
         .parity-title { font-size: 12px; color: #0b4594; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
         
         .data-row { display: flex; justify-content: space-between; border-bottom: 2px dotted #0b4594; padding: 8px 0; font-size: 14px; font-weight: 900; }
@@ -286,9 +286,19 @@
                     </div>
                 </div>
 
+                <!-- BẢNG PARITY & GỌI HÀNH ĐỘNG GIAO DỊCH -->
                 <div class="parity-section" style="width: 100%; box-sizing: border-box;">
-                    <div class="parity-title">HARD MONEY PARITY</div>
+                    <div class="parity-title">
+                        HARD MONEY PARITY 
+                        <span style="font-size: 10px; text-transform: none; float: right; color: #fff;">
+                            (Based on <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #e76f51; text-decoration: underline;">Satflow</a>)
+                        </span>
+                    </div>
                     <div class="data-row" style="border-bottom: none;"><span class="label">SAT / NAH</span><span class="value" id="sats-val" style="font-size: 16px;">... SAT</span></div>
+                </div>
+
+                <div style="font-size: 13px; font-weight: 900; text-align: center; color: #0b4594; margin-bottom: 25px; width: 100%;">
+                    💎 View historical SAT/NAH charts and get the best trading prices at <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank" style="color: #2a9d8f; text-decoration: underline;">DotSwap</a>.
                 </div>
 
                 <div class="converter-section">
@@ -323,11 +333,6 @@
                     <div class="sub-row"><span class="label">MARKET CAP (BTC)</span><span class="value highlight" id="mcap-btc">LOADING...</span></div>
                     <div class="sub-row"><span class="label">MARKET CAP (USD)</span><span class="value highlight" id="mcap-usd">LOADING...</span></div>
                     <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
-                </div>
-
-                <!-- LỜI GỌI HÀNH ĐỘNG GIAO DỊCH SÚC TÍCH -->
-                <div class="info-text" style="font-size: 15px; font-weight: 900; text-align: center; background: #fff3e0; border: 2px dashed #f4a261; padding: 15px; border-radius: 8px;">
-                    💎 View historical charts and trade SAT/NAH on <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" class="link-green">Satflow</a> or <a href="https://swap.on.nexus/#R_%E2%80%A2BTC_%E2%80%A2NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank" class="link-green">DotSwap</a>.
                 </div>
 
                 <!-- BẢNG STACKER NEWS (SN) -->
@@ -832,7 +837,7 @@
                     <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Sang Dang</span><span class="value" style="color: #e76f51;">0.59%</span></div>
                     <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Linh Phan</span><span class="value" style="color: #e76f51;">1%</span></div>
                     <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Anh Phan</span><span class="value" style="color: #e76f51;">7.05%</span></div>
-                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Minh Khoa Tran</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Min Khoa Tran</span><span class="value" style="color: #e76f51;">1%</span></div>
                     <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Khue Tong</span><span class="value" style="color: #e76f51;">0.5%</span></div>
                     <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Bao Pham</span><span class="value" style="color: #e76f51;">0.2%</span></div>
                     <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Tony Vong</span><span class="value" style="color: #e76f51;">2.01%</span></div>
@@ -891,7 +896,7 @@
         // ========================================================================
         
         // CHỈ CẦN CẬP NHẬT MỖI BIẾN NÀY KHI GIÁ THAY ĐỔI
-        const CURRENT_NAH_SATS = 0.00008; 
+        const CURRENT_NAH_SATS = 0.0003; 
         
         const CIRCULATING_SUPPLY = 85300000000000; 
 
