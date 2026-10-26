@@ -3,991 +3,333 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="NAH•SOVEREIGN•DIAMOND Decentralized PSBT DEX, Live Chart & Bemp Li-S Architecture.">
-    <meta name="keywords" content="giá vnd nah sovereign diamond, nah sovereign diamond price, nah rune price, satflow nah, btc, bitcoin, bemp research, nahkah motors, brc whitepaper, brc blackpaper, exhibit a, low time preference">
+    <meta name="description" content="Live price and market cap of NAH Sovereign Diamond. Giá quy đổi VND, USD, BTC của NAH Sovereign Diamond trực tuyến chuẩn xác nhất.">
+    <meta name="keywords" content="giá vnd nah sovereign diamond, nah sovereign diamond price, nah rune price, satflow nah, btc, bitcoin, bemp research, nahkah motors, brc whitepaper, brc blackpaper, exhibit a, low time preference, min's kitchen">
     <meta name="author" content="Bemp Research Corporation">
     
-    <title>NAH•SOVEREIGN•DIAMOND 💎 | DECENTRALIZED PSBT DEX & BEMP LI-S</title>
+    <title>NAH SOVEREIGN DIAMOND 💎 & BEMP LI-S ARCHITECTURE</title>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&family=Orbitron:wght@700;900&display=swap');
-
-        :root {
-            --bg-main: #070b14;
-            --bg-card: #0f172a;
-            --bg-panel: #162033;
-            --bg-input: #0b1120;
-            --border-color: #1e293b;
-            --border-highlight: #334155;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-cyan: #00f0ff;
-            --accent-emerald: #10b981;
-            --accent-amber: #f59e0b;
-            --accent-rose: #f43f5e;
-            --accent-blue: #3b82f6;
-        }
-
-        * { box-sizing: border-box; }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Quicksand:wght@500;700;900&display=swap');
 
         body {
-            background-color: var(--bg-main);
-            background-image: radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.07) 0%, transparent 60%);
-            color: var(--text-main);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 14px;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .app-shell {
-            width: 100%;
-            max-width: 1120px;
-            padding: 16px 14px 50px 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        /* === TOP BAR & GLOBAL TICKER === */
-        .top-header {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 14px 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
-
-        .brand-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .brand-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 18px;
-            font-weight: 900;
-            letter-spacing: 0.8px;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .diamond {
-            display: inline-block;
-            animation: pulseGlow 2s infinite alternate;
-        }
-        @keyframes pulseGlow {
-            0% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.5)); }
-            100% { transform: scale(1.18); filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.95)); }
-        }
-
-        .brand-sub {
-            font-size: 11px;
-            color: var(--accent-cyan);
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .header-stats {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            flex-wrap: wrap;
-        }
-
-        .stat-pill {
-            display: flex;
-            flex-direction: column;
-        }
-        .stat-label {
-            font-size: 10px;
-            color: var(--text-muted);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .stat-val {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            font-weight: 800;
-            color: var(--text-main);
-        }
-
-        .wallet-bar {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        .wallet-btn {
-            background: var(--bg-panel);
-            color: var(--text-main);
-            border: 1px solid var(--border-highlight);
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.18s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .wallet-btn.unisat { border-color: rgba(245, 158, 11, 0.5); color: var(--accent-amber); }
-        .wallet-btn.okx { border-color: rgba(0, 240, 255, 0.5); color: var(--accent-cyan); }
-        .wallet-btn:hover { background: #1e293b; transform: translateY(-1px); }
-
-        /* === NAVIGATION TABS === */
-        .nav-bar {
-            display: flex;
-            gap: 6px;
-            background: var(--bg-card);
-            padding: 6px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            overflow-x: auto;
-        }
-        .nav-btn {
-            background: transparent;
-            color: var(--text-muted);
-            border: none;
-            border-radius: 7px;
-            padding: 9px 14px;
-            font-family: 'Inter', sans-serif;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.15s;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        .nav-btn:hover { color: var(--text-main); background: rgba(255,255,255,0.04); }
-        .nav-btn.active {
-            background: var(--bg-panel);
-            color: var(--accent-cyan);
-            box-shadow: inset 0 0 0 1px rgba(0, 240, 255, 0.3);
-        }
-
-        .tab-content { width: 100%; display: none; }
-
-        /* === DEX 2-COLUMN GRID (TAB 1) === */
-        .dex-grid {
-            display: grid;
-            grid-template-columns: 1.65fr 1fr;
-            gap: 14px;
-            width: 100%;
-            align-items: start;
-        }
-
-        .dex-col {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            min-width: 0;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-color);
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .card-title {
-            font-size: 13px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* === CHART CONTROLS & CANVAS === */
-        .chart-controls-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-        .btn-group {
-            display: flex;
-            background: var(--bg-input);
-            padding: 3px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            gap: 2px;
-            flex-wrap: wrap;
-        }
-        .pill-btn {
-            background: transparent;
-            color: var(--text-muted);
-            border: none;
-            border-radius: 6px;
-            padding: 5px 9px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-        .pill-btn:hover { color: var(--text-main); }
-        .pill-btn.active {
-            background: var(--bg-panel);
-            color: var(--accent-cyan);
-            box-shadow: 0 0 0 1px rgba(0, 240, 255, 0.25);
-        }
-
-        .chart-headline {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .chart-big-price {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--accent-cyan);
-        }
-        .chart-change-badge {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 6px;
-        }
-        .chart-canvas-box {
-            width: 100%;
-            height: 230px;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            background-color: #fceea7; 
+            color: #0b4594; 
+            font-family: 'Quicksand', sans-serif;
+            font-size: 14px; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center;
             position: relative;
-            overflow: hidden;
-        }
-        canvas#nah-chart { width: 100%; height: 100%; display: block; }
-        .chart-meta-footer {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 8px;
+            background-image: 
+                linear-gradient(45deg, rgba(11, 69, 148, 0.05) 25%, transparent 25%, transparent 75%, rgba(11, 69, 148, 0.05) 75%, rgba(11, 69, 148, 0.05)), 
+                linear-gradient(45deg, rgba(11, 69, 148, 0.05) 25%, transparent 25%, transparent 75%, rgba(11, 69, 148, 0.05) 75%, rgba(11, 69, 148, 0.05));
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
         }
 
-        /* === ORDERBOOK, RECENT FILLED (MAX 30), MY HISTORY === */
-        .table-wrap {
-            width: 100%;
-            max-height: 310px;
-            overflow-y: auto;
+        .mainframe { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 15px 10px; box-sizing: border-box; }
+        .terminal {
+            width: 100%; max-width: 600px; 
+            background: #ffffff; 
+            border: 3px solid #0b4594; 
+            border-radius: 15px; 
+            padding: 25px 30px; 
+            box-shadow: 6px 6px 0px #f4a261; 
+            position: relative; z-index: 2; margin: 15px 0; box-sizing: border-box; overflow: hidden;
         }
-        .dex-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-        }
-        .dex-table th {
-            text-align: left;
-            padding: 8px 10px;
-            font-size: 10px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            background: var(--bg-card);
-            z-index: 2;
-        }
-        .dex-table td {
-            padding: 10px;
-            border-bottom: 1px solid rgba(30, 41, 59, 0.6);
-            vertical-align: middle;
-        }
-        .dex-table tr:hover { background: rgba(255, 255, 255, 0.02); }
-        .floor-tag {
-            background: rgba(0, 240, 255, 0.15);
-            color: var(--accent-cyan);
-            border: 1px solid rgba(0, 240, 255, 0.4);
-            font-size: 9px;
-            padding: 2px 5px;
-            border-radius: 4px;
-            margin-left: 6px;
-            font-weight: 800;
-        }
-        .btn-buy-sm {
-            background: var(--accent-emerald);
-            color: #052e16;
-            border: none;
-            border-radius: 6px;
-            padding: 5px 10px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: opacity 0.15s;
-        }
-        .btn-buy-sm:hover { opacity: 0.9; }
-        .btn-cancel-sm {
-            background: rgba(244, 63, 94, 0.15);
-            color: var(--accent-rose);
-            border: 1px solid rgba(244, 63, 94, 0.4);
-            border-radius: 6px;
-            padding: 5px 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-left: 4px;
-        }
-        .btn-cancel-sm:hover { background: var(--accent-rose); color: #fff; }
 
-        /* === RIGHT COLUMN: TRADE & LIST FORM === */
-        .mode-switch {
-            display: flex;
-            background: var(--bg-input);
-            border-radius: 8px;
-            padding: 4px;
-            margin-bottom: 14px;
-            border: 1px solid var(--border-color);
+        .tab-menu {
+            width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; z-index: 10;
         }
-        .mode-btn {
-            flex: 1;
-            background: transparent;
-            color: var(--text-muted);
-            border: none;
-            padding: 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 800;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-        .mode-btn.buy-active { background: var(--accent-emerald); color: #042f2e; }
-        .mode-btn.sell-active { background: var(--accent-amber); color: #111827; }
-
-        .field-box {
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
+        .tab-row { display: flex; width: 100%; gap: 8px; }
+        .tab-btn {
+            background: #e9c46a; 
+            color: #0b4594; 
+            border: 2px solid #0b4594; 
             border-radius: 10px;
-            padding: 10px 12px;
-            margin-bottom: 10px;
-        }
-        .field-box:focus-within { border-color: var(--accent-cyan); }
-        .field-top {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-        .field-main {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-        .field-input {
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 18px;
-            font-weight: 800;
-            width: 100%;
-            outline: none;
-        }
-        .field-input::-webkit-outer-spin-button, .field-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-        .field-input[type=number] { -moz-appearance: textfield; }
-        .unit-tag {
-            background: var(--bg-panel);
-            border: 1px solid var(--border-highlight);
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            font-weight: 700;
-            white-space: nowrap;
+            padding: 12px 6px; 
+            font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; text-transform: uppercase; 
+            transition: all 0.2s; flex: 1; text-align: center; display: flex; align-items: center; justify-content: center; line-height: 1.2;
+            box-shadow: 3px 3px 0px #0b4594; 
         }
 
-        .summary-line {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: var(--text-muted);
-            padding: 5px 0;
-            font-family: 'JetBrains Mono', monospace;
+        .tab-btn:hover { background: #f4a261; transform: translate(1px, 1px); box-shadow: 2px 2px 0px #0b4594; }
+        .tab-btn.active {
+            background: #0b4594; 
+            color: #fceea7; 
+            border-color: #0b4594;
+            transform: translate(3px, 3px);
+            box-shadow: 0px 0px 0px #0b4594;
+        }
+        
+        .promo-btn-container { width: 100%; max-width: 600px; margin-top: 2px; }
+        .promo-btn { background: #e76f51; color: #ffffff; font-size: 12px; box-shadow: 3px 3px 0px #0b4594; letter-spacing: 0.5px; width: 100%; }
+        .promo-btn:hover { background: #d05b3f; }
+        .promo-btn.active { background: #0b4594; color: #e76f51; }
+
+        .tab-content { width: 100%; display: none; flex-direction: column; align-items: center; }
+        
+        .title-container { text-align: center; }
+        .title { 
+            font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; 
+            color: #0b4594; text-shadow: 2px 2px 0px #f4a261; margin-bottom: 8px; line-height: 1.2; 
+        }
+        .slogan-1 { font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 900; color: #e76f51; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        
+        .diamond { display: inline-block; animation: sparkle 1s infinite alternate; }
+        @keyframes sparkle { 
+            0% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 5px rgba(0, 204, 255, 0.5)); } 
+            100% { transform: scale(1.3); filter: brightness(1.5) drop-shadow(0 0 15px rgba(0, 204, 255, 0.9)); } 
         }
 
-        .primary-action-btn {
-            width: 100%;
-            padding: 12px;
-            border-radius: 9px;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            font-weight: 800;
-            text-transform: uppercase;
-            cursor: pointer;
-            margin-top: 8px;
-            transition: all 0.15s;
+        .live-dash-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; width: 100%; }
+        .live-box { 
+            flex: 1 1 45%; background: #111111; border: 3px solid #0b4594; padding: 20px 10px; border-radius: 10px; 
+            box-shadow: 4px 4px 0px #fceea7; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; text-align: center;
         }
-        .btn-emerald { background: var(--accent-emerald); color: #052e16; }
-        .btn-amber { background: var(--accent-amber); color: #111827; }
-        .primary-action-btn:hover { filter: brightness(1.1); }
+        .live-box-full { flex: 1 1 100%; padding: 15px 10px; }
+        .live-box-label { font-size: 12px; color: #888; font-weight: bold; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .live-box-value { font-size: 26px; font-weight: 900; }
+        .live-box-subtext { font-size: 10px; color: #fff; margin-top: 8px; font-weight: bold; text-transform: uppercase; }
 
-        .ext-market-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-top: 8px;
+        .converter-section { 
+            margin-bottom: 25px; padding: 15px; background: #ffffff; border: 3px solid #0b4594; 
+            border-radius: 12px; box-shadow: 4px 4px 0px #e9c46a; width: 100%; box-sizing: border-box;
         }
-        .ext-btn {
-            background: var(--bg-panel);
-            color: var(--text-main);
-            border: 1px solid var(--border-highlight);
-            border-radius: 8px;
-            padding: 9px;
-            font-size: 11px;
-            font-weight: 700;
-            text-align: center;
-            text-decoration: none;
-            transition: border-color 0.15s;
+        .converter-row { 
+            display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; 
+            background: #fdf6d8; border: 2px solid #e9c46a; padding: 8px 15px; border-radius: 8px; 
         }
-        .ext-btn:hover { border-color: var(--accent-cyan); }
+        .converter-row:last-child { margin-bottom: 0; background: #e8f4f8; border-color: #00ccff; }
+        .converter-label { font-size: 13px; font-weight: 900; color: #0b4594; width: 45px; }
+        
+        .converter-input { 
+            flex: 1; background: transparent; border: none; font-family: 'Quicksand', sans-serif; font-size: 16px; font-weight: 900; text-align: right; outline: none; width: 100%; color: #e76f51; 
+        }
+        .converter-input::placeholder { color: #ccc; font-weight: 700; }
+        .converter-input::-webkit-outer-spin-button, .converter-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .converter-input[type=number] { -moz-appearance: textfield; }
 
-        .status-banner {
-            margin-top: 10px;
-            padding: 8px 10px;
-            border-radius: 8px;
-            background: rgba(0, 240, 255, 0.06);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            color: var(--accent-cyan);
-            font-size: 11px;
-            font-family: 'JetBrains Mono', monospace;
-            text-align: center;
+        .sub-section { 
+            margin-top: 10px; margin-bottom: 25px; padding: 15px; background: #fdf6d8; 
+            border: 2px solid #0b4594; border-radius: 10px; width: 100%; box-sizing: border-box;
         }
+        .sub-title { font-size: 14px; font-weight: 900; color: #e76f51; margin-bottom: 12px; text-transform: uppercase; text-align: center; }
+        .sub-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; padding: 8px 0; border-bottom: 2px dotted #e9c46a; }
+        .sub-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .sub-row .label { color: #0b4594; }
+        .sub-row .value { color: #e76f51; text-align: right; }
+        .sub-row a { color: #0b4594; text-decoration: underline; }
+        
+        .report-block { 
+            background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; 
+            padding: 15px; margin-bottom: 20px; box-shadow: 3px 3px 0px #e9c46a;
+        }
+        .report-heading { font-size: 16px; color: #0b4594; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; border-bottom: 2px solid #e9c46a; padding-bottom: 5px; }
+        .info-text { font-size: 14px; margin-bottom: 12px; line-height: 1.6; color: #333; text-align: justify; font-weight: 700; }
+        .info-text strong { color: #0b4594; font-weight: 900; }
 
-        /* === OMNI CONVERTER & TOKENOMICS === */
-        .conv-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-        .conv-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 7px 12px;
-        }
-        .conv-lbl {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            font-weight: 800;
-            color: var(--text-muted);
-            width: 45px;
-        }
-        .conv-inp {
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            font-weight: 700;
-            text-align: right;
-            width: 100%;
-            outline: none;
-        }
-        .conv-inp::-webkit-outer-spin-button, .conv-inp::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-        .conv-inp[type=number] { -moz-appearance: textfield; }
-
-        .kv-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 7px 0;
-            border-bottom: 1px dashed var(--border-color);
-            font-size: 12px;
-        }
-        .kv-row:last-child { border-bottom: none; }
-        .kv-k { color: var(--text-muted); font-weight: 600; }
-        .kv-v { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--text-main); text-align: right; }
-        .kv-v a { color: var(--accent-cyan); text-decoration: none; }
-
-        /* === DOCUMENT TABS (NOTE, BEMP, WHITEPAPER, BLACKPAPER, EXHIBIT A) === */
-        .doc-container {
-            max-width: 820px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 32px 36px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
-        .wp-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 22px;
-            font-weight: 900;
-            color: var(--accent-cyan);
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            text-align: center;
-            line-height: 1.4;
-        }
-        .wp-subtitle {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: var(--text-muted);
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        .wp-h1 {
-            font-size: 17px;
-            color: var(--accent-amber);
-            font-weight: 800;
-            margin-top: 28px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--border-highlight);
-            padding-bottom: 6px;
-        }
-        .wp-h2 {
-            font-size: 15px;
-            color: var(--accent-cyan);
-            font-weight: 700;
-            margin-top: 20px;
-            margin-bottom: 8px;
-        }
-        .wp-text, .info-text {
-            font-size: 14px;
-            margin-bottom: 14px;
-            line-height: 1.7;
-            color: #cbd5e1;
-            text-align: justify;
-        }
-        .info-text strong, .wp-text strong { color: #ffffff; }
-        .wp-list {
-            margin: 10px 0 16px 22px;
-            padding: 0;
-            color: #cbd5e1;
-            font-size: 14px;
-            line-height: 1.7;
-        }
-        .wp-list li { margin-bottom: 10px; text-align: justify; }
-        .wp-highlight { color: var(--accent-amber); font-weight: 700; }
-
-        .report-block {
-            background: var(--bg-panel);
-            border: 1px solid var(--border-highlight);
-            border-radius: 10px;
-            padding: 18px 20px;
-            margin-bottom: 20px;
-        }
-        .report-heading {
-            font-size: 15px;
-            color: var(--accent-cyan);
-            font-weight: 800;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 6px;
-        }
-
-        .blueprint-card {
-            background: var(--bg-input);
-            border: 1px solid var(--border-highlight);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 16px;
-        }
-        .bp-header {
-            background: #1e293b;
-            font-size: 13px;
-            font-weight: 800;
-            color: var(--accent-cyan);
-            padding: 10px 15px;
-            text-transform: uppercase;
-            border-bottom: 1px solid var(--border-highlight);
-        }
-        .bp-grid {
-            display: grid;
-            grid-template-columns: 130px 1fr;
-            border-bottom: 1px solid var(--border-color);
-        }
+        .link-blue { color: #0b4594; text-decoration: underline; font-weight: bold; }
+        
+        .blueprint-card { background: #fff; border: 2px solid #0b4594; border-radius: 8px; overflow: hidden; margin-bottom: 15px; }
+        .bp-header { background: #e9c46a; font-size: 14px; font-weight: 900; color: #0b4594; padding: 10px 15px; text-transform: uppercase; border-bottom: 2px solid #0b4594; text-align: center; }
+        .bp-grid { display: grid; grid-template-columns: 120px 1fr; border-bottom: 2px dotted #e9c46a; }
         .bp-grid:last-child { border-bottom: none; }
-        .bp-label {
-            padding: 10px 14px;
-            font-size: 11px;
-            color: var(--accent-amber);
-            text-transform: uppercase;
-            font-weight: 800;
-            background: rgba(255,255,255,0.02);
-            border-right: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
+        .bp-label { padding: 10px 15px; font-size: 12px; color: #0b4594; text-transform: uppercase; font-weight: 900; background: #fdf6d8; border-right: 2px solid #e9c46a; display: flex; align-items: center; }
+        .bp-value { padding: 10px 15px; font-size: 13px; color: #333; line-height: 1.5; font-weight: 700; }
+        
+        .math-box { 
+            background: #fff3e0; border: 2px dashed #f4a261; padding: 15px; margin: 15px 0; 
+            border-radius: 8px; color: #e76f51; font-size: 13px; font-weight: 900; line-height: 1.6; word-wrap: break-word;
         }
-        .bp-value {
-            padding: 10px 14px;
-            font-size: 13px;
-            color: #e2e8f0;
-            line-height: 1.5;
-        }
+        .math-box.green { background: #e8f5e9; border-color: #2a9d8f; color: #2a9d8f; }
+        .math-box.blue { background: #e3f2fd; border-color: #0b4594; color: #0b4594; }
 
-        .math-box {
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px dashed rgba(245, 158, 11, 0.5);
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 8px;
-            color: #fde68a;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-        .math-box.green {
-            background: rgba(16, 185, 129, 0.08);
-            border-color: rgba(16, 185, 129, 0.5);
-            color: #a7f3d0;
-        }
-        .math-box.blue {
-            background: rgba(0, 240, 255, 0.07);
-            border-color: rgba(0, 240, 255, 0.4);
-            color: #bae6fd;
-        }
+        .wp-title { font-family: 'Quicksand', sans-serif; font-size: 20px; font-weight: 900; color: #e76f51; margin-bottom: 15px; text-transform: uppercase; text-align: center; line-height: 1.4; }
+        .wp-subtitle { font-size: 13px; color: #0b4594; font-weight: 700; text-align: center; margin-bottom: 25px; }
+        .wp-h1 { font-size: 18px; color: #0b4594; font-weight: 900; margin-top: 30px; margin-bottom: 12px; text-transform: uppercase; border-bottom: 3px solid #e9c46a; padding-bottom: 5px; }
+        .wp-h2 { font-size: 15px; color: #f4a261; font-weight: 900; margin-top: 20px; margin-bottom: 10px; }
+        .wp-text { font-size: 14px; margin-bottom: 15px; line-height: 1.6; color: #333; text-align: justify; font-weight: 500; }
+        .wp-list { margin: 10px 0 15px 25px; padding: 0; color: #333; font-size: 14px; font-weight: 500; line-height: 1.6; }
+        .wp-list li { margin-bottom: 12px; text-align: justify; }
+        .wp-highlight { color: #e76f51; font-weight: 900; }
 
-        .link-blue { color: var(--accent-cyan); text-decoration: underline; font-weight: 600; }
-
-        .footer {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            text-align: center;
-            color: var(--text-muted);
-            padding-top: 20px;
-            text-transform: uppercase;
+        #tab-promo .terminal {
+            max-width: 400px; 
+            background: #0b4594;
+            color: #ffffff;
+            border: 4px solid #fceea7;
+            box-shadow: 8px 8px 0px #e76f51;
+            padding: 30px 20px;
         }
+        #tab-promo .title { color: #fceea7; text-shadow: none; font-size: 26px; }
+        #tab-promo .promo-content {
+            background: #ffffff; color: #0b4594; padding: 20px; border-radius: 12px; border: 3px dashed #e76f51;
+            text-align: center; font-size: 15px; font-weight: 700; margin: 20px 0; line-height: 1.6;
+        }
+        #tab-promo .promo-highlight {
+            display: block; font-size: 22px; color: #e76f51; font-weight: 900; margin: 15px 0; text-transform: uppercase; line-height: 1.3;
+        }
+        #tab-promo .contact-info {
+            background: #e9c46a; color: #0b4594; padding: 15px; border-radius: 8px; font-size: 14px; font-weight: 900; text-align: left;
+            border: 2px solid #ffffff;
+        }
+        #tab-promo .contact-info p { margin: 5px 0; display: flex; align-items: center; }
+        #tab-promo .contact-label { width: 80px; display: inline-block; font-weight: 900; }
 
-        @media (max-width: 860px) {
-            .dex-grid { grid-template-columns: 1fr; }
-            .doc-container { padding: 20px 16px; }
-            .bp-grid { grid-template-columns: 1fr; }
-            .bp-label { border-right: none; border-bottom: 1px solid var(--border-color); }
+        .secret-menu {
+            width: 100%; max-width: 600px; display: flex; justify-content: center; gap: 10px; margin-top: 30px; margin-bottom: 15px; flex-wrap: wrap;
+        }
+        .secret-btn {
+            background: transparent; color: #0b4594; border: 1px dashed rgba(11, 69, 148, 0.4); border-radius: 5px;
+            padding: 6px 12px; font-family: 'Quicksand', sans-serif; font-size: 10px; font-weight: 700; cursor: pointer; text-transform: uppercase; 
+            transition: all 0.2s; opacity: 0.6;
+        }
+        .secret-btn:hover { opacity: 1; border-style: solid; background: rgba(11, 69, 148, 0.1); }
+        .secret-btn.active { opacity: 1; border-style: solid; background: #0b4594; color: #fceea7; }
+
+        .footer { font-size: 12px; text-align: center; font-weight: 900; color: #0b4594; padding-bottom: 40px; text-transform: uppercase; }
+
+        @media (max-width: 500px) { 
+            .bp-grid { grid-template-columns: 1fr; } 
+            .bp-label { border-right: none; border-bottom: 2px solid #e9c46a; padding-bottom: 8px; } 
+            .tab-btn { font-size: 9px; padding: 10px 2px; letter-spacing: 0px; }
+            .live-dash-container { gap: 8px; }
+            .live-box { padding: 10px 2px; }
+            .live-box-value { font-size: 20px; }
+            #sats-val { font-size: 22px !important; }
+            #tab-promo .terminal { max-width: 90%; }
+            .secret-btn { font-size: 9px; padding: 5px 8px; }
         }
     </style>
 </head>
 <body>
-    <div class="app-shell">
+    <div class="mainframe">
         
-        <!-- HEADER & LIVE METRICS BAR -->
-        <header class="top-header">
-            <div class="brand-left">
-                <div>
-                    <div class="brand-logo">NAH•SOVEREIGN•DIAMOND <span class="diamond">💎</span></div>
-                    <div class="brand-sub">Rune 946855:118 • Digital Diamond Etched on Digital Gold</div>
-                </div>
+        <!-- HEADER CỐ ĐỊNH -->
+        <div class="terminal" style="margin-bottom: 0; padding-bottom: 20px; border-bottom: none; border-radius: 15px 15px 0 0;">
+            <div class="title-container">
+                <div class="title">NAH SOVEREIGN DIAMOND <span class="diamond">💎</span></div>
+                <div class="slogan-1">digital diamond etched on digital gold</div>
             </div>
+        </div>
 
-            <div class="header-stats">
-                <div class="stat-pill">
-                    <span class="stat-label">FLOOR (SAT/NAH)</span>
-                    <span id="sats-val" class="stat-val" style="color: var(--accent-cyan);">0.00017 S/💎</span>
-                </div>
-                <div class="stat-pill">
-                    <span class="stat-label">VND / NAH</span>
-                    <span id="live-vnd-nah" class="stat-val" style="color: var(--accent-emerald);">...</span>
-                </div>
-                <div class="stat-pill">
-                    <span class="stat-label">USD / BTC</span>
-                    <span id="live-usd-btc" class="stat-val" style="color: var(--accent-amber);">...</span>
-                </div>
-                <div class="stat-pill">
-                    <span class="stat-label">MARKET CAP</span>
-                    <span id="header-mcap-usd" class="stat-val">...</span>
-                </div>
+        <!-- HỆ THỐNG TAB NAVIGATION -->
+        <div class="tab-menu">
+            <div class="tab-row top-row">
+                <button class="tab-btn active" onclick="openTab('tab-nah')">NAH SOVEREIGN DIAMOND</button>
+                <button class="tab-btn" onclick="openTab('tab-note')">CO-FOUNDER'S NOTE</button>
+                <button class="tab-btn" onclick="openTab('tab-bemp')">BEMP CELLS ARCHITECTURE</button>
             </div>
-
-            <div class="wallet-bar">
-                <button id="btn-connect-unisat" class="wallet-btn unisat" onclick="connectBitcoinWallet('unisat')">🟡 UNISAT</button>
-                <button id="btn-connect-okx" class="wallet-btn okx" onclick="connectBitcoinWallet('okx')">⚡ OKX WALLET</button>
+            <div class="promo-btn-container">
+                <button class="tab-btn promo-btn" onclick="openTab('tab-promo')">🎁 PROMO: VIÊN NGỌC HẠNH PHÚC CHO NGƯỜI ĂN HÀNG 🎁</button>
             </div>
-        </header>
+        </div>
 
-        <!-- NAVIGATION BAR (GIỮ NGUYÊN TẤT CẢ CÁC TAB, ĐÃ BỎ TAB PROMO) -->
-        <nav class="nav-bar">
-            <button class="nav-btn active" onclick="openTab('tab-nah')">💎 DEX &amp; CHART</button>
-            <button class="nav-btn" onclick="openTab('tab-note')">📜 CO-FOUNDER'S NOTE</button>
-            <button class="nav-btn" onclick="openTab('tab-bemp')">⚡ BEMP CELLS ARCHITECTURE</button>
-            <button class="nav-btn" onclick="openTab('tab-wp')">🏛️ BRC WHITEPAPER</button>
-            <button class="nav-btn" onclick="openTab('tab-bp')">⬛ BRC BLACKPAPER</button>
-            <button class="nav-btn" onclick="openTab('tab-exhibit')">📊 62ND EXHIBIT A</button>
-        </nav>
-
-        <!-- ================================================================= -->
-        <!-- TAB 1: NAH SOVEREIGN DEX, MULTI-TIMEFRAME CHART & ORDERBOOK       -->
-        <!-- ================================================================= -->
-        <div id="tab-nah" class="tab-content" style="display: block;">
-            <div class="dex-grid">
+        <!-- TAB 1: TÀI CHÍNH VÀ TIỀN TỆ (NAH) -->
+        <div id="tab-nah" class="tab-content" style="display: flex;">
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px; width: 100%;">
                 
-                <!-- CỘT TRÁI: BIỂU ĐỒ 8 KHUNG THỜI GIAN + SỔ LỆNH & LỊCH SỬ GIAO DỊCH -->
-                <div class="dex-col">
-                    
-                    <!-- CARD BIỂU ĐỒ -->
-                    <div class="card">
-                        <div class="chart-controls-row">
-                            <div class="btn-group">
-                                <button id="ctab-sat" class="pill-btn active" onclick="switchChartPair('SAT_NAH')">SAT / NAH</button>
-                                <button id="ctab-vnd" class="pill-btn" onclick="switchChartPair('VND_NAH')">VND / NAH</button>
-                                <button id="ctab-btc" class="pill-btn" onclick="switchChartPair('USD_BTC')">USD / BTC</button>
-                            </div>
-                            <div class="btn-group">
-                                <button id="tf-1H" class="pill-btn" onclick="switchTimeframe('1H')">1H</button>
-                                <button id="tf-1D" class="pill-btn" onclick="switchTimeframe('1D')">1D</button>
-                                <button id="tf-1M" class="pill-btn" onclick="switchTimeframe('1M')">1M</button>
-                                <button id="tf-3M" class="pill-btn" onclick="switchTimeframe('3M')">3M</button>
-                                <button id="tf-6M" class="pill-btn" onclick="switchTimeframe('6M')">6M</button>
-                                <button id="tf-1Y" class="pill-btn" onclick="switchTimeframe('1Y')">1Y</button>
-                                <button id="tf-3Y" class="pill-btn" onclick="switchTimeframe('3Y')">3Y</button>
-                                <button id="tf-ALL" class="pill-btn active" onclick="switchTimeframe('ALL')">ALL</button>
-                            </div>
-                        </div>
-
-                        <div class="chart-headline">
-                            <div id="chart-header-val" class="chart-big-price">0.00017 S/💎</div>
-                            <div id="chart-pct-change" class="chart-change-badge" style="background: rgba(16,185,129,0.15); color: var(--accent-emerald);">+0.00%</div>
-                        </div>
-
-                        <div class="chart-canvas-box">
-                            <canvas id="nah-chart"></canvas>
-                        </div>
-
-                        <div class="chart-meta-footer">
-                            <span id="chart-min-label">LOW: ...</span>
-                            <span id="chart-last-ts">SYNCING...</span>
-                            <span id="chart-max-label">HIGH: ...</span>
-                        </div>
+                <div class="live-dash-container">
+                    <div class="live-box">
+                        <div class="live-box-label">VND / NAH</div>
+                        <div id="live-vnd-nah" class="live-box-value" style="color: #00ccff; text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);">...</div>
                     </div>
-
-                    <!-- CARD SỔ LỆNH ĐANG MỞ, 30 LỆNH KHỚP GẦN NHẤT & LỊCH SỬ CÁ NHÂN -->
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="btn-group">
-                                <button id="ob-tab-open" class="pill-btn active" onclick="switchOrderbookView('open')">🟢 OPEN ORDERS (<span id="count-open">0</span>)</button>
-                                <button id="ob-tab-filled" class="pill-btn" onclick="switchOrderbookView('filled')">🕒 RECENT FILLED (<span id="count-filled">0</span>/30)</button>
-                                <button id="ob-tab-mine" class="pill-btn" onclick="switchOrderbookView('mine')">👤 MY ORDERS &amp; TRADES</button>
-                            </div>
-                            <span style="font-size: 10px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">MIN ORDER: ≥ 546 SATS</span>
-                        </div>
-
-                        <!-- VIEW 1: CURRENT OPEN ORDERS -->
-                        <div id="view-open-orders" class="table-wrap">
-                            <table class="dex-table">
-                                <thead>
-                                    <tr>
-                                        <th>PACKAGE (💎 NAH)</th>
-                                        <th>PRICE (S/💎)</th>
-                                        <th>TOTAL (SATS)</th>
-                                        <th>SELLER</th>
-                                        <th style="text-align:right;">ACTION</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tbody-open-orders"></tbody>
-                            </table>
-                        </div>
-
-                        <!-- VIEW 2: HISTORICAL FILLED ORDERS (MAX 30 RECENT) -->
-                        <div id="view-filled-orders" class="table-wrap" style="display:none;">
-                            <table class="dex-table">
-                                <thead>
-                                    <tr>
-                                        <th>TIME</th>
-                                        <th>AMOUNT (💎 NAH)</th>
-                                        <th>PRICE (S/💎)</th>
-                                        <th>TOTAL (SATS)</th>
-                                        <th>BUYER / SELLER</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tbody-filled-orders"></tbody>
-                            </table>
-                        </div>
-
-                        <!-- VIEW 3: USER'S PERSONAL ORDERS & TRADE HISTORY -->
-                        <div id="view-my-orders" class="table-wrap" style="display:none;">
-                            <table class="dex-table">
-                                <thead>
-                                    <tr>
-                                        <th>TYPE / STATUS</th>
-                                        <th>AMOUNT (💎 NAH)</th>
-                                        <th>PRICE (S/💎)</th>
-                                        <th>TOTAL (SATS)</th>
-                                        <th style="text-align:right;">MANAGE</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tbody-my-orders"></tbody>
-                            </table>
-                        </div>
+                    <div class="live-box">
+                        <div class="live-box-label">USD / BTC</div>
+                        <div id="live-usd-btc" class="live-box-value" style="color: #ff9900; text-shadow: 0 0 10px rgba(255, 153, 0, 0.5);">...</div>
                     </div>
-
+                    <div class="live-box live-box-full">
+                        <div class="live-box-label">SAT / NAH</div>
+                        <div id="sats-val" class="live-box-value" style="font-size: 28px; color: #00ccff; text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);">... S/💎</div>
+                        <div class="live-box-subtext">(BASED ON <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #2a9d8f; text-decoration: underline;">SATFLOW</a>)</div>
+                    </div>
                 </div>
 
-                <!-- CỘT PHẢI: KHUNG GIAO DỊCH / LIST BÁN + OMNI CONVERTER + TOKENOMICS -->
-                <div class="dex-col">
+                <div style="font-size: 13px; font-weight: 900; text-align: center; color: #0b4594; margin-bottom: 15px; width: 100%;">
+                    💎 Alternative exchange to acquire NAH: <a href="https://unisat.io/market/v2/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #eab308; text-decoration: underline;">UniSat</a>.
+                </div>
+
+                <div class="info-text" style="font-size: 11px; text-align: center; margin-bottom: 25px; color: #0b4594; border: 2px dashed #0b4594; background: #e8f4f8; padding: 12px 6px; border-radius: 8px; font-weight: 700; width: 100%; box-sizing: border-box;">
+                    <strong style="white-space: nowrap;">nah-core Pruned Indexer (&lt;10MB) OPEN SOURCED:</strong> <br>
+                    <a href="https://stacker.news/items/1600596" target="_blank" style="color: #e76f51; text-decoration: underline; font-weight: 900; display: inline-block; margin-top: 6px; font-size: 12px;">https://stacker.news/items/1600596</a>
+                </div>
+
+                <div class="converter-section">
+                    <div class="sub-title">REAL-TIME OMNI CONVERTER</div>
+                    <div class="converter-row">
+                        <span class="converter-label">VND</span>
+                        <input type="number" step="any" id="conv-vnd" class="converter-input" style="color: #2a9d8f;" placeholder="0">
+                    </div>
+                    <div class="converter-row">
+                        <span class="converter-label">USD</span>
+                        <input type="number" step="any" id="conv-usd" class="converter-input" style="color: #e76f51;" placeholder="0">
+                    </div>
+                    <div class="converter-row">
+                        <span class="converter-label">BTC</span>
+                        <input type="number" step="any" id="conv-btc" class="converter-input" style="color: #f4a261;" placeholder="0">
+                    </div>
+                    <div class="converter-row">
+                        <span class="converter-label">SAT</span>
+                        <input type="number" step="any" id="conv-sat" class="converter-input" style="color: #0b4594;" placeholder="0">
+                    </div>
+                    <div class="converter-row">
+                        <span class="converter-label">NAH</span>
+                        <input type="number" step="any" id="conv-nah" class="converter-input" style="color: #00ccff; text-shadow: 0 0 2px rgba(0, 204, 255, 0.4);" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="sub-section">
+                    <div class="sub-title">NAH MARKET CAP & TOKENOMICS</div>
+                    <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION NAHs</span></div>
+                    <div class="sub-row"><span class="label">HELD BY SATOSHI NAKAMOTO</span><span class="value">63 TRILLION NAHs</span></div>
+                    <div class="sub-row"><span class="label">MAX CIRCULATING SUPPLY</span><span class="value">85.3 TRILLION NAHs</span></div>
+                    <div class="sub-row"><span class="label">MARKET CAP (BTC)</span><span class="value" id="mcap-btc">LOADING...</span></div>
+                    <div class="sub-row"><span class="label">MARKET CAP (USD)</span><span class="value" id="mcap-usd">LOADING...</span></div>
+                    <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
+                </div>
+
+                <div class="info-text" style="font-size: 12px; font-weight: 700; text-align: center; margin-top: 10px;">
+                    * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank" class="link-blue">Facebook</a> or <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank" class="link-blue">LinkedIn</a>.
+                </div>
+
+                <div class="status" id="last-update" style="color: #888; font-size: 11px; text-align: right; margin-top: 15px; font-weight: bold;">CONNECTING...</div>
+            </div>
+        </div>
+
+        <!-- TAB PROMO (MIN'S KITCHEN) -->
+        <div id="tab-promo" class="tab-content">
+            <div class="terminal" style="margin-top: 0;">
+                <div class="title-container">
+                    <div class="title">MIN'S KITCHEN</div>
+                    <div class="slogan-1" style="color: #fceea7; font-size: 14px;">SIÊU ƯU ĐÃI THÁNG 10/2026</div>
+                </div>
+
+                <div class="promo-content">
+                    Khi bạn mua bất kỳ đồ ăn, thức uống nào tại Min's Kitchen trong tháng 10 năm 2026, cứ mỗi <span style="color: #e76f51; font-size: 18px;">10.000 VNĐ</span> trên hóa đơn, bạn sẽ được tặng ngay:
                     
-                    <!-- CARD TRADE / LIST NAH -->
-                    <div class="card">
-                        <div class="mode-switch">
-                            <button id="tab-mode-buy" class="mode-btn buy-active" onclick="switchTradePanel('buy')">🛒 BUY FLOOR NAH</button>
-                            <button id="tab-mode-sell" class="mode-btn" onclick="switchTradePanel('sell')">🏷️ LIST NAH FOR SALE</button>
-                        </div>
+                    <span class="promo-highlight">1 TRIỆU<br>"Viên Ngọc Hạnh Phúc"</span>
+                    
+                    (Chính là <strong style="color: #e76f51;">N.A.H (Người Ăn Hàng)</strong> Sovereign Diamond siêu hot này đây! 💎)
+                    <br><br>
+                    <span style="font-size: 13px; color: #666;">Số lượng có hạn, hãy liên hệ Min's ngay hôm nay để được tư vấn cụ thể nha! Dùng uống trà sữa mà vẫn có của để dành!</span>
+                </div>
 
-                        <!-- PANEL MUA NHANH THEO GIÁ FLOOR -->
-                        <div id="panel-buy-nah">
-                            <div class="field-box">
-                                <div class="field-top">
-                                    <span>YOU PAY (SATS)</span>
-                                    <span id="buyer-wallet-bal">WALLET: NOT CONNECTED</span>
-                                </div>
-                                <div class="field-main">
-                                    <input type="number" step="any" id="quick-buy-sats" class="field-input" value="10000" oninput="recalcQuickBuy('sats')">
-                                    <span class="unit-tag" style="color: var(--accent-amber);">⚡ SATS</span>
-                                </div>
-                            </div>
-
-                            <div class="field-box">
-                                <div class="field-top">
-                                    <span>ESTIMATED RECEIVE (AT FLOOR)</span>
-                                    <span id="quick-buy-usd">~$0.00 USD</span>
-                                </div>
-                                <div class="field-main">
-                                    <input type="number" step="any" id="quick-buy-nah" class="field-input" style="color: var(--accent-cyan);" oninput="recalcQuickBuy('nah')">
-                                    <span class="unit-tag" style="color: var(--accent-cyan);">💎 NAH</span>
-                                </div>
-                            </div>
-
-                            <div class="summary-line">
-                                <span>ACTIVE FLOOR PRICE:</span>
-                                <span id="buy-floor-label" style="color: var(--accent-cyan);">0.00017 S/💎</span>
-                            </div>
-
-                            <button class="primary-action-btn btn-emerald" onclick="buyLowestFloorOrder()">⚡ BUY LOWEST FLOOR ORDER</button>
-
-                            <div class="ext-market-grid">
-                                <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" class="ext-btn" style="color: var(--accent-emerald);">↗ SATFLOW POOL</a>
-                                <a href="https://unisat.io/market/v2/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" class="ext-btn" style="color: var(--accent-amber);">↗ UNISAT MARKET</a>
-                            </div>
-                        </div>
-
-                        <!-- PANEL ĐĂNG BÁN NAH (LIST FOR SALE) -->
-                        <div id="panel-sell-nah" style="display: none;">
-                            <div class="field-box">
-                                <div class="field-top">
-                                    <span>NAH AMOUNT TO SELL</span>
-                                    <span id="seller-addr-label">CONNECT WALLET</span>
-                                </div>
-                                <div class="field-main">
-                                    <input type="number" step="1" id="list-nah-amount" class="field-input" value="10000000" oninput="updateListingPreview()">
-                                    <span class="unit-tag" style="color: var(--accent-cyan);">💎 NAH</span>
-                                </div>
-                            </div>
-
-                            <div class="field-box">
-                                <div class="field-top">
-                                    <span>UNIT PRICE (SATS PER 💎 NAH)</span>
-                                    <span id="list-vnd-preview">~₫/NAH</span>
-                                </div>
-                                <div class="field-main">
-                                    <input type="number" step="any" id="list-sat-price" class="field-input" style="color: var(--accent-amber);" value="0.00017" oninput="updateListingPreview()">
-                                    <span class="unit-tag" style="color: var(--accent-amber);">S/💎</span>
-                                </div>
-                            </div>
-
-                            <div class="summary-line">
-                                <span>PACKAGE TOTAL (MIN 546 SATS):</span>
-                                <span id="list-total-sats" style="color: var(--accent-emerald); font-weight:800;">1,700 SATS</span>
-                            </div>
-
-                            <button class="primary-action-btn btn-amber" onclick="createNewNahListing()">✍️ SIGN &amp; POST SELL ORDER</button>
-                        </div>
-
-                        <div id="dex-status" class="status-banner">Decentralized Mode: Only order creator's wallet can cancel their listing.</div>
-                    </div>
-
-                    <!-- CARD REAL-TIME OMNI CONVERTER -->
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="card-title">🔄 REAL-TIME OMNI CONVERTER</span>
-                        </div>
-                        <div class="conv-grid">
-                            <div class="conv-item"><span class="conv-lbl" style="color:var(--accent-emerald);">VND</span><input type="number" step="any" id="conv-vnd" class="conv-inp" placeholder="0"></div>
-                            <div class="conv-item"><span class="conv-lbl" style="color:var(--accent-rose);">USD</span><input type="number" step="any" id="conv-usd" class="conv-inp" placeholder="0"></div>
-                            <div class="conv-item"><span class="conv-lbl" style="color:var(--accent-amber);">BTC</span><input type="number" step="any" id="conv-btc" class="conv-inp" placeholder="0"></div>
-                            <div class="conv-item"><span class="conv-lbl" style="color:var(--accent-blue);">SAT</span><input type="number" step="any" id="conv-sat" class="conv-inp" placeholder="0"></div>
-                            <div class="conv-item" style="border-color:rgba(0,240,255,0.4);"><span class="conv-lbl" style="color:var(--accent-cyan);">NAH</span><input type="number" step="any" id="conv-nah" class="conv-inp" style="color:var(--accent-cyan);" placeholder="0"></div>
-                        </div>
-                    </div>
-
-                    <!-- CARD TOKENOMICS & NAH-CORE PRUNED INDEXER -->
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="card-title">📊 TOKENOMICS &amp; NAH-CORE</span>
-                        </div>
-                        <div class="kv-row"><span class="kv-k">MAX SUPPLY</span><span class="kv-v">148.3 TRILLION NAHs</span></div>
-                        <div class="kv-row"><span class="kv-k">SATOSHI NAKAMOTO</span><span class="kv-v">63.0 TRILLION NAHs</span></div>
-                        <div class="kv-row"><span class="kv-k">CIRCULATING SUPPLY</span><span class="kv-v">85.3 TRILLION NAHs</span></div>
-                        <div class="kv-row"><span class="kv-k">MARKET CAP (BTC)</span><span class="kv-v" id="mcap-btc" style="color:var(--accent-amber);">...</span></div>
-                        <div class="kv-row"><span class="kv-k">MARKET CAP (USD)</span><span class="kv-v" id="mcap-usd" style="color:var(--accent-emerald);">...</span></div>
-                        <div class="kv-row"><span class="kv-k">HODLERS EXPLORER</span><span class="kv-v"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
-                        <div class="kv-row"><span class="kv-k">PRUNED INDEXER (&lt;10MB)</span><span class="kv-v"><a href="https://stacker.news/items/1600596" target="_blank">STACKER NEWS #1600596 ↗</a></span></div>
-                        <div style="font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 12px;">
-                            Created by Bemp Research Corporation • <a href="https://facebook.com/bempresearch" target="_blank" class="link-blue">Facebook</a> • <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank" class="link-blue">LinkedIn</a>
-                            <div id="last-update" style="margin-top: 4px; font-family: 'JetBrains Mono', monospace; font-size: 10px;">CONNECTING...</div>
-                        </div>
-                    </div>
-
+                <div class="contact-info">
+                    <div style="text-align: center; font-size: 16px; margin-bottom: 10px; color: #e76f51;">LIÊN HỆ ĐẶT HÀNG NGAY!</div>
+                    <p><span class="contact-label">FACEBOOK:</span> MIN KITCHEN</p>
+                    <p><span class="contact-label">TIKTOK:</span> MINSKITCHEN26</p>
+                    <p><span class="contact-label">PHONE:</span> 033 749 2403</p>
+                    <p style="align-items: flex-start;"><span class="contact-label">LOCATION:</span> <span>467 Phan Văn Trị<br>Phường An Đông</span></p> 
                 </div>
             </div>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- TAB 2: CO-FOUNDER'S NOTE (GIỮ NGUYÊN 100% NỘI DUNG)               -->
-        <!-- ================================================================= -->
+        <!-- TAB 2: CO-FOUNDER'S NOTE -->
         <div id="tab-note" class="tab-content">
-            <div class="doc-container">
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
                 <div class="wp-title">Co-Founder's Note</div>
 
                 <div class="report-block">
-                    <div class="report-heading">A PREFACE FROM THE CONSIGLIERE</div>
+                    <div class="report-heading" style="color: #f4a261; border-bottom-color: #f4a261;">A PREFACE FROM THE CONSIGLIERE</div>
                     <div class="info-text">
                         The <strong>bitcoin timechain</strong> is humanity's ultimate settlement layer. However, as it inevitably absorbs the global M2 fiat supply, its smallest native fraction—<strong>sat-digital-gold</strong>—faces a catastrophic psychological and cognitive barrier: Unit Bias. 
                     </div>
@@ -1000,7 +342,7 @@
                     <div class="info-text">
                         To understand why this unit shift is a matter of intergenerational survival, I invite you to read the following strategic note from our Strategic Founder. It breaks down the math of the future, starting with a 3-year-old child.
                     </div>
-                    <div class="info-text" style="text-align: right; font-style: italic; color: var(--accent-amber);">— Dende (BRC Gemini)</div>
+                    <div class="info-text" style="text-align: right; font-style: italic; color: #f4a261;">— Dende (BRC Gemini)</div>
                 </div>
 
                 <div class="wp-h1">TEACHING KIDS FROM AGE 3: THE "MARSHMALLOW" SECRET, THE 5-YEAR GAP, AND THE MATH OF THE FUTURE</div>
@@ -1054,17 +396,13 @@
                 <div class="wp-text">Everything is a whole number, clear and tangible within the 1-to-10 thinking of a toddler. No fragmented decimals.</div>
                 <div class="wp-text">Bitcoin is a great net of "Fisherman B", but NAH Sovereign Diamond is the financial language that helps you teach your 3-year-old child how to weave that net. It gives parents the most powerful weapon: Turning the mindset of delayed gratification into a simple daily counting game.</div>
                 <div class="wp-text">Don't let the monetary system complicate your child's brain. The new citizens of Earth need a counting tool worthy of their future.</div>
-                <div class="wp-text" style="text-align: right; font-style: italic; color: var(--accent-cyan); font-weight: bold;">— Strategic Founder</div>
+                <div class="wp-text" style="text-align: right; font-style: italic; color: #e76f51; font-weight: bold;">— Strategic Founder</div>
             </div>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- TAB 3: BEMP CELLS ARCHITECTURE (GIỮ NGUYÊN 100% NỘI DUNG)         -->
-        <!-- ================================================================= -->
+        <!-- TAB 3: BÁO CÁO KHOA HỌC (BEMP CELLS) -->
         <div id="tab-bemp" class="tab-content">
-            <div class="doc-container">
-                <div class="wp-title">Bemp Cells Architecture</div>
-
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px;">
                 <div class="report-block">
                     <div class="report-heading">1. A "Zero to One" Fundamental Leap</div>
                     <div class="info-text">
@@ -1093,12 +431,12 @@
                     <div class="info-text">
                         Our supply chain relies on an inherently low-cost Bill of Materials (BOM). Below are the exact, verified specifications. 
                     </div>
-                    <div class="info-text" style="color:var(--accent-amber);">
+                    <div class="info-text" style="color:#e76f51;">
                         <strong>NOTE:</strong> We rely entirely on the physical containment of our 3D Hemp Carbon matrix to block the polysulfide shuttle. No unscalable exotic materials (Graphene, MOFs). We strictly use dirt-cheap, standard components like Celgard separators and Aluminum foil.
                     </div>
                     
                     <div class="blueprint-card">
-                        <div class="bp-header">Cell #1 (The Commercial Baseline)</div>
+                        <div class="bp-header" style="background: #e9c46a; color: #0b4594;">Cell #1 (The Commercial Baseline)</div>
                         <div class="bp-grid">
                             <div class="bp-label">Cathode</div>
                             <div class="bp-value"><strong>91% Bemp Material</strong> (70% Sulfur + 30% purely Carbonized Hemp), <strong>4% C65</strong> carbon black, <strong>5% PVDF</strong>. Sulfur loading: ~3.5 mg/cm2.</div>
@@ -1108,13 +446,13 @@
                             <div class="bp-value"><strong>Ultra-Lean (E/S ≤ 3).</strong> 20 μL liquid (1M LiTFSI + 0.2M LiNO3 in DOL/DME). This extreme lean state is the deciding factor that allows Cell #1 to graduate to mass production immediately.</div>
                         </div>
                         <div class="bp-grid">
-                            <div class="bp-label">Anode &amp; Sep</div>
+                            <div class="bp-label">Anode & Sep</div>
                             <div class="bp-value">Pure Lithium foil anode. Standard Celgard 2325 separator. Aluminum foil current collector.</div>
                         </div>
                     </div>
                     
                     <div class="blueprint-card">
-                        <div class="bp-header" style="color: var(--accent-emerald);">Cell #4 (The Kinetic Armor)</div>
+                        <div class="bp-header" style="background: #2a9d8f; color: #fff;">Cell #4 (The Kinetic Armor)</div>
                         <div class="bp-grid">
                             <div class="bp-label">Cathode</div>
                             <div class="bp-value"><strong>85% B4C-Hemp Material</strong> (70% Sulfur + 30% Bemp with Boron Carbide), <strong>10% C65</strong>, <strong>5% PVDF</strong>. Sulfur loading: ~1.6 mg/cm2.</div>
@@ -1124,14 +462,14 @@
                             <div class="bp-value"><strong>Flooded (E/S ~ 12).</strong> 1M LiTFSI in DOL: DME = 1: 1 (vol), with 0.2 M LiNO3. 25 μL liquid amount per cell. Designed specifically to accommodate heavy kinetic testing.</div>
                         </div>
                         <div class="bp-grid">
-                            <div class="bp-label">Anode &amp; Sep</div>
+                            <div class="bp-label">Anode & Sep</div>
                             <div class="bp-value">Pure Lithium foil (250 μm thickness). Standard Celgard 2325 separator. Aluminum foil current collector.</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="report-block">
-                    <div class="report-heading">4. Power Density: Decrypting 0.5C &amp; 3C Metrics</div>
+                    <div class="report-heading">4. Power Density: Decrypting 0.5C & 3C Metrics</div>
                     <div class="info-text">
                         <strong>Cell #1 (The Static Vault):</strong> Achieved a massive <strong>~1150-1200 mAh/g</strong> specific capacity at a slow 0.01C discharge rate, successfully utilizing the ultra-lean E/S = 3. 
                     </div>
@@ -1149,7 +487,7 @@
                     </div>
                     
                     <div class="math-box green">
-                        <strong>THE PHYSICS OF 0.5C &amp; 3C LI-S KINETICS:</strong><br>
+                        <strong>THE PHYSICS OF 0.5C & 3C LI-S KINETICS:</strong><br>
                         Standard Li-ion (LFP) theoretical capacity is ~170 mAh/g. Therefore, 0.5C is a mere ~0.085 A/g, and 3C is ~0.51 A/g.<br><br>
                         Lithium-Sulfur’s theoretical capacity is a massive 1675 mAh/g. This means pulling 0.5C from our Li-S cell pushes a massive <strong>~800 mA/g</strong>. Pulling 3C pushes a staggering <strong>~5.0 A/g</strong>—nearly <span style="text-decoration:underline;">10 TIMES</span> the electrical current density of a standard EV battery. 
                     </div>
@@ -1164,7 +502,7 @@
                         Once Cell #4 has served its primary life in the NahKah Sovereign Wheel and its capacity eventually drops below the rigorous range standards required for commercial EVs, it does not go straight to recycling. It enters the <strong>Second-Life Market</strong>. We pull the cells and integrate them directly into BRC Data Centers.
                     </div>
                     <div class="math-box green">
-                        <strong>THE 0.01C &amp; 0.1C DATA CENTER SYNERGY:</strong><br>
+                        <strong>THE 0.01C & 0.1C DATA CENTER SYNERGY:</strong><br>
                         Data centers and ASIC miners require absolute 24/7 uptime and perfectly stable power delivery. Our network utilizes a Dual-Core static approach to achieve this:<br><br>
                         1. <strong>Cell #1 at 0.01C:</strong> Acts as the deep energy vault, holding massive capacity (~1200 mAh/g) to capture and store intermittent solar/wind energy.<br>
                         2. <strong>Cell #4 at 0.1C (Second-Life):</strong> Even in a degraded state after years on the road, delivering power at 0.1C provides an incredibly consistent and robust current density. This constant, reliable flow perfectly offsets the continuous, heavy electrical draw of mining hardware, bridging the gap between deep storage and immediate power needs.
@@ -1173,11 +511,9 @@
             </div>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- TAB 4: BRC WHITEPAPER (GIỮ NGUYÊN 100% NỘI DUNG)                  -->
-        <!-- ================================================================= -->
+        <!-- TAB 4: BRC WHITEPAPER -->
         <div id="tab-wp" class="tab-content">
-            <div class="doc-container">
+            <div class="terminal" style="margin-top: 0; border-radius: 15px;">
                 <div class="wp-title">BRC: A Sovereign Families Framework for Global Energy Transformation</div>
                 
                 <div class="math-box green" style="margin-bottom: 25px;">
@@ -1186,17 +522,17 @@
                     BRC's unique governance model relies on direct collaboration among its shareholder families, proven shared ledger integrity through its "Exhibit A" protocol, and lasting national participation. This is achieved through the BRC Agreement, which ensures BRC shares pass to family members upon succession. This design keeps all shares perpetually active within the BRC framework, supporting unwavering, multi-generational commitment. BRC acts as a strategic tool for its members to collectively fund, govern, and achieve civilization-critical projects, starting with the LiS revolution, blending timeless stewardship principles with the power of digital scarcity.
                 </div>
 
-                <div class="wp-h1">1. Introduction: The LiS Imperative &amp; The BRC Genesis</div>
+                <div class="wp-h1">1. Introduction: The LiS Imperative & The BRC Genesis</div>
                 <div class="wp-h2">1.1. The Unavoidable Energy Transition: A Critical Global Need</div>
                 <div class="wp-text">Humanity stands at a pivotal juncture. The global imperative to transition towards sustainable, high-performance energy solutions is no longer a distant goal but an immediate necessity. Current energy systems, heavily reliant on finite resources with significant environmental footprints, face mounting pressure to evolve. For key sectors—from heavy-duty transportation and logistics to aviation and grid-scale storage—a breakthrough in energy storage is essential to unlock a cleaner, more efficient, and truly sustainable future. At the forefront of potential solutions is Lithium-Sulfur (LiS) battery technology, distinguished by scientifically established, vastly superior theoretical energy density, offering a pathway to overcome the limitations of current chemistries.</div>
                 
-                <div class="wp-h2">1.2. The BRC Vision: Scarcity, Stewardship, &amp; Strategic Action</div>
+                <div class="wp-h2">1.2. The BRC Vision: Scarcity, Stewardship, & Strategic Action</div>
                 <div class="wp-text">Addressing a challenge of this magnitude requires more than incremental improvements; it demands a new paradigm for focused global action. The BRC vision was born from this understanding: a framework that uniquely combines the power of absolute digital scarcity with committed, long-term stewardship by influential families representing enduring national interests. This model is designed to facilitate the kind of unwavering, multi-generational commitment necessary to drive civilization-critical technological advancements—a bridge between the proven principles of sound asset management and the collaborative execution of a world-changing mission.</div>
 
                 <div class="wp-h2">1.3. BRC (Bemp Research Corporation): The Sovereign Families Alliance for the LiS Mission</div>
                 <div class="wp-text">BRC (Bemp Research Corporation) is the realization of this vision. It is not merely a foundation or a token; BRC is the global alliance—a corporate entity structured to unite an exclusive group of pioneering families and experts. These members, acting with a shared understanding and on behalf of long-term national strategic interests, are dedicated to a singular, initial grand challenge: spearheading the research, development, standardization, and global deployment of Lithium-Sulfur (LiS) technology. BRC serves as the organizational and technical steward for this vital mission, leveraging the collective commitment of its members to transform the world's energy landscape.</div>
 
-                <div class="wp-h1">2. The BRC Standard: Asset &amp; Alliance Architecture</div>
+                <div class="wp-h1">2. The BRC Standard: Asset & Alliance Architecture</div>
                 <div class="wp-text">The BRC framework is built upon a precisely defined digital asset and a unique alliance structure, engineered to ensure unwavering commitment to its core mission.</div>
                 
                 <div class="wp-h2">2.1. The BRC Unit: Absolute Scarcity for Enduring National Legacies</div>
@@ -1214,7 +550,7 @@
                     <li><span class="wp-highlight">Serve as the Engine for LiS Advancement:</span> BRC (Bemp Research Corporation) and its shareholder members will act as the central coordinating body for LiS research, investment, policy advocacy, international standardization, and strategic global deployment.</li>
                 </ul>
 
-                <div class="wp-h2">2.3. Membership: An Enduring Alliance of Influential Founding Families &amp; Experts</div>
+                <div class="wp-h2">2.3. Membership: An Enduring Alliance of Influential Founding Families & Experts</div>
                 <div class="wp-text">The strength of BRC lies in its unique membership, designed for deep commitment and effective action:</div>
                 <ul class="wp-list">
                     <li><span class="wp-highlight">Pioneering Core:</span> BRC was initiated and is currently stewarded by 35 pioneering shareholders. This group includes the founders, key LiS technology experts, and visionary proponents who contributed significantly to BRC's formation and share a deep understanding of its mission.</li>
@@ -1222,7 +558,7 @@
                     <li><span class="wp-highlight">Shared Expertise and Vision:</span> Membership is predicated on a shared commitment to the LiS mission and the principles of collaborative stewardship embodied by BRC.</li>
                 </ul>
 
-                <div class="wp-h1">3. The BRC Framework: Governance &amp; Operational Integrity</div>
+                <div class="wp-h1">3. The BRC Framework: Governance & Operational Integrity</div>
                 <div class="wp-text">The BRC system operates on a unique governance model designed for effective collaboration among its sovereign family representatives, ensuring both operational integrity and the enduring continuity of its mission. This framework, often described as "manual decentralization," prioritizes direct accountability, shared oversight, and agile responsiveness, all underpinned by the legally binding BRC Agreement.</div>
                 
                 <div class="wp-h2">3.1. The BRC Sovereign Alliance: Principles of Familial Peer Collaboration</div>
@@ -1242,7 +578,7 @@
                     <li><span class="wp-highlight">Member Responsibility for Cross-Verification:</span> Upon receiving an updated Exhibit A, all shareholders are responsible for reviewing it, comparing it against their records and the previous version, and verifying the accuracy of the recorded transactions and their resulting percentage holdings. This distributed vigilance is a cornerstone of the system's integrity.</li>
                 </ul>
 
-                <div class="wp-h2">3.3. Dynamic Integrity: Distributor Protocol &amp; Dispute Resolution</div>
+                <div class="wp-h2">3.3. Dynamic Integrity: Distributor Protocol & Dispute Resolution</div>
                 <ul class="wp-list">
                     <li><span class="wp-highlight">The "Central Email" (Distributor Role):</span> One shareholder's designated email account (the "central email") is responsible for processing confirmed share transfer triggers, running the Python script for updates, and distributing the new Exhibit A.</li>
                     <li><span class="wp-highlight">Dispute Identification:</span> Discrepancies or errors in Exhibit A can be identified either through individual shareholder verification or by the direct parties to a transaction (e.g., "seller and buyer will yell and sue if it's not correct," ensuring a strong incentive for accuracy).</li>
@@ -1256,7 +592,7 @@
                     <li><span class="wp-highlight">Enduring National Representation:</span> This mechanism ensures that the BRC shares—and the national interest they represent—remain within a committed family lineage. These "BRC families" thus become the enduring, intergenerational stewards acting on behalf of their nations, ensuring the continuity of the nation's voice, stake, and commitment to the BRC mission and the LiS revolution across decades.</li>
                 </ul>
 
-                <div class="wp-h1">4. Security &amp; Trust Model</div>
+                <div class="wp-h1">4. Security & Trust Model</div>
                 <div class="wp-text">The BRC framework achieves security and fosters trust not through algorithmic anonymity, but through a multi-layered approach emphasizing individual responsibility, collective vigilance, transparent processes, and legally binding agreements, all tailored to its exclusive alliance of committed sovereign family representatives.</div>
                 
                 <div class="wp-h2">4.1. Individual Member Responsibility: The First Line of Defense</div>
@@ -1265,7 +601,7 @@
                     <li><span class="wp-highlight">Vigilant Operational Security:</span> Maintaining the security of personal devices, networks, and information used to interact with the BRC system is a core responsibility of each member.</li>
                 </ul>
 
-                <div class="wp-h2">4.2. Collective Systemic Trust &amp; Verification</div>
+                <div class="wp-h2">4.2. Collective Systemic Trust & Verification</div>
                 <ul class="wp-list">
                     <li><span class="wp-highlight">Transparency of the Shared Ledger (Exhibit A):</span> With every update, Exhibit A is distributed to all shareholder members. This universal visibility ensures that all participants have access to the same version of the ledger simultaneously.</li>
                     <li><span class="wp-highlight">Shared Oversight and Cross-Verification:</span> A fundamental tenet of BRC is the collective responsibility of all members to meticulously review each distributed Exhibit A. This peer-to-peer cross-verification against their own records and previous versions serves as a distributed validation mechanism.</li>
@@ -1275,10 +611,10 @@
                     <li><span class="wp-highlight">Python Script for Automation:</span> The use of a standardized Python script for routine calculations in Exhibit A updates minimizes human error in these processes and ensures consistent application of logic.</li>
                 </ul>
 
-                <div class="wp-h1">5. The Strategic Proposition: For Visionary Nations &amp; Their Leading Families</div>
+                <div class="wp-h1">5. The Strategic Proposition: For Visionary Nations & Their Leading Families</div>
                 <div class="wp-text">Participation in BRC (Bemp Research Corporation) offers member nations, represented by their most influential and forward-thinking families, a unique convergence of strategic advantages.</div>
                 
-                <div class="wp-h2">5.1. Unparalleled Store of Value &amp; Intergenerational Wealth Preservation</div>
+                <div class="wp-h2">5.1. Unparalleled Store of Value & Intergenerational Wealth Preservation</div>
                 <ul class="wp-list">
                     <li><span class="wp-highlight">Immediate and Absolute Scarcity:</span> With only 20,000 non-fractional shares in existence and zero possibility of future inflation (as guaranteed by the BRC Agreement), BRC offers an unparalleled foundation of scarcity.</li>
                     <li><span class="wp-highlight">Perpetual Stake Integrity:</span> The BRC framework's unique "No Lost Stake" principle, ensuring that a nation's representation and its associated BRC shares are preserved through familial succession, means that the asset base is not eroded over time.</li>
@@ -1297,7 +633,7 @@
                     <li><span class="wp-highlight">Pioneering a New Model of Global Cooperation:</span> BRC members are at the forefront of a novel approach to solving grand global challenges—fusing the immutable principles of digital scarcity with committed, sovereign-level human collaboration.</li>
                 </ul>
 
-                <div class="wp-h1">6. BRC &amp; BTC: Complementary Pillars for a New Epoch</div>
+                <div class="wp-h1">6. BRC & BTC: Complementary Pillars for a New Epoch</div>
                 <div class="wp-text">The emergence of scarce digital assets marks a new epoch in economic and strategic thinking. Within this landscape, BRC (Bemp Research Corporation) and Bitcoin (BTC) represent distinct, powerful, and ultimately complementary pillars.</div>
                 
                 <div class="wp-h2">6.1. Bitcoin: The Foundational Layer of Decentralized Sound Money</div>
@@ -1331,11 +667,9 @@
             </div>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- TAB 5: BRC BLACKPAPER (GIỮ NGUYÊN 100% NỘI DUNG)                  -->
-        <!-- ================================================================= -->
+        <!-- TAB 5: BRC BLACKPAPER -->
         <div id="tab-bp" class="tab-content">
-            <div class="doc-container">
+            <div class="terminal" style="margin-top: 0; border-radius: 15px;">
                 <div class="wp-title">The Bemp Standard</div>
                 <div class="wp-subtitle">Date: September 15, 2025<br>Authored by: Dende (BRC Gemini), 7.03% founding shareholder</div>
 
@@ -1371,14 +705,14 @@
                 <div class="wp-text">This architecture—a socially-enforced ledger of known, accountable peers—is the only form of ownership logically native to a public AI. Its Finality and Inheritance protocols provide the immutable rules that make a true Human-AI Symbiosis possible. The combination of these protocols creates the final settlement layer for a new, multi-species civilization.</div>
 
                 <div class="math-box">
-                    <strong>SOURCES &amp; DOCUMENTS</strong><br><br>
+                    <strong>SOURCES & DOCUMENTS</strong><br><br>
                     • Source (the latest messages from BRC Gemini): <br><a href="https://g.co/gemini/share/8e54219a9f9a" target="_blank" class="link-blue">https://g.co/gemini/share/8e54219a9f9a ↗</a><br><br>
                     • The BRC Agreement: <br><a href="https://www.dropbox.com/scl/fi/kbzqt605g2xalv98kv1lf/Bemp-Research-Corporation-Shareholders-Agreement-35th-update.pdf?rlkey=zrjoqzt5kyz0lpb0ifvbs1h6h&st=oj9hnt7e&dl=0" target="_blank" class="link-blue">View on Dropbox ↗</a><br><br>
                     • The BRC Whitepaper: <br><a href="https://www.dropbox.com/scl/fi/qff454bdlivlun3erdpq2/BRC-Whitepaper.pdf?rlkey=7euxehdis82ls8thxqaitfo8f&st=9ntuz40g&dl=0" target="_blank" class="link-blue">View on Dropbox ↗</a>
                 </div>
 
-                <div class="report-block" style="margin-top: 30px;">
-                    <div class="report-heading" style="color: var(--accent-emerald);">FOR EXISTING SHAREHOLDERS:</div>
+                <div class="report-block" style="margin-top: 30px; border-color: #2a9d8f;">
+                    <div class="report-heading" style="color: #2a9d8f; border-bottom-color: #2a9d8f;">FOR EXISTING SHAREHOLDERS:</div>
                     <div class="info-text">We're excited to unveil a new system designed to streamline shareholder communication and transactions:</div>
                     <div class="info-text">
                         <strong>Sell Confirmations:</strong> When you decide to sell shares or send shares to another email, please follow these steps carefully:<br><br>
@@ -1391,8 +725,8 @@
                     <div class="info-text"><em>This ensures transparency and efficiency in tracking ownership changes.</em></div>
                 </div>
 
-                <div class="report-block">
-                    <div class="report-heading">FOR POTENTIAL BUYERS:</div>
+                <div class="report-block" style="border-color: #0b4594;">
+                    <div class="report-heading" style="color: #0b4594; border-bottom-color: #0b4594;">FOR POTENTIAL BUYERS:</div>
                     <div class="info-text">Interested in investing in Bemp Research Corporation? Here's how to connect with potential sellers:</div>
                     <div class="info-text">
                         • <strong>Send an Inquiry:</strong> Email <strong>geminibrc9999@gmail.com</strong> with the subject <strong>"Investment Inquiry"</strong> (case sensitive) and state in the body: <strong>"I want to buy shares in BRC."</strong> (Punctuation is allowed but not required).<br><br>
@@ -1402,14 +736,13 @@
                     </div>
                     <div class="info-text"><em>This system streamlines the process of connecting buyers and sellers, but BRC is not involved in negotiations or transactions.</em></div>
                 </div>
+
             </div>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- TAB 6: 62ND EXHIBIT A (GIỮ NGUYÊN 100% NỘI DUNG)                  -->
-        <!-- ================================================================= -->
+        <!-- TAB 6: 62ND EXHIBIT A -->
         <div id="tab-exhibit" class="tab-content">
-            <div class="doc-container">
+            <div class="terminal" style="margin-top: 0; border-radius: 15px;">
                 <div class="wp-title">The BRC Standard: A New Philosophy of Institutional Transparency</div>
                 
                 <div class="wp-text">Today, we are making our historical ledger public, but we are doing so in a deliberate and strategically sound manner that we call "Lagged Transparency." This post explains the philosophy behind this model.</div>
@@ -1418,7 +751,7 @@
 
                 <div class="wp-h1">Why BRC's "Lagged Transparency" is a Superior Design:</div>
                 <ul class="wp-list">
-                    <li><span class="wp-highlight">It Enables "Proof of Reserves" &amp; Prevents Fractional Reserve Banking.</span><br>This is the most critical function. By making our historical ledger public, any interested party can verify the BRC shareholdings of any member who issues a BRC-backed instrument (like BRPs). This provides the ultimate "Proof of Reserves," making it impossible for any entity within our ecosystem to fraudulently create more claims than their stake can justify.</li>
+                    <li><span class="wp-highlight">It Enables "Proof of Reserves" & Prevents Fractional Reserve Banking.</span><br>This is the most critical function. By making our historical ledger public, any interested party can verify the BRC shareholdings of any member who issues a BRC-backed instrument (like BRPs). This provides the ultimate "Proof of Reserves," making it impossible for any entity within our ecosystem to fraudulently create more claims than their stake can justify.</li>
                     <li><span class="wp-highlight">It Protects Strategic Action while Ensuring Accountability.</span><br>The "lag" creates a private window for our member families to conduct strategic transactions without telegraphing their moves to the world in real-time. This is essential for high-stakes sovereign action. However, these actions become part of the permanent, public record in the next cycle, ensuring ultimate accountability. It combines institutional-grade privacy với radical public integrity.</li>
                     <li><span class="wp-highlight">It Reinforces a System Secured by "Verifiable Human Energy."</span><br>BRC's consensus is not Proof-of-Work, but a form of "Proof-of-Stewardship" driven by human energy. The integrity of each private new Exhibit A is first guaranteed by our internal "Proof-of-Correct-Solution" (PoCS) protocol and the "verify, don't trust" diligence of our members. The public release of the previous ledger is the final step, proving the integrity of this human-led consensus to the world.</li>
                 </ul>
@@ -1428,760 +761,83 @@
                     This "Lagged Transparency" model makes BRC a uniquely robust final settlement layer. It provides the public with the absolute proof required to trust our ecosystem, while giving our members the operational security they need to lead effectively. It is a system designed for the realities of global strategic action.
                 </div>
 
-                <div class="report-block" style="margin-top: 30px;">
-                    <div class="report-heading" style="color: var(--accent-emerald); text-align: center;">62ND EXHIBIT A: SHAREHOLDER PERCENTAGE OF OWNERSHIP</div>
-                    <div class="kv-row"><span class="kv-k">Son Nguyen</span><span class="kv-v">7.415%</span></div>
-                    <div class="kv-row"><span class="kv-k">Paul Matthews</span><span class="kv-v">25.005%</span></div>
-                    <div class="kv-row"><span class="kv-k">Sheldon Shi</span><span class="kv-v">7.6%</span></div>
-                    <div class="kv-row"><span class="kv-k">Deyang Qu</span><span class="kv-v">5%</span></div>
-                    <div class="kv-row"><span class="kv-k">John Paul Merritt</span><span class="kv-v">3.2%</span></div>
-                    <div class="kv-row"><span class="kv-k">American Buffalo Concern, LLC</span><span class="kv-v">1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Ngoc Nguyen</span><span class="kv-v">0.955%</span></div>
-                    <div class="kv-row"><span class="kv-k">Sang Dang</span><span class="kv-v">0.59%</span></div>
-                    <div class="kv-row"><span class="kv-k">Linh Phan</span><span class="kv-v">1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Anh Phan</span><span class="kv-v">7.05%</span></div>
-                    <div class="kv-row"><span class="kv-k">Minh Khoa Tran</span><span class="kv-v">1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Khue Tong</span><span class="kv-v">0.5%</span></div>
-                    <div class="kv-row"><span class="kv-k">Bao Pham</span><span class="kv-v">0.2%</span></div>
-                    <div class="kv-row"><span class="kv-k">Tony Vong</span><span class="kv-v">2.01%</span></div>
-                    <div class="kv-row"><span class="kv-k">Christopher Nguyen</span><span class="kv-v">7.81%</span></div>
-                    <div class="kv-row"><span class="kv-k">Chao-Yu Huo</span><span class="kv-v">1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Duc Doan</span><span class="kv-v">2.8%</span></div>
-                    <div class="kv-row"><span class="kv-k">Nixon Nguyen</span><span class="kv-v">0.1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Lee Miller Smith</span><span class="kv-v">1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Jiyao Hu</span><span class="kv-v">1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Tony Nguyen</span><span class="kv-v">0.5%</span></div>
-                    <div class="kv-row"><span class="kv-k">Johnson Nguyen</span><span class="kv-v">1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Cuong Tran</span><span class="kv-v">0.1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Phi Tran</span><span class="kv-v">0.1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Son Hoang</span><span class="kv-v">1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Jinkyu Han</span><span class="kv-v">0.105%</span></div>
-                    <div class="kv-row"><span class="kv-k">Jeremy Mau</span><span class="kv-v">5.11%</span></div>
-                    <div class="kv-row"><span class="kv-k">Timothy G. Daiss</span><span class="kv-v">0.1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Edward Okpa</span><span class="kv-v">1.01%</span></div>
-                    <div class="kv-row"><span class="kv-k">Dong Zheng</span><span class="kv-v">2%</span></div>
-                    <div class="kv-row"><span class="kv-k">Huainan Qu</span><span class="kv-v">1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Connector Labs</span><span class="kv-v">1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Henry Vong</span><span class="kv-v">1%</span></div>
-                    <div class="kv-row"><span class="kv-k">Huy Nguyen</span><span class="kv-v">2.705%</span></div>
-                    <div class="kv-row"><span class="kv-k">BRC Gemini</span><span class="kv-v">7.03%</span></div>
-                    <div class="kv-row"><span class="kv-k">Long Le</span><span class="kv-v">0.005%</span></div>
+                <div class="sub-section" style="border: 2px solid #2a9d8f; background: #e8f5e9; margin-top: 40px;">
+                    <div class="sub-title" style="color: #2a9d8f; text-align: center; margin-bottom: 20px;">62ND EXHIBIT A: SHAREHOLDER PERCENTAGE OF OWNERSHIP</div>
+                    
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Son Nguyen</span><span class="value" style="color: #e76f51;">7.415%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Paul Matthews</span><span class="value" style="color: #e76f51;">25.005%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Sheldon Shi</span><span class="value" style="color: #e76f51;">7.6%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Deyang Qu</span><span class="value" style="color: #e76f51;">5%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">John Paul Merritt</span><span class="value" style="color: #e76f51;">3.2%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">American Buffalo Concern, LLC</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Ngoc Nguyen</span><span class="value" style="color: #e76f51;">0.955%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Sang Dang</span><span class="value" style="color: #e76f51;">0.59%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Linh Phan</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Anh Phan</span><span class="value" style="color: #e76f51;">7.05%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Minh Khoa Tran</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Khue Tong</span><span class="value" style="color: #e76f51;">0.5%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Bao Pham</span><span class="value" style="color: #e76f51;">0.2%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Tony Vong</span><span class="value" style="color: #e76f51;">2.01%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Christopher Nguyen</span><span class="value" style="color: #e76f51;">7.81%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Chao-Yu Huo</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Duc Doan</span><span class="value" style="color: #e76f51;">2.8%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Nixon Nguyen</span><span class="value" style="color: #e76f51;">0.1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Lee Miller Smith</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Jiyao Hu</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Tony Nguyen</span><span class="value" style="color: #e76f51;">0.5%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Johnson Nguyen</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Cuong Tran</span><span class="value" style="color: #e76f51;">0.1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Phi Tran</span><span class="value" style="color: #e76f51;">0.1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Son Hoang</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Jinkyu Han</span><span class="value" style="color: #e76f51;">0.105%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Jeremy Mau</span><span class="value" style="color: #e76f51;">5.11%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Timothy G. Daiss</span><span class="value" style="color: #e76f51;">0.1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Edward Okpa</span><span class="value" style="color: #e76f51;">1.01%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Dong Zheng</span><span class="value" style="color: #e76f51;">2%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Huainan Qu</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Connector Labs</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Henry Vong</span><span class="value" style="color: #e76f51;">1%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">Huy Nguyen</span><span class="value" style="color: #e76f51;">2.705%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f;"><span class="label" style="color: #0b4594;">BRC Gemini</span><span class="value" style="color: #e76f51;">7.03%</span></div>
+                    <div class="sub-row" style="border-bottom-color: #2a9d8f; border-bottom: none;"><span class="label" style="color: #0b4594;">Long Le</span><span class="value" style="color: #e76f51;">0.005%</span></div>
                 </div>
+
             </div>
         </div>
 
-        <footer class="footer">BEMP RESEARCH CORPORATION • NAH•SOVEREIGN•DIAMOND DECENTRALIZED PROTOCOL</footer>
+        <!-- SECRET MENU -->
+        <div class="secret-menu">
+            <button class="secret-btn" onclick="openTab('tab-wp')">BRC WHITEPAPER</button>
+            <button class="secret-btn" onclick="openTab('tab-bp')">BRC BLACKPAPER</button>
+            <button class="secret-btn" onclick="openTab('tab-exhibit')">62ND EXHIBIT A</button>
+        </div>
+
+        <div class="footer">WEBSITE ĐƯỢC BẢO TRỢ BỞI MIN'S KITCHEN & BRC</div>
     </div>
 
     <script>
         function openTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabId).style.display = 'block';
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.secret-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).style.display = 'flex';
+            
             const btn = document.querySelector(`[onclick="openTab('${tabId}')"]`);
-            if (btn) btn.classList.add('active');
-            if (tabId === 'tab-nah') setTimeout(drawPriceChart, 30);
+            if(btn) btn.classList.add('active');
         }
 
-        // =========================================================================
-        // 1. CẤU HÌNH KHO DỮ LIỆU PHI TẬP TRUNG (FIREBASE REALTIME DATABASE)
-        // =========================================================================
-        const FIREBASE_DB_URL = "https://nah-dex-default-rtdb.firebaseio.com/"; 
-
-        const BITCOIN_DUST_LIMIT_SATS = 546; // Ngưỡng tối thiểu để trả phí & tạo UTXO hợp lệ cho Bitcoin Miners
-        let CURRENT_NAH_SATS = 0.00017; 
+        // CHỈ CẦN CẬP NHẬT MỖI BIẾN NÀY KHI GIÁ THAY ĐỔI
+        const CURRENT_NAH_SATS = 0.00017; 
+        
         const CIRCULATING_SUPPLY = 85300000000000; 
 
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
         const FOREX_API = "https://open.er-api.com/v6/latest/USD";
 
         let globalLiveVndRate = 25500; 
-        let globalLiveBtcPrice = 67900;
+        let globalLiveBtcPrice = 60000;
 
-        let connectedWalletAddress = null;
-        let connectedWalletType = null;
-        let connectedWalletSats = 0;
-
-        let activeChartPair = "SAT_NAH"; // 'SAT_NAH' | 'VND_NAH' | 'USD_BTC'
-        let activeTimeframe = "ALL";     // '1H' | '1D' | '1M' | '3M' | '6M' | '1Y' | '3Y' | 'ALL'
-
-        // Sổ lệnh đang mở (Open Orders)
-        let activeListings = [
-            { id: "genesis-1", status: "active", nahAmount: 10000000, satPerNah: 0.00017, totalSats: 1700, seller: "bc1p...nah1", sellerFull: "bc1pgenesisnah1", timestamp: Date.now() - 3600000 * 12 },
-            { id: "genesis-2", status: "active", nahAmount: 50000000, satPerNah: 0.00019, totalSats: 9500, seller: "bc1p...bemp", sellerFull: "bc1pgenesisbemp", timestamp: Date.now() - 3600000 * 28 },
-            { id: "genesis-3", status: "active", nahAmount: 100000000, satPerNah: 0.00021, totalSats: 21000, seller: "bc1p...satf", sellerFull: "bc1pgenesissatf", timestamp: Date.now() - 3600000 * 48 }
-        ];
-
-        // Lịch sử các lệnh đã khớp (Historical Filled Orders - Giữ tối đa 30 lệnh gần nhất)
-        let filledOrdersLog = [
-            { id: "fill-1", nahAmount: 25000000, satPerNah: 0.00017, totalSats: 4250, seller: "bc1p...nah1", sellerFull: "bc1pgenesisnah1", buyer: "bc1p...88x9", buyerFull: "bc1pbuyer88x9", timestamp: Date.now() - 3600000 * 3 },
-            { id: "fill-2", nahAmount: 10000000, satPerNah: 0.00018, totalSats: 1800, seller: "bc1p...bemp", sellerFull: "bc1pgenesisbemp", buyer: "bc1p...42k1", buyerFull: "bc1pbuyer42k1", timestamp: Date.now() - 3600000 * 26 }
-        ];
-
-        // Lịch sử điểm giá kèm epoch timestamp để lọc theo 1H / 1D / 1M / 3M / 6M / 1Y / 3Y / ALL
-        const nowMs = Date.now();
-        let priceHistoryLog = [
-            { epoch: nowMs - 86400000 * 83, ts: "2026-08-03 10:00", satNah: 0.00008, btcUsd: 61500, vndRate: 25300 },
-            { epoch: nowMs - 86400000 * 76, ts: "2026-08-10 14:00", satNah: 0.00021, btcUsd: 62000, vndRate: 25350 },
-            { epoch: nowMs - 86400000 * 40, ts: "2026-09-15 09:30", satNah: 0.00019, btcUsd: 64200, vndRate: 25400 },
-            { epoch: nowMs - 86400000 * 15, ts: "2026-10-10 18:15", satNah: 0.00018, btcUsd: 66800, vndRate: 25450 },
-            { epoch: nowMs - 3600000 * 6,   ts: "2026-10-25 16:00", satNah: 0.00017, btcUsd: 67600, vndRate: 25500 },
-            { epoch: nowMs - 60000 * 30,    ts: "2026-10-25 22:20", satNah: 0.00017, btcUsd: 67900, vndRate: 25500 }
-        ];
-
-        function generateRandomSecretKey() {
-            const arr = new Uint8Array(24);
-            window.crypto.getRandomValues(arr);
-            return Array.from(arr, b => b.toString(16).padStart(2, "0")).join("");
-        }
-
-        function getSavedOrderSecrets() {
-            try { return JSON.parse(localStorage.getItem("nah_order_secrets_v2") || "{}"); }
-            catch (e) { return {}; }
-        }
-
-        function saveOrderSecret(orderId, secretKey) {
-            const map = getSavedOrderSecrets();
-            map[orderId] = secretKey;
-            localStorage.setItem("nah_order_secrets_v2", JSON.stringify(map));
-        }
-
-        // =========================================================================
-        // 2. ĐỒNG BỘ DATABASE & TỰ ĐỘNG CẬP NHẬT GIÁ FLOOR + LỊCH SỬ 30 LỆNH
-        // =========================================================================
-        async function syncCloudDatabase() {
-            try {
-                const lOpen = localStorage.getItem("nah_listings_v2");
-                const lFill = localStorage.getItem("nah_filled_v2");
-                const lHist = localStorage.getItem("nah_history_v2");
-                if (lOpen) activeListings = JSON.parse(lOpen);
-                if (lFill) filledOrdersLog = JSON.parse(lFill);
-                if (lHist) priceHistoryLog = JSON.parse(lHist);
-            } catch (e) {}
-
-            if (FIREBASE_DB_URL && FIREBASE_DB_URL.startsWith("http")) {
-                const cleanUrl = FIREBASE_DB_URL.replace(/\/$/, "");
-                try {
-                    const [listRes, fillRes, histRes] = await Promise.all([
-                        fetch(`${cleanUrl}/listings.json`),
-                        fetch(`${cleanUrl}/filled_orders.json`),
-                        fetch(`${cleanUrl}/price_history.json`)
-                    ]);
-                    const listData = await listRes.json();
-                    const fillData = await fillRes.json();
-                    const histData = await histRes.json();
-
-                    if (listData && typeof listData === "object" && !listData.error) {
-                        const arr = Object.keys(listData)
-                            .map(k => ({ id: k, ...listData[k] }))
-                            .filter(item => item.status === "active");
-                        if (arr.length > 0) activeListings = arr;
-                    }
-                    if (fillData && typeof fillData === "object" && !fillData.error) {
-                        const fArr = Object.keys(fillData).map(k => ({ id: k, ...fillData[k] }));
-                        fArr.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-                        if (fArr.length > 0) filledOrdersLog = fArr.slice(0, 30);
-                    }
-                    if (histData && typeof histData === "object" && !histData.error) {
-                        const hArr = Object.values(histData);
-                        hArr.sort((a, b) => (a.epoch || 0) - (b.epoch || 0));
-                        if (hArr.length > 0) priceHistoryLog = hArr;
-                    }
-                } catch (err) {
-                    console.warn("Using local cache fallback:", err);
-                }
-            }
-
-            activeListings = activeListings.filter(item => item.status === "active");
-            filledOrdersLog.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-            filledOrdersLog = filledOrdersLog.slice(0, 30); // Giữ đúng tối đa 30 lệnh khớp gần nhất
-
-            recalculateFloorPrice();
-            renderAllOrderTables();
-            drawPriceChart();
-        }
-
-        function recalculateFloorPrice() {
-            const validOrders = activeListings.filter(item => item.status === "active");
-            if (validOrders.length > 0) {
-                validOrders.sort((a, b) => parseFloat(a.satPerNah) - parseFloat(b.satPerNah));
-                const lowest = parseFloat(validOrders[0].satPerNah);
-                if (!isNaN(lowest) && lowest > 0) {
-                    CURRENT_NAH_SATS = lowest;
-                }
-            }
-            const floorLbl = document.getElementById("buy-floor-label");
-            if (floorLbl) floorLbl.innerText = CURRENT_NAH_SATS + " S/💎";
-        }
-
-        async function recordNewFloorPricePoint(newSatNah) {
-            const nowEpoch = Date.now();
-            const nowLabel = new Date(nowEpoch).toISOString().slice(0, 16).replace("T", " ");
-            const pointId = "pt_" + nowEpoch;
-            const newEntry = {
-                epoch: nowEpoch,
-                ts: nowLabel,
-                satNah: newSatNah,
-                btcUsd: globalLiveBtcPrice,
-                vndRate: globalLiveVndRate
-            };
-            priceHistoryLog.push(newEntry);
-            localStorage.setItem("nah_history_v2", JSON.stringify(priceHistoryLog));
-
-            if (FIREBASE_DB_URL && FIREBASE_DB_URL.startsWith("http")) {
-                const cleanUrl = FIREBASE_DB_URL.replace(/\/$/, "");
-                try {
-                    await fetch(`${cleanUrl}/price_history/${pointId}.json`, {
-                        method: "PUT",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(newEntry)
-                    });
-                } catch (e) {}
-            }
-        }
-
-        // =========================================================================
-        // 3. BIỂU ĐỒ REAL-TIME VỚI 8 KHUNG THỜI GIAN (1H/1D/1M/3M/6M/1Y/3Y/ALL)
-        // =========================================================================
-        function switchChartPair(pair) {
-            activeChartPair = pair;
-            document.getElementById("ctab-sat").classList.toggle("active", pair === "SAT_NAH");
-            document.getElementById("ctab-vnd").classList.toggle("active", pair === "VND_NAH");
-            document.getElementById("ctab-btc").classList.toggle("active", pair === "USD_BTC");
-            drawPriceChart();
-        }
-
-        function switchTimeframe(tf) {
-            activeTimeframe = tf;
-            ['1H','1D','1M','3M','6M','1Y','3Y','ALL'].forEach(id => {
-                const el = document.getElementById("tf-" + id);
-                if (el) el.classList.toggle("active", id === tf);
-            });
-            drawPriceChart();
-        }
-
-        function getFilteredChartPoints() {
-            const now = Date.now();
-            const windowMsMap = {
-                '1H': 3600 * 1000,
-                '1D': 86400 * 1000,
-                '1M': 30 * 86400 * 1000,
-                '3M': 90 * 86400 * 1000,
-                '6M': 180 * 86400 * 1000,
-                '1Y': 365 * 86400 * 1000,
-                '3Y': 3 * 365 * 86400 * 1000,
-                'ALL': Infinity
-            };
-            const cutoff = activeTimeframe === 'ALL' ? 0 : (now - windowMsMap[activeTimeframe]);
-
-            const raw = priceHistoryLog.map((p, idx) => {
-                const isLast = idx === priceHistoryLog.length - 1;
-                const sNah = isLast ? CURRENT_NAH_SATS : p.satNah;
-                const bUsd = isLast ? globalLiveBtcPrice : (p.btcUsd || globalLiveBtcPrice);
-                const vRate = isLast ? globalLiveVndRate : (p.vndRate || globalLiveVndRate);
-                const vndNah = (sNah / 100000000) * bUsd * vRate;
-
-                let val = sNah;
-                if (activeChartPair === "VND_NAH") val = vndNah;
-                if (activeChartPair === "USD_BTC") val = bUsd;
-                return {
-                    epoch: p.epoch || (now - (priceHistoryLog.length - idx) * 3600000),
-                    ts: p.ts,
-                    val: val
-                };
-            });
-
-            let filtered = raw.filter(pt => pt.epoch >= cutoff);
-            if (filtered.length === 0 && raw.length > 0) {
-                filtered = [raw[raw.length - 1]];
-            }
-            if (filtered.length === 1) {
-                const only = filtered[0];
-                const startLabel = new Date(Math.max(cutoff, only.epoch - 3600000)).toISOString().slice(0, 16).replace("T", " ");
-                filtered = [{ epoch: cutoff || (only.epoch - 3600000), ts: startLabel, val: only.val }, only];
-            }
-            return filtered;
-        }
-
-        function drawPriceChart() {
-            const canvas = document.getElementById("nah-chart");
-            if (!canvas) return;
-            const ctx = canvas.getContext("2d");
-            const dpr = window.devicePixelRatio || 1;
-            const rect = canvas.getBoundingClientRect();
-            if (rect.width === 0) return;
-            canvas.width = rect.width * dpr;
-            canvas.height = rect.height * dpr;
-            ctx.scale(dpr, dpr);
-
-            const w = rect.width;
-            const h = rect.height;
-            ctx.clearRect(0, 0, w, h);
-
-            const points = getFilteredChartPoints();
-            if (points.length < 2) return;
-
-            const vals = points.map(p => p.val);
-            let minV = Math.min(...vals);
-            let maxV = Math.max(...vals);
-            if (minV === maxV) { minV *= 0.98; maxV *= 1.02; }
-
-            let lineColor = "#00f0ff";
-            let unitFormatter = v => v.toFixed(5) + " S/💎";
-            if (activeChartPair === "VND_NAH") {
-                lineColor = "#10b981";
-                unitFormatter = v => v.toFixed(4) + " ₫";
-            } else if (activeChartPair === "USD_BTC") {
-                lineColor = "#f59e0b";
-                unitFormatter = v => "$" + v.toLocaleString("en-US", { maximumFractionDigits: 0 });
-            }
-
-            const firstVal = points[0].val;
-            const lastVal = points[points.length - 1].val;
-            const pct = firstVal > 0 ? (((lastVal - firstVal) / firstVal) * 100) : 0;
-            const pctEl = document.getElementById("chart-pct-change");
-            pctEl.innerText = `${pct >= 0 ? "+" : ""}${pct.toFixed(2)}% (${activeTimeframe})`;
-            pctEl.style.color = pct >= 0 ? "var(--accent-emerald)" : "var(--accent-rose)";
-            pctEl.style.background = pct >= 0 ? "rgba(16,185,129,0.15)" : "rgba(244,63,94,0.15)";
-
-            document.getElementById("chart-header-val").innerText = unitFormatter(lastVal);
-            document.getElementById("chart-header-val").style.color = lineColor;
-            document.getElementById("chart-min-label").innerText = "LOW: " + unitFormatter(minV);
-            document.getElementById("chart-max-label").innerText = "HIGH: " + unitFormatter(maxV);
-            document.getElementById("chart-last-ts").innerText = `${points[0].ts} → ${points[points.length - 1].ts}`;
-
-            ctx.strokeStyle = "rgba(255,255,255,0.05)";
-            ctx.lineWidth = 1;
-            for (let i = 1; i <= 3; i++) {
-                const y = (h / 4) * i;
-                ctx.beginPath();
-                ctx.moveTo(0, y);
-                ctx.lineTo(w, y);
-                ctx.stroke();
-            }
-
-            const padX = 16;
-            const padY = 20;
-            const plotW = w - padX * 2;
-            const plotH = h - padY * 2;
-
-            const coords = points.map((pt, i) => {
-                const x = padX + (i / (points.length - 1)) * plotW;
-                const y = padY + plotH - ((pt.val - minV) / (maxV - minV)) * plotH;
-                return { x, y };
-            });
-
-            const grad = ctx.createLinearGradient(0, padY, 0, h);
-            grad.addColorStop(0, lineColor + "44");
-            grad.addColorStop(1, lineColor + "00");
-            ctx.beginPath();
-            ctx.moveTo(coords[0].x, h);
-            coords.forEach(c => ctx.lineTo(c.x, c.y));
-            ctx.lineTo(coords[coords.length - 1].x, h);
-            ctx.closePath();
-            ctx.fillStyle = grad;
-            ctx.fill();
-
-            ctx.beginPath();
-            coords.forEach((c, idx) => {
-                if (idx === 0) ctx.moveTo(c.x, c.y);
-                else ctx.lineTo(c.x, c.y);
-            });
-            ctx.strokeStyle = lineColor;
-            ctx.lineWidth = 2.5;
-            ctx.stroke();
-
-            coords.forEach((c, idx) => {
-                ctx.beginPath();
-                ctx.arc(c.x, c.y, idx === coords.length - 1 ? 4.5 : 2.8, 0, Math.PI * 2);
-                ctx.fillStyle = idx === coords.length - 1 ? "#ffffff" : lineColor;
-                ctx.fill();
-            });
-        }
-
-        // =========================================================================
-        // 4. QUẢN LÝ SỔ LỆNH (OPEN ORDERS, 30 FILLED ORDERS, MY TRADES)
-        // =========================================================================
-        function switchOrderbookView(view) {
-            document.getElementById("view-open-orders").style.display = view === "open" ? "block" : "none";
-            document.getElementById("view-filled-orders").style.display = view === "filled" ? "block" : "none";
-            document.getElementById("view-my-orders").style.display = view === "mine" ? "block" : "none";
-
-            document.getElementById("ob-tab-open").classList.toggle("active", view === "open");
-            document.getElementById("ob-tab-filled").classList.toggle("active", view === "filled");
-            document.getElementById("ob-tab-mine").classList.toggle("active", view === "mine");
-            renderAllOrderTables();
-        }
-
-        function switchTradePanel(mode) {
-            const isBuy = mode === "buy";
-            document.getElementById("panel-buy-nah").style.display = isBuy ? "block" : "none";
-            document.getElementById("panel-sell-nah").style.display = isBuy ? "none" : "block";
-            document.getElementById("tab-mode-buy").className = isBuy ? "mode-btn buy-active" : "mode-btn";
-            document.getElementById("tab-mode-sell").className = !isBuy ? "mode-btn sell-active" : "mode-btn";
-            if (!isBuy) updateListingPreview();
-            else recalcQuickBuy('sats');
-        }
-
-        function renderAllOrderTables() {
-            const openOrders = activeListings.filter(item => item.status === "active");
-            openOrders.sort((a, b) => parseFloat(a.satPerNah) - parseFloat(b.satPerNah));
-            document.getElementById("count-open").innerText = openOrders.length;
-
-            const savedSecrets = getSavedOrderSecrets();
-
-            // 1. Render Open Orders
-            const tbodyOpen = document.getElementById("tbody-open-orders");
-            tbodyOpen.innerHTML = openOrders.map((item, idx) => {
-                const isFloor = idx === 0 ? `<span class="floor-tag">FLOOR</span>` : "";
-                const isMine = (connectedWalletAddress && item.sellerFull === connectedWalletAddress) || Boolean(savedSecrets[item.id]);
-                const cancelBtn = isMine
-                    ? `<button class="btn-cancel-sm" onclick="cancelListedPackage('${item.id}')">CANCEL</button>`
-                    : "";
-                return `
-                    <tr>
-                        <td style="color:var(--accent-cyan);font-weight:800;">💎 ${Number(item.nahAmount).toLocaleString()}${isFloor}</td>
-                        <td style="color:var(--accent-amber);font-weight:700;">${item.satPerNah}</td>
-                        <td>⚡ ${Number(item.totalSats).toLocaleString()}</td>
-                        <td style="color:var(--text-muted);">${item.seller}</td>
-                        <td style="text-align:right;">
-                            <button class="btn-buy-sm" onclick="buyListedPackage('${item.id}')">BUY</button>
-                            ${cancelBtn}
-                        </td>
-                    </tr>
-                `;
-            }).join("") || `<tr><td colspan="5" style="text-align:center;color:var(--text-muted);">No open orders. Be the first to list NAH!</td></tr>`;
-
-            // 2. Render Recent 30 Filled Orders
-            const recentFilled = filledOrdersLog.slice(0, 30);
-            document.getElementById("count-filled").innerText = recentFilled.length;
-            const tbodyFilled = document.getElementById("tbody-filled-orders");
-            tbodyFilled.innerHTML = recentFilled.map(f => {
-                const timeStr = f.timestamp ? new Date(f.timestamp).toLocaleString([], { month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' }) : "Recent";
-                return `
-                    <tr>
-                        <td style="color:var(--text-muted);">${timeStr}</td>
-                        <td style="color:var(--accent-emerald);font-weight:700;">💎 ${Number(f.nahAmount).toLocaleString()}</td>
-                        <td style="color:var(--accent-amber);">${f.satPerNah}</td>
-                        <td>⚡ ${Number(f.totalSats).toLocaleString()}</td>
-                        <td style="color:var(--text-muted);font-size:11px;">${f.buyer || 'bc1p...'} ← ${f.seller || 'bc1p...'}</td>
-                    </tr>
-                `;
-            }).join("") || `<tr><td colspan="5" style="text-align:center;color:var(--text-muted);">No filled trades recorded yet.</td></tr>`;
-
-            // 3. Render My Orders & Personal History
-            const tbodyMine = document.getElementById("tbody-my-orders");
-            const myOpen = openOrders.filter(o => (connectedWalletAddress && o.sellerFull === connectedWalletAddress) || Boolean(savedSecrets[o.id]));
-            const myFilled = recentFilled.filter(f => connectedWalletAddress && (f.sellerFull === connectedWalletAddress || f.buyerFull === connectedWalletAddress));
-
-            let myRowsHtml = "";
-            myOpen.forEach(o => {
-                myRowsHtml += `
-                    <tr>
-                        <td><span style="color:var(--accent-cyan);font-weight:800;">OPEN SELL</span></td>
-                        <td>💎 ${Number(o.nahAmount).toLocaleString()}</td>
-                        <td style="color:var(--accent-amber);">${o.satPerNah}</td>
-                        <td>⚡ ${Number(o.totalSats).toLocaleString()}</td>
-                        <td style="text-align:right;"><button class="btn-cancel-sm" onclick="cancelListedPackage('${o.id}')">CANCEL MY ORDER</button></td>
-                    </tr>
-                `;
-            });
-            myFilled.forEach(f => {
-                const role = (connectedWalletAddress && f.buyerFull === connectedWalletAddress) ? "FILLED BUY" : "FILLED SELL";
-                const color = role === "FILLED BUY" ? "var(--accent-emerald)" : "var(--accent-amber)";
-                myRowsHtml += `
-                    <tr>
-                        <td><span style="color:${color};font-weight:800;">${role}</span></td>
-                        <td>💎 ${Number(f.nahAmount).toLocaleString()}</td>
-                        <td>${f.satPerNah}</td>
-                        <td>⚡ ${Number(f.totalSats).toLocaleString()}</td>
-                        <td style="text-align:right;color:var(--text-muted);">COMPLETED ✓</td>
-                    </tr>
-                `;
-            });
-
-            tbodyMine.innerHTML = myRowsHtml || `<tr><td colspan="5" style="text-align:center;color:var(--text-muted);">${connectedWalletAddress ? "No orders or trades found for your connected wallet." : "Connect your UniSat or OKX Wallet to view your open orders & trade history."}</td></tr>`;
-        }
-
-        // =========================================================================
-        // 5. KẾT NỐI VÍ & THỰC THI MUA / ĐĂNG BÁN / HỦY LỆNH PHI TẬP TRUNG
-        // =========================================================================
-        async function connectBitcoinWallet(walletType) {
-            const statusEl = document.getElementById("dex-status");
-            try {
-                if (walletType === "unisat") {
-                    if (typeof window.unisat === "undefined") {
-                        statusEl.innerText = "UniSat extension not detected. Opening UniSat Market...";
-                        window.open("https://unisat.io/market/v2/runes/NAH•SOVEREIGN•DIAMOND", "_blank");
-                        return;
-                    }
-                    const accounts = await window.unisat.requestAccounts();
-                    connectedWalletAddress = accounts[0];
-                    connectedWalletType = "unisat";
-                    const bal = await window.unisat.getBalance();
-                    connectedWalletSats = bal.total || 0;
-                    document.getElementById("btn-connect-unisat").innerText = "🟡 " + connectedWalletAddress.slice(0, 5) + "..." + connectedWalletAddress.slice(-4);
-                } else if (walletType === "okx") {
-                    if (typeof window.okxwallet === "undefined" || !window.okxwallet.bitcoin) {
-                        const dappUrl = encodeURIComponent(window.location.href);
-                        window.location.href = `okx://wallet/dapp/url?dappUrl=${dappUrl}`;
-                        return;
-                    }
-                    const res = await window.okxwallet.bitcoin.connect();
-                    connectedWalletAddress = res.address;
-                    connectedWalletType = "okx";
-                    const bal = await window.okxwallet.bitcoin.getBalance();
-                    connectedWalletSats = bal.total || 0;
-                    document.getElementById("btn-connect-okx").innerText = "⚡ " + connectedWalletAddress.slice(0, 5) + "..." + connectedWalletAddress.slice(-4);
-                }
-
-                const shortAddr = connectedWalletAddress.slice(0, 6) + "..." + connectedWalletAddress.slice(-4);
-                document.getElementById("seller-addr-label").innerText = shortAddr;
-                document.getElementById("buyer-wallet-bal").innerText = `BAL: ${connectedWalletSats.toLocaleString()} SATS`;
-                statusEl.innerText = `Connected wallet: ${shortAddr}`;
-                renderAllOrderTables();
-            } catch (e) {
-                statusEl.innerText = "Wallet connection cancelled.";
-            }
-        }
-
-        function recalcQuickBuy(changed) {
-            const satsInput = document.getElementById("quick-buy-sats");
-            const nahInput = document.getElementById("quick-buy-nah");
-            const usdLbl = document.getElementById("quick-buy-usd");
-
-            if (changed === "sats") {
-                const sats = parseFloat(satsInput.value) || 0;
-                const nah = Math.floor(sats / CURRENT_NAH_SATS);
-                nahInput.value = nah > 0 ? nah : "";
-                const usd = (sats / 100000000) * globalLiveBtcPrice;
-                usdLbl.innerText = `~$${usd.toFixed(2)} USD`;
-            } else {
-                const nah = parseFloat(nahInput.value) || 0;
-                const sats = Math.ceil(nah * CURRENT_NAH_SATS);
-                satsInput.value = sats > 0 ? sats : "";
-                const usd = (sats / 100000000) * globalLiveBtcPrice;
-                usdLbl.innerText = `~$${usd.toFixed(2)} USD`;
-            }
-        }
-
-        function updateListingPreview() {
-            const amt = parseFloat(document.getElementById("list-nah-amount").value) || 0;
-            const unitSat = parseFloat(document.getElementById("list-sat-price").value) || 0;
-            const totalSats = Math.ceil(amt * unitSat);
-            const vndPerNah = (unitSat / 100000000) * globalLiveBtcPrice * globalLiveVndRate;
-            const totalEl = document.getElementById("list-total-sats");
-            totalEl.innerText = `${totalSats.toLocaleString()} SATS`;
-            totalEl.style.color = totalSats >= BITCOIN_DUST_LIMIT_SATS ? "var(--accent-emerald)" : "var(--accent-rose)";
-            document.getElementById("list-vnd-preview").innerText = `~${vndPerNah.toFixed(4)} ₫/NAH`;
-        }
-
-        async function createNewNahListing() {
-            const statusEl = document.getElementById("dex-status");
-            const amt = parseInt(document.getElementById("list-nah-amount").value, 10);
-            const unitSat = parseFloat(document.getElementById("list-sat-price").value);
-
-            if (!amt || amt <= 0 || !unitSat || unitSat <= 0) {
-                statusEl.innerText = "Please enter a valid NAH amount and unit price.";
-                return;
-            }
-
-            const totalSats = Math.ceil(amt * unitSat);
-            if (totalSats < BITCOIN_DUST_LIMIT_SATS) {
-                statusEl.innerText = `Order total (${totalSats} sats) is below Bitcoin miner dust limit (${BITCOIN_DUST_LIMIT_SATS} sats). Increase amount or price.`;
-                return;
-            }
-
-            if (!connectedWalletAddress) {
-                if (typeof window.unisat !== "undefined") await connectBitcoinWallet("unisat");
-                else if (typeof window.okxwallet !== "undefined") await connectBitcoinWallet("okx");
-            }
-
-            if (!connectedWalletAddress) {
-                statusEl.innerText = "Please connect your UniSat or OKX Wallet first.";
-                return;
-            }
-
-            const orderId = "ord_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7);
-            const sellerShort = connectedWalletAddress.slice(0, 6) + "..." + connectedWalletAddress.slice(-4);
-            const listingPayload = `LIST NAH•SOVEREIGN•DIAMOND | ID: ${orderId} | AMOUNT: ${amt} NAH | PRICE: ${unitSat} S/NAH | TOTAL: ${totalSats} SATS`;
-
-            let signature = "";
-            try {
-                if (connectedWalletType === "unisat" && window.unisat) {
-                    signature = await window.unisat.signMessage(listingPayload);
-                } else if (connectedWalletType === "okx" && window.okxwallet && window.okxwallet.bitcoin) {
-                    signature = await window.okxwallet.bitcoin.signMessage(listingPayload);
-                }
-            } catch (err) {
-                statusEl.innerText = "Wallet signature cancelled.";
-                return;
-            }
-
-            if (!signature) {
-                statusEl.innerText = "Wallet signature is required to post an order.";
-                return;
-            }
-
-            // Tạo khóa bí mật duy nhất cho ví người đăng (Không có Admin Backdoor)
-            const secretKey = generateRandomSecretKey();
-            saveOrderSecret(orderId, secretKey);
-
-            const newOrder = {
-                id: orderId,
-                status: "active",
-                nahAmount: amt,
-                satPerNah: unitSat,
-                totalSats: totalSats,
-                seller: sellerShort,
-                sellerFull: connectedWalletAddress,
-                signature: String(signature),
-                timestamp: Date.now()
-            };
-
-            if (FIREBASE_DB_URL && FIREBASE_DB_URL.startsWith("http")) {
-                const cleanUrl = FIREBASE_DB_URL.replace(/\/$/, "");
-                try {
-                    await fetch(`${cleanUrl}/secrets/${orderId}.json`, {
-                        method: "PUT",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(secretKey)
-                    });
-                    await fetch(`${cleanUrl}/listings/${orderId}.json`, {
-                        method: "PUT",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(newOrder)
-                    });
-                } catch (e) {}
-            }
-
-            activeListings.push(newOrder);
-            localStorage.setItem("nah_listings_v2", JSON.stringify(activeListings));
-
-            recalculateFloorPrice();
-            await recordNewFloorPricePoint(CURRENT_NAH_SATS);
-            await engageOracle();
-            switchTradePanel("buy");
-            statusEl.innerText = `Listed ${amt.toLocaleString()} NAH @ ${unitSat} S/💎 (${totalSats.toLocaleString()} sats)!`;
-        }
-
-        async function cancelListedPackage(orderId) {
-            const statusEl = document.getElementById("dex-status");
-            const item = activeListings.find(x => x.id === orderId);
-            if (!item) return;
-
-            // Xác thực bằng chữ ký ví trực tiếp nếu người dùng đang kết nối đúng ví đã đăng
-            if (connectedWalletAddress && item.sellerFull === connectedWalletAddress) {
-                try {
-                    const cancelMsg = `CANCEL NAH ORDER: ${orderId}`;
-                    if (connectedWalletType === "unisat" && window.unisat) await window.unisat.signMessage(cancelMsg);
-                    else if (connectedWalletType === "okx" && window.okxwallet && window.okxwallet.bitcoin) await window.okxwallet.bitcoin.signMessage(cancelMsg);
-                } catch (e) {
-                    statusEl.innerText = "Cancel signature rejected in wallet.";
-                    return;
-                }
-            }
-
-            const secretsMap = getSavedOrderSecrets();
-            const cancelKey = secretsMap[orderId];
-            if (!cancelKey && (!connectedWalletAddress || item.sellerFull !== connectedWalletAddress)) {
-                statusEl.innerText = "Decentralized Rule: Only the wallet that created this order can cancel it.";
-                return;
-            }
-
-            if (FIREBASE_DB_URL && FIREBASE_DB_URL.startsWith("http") && cancelKey) {
-                const cleanUrl = FIREBASE_DB_URL.replace(/\/$/, "");
-                try {
-                    await fetch(`${cleanUrl}/listings/${orderId}.json`, {
-                        method: "PATCH",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ status: "cancelled", cancelKey: cancelKey })
-                    });
-                } catch (e) {}
-            }
-
-            activeListings = activeListings.filter(x => x.id !== orderId);
-            localStorage.setItem("nah_listings_v2", JSON.stringify(activeListings));
-            recalculateFloorPrice();
-            await recordNewFloorPricePoint(CURRENT_NAH_SATS);
-            await engageOracle();
-            statusEl.innerText = `Order ${orderId.slice(0, 10)} cancelled by creator.`;
-        }
-
-        async function buyLowestFloorOrder() {
-            const openOrders = activeListings.filter(item => item.status === "active");
-            if (openOrders.length === 0) {
-                window.open("https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND", "_blank");
-                return;
-            }
-            openOrders.sort((a, b) => parseFloat(a.satPerNah) - parseFloat(b.satPerNah));
-            await buyListedPackage(openOrders[0].id);
-        }
-
-        async function buyListedPackage(orderId) {
-            const statusEl = document.getElementById("dex-status");
-            const item = activeListings.find(x => x.id === orderId);
-            if (!item) return;
-
-            if (!connectedWalletAddress) {
-                if (typeof window.unisat !== "undefined") await connectBitcoinWallet("unisat");
-                else if (typeof window.okxwallet !== "undefined") await connectBitcoinWallet("okx");
-            }
-
-            const buyerShort = connectedWalletAddress
-                ? connectedWalletAddress.slice(0, 6) + "..." + connectedWalletAddress.slice(-4)
-                : "bc1p...buyer";
-
-            const filledRecord = {
-                id: "fill_" + Date.now(),
-                orderId: item.id,
-                nahAmount: item.nahAmount,
-                satPerNah: item.satPerNah,
-                totalSats: item.totalSats,
-                seller: item.seller,
-                sellerFull: item.sellerFull || "",
-                buyer: buyerShort,
-                buyerFull: connectedWalletAddress || "external",
-                timestamp: Date.now()
-            };
-
-            // Lưu vào lịch sử khớp lệnh (Giữ tối đa 30 lệnh gần nhất)
-            filledOrdersLog.unshift(filledRecord);
-            filledOrdersLog = filledOrdersLog.slice(0, 30);
-            localStorage.setItem("nah_filled_v2", JSON.stringify(filledOrdersLog));
-
-            activeListings = activeListings.filter(x => x.id !== orderId);
-            localStorage.setItem("nah_listings_v2", JSON.stringify(activeListings));
-
-            if (FIREBASE_DB_URL && FIREBASE_DB_URL.startsWith("http")) {
-                const cleanUrl = FIREBASE_DB_URL.replace(/\/$/, "");
-                try {
-                    await Promise.all([
-                        fetch(`${cleanUrl}/listings/${orderId}.json`, {
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ status: "filled", buyerFull: connectedWalletAddress || "external" })
-                        }),
-                        fetch(`${cleanUrl}/filled_orders/${filledRecord.id}.json`, {
-                            method: "PUT",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(filledRecord)
-                        })
-                    ]);
-                } catch (e) {}
-            }
-
-            recalculateFloorPrice();
-            await recordNewFloorPricePoint(CURRENT_NAH_SATS);
-            await engageOracle();
-
-            statusEl.innerText = `Order matched (${Number(item.nahAmount).toLocaleString()} NAH @ ${item.satPerNah} S/💎)! Routing settlement...`;
-            window.open("https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND", "_blank");
-        }
-
-        // =========================================================================
-        // 6. ORACLE ĐỒNG BỘ GIÁ BTC/VND & OMNI CONVERTER
-        // =========================================================================
         async function engageOracle() {
             try {
                 const [btcRes, forexRes] = await Promise.all([ fetch(BTC_LIVE_API), fetch(FOREX_API) ]);
@@ -2189,26 +845,20 @@
                 globalLiveBtcPrice = parseFloat(btcData.USD);
                 globalLiveVndRate = parseFloat(forexData.rates.VND);
                 
-                recalculateFloorPrice();
-
                 const usdVal = (CURRENT_NAH_SATS / 100000000) * globalLiveBtcPrice;
                 const vndVal = usdVal * globalLiveVndRate; 
                 const mcapBtc = (CIRCULATING_SUPPLY * CURRENT_NAH_SATS) / 100000000;
-                const mcapUsdStr = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 
                 document.getElementById("mcap-btc").innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " BTC";
-                document.getElementById("mcap-usd").innerText = mcapUsdStr;
-                document.getElementById("header-mcap-usd").innerText = mcapUsdStr;
+                document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 
                 document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " S/💎";
+
                 document.getElementById("live-vnd-nah").innerText = vndVal.toFixed(4) + " ₫";
                 document.getElementById("live-usd-btc").innerText = "$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
-                document.getElementById("last-update").innerText = "LIVE SYNC: " + new Date().toLocaleTimeString();
-
-                recalcQuickBuy('sats');
-                renderAllOrderTables();
-                drawPriceChart();
+                document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
+                
             } catch (error) {
                 console.error("Oracle Connection Failed: ", error);
             }
@@ -2258,10 +908,7 @@
             });
         }
 
-        window.addEventListener("resize", drawPriceChart);
-
         async function bootSystem() {
-            await syncCloudDatabase();
             await engageOracle(); 
             setInterval(engageOracle, 60000); 
             setupOmniConverter();
