@@ -284,7 +284,27 @@
                     <div class="sub-row"><span class="label">MAX CIRCULATING SUPPLY</span><span class="value">85.3 TRILLION NAHs</span></div>
                     <div class="sub-row"><span class="label">MARKET CAP (BTC)</span><span class="value" id="mcap-btc">LOADING...</span></div>
                     <div class="sub-row"><span class="label">MARKET CAP (USD)</span><span class="value" id="mcap-usd">LOADING...</span></div>
-                    <div class="sub-row"><span class="label">FULL LIST OF NAH HODLERS</span><span class="value"><a href="https://uniscan.cc/runes/detail/NAH%E2%80%A2SOVEREIGN%E2%80%A2DIAMOND" target="_blank">UNISCAN ↗</a></span></div>
+                    <div class="sub-row"><span class="label">SYNCED BITCOIN BLOCK</span><span class="value" id="nah-synced-block" style="color: #2a9d8f;">CONNECTING...</span></div>
+                    <div class="sub-row"><span class="label">PRUNED DB DISK SIZE</span><span class="value" id="nah-db-size" style="color: #2a9d8f;">...</span></div>
+                    <div class="sub-row">
+                        <span class="label">FULL LIST OF NAH HODLERS (<span id="nah-holders-count">...</span>)</span>
+                        <span class="value"><a href="javascript:void(0)" onclick="toggleHoldersList()" id="holders-toggle-btn" style="color: #0b4594; font-weight: 900;">VIEW LIVE LIST ▼</a></span>
+                    </div>
+                </div>
+
+                <!-- KHUNG TRA CỨU ĐỊA CHỈ VÍ & DANH SÁCH NAH HODLERS TRỰC TIẾP -->
+                <div class="converter-section" style="background: #fdf6d8; margin-bottom: 20px;">
+                    <div class="sub-title" style="margin-bottom: 8px;">🔍 NAH ADDRESS BALANCE CHECKER</div>
+                    <div style="display: flex; gap: 6px; margin-bottom: 10px;">
+                        <input type="text" id="wallet-search-input" placeholder="Paste Bitcoin address (bc1p... or 1A1z...)" style="flex: 1; padding: 10px; border: 2px solid #0b4594; border-radius: 8px; font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 700; color: #0b4594; outline: none; background: #ffffff;">
+                        <button onclick="lookupNahWallet()" style="background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 0 14px; font-family: 'Quicksand', sans-serif; font-weight: 900; font-size: 12px; cursor: pointer;">CHECK</button>
+                    </div>
+                    <div id="wallet-search-result" style="display: none; background: #ffffff; border: 2px solid #2a9d8f; border-radius: 8px; padding: 12px; font-size: 12px; font-weight: 700; color: #0b4594; word-break: break-all;"></div>
+
+                    <div id="holders-leaderboard" style="display: none; margin-top: 12px; background: #ffffff; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; max-height: 280px; overflow-y: auto;">
+                        <div style="font-size: 12px; font-weight: 900; color: #e76f51; text-align: center; margin-bottom: 8px; text-transform: uppercase;">LIVE ON-CHAIN NAH HODLERS (CLICK ADDRESS TO INSPECT)</div>
+                        <div id="holders-list-body" style="font-size: 11px; font-weight: 700;">LOADING...</div>
+                    </div>
                 </div>
 
                 <div class="info-text" style="font-size: 12px; font-weight: 700; text-align: center; margin-top: 10px;">
@@ -834,6 +854,7 @@
 
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
         const FOREX_API = "https://open.er-api.com/v6/latest/USD";
+        const NAH_NODE_API = "https://api.nahkahmotors.com/api/v1";
 
         let globalLiveVndRate = 25500; 
         let globalLiveBtcPrice = 80000;
@@ -861,6 +882,68 @@
                 
             } catch (error) {
                 console.error("Oracle Connection Failed: ", error);
+            }
+        }
+
+        async function syncNahCoreNode() {
+            try {
+                const res = await fetch(`${NAH_NODE_API}/status`);
+                const data = await res.json();
+                if (data.synced_block) {
+                    document.getElementById("nah-synced-block").innerText = "#" + data.synced_block.toLocaleString('en-US');
+                    document.getElementById("nah-db-size").innerText = data.db_size_kb + " KB (<10MB)";
+                    document.getElementById("nah-holders-count").innerText = data.holders_count + " ADDRESSES";
+                }
+            } catch (e) {
+                console.error("nah-core API sync error:", e);
+            }
+        }
+
+        async function toggleHoldersList() {
+            const box = document.getElementById("holders-leaderboard");
+            const btn = document.getElementById("holders-toggle-btn");
+            if (box.style.display === "block") {
+                box.style.display = "none";
+                btn.innerText = "VIEW LIVE LIST ▼";
+                return;
+            }
+            box.style.display = "block";
+            btn.innerText = "HIDE LIVE LIST ▲";
+            const body = document.getElementById("holders-list-body");
+            body.innerHTML = "LOADING LIVE ADDRESSES FROM NAH-CORE...";
+            try {
+                const res = await fetch(`${NAH_NODE_API}/holders`);
+                const data = await res.json();
+                body.innerHTML = data.holders.map(h => {
+                    const shortAddr = h.address.length > 20 ? h.address.slice(0, 10) + "..." + h.address.slice(-6) : h.address;
+                    const pct = ((h.balance / 148300000000000) * 100).toFixed(4);
+                    return `<div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dotted #e9c46a; cursor:pointer;" onclick="document.getElementById('wallet-search-input').value='${h.address}'; lookupNahWallet();">
+                        <span style="color:#0b4594;">#${h.rank} ${shortAddr}</span>
+                        <span style="color:#e76f51;">${h.balance.toLocaleString('en-US')} NAH (${pct}%)</span>
+                    </div>`;
+                }).join("");
+            } catch (e) {
+                body.innerHTML = "Unable to load live holder list.";
+            }
+        }
+
+        async function lookupNahWallet() {
+            const addr = document.getElementById("wallet-search-input").value.trim();
+            const resBox = document.getElementById("wallet-search-result");
+            if (!addr) return;
+            resBox.style.display = "block";
+            resBox.innerHTML = "CHECKING ADDRESS BALANCE...";
+            try {
+                const res = await fetch(`${NAH_NODE_API}/address/${encodeURIComponent(addr)}`);
+                const data = await res.json();
+                const pctTotal = ((data.balance / 148300000000000) * 100).toFixed(6);
+                resBox.innerHTML = `
+                    <div style="color:#0b4594; font-size:11px; margin-bottom:6px;">ADDRESS: <span style="color:#555;">${data.address}</span></div>
+                    <div style="color:#e76f51; font-size:15px; font-weight:900; margin-bottom:4px;">BALANCE: ${data.balance.toLocaleString('en-US')} NAH 💎</div>
+                    <div style="color:#2a9d8f; font-size:11px;">SHARE OF MAX SUPPLY: ${pctTotal}%</div>
+                `;
+            } catch (e) {
+                resBox.innerHTML = "Unable to check address right now.";
             }
         }
         
@@ -909,8 +992,9 @@
         }
 
         async function bootSystem() {
-            await engageOracle(); 
+            await Promise.all([ engageOracle(), syncNahCoreNode() ]);
             setInterval(engageOracle, 60000); 
+            setInterval(syncNahCoreNode, 60000);
             setupOmniConverter();
         }
         bootSystem();
