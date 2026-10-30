@@ -284,25 +284,23 @@
                     <div class="sub-row"><span class="label">MAX CIRCULATING SUPPLY</span><span class="value">85.3 TRILLION NAHs</span></div>
                     <div class="sub-row"><span class="label">MARKET CAP (BTC)</span><span class="value" id="mcap-btc">LOADING...</span></div>
                     <div class="sub-row"><span class="label">MARKET CAP (USD)</span><span class="value" id="mcap-usd">LOADING...</span></div>
-                    <div class="sub-row"><span class="label">SYNCED BITCOIN BLOCK</span><span class="value" id="nah-synced-block" style="color: #2a9d8f;">CONNECTING...</span></div>
-                    <div class="sub-row"><span class="label">PRUNED DB DISK SIZE</span><span class="value" id="nah-db-size" style="color: #2a9d8f;">...</span></div>
                     <div class="sub-row">
                         <span class="label">FULL LIST OF NAH HODLERS (<span id="nah-holders-count">...</span>)</span>
                         <span class="value"><a href="javascript:void(0)" onclick="toggleHoldersList()" id="holders-toggle-btn" style="color: #0b4594; font-weight: 900;">VIEW LIVE LIST ▼</a></span>
                     </div>
                 </div>
 
-                <!-- KHUNG TRA CỨU ĐỊA CHỈ VÍ & DANH SÁCH NAH HODLERS TRỰC TIẾP -->
+                <!-- KHUNG EXPLORER TRA CỨU SỐ DƯ & LỊCH SỬ GIAO DỊCH TỪNG ĐỊA CHỈ VÍ -->
                 <div class="converter-section" style="background: #fdf6d8; margin-bottom: 20px;">
-                    <div class="sub-title" style="margin-bottom: 8px;">🔍 NAH ADDRESS BALANCE CHECKER</div>
+                    <div class="sub-title" style="margin-bottom: 8px;">🔍 NAH SOVEREIGN EXPLORER</div>
                     <div style="display: flex; gap: 6px; margin-bottom: 10px;">
                         <input type="text" id="wallet-search-input" placeholder="Paste Bitcoin address (bc1p... or 1A1z...)" style="flex: 1; padding: 10px; border: 2px solid #0b4594; border-radius: 8px; font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 700; color: #0b4594; outline: none; background: #ffffff;">
-                        <button onclick="lookupNahWallet()" style="background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 0 14px; font-family: 'Quicksand', sans-serif; font-weight: 900; font-size: 12px; cursor: pointer;">CHECK</button>
+                        <button onclick="lookupNahWallet()" style="background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 0 14px; font-family: 'Quicksand', sans-serif; font-weight: 900; font-size: 12px; cursor: pointer;">SEARCH</button>
                     </div>
                     <div id="wallet-search-result" style="display: none; background: #ffffff; border: 2px solid #2a9d8f; border-radius: 8px; padding: 12px; font-size: 12px; font-weight: 700; color: #0b4594; word-break: break-all;"></div>
 
-                    <div id="holders-leaderboard" style="display: none; margin-top: 12px; background: #ffffff; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; max-height: 280px; overflow-y: auto;">
-                        <div style="font-size: 12px; font-weight: 900; color: #e76f51; text-align: center; margin-bottom: 8px; text-transform: uppercase;">LIVE ON-CHAIN NAH HODLERS (CLICK ADDRESS TO INSPECT)</div>
+                    <div id="holders-leaderboard" style="display: none; margin-top: 12px; background: #ffffff; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; max-height: 300px; overflow-y: auto;">
+                        <div style="font-size: 12px; font-weight: 900; color: #e76f51; text-align: center; margin-bottom: 8px; text-transform: uppercase;">LIVE ON-CHAIN NAH HODLERS (TAP ANY ADDRESS TO VIEW HISTORY)</div>
                         <div id="holders-list-body" style="font-size: 11px; font-weight: 700;">LOADING...</div>
                     </div>
                 </div>
@@ -889,14 +887,17 @@
             try {
                 const res = await fetch(`${NAH_NODE_API}/status`);
                 const data = await res.json();
-                if (data.synced_block) {
-                    document.getElementById("nah-synced-block").innerText = "#" + data.synced_block.toLocaleString('en-US');
-                    document.getElementById("nah-db-size").innerText = data.db_size_kb + " KB (<10MB)";
+                if (data.holders_count) {
                     document.getElementById("nah-holders-count").innerText = data.holders_count + " ADDRESSES";
                 }
             } catch (e) {
                 console.error("nah-core API sync error:", e);
             }
+        }
+
+        function shortAddress(addr) {
+            if (!addr) return "";
+            return addr.length > 22 ? addr.slice(0, 10) + "..." + addr.slice(-6) : addr;
         }
 
         async function toggleHoldersList() {
@@ -910,15 +911,14 @@
             box.style.display = "block";
             btn.innerText = "HIDE LIVE LIST ▲";
             const body = document.getElementById("holders-list-body");
-            body.innerHTML = "LOADING LIVE ADDRESSES FROM NAH-CORE...";
+            body.innerHTML = "LOADING LIVE HODLERS...";
             try {
                 const res = await fetch(`${NAH_NODE_API}/holders`);
                 const data = await res.json();
                 body.innerHTML = data.holders.map(h => {
-                    const shortAddr = h.address.length > 20 ? h.address.slice(0, 10) + "..." + h.address.slice(-6) : h.address;
                     const pct = ((h.balance / 148300000000000) * 100).toFixed(4);
-                    return `<div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dotted #e9c46a; cursor:pointer;" onclick="document.getElementById('wallet-search-input').value='${h.address}'; lookupNahWallet();">
-                        <span style="color:#0b4594;">#${h.rank} ${shortAddr}</span>
+                    return `<div style="display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px dotted #e9c46a; cursor:pointer;" onclick="document.getElementById('wallet-search-input').value='${h.address}'; lookupNahWallet();">
+                        <span style="color:#0b4594; text-decoration:underline;">#${h.rank} ${shortAddress(h.address)}</span>
                         <span style="color:#e76f51;">${h.balance.toLocaleString('en-US')} NAH (${pct}%)</span>
                     </div>`;
                 }).join("");
@@ -932,18 +932,46 @@
             const resBox = document.getElementById("wallet-search-result");
             if (!addr) return;
             resBox.style.display = "block";
-            resBox.innerHTML = "CHECKING ADDRESS BALANCE...";
+            resBox.innerHTML = "LOADING ADDRESS BALANCE & TRANSACTION HISTORY...";
             try {
                 const res = await fetch(`${NAH_NODE_API}/address/${encodeURIComponent(addr)}`);
                 const data = await res.json();
                 const pctTotal = ((data.balance / 148300000000000) * 100).toFixed(6);
+                const history = data.history || [];
+
+                const historyHtml = history.map(tx => {
+                    const isSent = tx.type === "SENT";
+                    const badgeColor = isSent ? "#e76f51" : "#2a9d8f";
+                    const sign = isSent ? "-" : "+";
+                    const peerLabel = tx.type === "GENESIS ETCH" ? "Origin" : (isSent ? "To" : "From");
+                    const canClickPeer = tx.counterparty && tx.counterparty !== "NAH Protocol Genesis";
+                    const peerHtml = canClickPeer
+                        ? `<a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.counterparty}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(tx.counterparty)}</a>`
+                        : `<span style="color:#555;">${tx.counterparty}</span>`;
+
+                    return `<div style="padding:8px 0; border-top:1px dotted #e9c46a; font-size:11px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:3px;">
+                            <span style="background:${badgeColor}; color:#fff; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:900;">${tx.type}</span>
+                            <span style="color:${badgeColor}; font-size:12px; font-weight:900;">${sign}${tx.amount.toLocaleString('en-US')} NAH</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; color:#555; font-size:10px;">
+                            <span>${peerLabel}: ${peerHtml}</span>
+                            <span>${tx.time || ('Block #' + tx.height)}</span>
+                        </div>
+                    </div>`;
+                }).join("");
+
                 resBox.innerHTML = `
-                    <div style="color:#0b4594; font-size:11px; margin-bottom:6px;">ADDRESS: <span style="color:#555;">${data.address}</span></div>
-                    <div style="color:#e76f51; font-size:15px; font-weight:900; margin-bottom:4px;">BALANCE: ${data.balance.toLocaleString('en-US')} NAH 💎</div>
-                    <div style="color:#2a9d8f; font-size:11px;">SHARE OF MAX SUPPLY: ${pctTotal}%</div>
+                    <div style="color:#0b4594; font-size:11px; margin-bottom:4px;">ADDRESS: <span style="color:#555;">${data.address}</span></div>
+                    <div style="color:#e76f51; font-size:15px; font-weight:900; margin-bottom:2px;">BALANCE: ${data.balance.toLocaleString('en-US')} NAH 💎</div>
+                    <div style="color:#2a9d8f; font-size:11px; margin-bottom:10px;">SHARE OF MAX SUPPLY: ${pctTotal}%</div>
+                    <div style="color:#0b4594; font-size:11px; font-weight:900; text-transform:uppercase; margin-bottom:4px;">TRANSACTION HISTORY (${history.length})</div>
+                    <div style="max-height:220px; overflow-y:auto;">
+                        ${historyHtml || '<div style="color:#777; font-size:11px;">No NAH transactions found for this address.</div>'}
+                    </div>
                 `;
             } catch (e) {
-                resBox.innerHTML = "Unable to check address right now.";
+                resBox.innerHTML = "Unable to load address details right now.";
             }
         }
         
