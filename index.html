@@ -86,7 +86,7 @@
             box-shadow: 4px 4px 0px #fceea7; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; text-align: center;
         }
         .live-box-full { flex: 1 1 100%; padding: 15px 10px; }
-        .live-box-label { font-size: 12px; color: #888; font-weight: bold; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .live-box-label { font-size: 12px; color: #888; font-weight: bold; margin-bottom: 12px; letter-spacing: 1px; }
         .live-box-value { font-size: 26px; font-weight: 900; }
         .live-box-subtext { font-size: 10px; color: #fff; margin-top: 8px; font-weight: bold; text-transform: uppercase; }
 
@@ -230,7 +230,7 @@
                 
                 <div class="live-dash-container">
                     <div class="live-box">
-                        <div class="live-box-label">VND / NAH</div>
+                        <div class="live-box-label">VND / nah</div>
                         <div id="live-vnd-nah" class="live-box-value" style="color: #00ccff; text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);">...</div>
                     </div>
                     <div class="live-box">
@@ -238,14 +238,14 @@
                         <div id="live-usd-btc" class="live-box-value" style="color: #ff9900; text-shadow: 0 0 10px rgba(255, 153, 0, 0.5);">...</div>
                     </div>
                     <div class="live-box live-box-full">
-                        <div class="live-box-label">SAT / NAH</div>
-                        <div id="sats-val" class="live-box-value" style="font-size: 28px; color: #00ccff; text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);">... S/💎</div>
+                        <div class="live-box-label">sat / nah</div>
+                        <div id="sats-val" class="live-box-value" style="font-size: 28px; color: #00ccff; text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);">... sats/💎</div>
                         <div class="live-box-subtext">(BASED ON <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #2a9d8f; text-decoration: underline;">SATFLOW</a>)</div>
                     </div>
                 </div>
 
                 <div style="font-size: 13px; font-weight: 900; text-align: center; color: #0b4594; margin-bottom: 15px; width: 100%;">
-                    💎 Alternative exchange to acquire NAH: <a href="https://unisat.io/market/v2/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #eab308; text-decoration: underline;">UniSat</a>.
+                    💎 Alternative exchange to acquire nah: <a href="https://unisat.io/market/v2/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #eab308; text-decoration: underline;">UniSat</a>.
                 </div>
 
                 <div class="info-text" style="font-size: 11px; text-align: center; margin-bottom: 25px; color: #0b4594; border: 2px dashed #0b4594; background: #e8f4f8; padding: 12px 6px; border-radius: 8px; font-weight: 700; width: 100%; box-sizing: border-box;">
@@ -268,39 +268,39 @@
                         <input type="number" step="any" id="conv-btc" class="converter-input" style="color: #f4a261;" placeholder="0">
                     </div>
                     <div class="converter-row">
-                        <span class="converter-label">SAT</span>
+                        <span class="converter-label">sat</span>
                         <input type="number" step="any" id="conv-sat" class="converter-input" style="color: #0b4594;" placeholder="0">
                     </div>
                     <div class="converter-row">
-                        <span class="converter-label">NAH</span>
+                        <span class="converter-label">nah</span>
                         <input type="number" step="any" id="conv-nah" class="converter-input" style="color: #00ccff; text-shadow: 0 0 2px rgba(0, 204, 255, 0.4);" placeholder="0">
                     </div>
                 </div>
 
                 <div class="sub-section">
                     <div class="sub-title">NAH MARKET CAP & TOKENOMICS</div>
-                    <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION NAHs</span></div>
-                    <div class="sub-row"><span class="label">HELD BY SATOSHI NAKAMOTO</span><span class="value">63 TRILLION NAHs</span></div>
-                    <div class="sub-row"><span class="label">MAX CIRCULATING SUPPLY</span><span class="value">85.3 TRILLION NAHs</span></div>
+                    <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION nahs</span></div>
+                    <div class="sub-row"><span class="label">HELD BY SATOSHI NAKAMOTO</span><span class="value">63 TRILLION nahs</span></div>
+                    <div class="sub-row"><span class="label">MAX CIRCULATING SUPPLY</span><span class="value">85.3 TRILLION nahs</span></div>
                     <div class="sub-row"><span class="label">MARKET CAP (BTC)</span><span class="value" id="mcap-btc">LOADING...</span></div>
                     <div class="sub-row"><span class="label">MARKET CAP (USD)</span><span class="value" id="mcap-usd">LOADING...</span></div>
                     <div class="sub-row">
-                        <span class="label">FULL LIST OF NAH HODLERS (<span id="nah-holders-count">...</span>)</span>
-                        <span class="value"><a href="javascript:void(0)" onclick="toggleHoldersList()" id="holders-toggle-btn" style="color: #0b4594; font-weight: 900;">VIEW LIVE LIST ▼</a></span>
+                        <span class="label">LIST OF CURRENT NAH HODLERS (<span id="nah-holders-count">18</span>)</span>
+                        <span class="value"><a href="javascript:void(0)" onclick="toggleHoldersList()" id="holders-toggle-btn" style="color: #0b4594; font-weight: 900;">VIEW LIST ▼</a></span>
                     </div>
                 </div>
 
-                <!-- KHUNG EXPLORER TRA CỨU SỐ DƯ & LỊCH SỬ GIAO DỊCH TỪNG ĐỊA CHỈ VÍ -->
+                <!-- NAH SOVEREIGN EXPLORER (NAH + SAT TRANSACTIONS) -->
                 <div class="converter-section" style="background: #fdf6d8; margin-bottom: 20px;">
                     <div class="sub-title" style="margin-bottom: 8px;">🔍 NAH SOVEREIGN EXPLORER</div>
                     <div style="display: flex; gap: 6px; margin-bottom: 10px;">
-                        <input type="text" id="wallet-search-input" placeholder="Paste Bitcoin address (bc1p... or 1A1z...)" style="flex: 1; padding: 10px; border: 2px solid #0b4594; border-radius: 8px; font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 700; color: #0b4594; outline: none; background: #ffffff;">
+                        <input type="text" id="wallet-search-input" placeholder="Paste Bitcoin Address" style="flex: 1; padding: 10px; border: 2px solid #0b4594; border-radius: 8px; font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 700; color: #0b4594; outline: none; background: #ffffff;">
                         <button onclick="lookupNahWallet()" style="background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 0 14px; font-family: 'Quicksand', sans-serif; font-weight: 900; font-size: 12px; cursor: pointer;">SEARCH</button>
                     </div>
-                    <div id="wallet-search-result" style="display: none; background: #ffffff; border: 2px solid #2a9d8f; border-radius: 8px; padding: 12px; font-size: 12px; font-weight: 700; color: #0b4594; word-break: break-all;"></div>
+                    <div id="wallet-search-result" style="display: none; background: #ffffff; border: 2px solid #0b4594; border-radius: 8px; padding: 12px; font-size: 12px; font-weight: 700; color: #0b4594; word-break: break-all;"></div>
 
                     <div id="holders-leaderboard" style="display: none; margin-top: 12px; background: #ffffff; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; max-height: 300px; overflow-y: auto;">
-                        <div style="font-size: 12px; font-weight: 900; color: #e76f51; text-align: center; margin-bottom: 8px; text-transform: uppercase;">LIVE ON-CHAIN NAH HODLERS (TAP ANY ADDRESS TO VIEW HISTORY)</div>
+                        <div style="font-size: 11px; font-weight: 900; color: #e76f51; text-align: center; margin-bottom: 8px; text-transform: uppercase;">TAP ADDRESS TO VIEW HISTORY</div>
                         <div id="holders-list-body" style="font-size: 11px; font-weight: 700;">LOADING...</div>
                     </div>
                 </div>
@@ -387,30 +387,30 @@
                 <div class="math-box blue">
                     • Actual circulating supply: 20 million BTC.<br>
                     • 1 BTC Price = $120,000,000,000,000 / 20,000,000 = <strong>$6,000,000 USD</strong><br>
-                    • Since 1 BTC = 100 million SATS (the smallest unit), the price of 1 SATS = $6,000,000 / 100,000,000 = <strong>$0.06 USD</strong>
+                    • Since 1 BTC = 100 million sats (the smallest unit), the price of 1 sat = $6,000,000 / 100,000,000 = <strong>$0.06 USD</strong>
                 </div>
                 <div class="wp-text">Suppose your child wants to save up to buy a toy car priced at $14 USD (approx. 350,000 VND):</div>
                 <ul class="wp-list">
                     <li><span class="wp-highlight">If using BTC:</span> The child's math problem is $14 / $6,000,000 = <strong>0.00000233 BTC</strong>.</li>
-                    <li><span class="wp-highlight">If using SATS:</span> The child's math problem is $14 / $0.06 = <strong>233 SATS</strong>.</li>
+                    <li><span class="wp-highlight">If using sats:</span> The child's math problem is $14 / $0.06 = <strong>233 sats</strong>.</li>
                 </ul>
-                <div class="wp-text">What are the consequences? A 3-5 year old child CANNOT visualize the decimal 0.00000233, and is completely stuck at the number 233 (far exceeding their 1-10 counting ability). The child cannot calculate: <em>"Today I put away my toys and got 10 SATS, when will I have 233 SATS?"</em></div>
+                <div class="wp-text">What are the consequences? A 3-5 year old child CANNOT visualize the decimal 0.00000233, and is completely stuck at the number 233 (far exceeding their 1-10 counting ability). The child cannot calculate: <em>"Today I put away my toys and got 10 sats, when will I have 233 sats?"</em></div>
                 <div class="wp-text">The Marshmallow lesson fails because the math is too hard. This creates a "5-Year Gap" (from age 3 to 8). Children are pushed back from the opportunity to interact with Hard Money and are forced to use fiat money, missing the "golden window" to shape their financial mindset.</div>
 
                 <div class="wp-h2">3. NAH Sovereign Diamond: The "Marshmallow" Protocol of the New Generation</div>
-                <div class="wp-text">This exact inadequacy is why NAH Sovereign Diamond was born. <em>The Bitcoin Standard</em> sets the theory, but the mathematical architecture of NAH is the tool to turn that theory into reality right in your living room.</div>
-                <div class="wp-text">The blueprint of NAH:</div>
+                <div class="wp-text">This exact inadequacy is why NAH Sovereign Diamond was born. <em>The Bitcoin Standard</em> sets the theory, but the mathematical architecture of nah is the tool to turn that theory into reality right in your living room.</div>
+                <div class="wp-text">The blueprint of nah:</div>
                 <div class="math-box green">
-                    • Actual circulating supply: Total supply 148.3 Trillion minus Satoshi Nakamoto's 63 Trillion NAH, leaving 85.3 Trillion NAH.<br>
-                    • 1 NAH Price = $120,000,000,000,000 / 85,300,000,000,000 = <strong>$1.40 USD</strong>
+                    • Actual circulating supply: Total supply 148.3 Trillion minus Satoshi Nakamoto's 63 Trillion nahs, leaving 85.3 Trillion nahs.<br>
+                    • 1 nah Price = $120,000,000,000,000 / 85,300,000,000,000 = <strong>$1.40 USD</strong>
                 </div>
-                <div class="wp-text">Now, look at how NAH establishes Low Time Preference for a 3-year-old child:</div>
+                <div class="wp-text">Now, look at how nah establishes Low Time Preference for a 3-year-old child:</div>
                 <ul class="wp-list">
-                    <li><span class="wp-highlight">Putting toys in the basket:</span> Receives 1 NAH (A 3-year-old counts 1 finger).</li>
-                    <li><span class="wp-highlight">Buying a small box of candy:</span> Price is 2 NAH.</li>
-                    <li><span class="wp-highlight">Buying a $14 USD toy car:</span> The child's math problem is $14 / $1.40 = <strong>10 NAH</strong>.</li>
+                    <li><span class="wp-highlight">Putting toys in the basket:</span> Receives 1 nah (A 3-year-old counts 1 finger).</li>
+                    <li><span class="wp-highlight">Buying a small box of candy:</span> Price is 2 nahs.</li>
+                    <li><span class="wp-highlight">Buying a $14 USD toy car:</span> The child's math problem is $14 / $1.40 = <strong>10 nahs</strong>.</li>
                 </ul>
-                <div class="wp-text">The Marshmallow Experiment lesson now plays out perfectly: <em>"The car costs 10 NAH. Every day I put away toys I get 1 NAH. I will not buy candy (2 NAH) to fast, saving up 10 NAH in 10 days to buy the car."</em></div>
+                <div class="wp-text">The Marshmallow Experiment lesson now plays out perfectly: <em>"The car costs 10 nahs. Every day I put away toys I get 1 nah. I will not buy candy (2 nahs) to fast, saving up 10 nahs in 10 days to buy the car."</em></div>
                 <div class="wp-text">Everything is a whole number, clear and tangible within the 1-to-10 thinking of a toddler. No fragmented decimals.</div>
                 <div class="wp-text">Bitcoin is a great net of "Fisherman B", but NAH Sovereign Diamond is the financial language that helps you teach your 3-year-old child how to weave that net. It gives parents the most powerful weapon: Turning the mindset of delayed gratification into a simple daily counting game.</div>
                 <div class="wp-text">Don't let the monetary system complicate your child's brain. The new citizens of Earth need a counting tool worthy of their future.</div>
@@ -853,9 +853,14 @@
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
         const FOREX_API = "https://open.er-api.com/v6/latest/USD";
         const NAH_NODE_API = "https://api.nahkahmotors.com/api/v1";
+        const MEMPOOL_API = "https://mempool.space/api";
 
         let globalLiveVndRate = 25500; 
         let globalLiveBtcPrice = 80000;
+
+        function fmtUnit(n, singular, plural) {
+            return Number(n) === 1 ? singular : plural;
+        }
 
         async function engageOracle() {
             try {
@@ -871,7 +876,7 @@
                 document.getElementById("mcap-btc").innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " BTC";
                 document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 
-                document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " S/💎";
+                document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " sats/💎";
 
                 document.getElementById("live-vnd-nah").innerText = vndVal.toFixed(4) + " ₫";
                 document.getElementById("live-usd-btc").innerText = "$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
@@ -888,7 +893,7 @@
                 const res = await fetch(`${NAH_NODE_API}/status`);
                 const data = await res.json();
                 if (data.holders_count) {
-                    document.getElementById("nah-holders-count").innerText = data.holders_count + " ADDRESSES";
+                    document.getElementById("nah-holders-count").innerText = data.holders_count;
                 }
             } catch (e) {
                 console.error("nah-core API sync error:", e);
@@ -905,26 +910,61 @@
             const btn = document.getElementById("holders-toggle-btn");
             if (box.style.display === "block") {
                 box.style.display = "none";
-                btn.innerText = "VIEW LIVE LIST ▼";
+                btn.innerText = "VIEW LIST ▼";
                 return;
             }
             box.style.display = "block";
-            btn.innerText = "HIDE LIVE LIST ▲";
+            btn.innerText = "HIDE LIST ▲";
             const body = document.getElementById("holders-list-body");
-            body.innerHTML = "LOADING LIVE HODLERS...";
+            body.innerHTML = "LOADING...";
             try {
                 const res = await fetch(`${NAH_NODE_API}/holders`);
                 const data = await res.json();
                 body.innerHTML = data.holders.map(h => {
                     const pct = ((h.balance / 148300000000000) * 100).toFixed(4);
+                    const unit = fmtUnit(h.balance, "nah", "nahs");
                     return `<div style="display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px dotted #e9c46a; cursor:pointer;" onclick="document.getElementById('wallet-search-input').value='${h.address}'; lookupNahWallet();">
                         <span style="color:#0b4594; text-decoration:underline;">#${h.rank} ${shortAddress(h.address)}</span>
-                        <span style="color:#e76f51;">${h.balance.toLocaleString('en-US')} NAH (${pct}%)</span>
+                        <span style="color:#e76f51;">${h.balance.toLocaleString('en-US')} ${unit} (${pct}%)</span>
                     </div>`;
                 }).join("");
             } catch (e) {
-                body.innerHTML = "Unable to load live holder list.";
+                body.innerHTML = "Unable to load holder list.";
             }
+        }
+
+        function parseSatTxs(txs, addr) {
+            if (!Array.isArray(txs)) return [];
+            return txs.slice(0, 25).map(tx => {
+                let sent = 0, recv = 0;
+                (tx.vin || []).forEach(v => {
+                    if (v.prevout && v.prevout.scriptpubkey_address === addr) sent += (v.prevout.value || 0);
+                });
+                (tx.vout || []).forEach(v => {
+                    if (v.scriptpubkey_address === addr) recv += (v.value || 0);
+                });
+                const net = recv - sent;
+                const isSent = net < 0;
+                let peer = "Bitcoin Network";
+                if (isSent) {
+                    const other = (tx.vout || []).find(v => v.scriptpubkey_address && v.scriptpubkey_address !== addr);
+                    peer = other ? other.scriptpubkey_address : addr;
+                } else {
+                    const other = (tx.vin || []).find(v => v.prevout && v.prevout.scriptpubkey_address && v.prevout.scriptpubkey_address !== addr);
+                    peer = other ? other.prevout.scriptpubkey_address : "Coinbase / Network";
+                }
+                let timeStr = "Unconfirmed (Mempool)";
+                if (tx.status && tx.status.block_time) {
+                    timeStr = new Date(tx.status.block_time * 1000).toISOString().slice(0, 16).replace("T", " ") + " UTC";
+                }
+                return {
+                    txid: tx.txid,
+                    type: isSent ? "SENT" : "RECEIVED",
+                    amount: Math.abs(net),
+                    counterparty: peer,
+                    time: timeStr
+                };
+            });
         }
 
         async function lookupNahWallet() {
@@ -932,42 +972,94 @@
             const resBox = document.getElementById("wallet-search-result");
             if (!addr) return;
             resBox.style.display = "block";
-            resBox.innerHTML = "LOADING ADDRESS BALANCE & TRANSACTION HISTORY...";
+            resBox.innerHTML = "LOADING ADDRESS DETAILS...";
             try {
-                const res = await fetch(`${NAH_NODE_API}/address/${encodeURIComponent(addr)}`);
-                const data = await res.json();
-                const pctTotal = ((data.balance / 148300000000000) * 100).toFixed(6);
-                const history = data.history || [];
+                const [nahRes, satInfoRes, satTxsRes] = await Promise.allSettled([
+                    fetch(`${NAH_NODE_API}/address/${encodeURIComponent(addr)}`).then(r => r.ok ? r.json() : null),
+                    fetch(`${MEMPOOL_API}/address/${encodeURIComponent(addr)}`).then(r => r.ok ? r.json() : null),
+                    fetch(`${MEMPOOL_API}/address/${encodeURIComponent(addr)}/txs`).then(r => r.ok ? r.json() : [])
+                ]);
 
-                const historyHtml = history.map(tx => {
+                const nahData = (nahRes.status === "fulfilled" && nahRes.value) ? nahRes.value : { address: addr, balance: 0, history: [] };
+                const satInfo = (satInfoRes.status === "fulfilled" && satInfoRes.value) ? satInfoRes.value : null;
+                const satTxsRaw = (satTxsRes.status === "fulfilled" && Array.isArray(satTxsRes.value)) ? satTxsRes.value : [];
+
+                const nahBal = nahData.balance || 0;
+                const nahUnit = fmtUnit(nahBal, "nah", "nahs");
+                const pctTotal = ((nahBal / 148300000000000) * 100).toFixed(6);
+
+                let satBal = 0;
+                if (satInfo && satInfo.chain_stats) {
+                    const c = satInfo.chain_stats;
+                    const m = satInfo.mempool_stats || { funded_txo_sum: 0, spent_txo_sum: 0 };
+                    satBal = (c.funded_txo_sum - c.spent_txo_sum) + (m.funded_txo_sum - m.spent_txo_sum);
+                }
+                const satUnit = fmtUnit(satBal, "sat", "sats");
+
+                const nahHistory = nahData.history || [];
+                const nahHistoryHtml = nahHistory.map(tx => {
                     const isSent = tx.type === "SENT";
                     const badgeColor = isSent ? "#e76f51" : "#2a9d8f";
                     const sign = isSent ? "-" : "+";
-                    const peerLabel = tx.type === "GENESIS ETCH" ? "Origin" : (isSent ? "To" : "From");
-                    const canClickPeer = tx.counterparty && tx.counterparty !== "NAH Protocol Genesis";
+                    const peerLabel = isSent ? "To" : "From";
+                    const txUnit = fmtUnit(tx.amount, "nah", "nahs");
+                    const canClickPeer = tx.counterparty && !tx.counterparty.includes("Protocol") && !tx.counterparty.includes("Genesis");
                     const peerHtml = canClickPeer
                         ? `<a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.counterparty}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(tx.counterparty)}</a>`
                         : `<span style="color:#555;">${tx.counterparty}</span>`;
 
-                    return `<div style="padding:8px 0; border-top:1px dotted #e9c46a; font-size:11px;">
+                    return `<div style="padding:8px; margin-bottom:6px; background:#fdf6d8; border:2px solid #0b4594; border-radius:6px; font-size:11px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:3px;">
-                            <span style="background:${badgeColor}; color:#fff; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:900;">${tx.type}</span>
-                            <span style="color:${badgeColor}; font-size:12px; font-weight:900;">${sign}${tx.amount.toLocaleString('en-US')} NAH</span>
+                            <span style="background:${badgeColor}; color:#fff; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:900;">💎 ${tx.type}</span>
+                            <span style="color:${badgeColor}; font-size:13px; font-weight:900;">${sign}${tx.amount.toLocaleString('en-US')} ${txUnit}</span>
                         </div>
-                        <div style="display:flex; justify-content:space-between; color:#555; font-size:10px;">
+                        <div style="display:flex; justify-content:space-between; color:#0b4594; font-size:10px;">
                             <span>${peerLabel}: ${peerHtml}</span>
                             <span>${tx.time || ('Block #' + tx.height)}</span>
                         </div>
                     </div>`;
                 }).join("");
 
+                const satHistory = parseSatTxs(satTxsRaw, addr);
+                const satHistoryHtml = satHistory.map(tx => {
+                    const isSent = tx.type === "SENT";
+                    const badgeColor = isSent ? "#888" : "#f4a261";
+                    const sign = isSent ? "-" : "+";
+                    const peerLabel = isSent ? "To" : "From";
+                    const txUnit = fmtUnit(tx.amount, "sat", "sats");
+                    const canClickPeer = tx.counterparty && !tx.counterparty.includes("Network") && !tx.counterparty.includes("Coinbase");
+                    const peerHtml = canClickPeer
+                        ? `<a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.counterparty}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(tx.counterparty)}</a>`
+                        : `<span style="color:#777;">${tx.counterparty}</span>`;
+
+                    return `<div style="padding:6px 0; border-bottom:1px dotted #ccc; font-size:11px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+                            <span style="color:${badgeColor}; font-size:10px; font-weight:900;">${tx.type}</span>
+                            <span style="color:#555; font-size:11px; font-weight:900;">${sign}${tx.amount.toLocaleString('en-US')} ${txUnit}</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; color:#777; font-size:10px;">
+                            <span>${peerLabel}: ${peerHtml}</span>
+                            <span>${tx.time}</span>
+                        </div>
+                    </div>`;
+                }).join("");
+
                 resBox.innerHTML = `
-                    <div style="color:#0b4594; font-size:11px; margin-bottom:4px;">ADDRESS: <span style="color:#555;">${data.address}</span></div>
-                    <div style="color:#e76f51; font-size:15px; font-weight:900; margin-bottom:2px;">BALANCE: ${data.balance.toLocaleString('en-US')} NAH 💎</div>
-                    <div style="color:#2a9d8f; font-size:11px; margin-bottom:10px;">SHARE OF MAX SUPPLY: ${pctTotal}%</div>
-                    <div style="color:#0b4594; font-size:11px; font-weight:900; text-transform:uppercase; margin-bottom:4px;">TRANSACTION HISTORY (${history.length})</div>
-                    <div style="max-height:220px; overflow-y:auto;">
-                        ${historyHtml || '<div style="color:#777; font-size:11px;">No NAH transactions found for this address.</div>'}
+                    <div style="color:#0b4594; font-size:11px; margin-bottom:6px;">ADDRESS: <span style="color:#555;">${addr}</span></div>
+                    <div style="background:#111111; border:2px solid #0b4594; border-radius:8px; padding:10px; margin-bottom:8px; text-align:center;">
+                        <div style="color:#00ccff; font-size:18px; font-weight:900; text-shadow:0 0 8px rgba(0,204,255,0.4);">💎 ${nahBal.toLocaleString('en-US')} ${nahUnit}</div>
+                        <div style="color:#2a9d8f; font-size:10px; margin-top:3px;">SHARE OF MAX SUPPLY: ${pctTotal}%</div>
+                    </div>
+                    <div style="color:#0b4594; font-size:12px; margin-bottom:12px; text-align:center;">Bitcoin Balance: <span style="color:#f4a261; font-weight:900;">${satBal.toLocaleString('en-US')} ${satUnit}</span></div>
+
+                    <div style="color:#e76f51; font-size:12px; font-weight:900; margin-bottom:6px;">💎 nah transactions (${nahHistory.length})</div>
+                    <div style="max-height:220px; overflow-y:auto; margin-bottom:14px;">
+                        ${nahHistoryHtml || '<div style="color:#777; font-size:11px; padding:6px 0;">No nah transactions found for this address.</div>'}
+                    </div>
+
+                    <div style="color:#0b4594; font-size:11px; font-weight:900; border-top:2px solid #e9c46a; padding-top:10px; margin-bottom:4px;">sat transactions (${satHistory.length}${satHistory.length === 25 ? '+' : ''})</div>
+                    <div style="max-height:180px; overflow-y:auto;">
+                        ${satHistoryHtml || '<div style="color:#777; font-size:11px; padding:6px 0;">No sat transactions found for this address.</div>'}
                     </div>
                 `;
             } catch (e) {
