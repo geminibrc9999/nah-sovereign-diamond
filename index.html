@@ -80,15 +80,15 @@
             100% { transform: scale(1.3); filter: brightness(1.5) drop-shadow(0 0 15px rgba(0, 204, 255, 0.9)); } 
         }
 
-        .live-dash-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; width: 100%; }
+        /* 3 Ô ĐEN XẾP THÀNH 1 HÀNG NGANG NHỎ GỌN */
+        .live-dash-container { display: flex; flex-wrap: nowrap; gap: 8px; margin-bottom: 18px; width: 100%; }
         .live-box { 
-            flex: 1 1 45%; background: #111111; border: 3px solid #0b4594; padding: 20px 10px; border-radius: 10px; 
-            box-shadow: 4px 4px 0px #fceea7; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; text-align: center;
+            flex: 1 1 33.33%; min-width: 0; background: #111111; border: 2px solid #0b4594; padding: 10px 6px; border-radius: 10px; 
+            box-shadow: 3px 3px 0px #fceea7; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; text-align: center;
         }
-        .live-box-full { flex: 1 1 100%; padding: 15px 10px; }
-        .live-box-label { font-size: 12px; color: #888; font-weight: bold; margin-bottom: 12px; letter-spacing: 1px; }
-        .live-box-value { font-size: 26px; font-weight: 900; }
-        .live-box-subtext { font-size: 10px; color: #fff; margin-top: 8px; font-weight: bold; text-transform: uppercase; }
+        .live-box-label { font-size: 10px; color: #888; font-weight: 900; margin-bottom: 6px; letter-spacing: 0.5px; text-transform: none; }
+        .live-box-value { font-size: 15px; font-weight: 900; white-space: nowrap; }
+        .live-box-subtext { font-size: 8px; color: #fff; margin-top: 4px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
         .converter-section { 
             margin-bottom: 25px; padding: 15px; background: #ffffff; border: 3px solid #0b4594; 
@@ -99,7 +99,7 @@
             background: #fdf6d8; border: 2px solid #e9c46a; padding: 8px 15px; border-radius: 8px; 
         }
         .converter-row:last-child { margin-bottom: 0; background: #e8f4f8; border-color: #00ccff; }
-        .converter-label { font-size: 13px; font-weight: 900; color: #0b4594; width: 45px; }
+        .converter-label { font-size: 13px; font-weight: 900; color: #0b4594; width: 45px; text-transform: none; }
         
         .converter-input { 
             flex: 1; background: transparent; border: none; font-family: 'Quicksand', sans-serif; font-size: 16px; font-weight: 900; text-align: right; outline: none; width: 100%; color: #e76f51; 
@@ -186,22 +186,19 @@
         .secret-btn:hover { opacity: 1; border-style: solid; background: rgba(11, 69, 148, 0.1); }
         .secret-btn.active { opacity: 1; border-style: solid; background: #0b4594; color: #fceea7; }
 
+        /* DẢI MEMPOOL 3 PENDING + 5 MINED NHỎ GỌN */
         .mempool-strip {
-            display: flex; gap: 8px; overflow-x: auto; padding: 8px 2px; width: 100%; box-sizing: border-box;
+            display: flex; gap: 5px; overflow-x: auto; padding: 4px 1px; width: 100%; box-sizing: border-box;
         }
         .mp-card {
-            min-width: 105px; flex-shrink: 0; border-radius: 8px; padding: 8px 6px; text-align: center;
+            min-width: 78px; flex: 1 0 auto; border-radius: 6px; padding: 5px 4px; text-align: center;
             display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;
         }
         .mp-card.pending {
-            background: #2b1d0e; border: 2px dashed #f4a261; color: #fceea7;
+            background: #2b1d0e; border: 1.5px dashed #f4a261; color: #fceea7;
         }
         .mp-card.mined {
-            background: #111111; border: 2px solid #0b4594; color: #00ccff; box-shadow: 2px 2px 0px #e9c46a;
-        }
-        .mp-divider {
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            padding: 0 4px; color: #e76f51; font-size: 10px; font-weight: 900; flex-shrink: 0;
+            background: #111111; border: 1.5px solid #0b4594; color: #00ccff;
         }
 
         .footer { font-size: 12px; text-align: center; font-weight: 900; color: #0b4594; padding-bottom: 40px; text-transform: uppercase; }
@@ -212,10 +209,12 @@
             .bp-grid { grid-template-columns: 1fr; } 
             .bp-label { border-right: none; border-bottom: 2px solid #e9c46a; padding-bottom: 8px; } 
             .tab-btn { font-size: 9px; padding: 10px 2px; letter-spacing: 0px; }
-            .live-dash-container { gap: 8px; }
-            .live-box { padding: 10px 2px; }
-            .live-box-value { font-size: 20px; }
-            #sats-val { font-size: 22px !important; }
+            .live-dash-container { gap: 5px; }
+            .live-box { padding: 8px 3px; }
+            .live-box-label { font-size: 9px; margin-bottom: 4px; }
+            .live-box-value { font-size: 13px; }
+            #sats-val { font-size: 14px !important; }
+            .live-box-subtext { font-size: 7px; }
             #tab-promo .terminal { max-width: 90%; }
             .secret-btn { font-size: 9px; padding: 5px 8px; }
         }
@@ -248,19 +247,20 @@
         <div id="tab-nah" class="tab-content" style="display: flex;">
             <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px; width: 100%;">
                 
+                <!-- 3 Ô ĐEN TRÊN 1 HÀNG NGANG: vnd/nah | sat/nah | usd/btc -->
                 <div class="live-dash-container">
                     <div class="live-box">
-                        <div class="live-box-label">VND / nah</div>
-                        <div id="live-vnd-nah" class="live-box-value" style="color: #00ccff; text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);">...</div>
+                        <div class="live-box-label">vnd / nah</div>
+                        <div id="live-vnd-nah" class="live-box-value" style="color: #00ccff; text-shadow: 0 0 8px rgba(0, 204, 255, 0.5);">...</div>
                     </div>
                     <div class="live-box">
-                        <div class="live-box-label">USD / BTC</div>
-                        <div id="live-usd-btc" class="live-box-value" style="color: #ff9900; text-shadow: 0 0 10px rgba(255, 153, 0, 0.5);">...</div>
-                    </div>
-                    <div class="live-box live-box-full">
                         <div class="live-box-label">sat / nah</div>
-                        <div id="sats-val" class="live-box-value" style="font-size: 28px; color: #00ccff; text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);">... sats/💎</div>
+                        <div id="sats-val" class="live-box-value" style="color: #00ccff; text-shadow: 0 0 8px rgba(0, 204, 255, 0.5);">... s/💎</div>
                         <div class="live-box-subtext">(BASED ON <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #2a9d8f; text-decoration: underline;">SATFLOW</a>)</div>
+                    </div>
+                    <div class="live-box">
+                        <div class="live-box-label">usd / btc</div>
+                        <div id="live-usd-btc" class="live-box-value" style="color: #ff9900; text-shadow: 0 0 8px rgba(255, 153, 0, 0.5);">...</div>
                     </div>
                 </div>
 
@@ -276,15 +276,15 @@
                 <div class="converter-section">
                     <div class="sub-title">REAL-TIME OMNI CONVERTER</div>
                     <div class="converter-row">
-                        <span class="converter-label">VND</span>
+                        <span class="converter-label">vnd</span>
                         <input type="number" step="any" id="conv-vnd" class="converter-input" style="color: #2a9d8f;" placeholder="0">
                     </div>
                     <div class="converter-row">
-                        <span class="converter-label">USD</span>
+                        <span class="converter-label">usd</span>
                         <input type="number" step="any" id="conv-usd" class="converter-input" style="color: #e76f51;" placeholder="0">
                     </div>
                     <div class="converter-row">
-                        <span class="converter-label">BTC</span>
+                        <span class="converter-label">btc</span>
                         <input type="number" step="any" id="conv-btc" class="converter-input" style="color: #f4a261;" placeholder="0">
                     </div>
                     <div class="converter-row">
@@ -298,12 +298,12 @@
                 </div>
 
                 <div class="sub-section">
-                    <div class="sub-title">NAH MARKET CAP & TOKENOMICS</div>
+                    <div class="sub-title">NAH MARKET CAP &amp; TOKENOMICS</div>
                     <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION nahs</span></div>
                     <div class="sub-row"><span class="label">HELD BY SATOSHI NAKAMOTO</span><span class="value">63 TRILLION nahs</span></div>
                     <div class="sub-row"><span class="label">MAX CIRCULATING SUPPLY</span><span class="value">85.3 TRILLION nahs</span></div>
-                    <div class="sub-row"><span class="label">MARKET CAP (BTC)</span><span class="value" id="mcap-btc">LOADING...</span></div>
-                    <div class="sub-row"><span class="label">MARKET CAP (USD)</span><span class="value" id="mcap-usd">LOADING...</span></div>
+                    <div class="sub-row"><span class="label">MARKET CAP (btc)</span><span class="value" id="mcap-btc">LOADING...</span></div>
+                    <div class="sub-row"><span class="label">MARKET CAP (usd)</span><span class="value" id="mcap-usd">LOADING...</span></div>
                     <div class="sub-row">
                         <span class="label">LIST OF CURRENT NAH HODLERS (<span id="nah-holders-count">18</span>)</span>
                         <span class="value"><a href="javascript:void(0)" onclick="toggleHoldersList()" id="holders-toggle-btn" style="color: #0b4594; font-weight: 900;">VIEW LIST ▼</a></span>
@@ -311,7 +311,7 @@
                 </div>
 
                 <!-- NAH SOVEREIGN EXPLORER -->
-                <div class="converter-section" style="background: #fdf6d8; margin-bottom: 20px;">
+                <div class="converter-section" style="background: #fdf6d8; margin-bottom: 18px;">
                     <div class="sub-title" style="margin-bottom: 8px;">🔍 NAH SOVEREIGN EXPLORER</div>
                     <div style="display: flex; gap: 6px; margin-bottom: 10px;">
                         <input type="text" id="wallet-search-input" placeholder="Paste Bitcoin Address" style="flex: 1; padding: 10px; border: 2px solid #0b4594; border-radius: 8px; font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 700; color: #0b4594; outline: none; background: #ffffff;">
@@ -325,12 +325,11 @@
                     </div>
                 </div>
 
-                <!-- BITCOIN TIMECHAIN LIVE BLOCKS (5 PENDING MEMPOOL + 8 MINED BLOCKS) -->
-                <div class="sub-section" style="background: #ffffff; margin-top: 0; margin-bottom: 18px; padding: 12px;">
-                    <div class="sub-title" style="font-size: 12px; margin-bottom: 4px;">⛓️ BITCOIN TIMECHAIN: 5 PENDING &amp; 8 MINED BLOCKS</div>
-                    <div style="font-size: 10px; color: #666; text-align: center; margin-bottom: 8px; font-weight: 700;">Swipe horizontally to estimate confirmation wait time</div>
+                <!-- BITCOIN TIMECHAIN LIVE BLOCKS (3 PENDING + 5 MINED BLOCKS) -->
+                <div class="sub-section" style="background: #ffffff; margin-top: 0; margin-bottom: 16px; padding: 10px;">
+                    <div class="sub-title" style="font-size: 11px; margin-bottom: 6px;">⛓️ BITCOIN TIMECHAIN: 3 PENDING &amp; 5 MINED BLOCKS</div>
                     <div id="block-ticker" class="mempool-strip">
-                        <div style="font-size: 11px; color: #888; text-align: center; width: 100%; padding: 10px;">Loading live Bitcoin blocks...</div>
+                        <div style="font-size: 10px; color: #888; text-align: center; width: 100%; padding: 6px;">Loading live blocks...</div>
                     </div>
                 </div>
 
@@ -439,10 +438,10 @@
                 const vndVal = usdVal * globalLiveVndRate; 
                 const mcapBtc = (CIRCULATING_SUPPLY * CURRENT_NAH_SATS) / 100000000;
                 
-                document.getElementById("mcap-btc").innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " BTC";
+                document.getElementById("mcap-btc").innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " btc";
                 document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 
-                document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " sats/💎";
+                document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " s/💎";
                 document.getElementById("live-vnd-nah").innerText = vndVal.toFixed(4) + " ₫";
                 document.getElementById("live-usd-btc").innerText = "$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
                 document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
@@ -461,47 +460,43 @@
                 const minedBlocks = await minedRes.json();
 
                 let pendingCards = [];
-                for (let i = 4; i >= 0; i--) {
+                for (let i = 2; i >= 0; i--) {
                     const b = mpBlocks[i];
                     const waitMin = (i + 1) * 10;
                     if (b) {
                         const minF = b.feeRange && b.feeRange.length ? Math.round(b.feeRange[0]) : Math.round(b.medianFee || 1);
                         const maxF = b.feeRange && b.feeRange.length ? Math.round(b.feeRange[b.feeRange.length - 1]) : minF;
-                        const mb = (b.blockVSize / 1000000).toFixed(2);
                         pendingCards.push(`
                             <div class="mp-card pending">
-                                <div style="font-size:10px; color:#f4a261; font-weight:900;">In ~${waitMin} min</div>
-                                <div style="font-size:11px; color:#fff; font-weight:900; margin:4px 0;">${minF}–${maxF} sat/vB</div>
-                                <div style="font-size:9px; color:#ccc;">${b.nTx.toLocaleString('en-US')} txs (${mb} vMB)</div>
+                                <div style="font-size:8px; color:#f4a261; font-weight:900;">Pending ~${waitMin}m</div>
+                                <div style="font-size:9px; color:#fff; font-weight:900; margin:2px 0;">${minF}–${maxF} sat/vB</div>
+                                <div style="font-size:8px; color:#ccc;">${b.nTx.toLocaleString('en-US')} txs</div>
                             </div>
                         `);
                     } else {
                         pendingCards.push(`
                             <div class="mp-card pending" style="opacity:0.65;">
-                                <div style="font-size:10px; color:#f4a261; font-weight:900;">In ~${waitMin} min</div>
-                                <div style="font-size:11px; color:#fff; font-weight:900; margin:4px 0;">~1 sat/vB</div>
-                                <div style="font-size:9px; color:#ccc;">Open Queue</div>
+                                <div style="font-size:8px; color:#f4a261; font-weight:900;">Pending ~${waitMin}m</div>
+                                <div style="font-size:9px; color:#fff; font-weight:900; margin:2px 0;">~1 sat/vB</div>
+                                <div style="font-size:8px; color:#ccc;">Open Queue</div>
                             </div>
                         `);
                     }
                 }
 
-                let minedCards = (minedBlocks || []).slice(0, 8).map(b => {
+                let minedCards = (minedBlocks || []).slice(0, 5).map(b => {
                     const minsAgo = Math.max(1, Math.round((Date.now() / 1000 - b.timestamp) / 60));
                     const medFee = b.extras && b.extras.medianFee ? Math.round(b.extras.medianFee) : 1;
                     return `
                         <div class="mp-card mined">
-                            <div style="font-size:11px; color:#00ccff; font-weight:900;">#${b.height.toLocaleString('en-US')}</div>
-                            <div style="font-size:10px; color:#fceea7; font-weight:900; margin:4px 0;">~${medFee} sat/vB</div>
-                            <div style="font-size:9px; color:#aaa;">${b.tx_count.toLocaleString('en-US')} txs • ${minsAgo}m ago</div>
+                            <div style="font-size:9px; color:#00ccff; font-weight:900;">#${b.height.toLocaleString('en-US')}</div>
+                            <div style="font-size:9px; color:#fceea7; font-weight:900; margin:2px 0;">~${medFee} sat/vB</div>
+                            <div style="font-size:8px; color:#aaa;">${minsAgo}m ago</div>
                         </div>
                     `;
                 });
 
-                document.getElementById("block-ticker").innerHTML =
-                    pendingCards.join("") +
-                    `<div class="mp-divider"><span>PENDING</span><span>◀ ▶</span><span>MINED</span></div>` +
-                    minedCards.join("");
+                document.getElementById("block-ticker").innerHTML = pendingCards.join("") + minedCards.join("");
             } catch(e) {
                 console.error("Block ticker error:", e);
             }
@@ -577,7 +572,7 @@
         function renderSatTxsList(txs, addr) {
             const cleanTxs = txs.filter(tx => !isRunesOrDustTx(tx, addr));
             if (cleanTxs.length === 0) {
-                return '<div style="color:#777; font-size:11px; padding:6px 0;">No pure sat transactions found for this address.</div>';
+                return '<div style="color:#777; font-size:11px; padding:6px 0;">No sat transactions found for this address.</div>';
             }
             return cleanTxs.map(tx => {
                 let sent = 0, recv = 0;
@@ -610,7 +605,6 @@
 
                 const timeStr = (tx.status && tx.status.block_time) ? formatLocalDate(tx.status.block_time) : "Unconfirmed (Mempool)";
                 const feeStr = tx.fee ? `tx fee: ${tx.fee.toLocaleString('en-US')} sats` : "";
-                const blkStr = (tx.status && tx.status.block_height) ? `Block #${tx.status.block_height.toLocaleString('en-US')}` : "Pending";
 
                 return `<div style="padding:7px 0; border-bottom:1px dotted #ccc; font-size:10px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:3px;">
@@ -622,8 +616,8 @@
                         <span style="white-space:nowrap;">${timeStr}</span>
                     </div>
                     <div style="display:flex; justify-content:space-between; align-items:center; color:#888; font-size:9px;">
-                        <span>Tx: <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.txid}'; lookupNahWallet();" style="color:#666;">${tx.txid.slice(0,8)}...${tx.txid.slice(-6)}</a></span>
-                        <span style="white-space:nowrap;">${blkStr}${feeStr ? ' • ' + feeStr : ''}</span>
+                        <span>Tx: <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.txid}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${tx.txid.slice(0,8)}...${tx.txid.slice(-6)}</a></span>
+                        <span style="white-space:nowrap;">${feeStr}</span>
                     </div>
                 </div>`;
             }).join("");
@@ -657,7 +651,7 @@
             resBox.style.display = "block";
             resBox.innerHTML = "LOADING DETAILS...";
 
-            // CHỈ NHẬN DIỆN LÀ TXID NẾU ĐÚNG 64 KÝ TỰ HEX (KHÔNG BAO GIỜ NHẦM VỚI ĐỊA CHỈ VÍ bc1p...)
+            // XEM CHI TIẾT GIAO DỊCH (TXID 64 KÝ TỰ HEX) — HIỂN THỊ RÕ AI GỬI CHO AI (CẢ NAH & SAT)
             if (/^[0-9a-fA-F]{64}$/.test(query)) {
                 try {
                     const [nahTxRes, mpTxRes] = await Promise.allSettled([
@@ -666,26 +660,80 @@
                     ]);
                     const nahTx = nahTxRes.status === "fulfilled" ? nahTxRes.value : null;
                     const mpTx = mpTxRes.status === "fulfilled" ? mpTxRes.value : null;
-                    const fee = (mpTx && mpTx.fee) ? mpTx.fee.toLocaleString('en-US') + " sats" : "N/A";
-                    const timeStr = (mpTx && mpTx.status && mpTx.status.block_time) ? formatLocalDate(mpTx.status.block_time) : "Unconfirmed (Mempool)";
-                    const blk = (mpTx && mpTx.status && mpTx.status.block_height) ? "#" + mpTx.status.block_height.toLocaleString('en-US') : "Pending";
-                    const nahOuts = (nahTx && nahTx.nah_outputs) ? nahTx.nah_outputs : [];
 
-                    const nahOutHtml = nahOuts.map(o => `
-                        <div style="display:flex; justify-content:space-between; padding:4px 0; border-top:1px dotted #e9c46a; font-size:10px;">
-                            <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${o.address}'; lookupNahWallet();" style="color:#0b4594;">${shortAddress(o.address)}</a>
-                            <span style="color:#2a9d8f; font-weight:900; white-space:nowrap;">${o.amount.toLocaleString('en-US')} ${fmtUnit(o.amount, 'nah', 'nahs')}</span>
-                        </div>
-                    `).join("");
+                    const fee = (mpTx && mpTx.fee) ? mpTx.fee.toLocaleString('en-US') + " sats" : ((nahTx && nahTx.meta && nahTx.meta.fee) ? nahTx.meta.fee.toLocaleString('en-US') + " sats" : "N/A");
+                    const ts = (mpTx && mpTx.status && mpTx.status.block_time) ? mpTx.status.block_time : (nahTx && nahTx.meta ? nahTx.meta.ts : 0);
+                    const timeStr = ts ? formatLocalDate(ts) : "Unconfirmed (Waiting in Mempool)";
+                    const blk = (mpTx && mpTx.status && mpTx.status.block_height) ? "#" + mpTx.status.block_height.toLocaleString('en-US') : "Pending in Mempool";
+
+                    const inputSenders = [];
+                    if (mpTx && Array.isArray(mpTx.vin)) {
+                        mpTx.vin.forEach(v => {
+                            const a = v.prevout && v.prevout.scriptpubkey_address;
+                            if (a && !inputSenders.includes(a)) inputSenders.push(a);
+                        });
+                    }
+                    const primarySender = inputSenders[0] || (nahTx && nahTx.meta && nahTx.meta.sender) || "NAH Protocol Genesis";
+                    const senderLink = (!primarySender.includes("Genesis"))
+                        ? `<a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${primarySender}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(primarySender)}</a>`
+                        : `<span>${primarySender}</span>`;
+
+                    const nahOuts = (nahTx && Array.isArray(nahTx.nah_outputs)) ? nahTx.nah_outputs : [];
+                    const nahTransfersHtml = nahOuts.map(o => {
+                        const isSelf = o.address === primarySender;
+                        const label = isSelf ? "SELF / CHANGE" : "TRANSFER";
+                        const badgeBg = isSelf ? "#888" : "#2a9d8f";
+                        const u = fmtUnit(o.amount, "nah", "nahs");
+                        return `<div style="padding:7px; margin-bottom:5px; background:#fdf6d8; border:1.5px solid #0b4594; border-radius:6px; font-size:10px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                                <span style="background:${badgeBg}; color:#fff; padding:1px 5px; border-radius:4px; font-size:8px; font-weight:900;">💎 ${label}</span>
+                                <span style="color:#e76f51; font-size:12px; font-weight:900; white-space:nowrap;">${o.amount.toLocaleString('en-US')} ${u}</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; color:#0b4594; font-size:10px;">
+                                <span>From: ${senderLink}</span>
+                                <span>➔ To: <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${o.address}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(o.address)}</a></span>
+                            </div>
+                        </div>`;
+                    }).join("");
+
+                    let satTransfersHtml = "";
+                    if (mpTx && Array.isArray(mpTx.vout)) {
+                        const validVouts = mpTx.vout.filter(v => (v.value || 0) > 0 && v.scriptpubkey_address);
+                        satTransfersHtml = validVouts.map(v => {
+                            const isSelf = v.scriptpubkey_address === primarySender;
+                            const isCarrier = nahOuts.some(no => no.address === v.scriptpubkey_address) && v.value <= 546;
+                            const tag = isCarrier ? "nah carrier" : (isSelf ? "change back to sender" : "sat transfer");
+                            const u = fmtUnit(v.value, "sat", "sats");
+                            return `<div style="padding:6px 0; border-bottom:1px dotted #ccc; font-size:10px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
+                                    <span style="color:#666; font-size:9px; font-weight:900; text-transform:uppercase;">${tag}</span>
+                                    <span style="color:#333; font-size:11px; font-weight:900; white-space:nowrap;">${v.value.toLocaleString('en-US')} ${u}</span>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; align-items:center; color:#555; font-size:9px;">
+                                    <span>From: ${senderLink}</span>
+                                    <span>➔ To: <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${v.scriptpubkey_address}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(v.scriptpubkey_address)}</a></span>
+                                </div>
+                            </div>`;
+                        }).join("");
+                    }
+
+                    const backBtn = currentLookupAddr
+                        ? `<div style="margin-bottom:8px;"><a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${currentLookupAddr}'; lookupNahWallet();" style="color:#0b4594; font-size:10px; font-weight:900; text-decoration:underline;">← BACK TO ADDRESS (${shortAddress(currentLookupAddr)})</a></div>`
+                        : "";
 
                     resBox.innerHTML = `
-                        <div style="color:#0b4594; font-size:10px; margin-bottom:4px;">TRANSACTION ID: <span style="color:#555;">${query}</span></div>
-                        <div style="display:flex; justify-content:space-between; font-size:11px; color:#e76f51; margin-bottom:6px;">
-                            <span>Block: ${blk}</span>
-                            <span>tx fee: ${fee}</span>
+                        ${backBtn}
+                        <div style="background:#111; color:#fff; padding:8px; border-radius:6px; margin-bottom:8px; font-size:10px;">
+                            <div style="color:#00ccff; font-weight:900; margin-bottom:3px; word-break:break-all;">TXID: ${query}</div>
+                            <div style="display:flex; justify-content:space-between; color:#fceea7;">
+                                <span>Block: ${blk}</span>
+                                <span>tx fee: ${fee}</span>
+                            </div>
+                            <div style="color:#aaa; font-size:9px; margin-top:2px;">Time: ${timeStr}</div>
                         </div>
-                        <div style="font-size:10px; color:#666; margin-bottom:8px;">Time: ${timeStr}</div>
-                        ${nahOuts.length ? `<div style="font-size:11px; color:#0b4594; margin-bottom:4px;">💎 nah outputs (${nahOuts.length}):</div>${nahOutHtml}` : ''}
+                        ${nahOuts.length ? `<div style="color:#e76f51; font-size:11px; font-weight:900; margin-bottom:4px;">💎 nah transfers (${nahOuts.length})</div><div style="margin-bottom:10px;">${nahTransfersHtml}</div>` : ''}
+                        <div style="color:#0b4594; font-size:11px; font-weight:900; margin-bottom:4px;">sat transfers</div>
+                        <div style="max-height:200px; overflow-y:auto;">${satTransfersHtml || '<div style="color:#777; font-size:10px;">No sat output details found.</div>'}</div>
                     `;
                     return;
                 } catch(e) {}
@@ -734,7 +782,6 @@
 
                 const nahHistory = nahData.history || [];
                 activeNahTxidSet = new Set(nahHistory.map(t => t.txid));
-                const postageType = query.toLowerCase().startsWith("bc1p") ? "330 sats" : "546 sats";
 
                 const nahHistoryHtml = nahHistory.map(tx => {
                     const isSent = tx.type === "SENT";
@@ -759,8 +806,8 @@
                             <span style="white-space:nowrap; color:#555;">${timeStr}</span>
                         </div>
                         <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; color:#666; font-size:9px; border-top:1px dashed #e9c46a; padding-top:3px;">
-                            <span style="white-space:nowrap;">Tx: <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.txid}'; lookupNahWallet();" style="color:#0b4594;">${tx.txid.slice(0,8)}...${tx.txid.slice(-4)}</a></span>
-                            <span style="white-space:nowrap;">postage: ${postageType}${feeStr ? ' • ' + feeStr : ''}</span>
+                            <span style="white-space:nowrap;">Tx: <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.txid}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${tx.txid.slice(0,8)}...${tx.txid.slice(-6)}</a></span>
+                            <span style="white-space:nowrap;">${feeStr}</span>
                         </div>
                     </div>`;
                 }).join("");
