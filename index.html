@@ -310,9 +310,9 @@
                     </div>
                 </div>
 
-                <!-- NAH SOVEREIGN EXPLORER -->
+                <!-- BITCOIN SAT NAH SOVEREIGN EXPLORER -->
                 <div class="converter-section" style="background: #fdf6d8; margin-bottom: 18px;">
-                    <div class="sub-title" style="margin-bottom: 8px;">🔍 NAH SOVEREIGN EXPLORER</div>
+                    <div class="sub-title" style="margin-bottom: 8px;">🔍 BITCOIN SAT NAH SOVEREIGN EXPLORER</div>
                     <div style="display: flex; gap: 6px; margin-bottom: 10px;">
                         <input type="text" id="wallet-search-input" placeholder="Paste Bitcoin Address" style="flex: 1; padding: 10px; border: 2px solid #0b4594; border-radius: 8px; font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 700; color: #0b4594; outline: none; background: #ffffff;">
                         <button onclick="lookupNahWallet()" style="background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 0 14px; font-family: 'Quicksand', sans-serif; font-weight: 900; font-size: 12px; cursor: pointer;">SEARCH</button>
@@ -322,6 +322,11 @@
                     <div id="holders-leaderboard" style="display: none; margin-top: 12px; background: #ffffff; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; max-height: 300px; overflow-y: auto;">
                         <div style="font-size: 11px; font-weight: 900; color: #e76f51; text-align: center; margin-bottom: 8px; text-transform: uppercase;">TAP ADDRESS TO VIEW HISTORY</div>
                         <div id="holders-list-body" style="font-size: 11px; font-weight: 700;">LOADING...</div>
+                    </div>
+
+                    <div style="margin-top: 10px; padding-top: 8px; border-top: 1.5px dashed #e9c46a; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 900; color: #0b4594;">
+                        <span>TOTAL NAH TRANSACTIONS COUNT:</span>
+                        <span id="nah-total-tx-count" style="color: #e76f51; font-size: 12px;">609</span>
                     </div>
                 </div>
 
@@ -513,6 +518,9 @@
                 if (data.holders_count) {
                     document.getElementById("nah-holders-count").innerText = data.holders_count;
                 }
+                if (data.indexed_nah_txs) {
+                    document.getElementById("nah-total-tx-count").innerText = data.indexed_nah_txs.toLocaleString('en-US');
+                }
             } catch (e) {
                 console.error("nah-core API sync error:", e);
             }
@@ -552,7 +560,6 @@
             }
         }
 
-        // CHỈ LỌC BỎ BỤI CARRIER 546 SATS HOẶC PHÍ TỰ CHUYỂN — GIỮ NGUYÊN MỌI GIAO DỊCH SAT THỰC TẾ (KỂ CẢ GIAO DỊCH KÉP SAT + NAH)
         function isDustOrSelfFeeOnly(tx, addr) {
             let sent = 0, recv = 0;
             (tx.vin || []).forEach(v => {
@@ -654,7 +661,7 @@
             resBox.style.display = "block";
             resBox.innerHTML = "LOADING DETAILS...";
 
-            // XEM CHI TIẾT GIAO DỊCH (TXID 64 KÝ TỰ HEX) — CHUẨN UNISCAN + DỄ ĐỌC CHO NEWBIES
+            // XEM CHI TIẾT GIAO DỊCH (TXID 64 KÝ TỰ HEX)
             if (/^[0-9a-fA-F]{64}$/.test(query)) {
                 try {
                     const txRes = await fetch(`${NAH_NODE_API}/tx/${query}`);
@@ -665,12 +672,13 @@
                     }
 
                     const feeUsd = ((d.fee / 100000000) * globalLiveBtcPrice).toFixed(2);
+                    const cleanFeeRate = Number(d.fee_rate || 0).toFixed(2).replace(/\.00$/, "");
                     const timeStr = d.ts ? formatLocalDate(d.ts) : "Unconfirmed (Mempool)";
                     const blkStr = d.height ? "#" + d.height.toLocaleString('en-US') : "Pending";
                     const inputs = d.inputs || [];
                     const outputs = d.outputs || [];
 
-                    // TÍNH TÓM TẮT BIẾN ĐỘNG RÒNG CHO NEWBIES (EASY SUMMARY)
+                    // TÍNH TÓM TẮT BIẾN ĐỘNG RÒNG CHO NEWBIES (ẨN TIỀN THỪA CHANGE KHI GỬI CHO NGƯỜI KHÁC)
                     const nahSenders = inputs.filter(i => i.nah > 0);
                     const nahReceivers = outputs.filter(o => o.nah > 0);
                     let nahSummaryHtml = "";
@@ -680,9 +688,12 @@
                             ? `<a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${fromAddr}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(fromAddr)}</a>`
                             : `<span>${fromAddr}</span>`;
 
-                        nahSummaryHtml = nahReceivers.map(r => {
+                        const externalReceivers = nahReceivers.filter(r => r.address !== fromAddr);
+                        const summaryTargets = externalReceivers.length > 0 ? externalReceivers : nahReceivers;
+
+                        nahSummaryHtml = summaryTargets.map(r => {
                             const isSelf = r.address === fromAddr;
-                            const badge = isSelf ? "SELF / SPLIT" : "SENT";
+                            const badge = isSelf ? "SPLIT / CONSOLIDATE" : "SENT";
                             const badgeBg = isSelf ? "#2a9d8f" : "#e76f51";
                             return `<div style="padding:6px; margin-bottom:4px; background:#ffffff; border:1.5px solid #0b4594; border-radius:6px;">
                                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
@@ -697,7 +708,6 @@
                         }).join("");
                     }
 
-                    // TÍNH BIẾN ĐỘNG SAT RÒNG CỦA TỪNG ĐỊA CHỈ TRONG TX
                     const addrSatNet = {};
                     inputs.forEach(i => { if (i.address) addrSatNet[i.address] = (addrSatNet[i.address] || 0) - (i.sats || 0); });
                     outputs.forEach(o => { if (o.address) addrSatNet[o.address] = (addrSatNet[o.address] || 0) + (o.sats || 0); });
@@ -715,12 +725,11 @@
                         }).join("");
                     }
 
-                    // DANH SÁCH INPUTS & OUTPUTS CHI TIẾT CHUẨN UNISCAN
                     const inputsHtml = inputs.map(i => {
                         const nahBadge = i.nah > 0
                             ? `<div style="margin-top:4px; margin-left:10px; padding:4px 8px; background:#111; border:1px solid #00ccff; border-radius:5px; color:#00ccff; font-size:9px; font-weight:900; display:flex; justify-content:space-between;">
                                 <span>💎 NAH•SOVEREIGN•DIAMOND</span>
-                                <span>${i.nah.toLocaleString('en-US')} ${fmtUnit(i.nah, 'nah', 'nahs')}</span>
+                                <span style="white-space:nowrap;">${i.nah.toLocaleString('en-US')} ${fmtUnit(i.nah, 'nah', 'nahs')}</span>
                                </div>`
                             : "";
                         return `<div style="padding:6px 0; border-bottom:1px dotted #e9c46a;">
@@ -736,13 +745,13 @@
                         if (o.is_op_return) {
                             return `<div style="padding:6px 0; border-bottom:1px dotted #e9c46a; display:flex; justify-content:space-between; align-items:center; font-size:10px;">
                                 <span style="background:#0b4594; color:#fceea7; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900;">OP_RETURN: ${o.op_label}</span>
-                                <span style="color:#777;">0 sats</span>
+                                <span style="color:#777; white-space:nowrap;">0 sats</span>
                             </div>`;
                         }
                         const nahBadge = o.nah > 0
                             ? `<div style="margin-top:4px; margin-left:10px; padding:4px 8px; background:#111; border:1px solid #00ccff; border-radius:5px; color:#00ccff; font-size:9px; font-weight:900; display:flex; justify-content:space-between;">
                                 <span>💎 NAH•SOVEREIGN•DIAMOND</span>
-                                <span>${o.nah.toLocaleString('en-US')} ${fmtUnit(o.nah, 'nah', 'nahs')}</span>
+                                <span style="white-space:nowrap;">${o.nah.toLocaleString('en-US')} ${fmtUnit(o.nah, 'nah', 'nahs')}</span>
                                </div>`
                             : "";
                         return `<div style="padding:6px 0; border-bottom:1px dotted #e9c46a;">
@@ -763,12 +772,12 @@
                         <div style="background:#111; color:#fff; padding:10px; border-radius:8px; margin-bottom:10px; font-size:10px;">
                             <div style="color:#00ccff; font-weight:900; margin-bottom:6px; word-break:break-all;">TXID: ${d.txid}</div>
                             <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; border-top:1px solid #333; padding-top:6px;">
-                                <div><span style="color:#888;">Block:</span> <span style="color:#fceea7;">${blkStr}</span></div>
-                                <div style="text-align:right;"><span style="color:#888;">Time:</span> <span style="color:#fceea7;">${timeStr}</span></div>
-                                <div><span style="color:#888;">Size / vSize:</span> <span style="color:#fff;">${d.size} B / ${d.vsize} vB</span></div>
-                                <div style="text-align:right;"><span style="color:#888;">Fee Rate:</span> <span style="color:#00ccff;">${d.fee_rate} sat/vB</span></div>
+                                <div style="white-space:nowrap;"><span style="color:#888;">Block:</span> <span style="color:#fceea7;">${blkStr}</span></div>
+                                <div style="text-align:right; white-space:nowrap;"><span style="color:#888;">Time:</span> <span style="color:#fceea7;">${timeStr}</span></div>
+                                <div style="white-space:nowrap;"><span style="color:#888;">Size / vSize:</span> <span style="color:#fff;">${d.size} B / ${d.vsize} vB</span></div>
+                                <div style="text-align:right; white-space:nowrap;"><span style="color:#888;">Fee Rate:</span> <span style="color:#00ccff;">${cleanFeeRate} sat/vB</span></div>
                             </div>
-                            <div style="border-top:1px dotted #333; margin-top:6px; padding-top:4px; text-align:right; color:#f4a261;">
+                            <div style="border-top:1px dotted #333; margin-top:6px; padding-top:4px; text-align:right; color:#f4a261; white-space:nowrap;">
                                 Fee: ${d.fee.toLocaleString('en-US')} sats ($${feeUsd})
                             </div>
                         </div>
