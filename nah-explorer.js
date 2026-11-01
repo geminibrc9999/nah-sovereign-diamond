@@ -156,7 +156,6 @@ function fmtFeeRate(v) {
     return v < 1 ? v.toFixed(1) : Math.round(v).toString();
 }
 
-// TÍNH THỜI GIAN ƯỚC TÍNH ĐẾN CONFIRMATION ĐẦU TIÊN DỰA TRÊN FEE RATE VÀ LIVE MEMPOOL BLOCKS
 function estimateFirstConfWait(feeRateSatVb) {
     const rate = Number(feeRateSatVb || 0);
     const mp = window.liveMempoolBlocks || [];
@@ -341,7 +340,7 @@ function renderSatTxsList(txs, addr) {
 
         const statusBadge = isConfirmed
             ? `<span style="color:${badgeColor}; font-weight:900;">${isSent ? 'SENT' : 'RECEIVED'}</span>`
-            : `<span style="background:#f4a261; color:#111; padding:1px 5px; border-radius:4px; font-size:9px; font-weight:900;">⏳ UNCONFIRMED • ${isSent ? 'SENT' : 'RECEIVED'}</span>`;
+            : `<span style="background:#f4a261; color:#111; padding:1px 5px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">⏳ UNCONFIRMED / PENDING</span>`;
 
         const timeOrWaitHtml = isConfirmed
             ? `<span style="white-space:nowrap;">${formatLocalDate(tx.status.block_time)}</span>`
@@ -414,8 +413,8 @@ async function lookupNahWallet() {
             const isConfirmed = Boolean(d.height && d.height > 0);
             const feeUsd = ((d.fee / 100000000) * btcUsd).toFixed(2);
             const cleanFeeRate = Number(d.fee_rate || 0).toFixed(2).replace(/\.00$/, "");
-            const timeStr = isConfirmed ? formatLocalDate(d.ts) : `⏳ Est. 1st conf: ${estimateFirstConfWait(d.fee_rate)}`;
-            const blkStr = isConfirmed ? "#" + d.height.toLocaleString('en-US') : "⏳ Unconfirmed (Mempool)";
+            const timeStr = isConfirmed ? formatLocalDate(d.ts) : `⏳ 1st conf: ${estimateFirstConfWait(d.fee_rate)}`;
+            const blkStr = isConfirmed ? "#" + d.height.toLocaleString('en-US') : "⏳ Unconfirmed";
             const inputs = d.inputs || [];
             const outputs = d.outputs || [];
 
@@ -433,11 +432,12 @@ async function lookupNahWallet() {
 
                 nahSummaryHtml = summaryTargets.map(r => {
                     const isSelf = r.address === fromAddr;
-                    const badge = isSelf ? "SPLIT / CONSOLIDATE" : "SENT";
-                    const badgeBg = isSelf ? "#2a9d8f" : "#e76f51";
+                    const badge = !isConfirmed ? "⏳ UNCONFIRMED / 💎 PENDING" : (isSelf ? "💎 SPLIT / CONSOLIDATE" : "💎 SENT");
+                    const badgeBg = !isConfirmed ? "#f4a261" : (isSelf ? "#2a9d8f" : "#e76f51");
+                    const badgeCol = !isConfirmed ? "#111" : "#fff";
                     return `<div style="padding:6px; margin-bottom:4px; background:#ffffff; border:1.5px solid #0b4594; border-radius:6px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
-                            <span style="background:${badgeBg}; color:#fff; padding:1px 5px; border-radius:4px; font-size:8px; font-weight:900;">💎 ${badge}${!isConfirmed ? ' (UNCONFIRMED)' : ''}</span>
+                            <span style="background:${badgeBg}; color:${badgeCol}; padding:1px 5px; border-radius:4px; font-size:8px; font-weight:900;">${badge}</span>
                             <span style="color:#0b4594; font-size:11px; font-weight:900; white-space:nowrap;">${r.nah.toLocaleString('en-US')} ${fmtUnit(r.nah, 'nah', 'nahs')}</span>
                         </div>
                         <div style="display:flex; justify-content:space-between; font-size:9px; color:#555;">
@@ -509,15 +509,19 @@ async function lookupNahWallet() {
 
             resBox.innerHTML = `
                 ${backBtn}
-                <div style="background:#111; color:#fff; padding:10px; border-radius:8px; margin-bottom:10px; font-size:10px;">
+                <div style="background:#111; color:#fff; padding:10px; border-radius:8px; margin-bottom:10px; font-size:10px; box-sizing:border-box; width:100%; overflow:hidden;">
                     <div style="color:#00ccff; font-weight:900; margin-bottom:6px; word-break:break-all;">TXID: ${d.txid}</div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; border-top:1px solid #333; padding-top:6px;">
-                        <div style="white-space:nowrap;"><span style="color:#888;">Block:</span> <span style="color:${isConfirmed ? '#fceea7' : '#f4a261'}; font-weight:900;">${blkStr}</span></div>
-                        <div style="text-align:right; white-space:nowrap;"><span style="color:#888;">${isConfirmed ? 'Time:' : ''}</span> <span style="color:#fceea7; font-weight:900;">${timeStr}</span></div>
-                        <div style="white-space:nowrap;"><span style="color:#888;">Size / vSize:</span> <span style="color:#fff;">${d.size} B / ${d.vsize} vB</span></div>
-                        <div style="text-align:right; white-space:nowrap;"><span style="color:#888;">Fee Rate:</span> <span style="color:#00ccff;">${cleanFeeRate} sat/vB</span></div>
+                    <div style="border-top:1px solid #333; padding-top:6px; display:flex; flex-direction:column; gap:5px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px;">
+                            <span><span style="color:#888;">Block:</span> <span style="color:${isConfirmed ? '#fceea7' : '#f4a261'}; font-weight:900;">${blkStr}</span></span>
+                            <span><span style="color:#888;">${isConfirmed ? 'Time:' : ''}</span> <span style="color:#fceea7; font-weight:900;">${timeStr}</span></span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px;">
+                            <span><span style="color:#888;">Size / vSize:</span> <span style="color:#fff;">${d.size} B / ${d.vsize} vB</span></span>
+                            <span><span style="color:#888;">Fee Rate:</span> <span style="color:#00ccff;">${cleanFeeRate} sat/vB</span></span>
+                        </div>
                     </div>
-                    <div style="border-top:1px dotted #333; margin-top:6px; padding-top:4px; text-align:right; color:#f4a261; white-space:nowrap;">
+                    <div style="border-top:1px dotted #333; margin-top:6px; padding-top:4px; text-align:right; color:#f4a261;">
                         Fee: ${d.fee.toLocaleString('en-US')} sats ($${feeUsd})
                     </div>
                 </div>
@@ -597,9 +601,11 @@ async function lookupNahWallet() {
                 else if (t.type === "SENT") netPendingNah -= (t.amount || 0);
             });
             const signP = netPendingNah >= 0 ? "+" : "-";
-            const waitP = estimateFirstConfWait(unconfNahTxs[0].fee_rate);
-            pendingNahBanner = `<div style="margin-top:4px; padding:4px 8px; background:#2b1d0e; border:1px dashed #f4a261; border-radius:6px; color:#fceea7; font-size:9px; font-weight:900;">
-                ⏳ MEMPOOL PENDING (${unconfNahTxs.length}): ${ netPendingNah !== 0 ? `${signP}${Math.abs(netPendingNah).toLocaleString('en-US')} ${fmtUnit(Math.abs(netPendingNah), 'nah', 'nahs')} • ` : 'SPLIT / CONSOLIDATE • ' }1st conf: ${waitP}
+            const pendingAmtStr = netPendingNah !== 0
+                ? `${signP}${Math.abs(netPendingNah).toLocaleString('en-US')} ${fmtUnit(Math.abs(netPendingNah), 'nah', 'nahs')}`
+                : `SPLIT / CONSOLIDATE`;
+            pendingNahBanner = `<div style="margin-top:5px; padding:4px 8px; background:#2b1d0e; border:1px dashed #f4a261; border-radius:6px; color:#fceea7; font-size:10px; font-weight:900;">
+                ⏳ PENDING (${unconfNahTxs.length}): ${pendingAmtStr}
             </div>`;
         }
 
@@ -630,7 +636,7 @@ async function lookupNahWallet() {
 
             const statusBadgeHtml = isConfirmed
                 ? `<span style="background:${badgeColor}; color:#fff; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">💎 ${tx.type}</span>`
-                : `<span style="background:#f4a261; color:#111; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">⏳ UNCONFIRMED • 💎 ${tx.type}</span>`;
+                : `<span style="background:#f4a261; color:#111; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">⏳ UNCONFIRMED / 💎 PENDING</span>`;
 
             return `<div style="${cardStyle}">
                 <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:4px;">
