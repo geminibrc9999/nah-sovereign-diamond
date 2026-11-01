@@ -222,7 +222,7 @@
                             </button>
                         </div>
 
-                        <!-- BƯỚC 2: POPUP 3 LỰA CHỌN VÍ: XVERSE (TRÁI) | UNISAT RECOMMENDED (GIỮA) | OKX (PHẢI) -->
+                        <!-- BƯỚC 2: POPUP 3 LỰA CHỌN VÍ: XVERSE (TRÁI) | UNISAT RECOMMENDED (GIỮA) | OKX WALLET (PHẢI) -->
                         <div id="wallet-selector-popup" style="display: none; margin-top: 10px; padding: 10px; background: #ffffff; border: 2px solid #0b4594; border-radius: 10px;">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                                 <span style="font-size: 10px; font-weight: 900; color: #0b4594; text-transform: uppercase;">SELECT YOUR BITCOIN WALLET</span>
@@ -232,11 +232,11 @@
                                 <a id="btn-wallet-xverse" href="xverse://browser?url=https%3A%2F%2Fnahkahmotors.com%2F%3Fauto%3Dxverse" onclick="return handleWalletTap(event, 'xverse')" class="wallet-btn-link" style="color: #f4a261;">
                                     <span>🔵 XVERSE</span>
                                 </a>
-                                <a id="btn-wallet-unisat" href="unisat://request?method=connect&from=NAHSovereignDiamond" onclick="return handleWalletTap(event, 'unisat')" class="wallet-btn-link" style="flex: 1.25; color: #fceea7;">
+                                <a id="btn-wallet-unisat" href="javascript:void(0)" onclick="return handleWalletTap(event, 'unisat')" class="wallet-btn-link" style="flex: 1.25; color: #fceea7;">
                                     <span>🟡 UNISAT</span>
                                     <span style="font-size: 7px; color: #e76f51; display: block; margin-top: 2px;">(RECOMMENDED)</span>
                                 </a>
-                                <a id="btn-wallet-okx" href="https://www.okx.com/download?deeplink=okx%3A%2F%2Fwallet%2Fdapp%2Furl%3FdappUrl%3Dhttps%253A%252F%252Fnahkahmotors.com%252F%253Fauto%253Dokx" onclick="return handleWalletTap(event, 'okx')" class="wallet-btn-link" style="color: #00ccff;">
+                                <a id="btn-wallet-okx" href="javascript:void(0)" onclick="return handleWalletTap(event, 'okx')" class="wallet-btn-link" style="color: #00ccff;">
                                     <span>🟢 OKX WALLET</span>
                                 </a>
                             </div>
@@ -244,7 +244,7 @@
 
                         <div id="wallet-status-msg" style="display: none; margin-top: 8px; padding: 8px; background: #fff3e0; border: 1.5px dashed #e76f51; border-radius: 6px; font-size: 10px; font-weight: 700; color: #0b4594; text-align: center;"></div>
 
-                        <!-- BƯỚC 3: GIAO DIỆN SAU KHI KẾT NỐI VÍ (ẨN HOÀN TOÀN CÁC NÚT CHỌN VÍ & HIỆN FULL ĐỊA CHỈ) -->
+                        <!-- BƯỚC 3: GIAO DIỆN SAU KHI KẾT NỐI VÍ (KHÔNG CẮT NGANG THẺ PACKET) -->
                         <div id="wallet-vault-panel" style="display: none; background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; padding: 10px;">
                             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; border-bottom: 1.5px dotted #e9c46a; padding-bottom: 8px; margin-bottom: 10px;">
                                 <div id="vault-addr-display" style="font-size: 10px; font-weight: 900; color: #0b4594; word-break: break-all; line-height: 1.35; flex: 1;">...</div>
@@ -270,7 +270,9 @@
                                 📦 NAH UTXO PACKETS <span style="color: #0b4594; font-size: 9px;">(TAP PACKET TO SPLIT / LIST)</span>
                             </div>
 
-                            <div id="vault-utxo-list" style="max-height: 256px; overflow-y: auto; padding-right: 2px;"></div>
+                            <!-- DANH SÁCH PACKET PHÂN TRANG (5 PACKETS NGUYÊN VẸN / TRANG — KHÔNG BAO GIỜ BỊ CẮT LƯNG CHỪNG) -->
+                            <div id="vault-utxo-list"></div>
+                            <div id="vault-utxo-pagination" style="display: none; justify-content: space-between; align-items: center; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #e9c46a; font-size: 10px; font-weight: 900; color: #0b4594;"></div>
 
                             <div id="vault-splitter-box" style="display: none; margin-top: 10px; padding: 10px; background: #fdf6d8; border: 2px solid #0b4594; border-radius: 8px;"></div>
                         </div>
@@ -328,6 +330,8 @@
         window.CIRCULATING_SUPPLY = 85300000000000; 
         window.globalLiveVndRate = 25500; 
         window.globalLiveBtcPrice = 80000;
+        window.currentPacketPage = 0;
+        const PACKETS_PER_PAGE = 5;
 
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
         const FOREX_API = "https://open.er-api.com/v6/latest/USD";
@@ -383,11 +387,14 @@
                     return true;
                 }
             }
-            if (type === "okx" && window.okxwallet && window.okxwallet.bitcoin) {
-                const res = await window.okxwallet.bitcoin.connect();
-                if (res && res.address) {
-                    await loadVaultForAddress(res.address, "OKX WALLET", res.publicKey || "");
-                    return true;
+            if (type === "okx") {
+                const okxBtc = (window.okxwallet && window.okxwallet.bitcoin) ? window.okxwallet.bitcoin : null;
+                if (okxBtc) {
+                    const res = await okxBtc.connect();
+                    if (res && res.address) {
+                        await loadVaultForAddress(res.address, "OKX WALLET", res.publicKey || "");
+                        return true;
+                    }
                 }
             }
             const xv = (window.XverseProviders && window.XverseProviders.BitcoinProvider) || window.BitcoinProvider;
@@ -404,12 +411,6 @@
         }
 
         function handleWalletTap(evt, type) {
-            const downloadMap = {
-                xverse: { name: "Xverse Wallet", url: "https://www.xverse.app/download" },
-                unisat: { name: "UniSat Wallet", url: "https://unisat.io/download" },
-                okx: { name: "OKX Wallet", url: "https://www.okx.com/download" }
-            };
-
             const hasUniSat = (type === "unisat" && window.unisat);
             const hasOkx = (type === "okx" && window.okxwallet && window.okxwallet.bitcoin);
             const xv = (window.XverseProviders && window.XverseProviders.BitcoinProvider) || window.BitcoinProvider;
@@ -421,22 +422,36 @@
                 return false;
             }
 
-            const info = downloadMap[type];
-            showWalletNotice(`
-                📲 Opening <strong>${info.name}</strong>...<br>
-                <span style="font-size:9px; color:#555;">For 1-tap connection on mobile, open <strong>nahkahmotors.com</strong> inside the ${info.name} App Browser, or <a href="${info.url}" target="_blank" style="color:#e76f51; text-decoration:underline; font-weight:900;">Download ${info.name}</a>.</span>
-            `);
+            if (type === "xverse") {
+                showWalletNotice(`📲 Opening <strong>Xverse Wallet</strong>...`);
+                return true;
+            }
 
             if (type === "unisat") {
-                let appOpened = false;
-                const mark = () => { appOpened = true; };
-                window.addEventListener("blur", mark, { once: true });
-                window.addEventListener("pagehide", mark, { once: true });
-                setTimeout(() => {
-                    if (!appOpened && !document.hidden) {
-                        window.location.href = info.url;
-                    }
-                }, 2500);
+                evt.preventDefault();
+                showWalletNotice(`
+                    🟡 <strong>UniSat Desktop / Mobile:</strong><br>
+                    • On Desktop: Install the open-source <a href="https://unisat.io/download" target="_blank" style="color:#e76f51; text-decoration:underline; font-weight:900;">UniSat Chrome Extension</a> for 1-click connection.<br>
+                    • On iPhone (UniSat iOS app has no built-in browser): Paste your UniSat address below to load your packets:
+                    <div style="display:flex; gap:5px; margin-top:6px;">
+                        <input type="text" id="quick-unisat-addr" placeholder="Paste your UniSat bc1p... address" style="flex:1; padding:6px 8px; border:1.5px solid #0b4594; border-radius:6px; font-family:'Quicksand',sans-serif; font-size:10px; font-weight:700;">
+                        <button onclick="const v=document.getElementById('quick-unisat-addr').value.trim(); if(v) loadVaultForAddress(v,'UNISAT','');" style="background:#0b4594; color:#fceea7; border:none; border-radius:6px; padding:0 10px; font-family:'Quicksand',sans-serif; font-size:10px; font-weight:900; cursor:pointer;">CONNECT</button>
+                    </div>
+                `);
+                return false;
+            }
+
+            if (type === "okx") {
+                evt.preventDefault();
+                showWalletNotice(`
+                    🟢 <strong>OKX Wallet App:</strong><br>
+                    Open your <strong>OKX Wallet</strong> app ➔ tap the <strong>Browser / Discover</strong> tab at the bottom ➔ enter <strong>nahkahmotors.com</strong> for instant 1-tap connection, or paste your OKX address below:
+                    <div style="display:flex; gap:5px; margin-top:6px;">
+                        <input type="text" id="quick-okx-addr" placeholder="Paste your OKX bc1p... address" style="flex:1; padding:6px 8px; border:1.5px solid #0b4594; border-radius:6px; font-family:'Quicksand',sans-serif; font-size:10px; font-weight:700;">
+                        <button onclick="const v=document.getElementById('quick-okx-addr').value.trim(); if(v) loadVaultForAddress(v,'OKX WALLET','');" style="background:#0b4594; color:#fceea7; border:none; border-radius:6px; padding:0 10px; font-family:'Quicksand',sans-serif; font-size:10px; font-weight:900; cursor:pointer;">CONNECT</button>
+                    </div>
+                `);
+                return false;
             }
             return true;
         }
@@ -452,8 +467,60 @@
             document.getElementById("connect-wallet-entry").style.display = "block";
         }
 
+        function renderNahPacketPage(pageIdx) {
+            const state = window.NAH_WALLET_STATE;
+            const listEl = document.getElementById("vault-utxo-list");
+            const pagEl = document.getElementById("vault-utxo-pagination");
+            if (!state || !listEl) return;
+
+            const utxos = state.nahUtxos || [];
+            const nahBal = state.nahBalance || 0;
+            if (utxos.length === 0) {
+                listEl.innerHTML = `<div style="font-size:10px; color:#777; text-align:center; padding:10px;">No nah UTXO packets found in this wallet.</div>`;
+                if (pagEl) pagEl.style.display = "none";
+                return;
+            }
+
+            const totalPages = Math.ceil(utxos.length / PACKETS_PER_PAGE);
+            window.currentPacketPage = Math.max(0, Math.min(pageIdx, totalPages - 1));
+            const start = window.currentPacketPage * PACKETS_PER_PAGE;
+            const slice = utxos.slice(start, start + PACKETS_PER_PAGE);
+
+            listEl.innerHTML = slice.map((u, i) => {
+                const realIdx = start + i;
+                const pctWallet = nahBal > 0 ? ((u.nah / nahBal) * 100).toFixed(2) + "%" : "100%";
+                const isSelected = state.selectedUtxo && state.selectedUtxo.outpoint === u.outpoint;
+                const borderCol = isSelected ? "#e76f51" : "#0b4594";
+                const bgCol = isSelected ? "#fff3e0" : "#fdf6d8";
+                return `
+                    <div onclick="selectNahUtxoPacket(${realIdx})" style="padding:10px; margin-bottom:6px; background:${bgCol}; border:2px solid ${borderCol}; border-radius:8px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+                        <span style="background:#111; color:#00ccff; padding:3px 7px; border-radius:5px; font-size:9px; font-weight:900; white-space:nowrap;">
+                            PACKET #${realIdx + 1} (${pctWallet})
+                        </span>
+                        <span style="color:#0b4594; font-size:12px; font-weight:900; white-space:nowrap;">
+                            💎 ${u.nah.toLocaleString('en-US')} ${fmtUnit(u.nah, 'nah', 'nahs')}
+                        </span>
+                    </div>
+                `;
+            }).join("");
+
+            if (pagEl) {
+                if (totalPages > 1) {
+                    pagEl.style.display = "flex";
+                    const prevDisabled = window.currentPacketPage === 0;
+                    const nextDisabled = window.currentPacketPage >= totalPages - 1;
+                    pagEl.innerHTML = `
+                        <button onclick="renderNahPacketPage(${window.currentPacketPage - 1})" ${prevDisabled ? 'disabled' : ''} style="background:${prevDisabled ? '#eee' : '#0b4594'}; color:${prevDisabled ? '#999' : '#fceea7'}; border:none; border-radius:5px; padding:4px 10px; font-family:'Quicksand',sans-serif; font-size:9px; font-weight:900; cursor:${prevDisabled ? 'default' : 'pointer'};">◀ PREV</button>
+                        <span>PAGE ${window.currentPacketPage + 1} / ${totalPages} (${utxos.length} PACKETS)</span>
+                        <button onclick="renderNahPacketPage(${window.currentPacketPage + 1})" ${nextDisabled ? 'disabled' : ''} style="background:${nextDisabled ? '#eee' : '#0b4594'}; color:${nextDisabled ? '#999' : '#fceea7'}; border:none; border-radius:5px; padding:4px 10px; font-family:'Quicksand',sans-serif; font-size:9px; font-weight:900; cursor:${nextDisabled ? 'default' : 'pointer'};">NEXT ▶</button>
+                    `;
+                } else {
+                    pagEl.style.display = "none";
+                }
+            }
+        }
+
         async function loadVaultForAddress(address, providerLabel, pubKey) {
-            // ẨN HOÀN TOÀN NÚT CONNECT VÀ 3 NÚT VÍ KHI ĐÃ KẾT NỐI
             document.getElementById("connect-wallet-entry").style.display = "none";
             document.getElementById("wallet-selector-popup").style.display = "none";
             const msgBox = document.getElementById("wallet-status-msg");
@@ -466,7 +533,6 @@
             if (splitBox) splitBox.style.display = "none";
             if (listEl) listEl.innerHTML = `<div style="font-size:10px; color:#888; text-align:center; padding:10px;">Loading UTXO packets...</div>`;
 
-            // HIỂN THỊ FULL ĐỊA CHỈ VÍ (KHÔNG CÒN NHÃN TÊN VÍ DƯ THỪA)
             document.getElementById("vault-addr-display").innerText = address;
 
             try {
@@ -509,25 +575,7 @@
                 document.getElementById("vault-sat-bal").innerText = `${cardinalSats.toLocaleString('en-US')} ${fmtUnit(cardinalSats, 'sat', 'sats')}`;
                 document.getElementById("vault-sat-packets").innerText = `${cardinalUtxos.length} spendable ${fmtUnit(cardinalUtxos.length, 'UTXO', 'UTXOs')}`;
 
-                if (nahUtxos.length === 0) {
-                    listEl.innerHTML = `<div style="font-size:10px; color:#777; text-align:center; padding:10px;">No nah UTXO packets found in this wallet.</div>`;
-                    return;
-                }
-
-                // CHỈ HIỂN THỊ PACKET # VÀ SỐ DƯ NAH GỌN ĐẸP TRÊN 1 HÀNG
-                listEl.innerHTML = nahUtxos.map((u, idx) => {
-                    const pctWallet = nahBal > 0 ? ((u.nah / nahBal) * 100).toFixed(2) + "%" : "100%";
-                    return `
-                        <div onclick="selectNahUtxoPacket(${idx})" style="padding:10px; margin-bottom:6px; background:#fdf6d8; border:1.5px solid #0b4594; border-radius:8px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-                            <span style="background:#111; color:#00ccff; padding:3px 7px; border-radius:5px; font-size:9px; font-weight:900; white-space:nowrap;">
-                                PACKET #${idx + 1} (${pctWallet})
-                            </span>
-                            <span style="color:#0b4594; font-size:12px; font-weight:900; white-space:nowrap;">
-                                💎 ${u.nah.toLocaleString('en-US')} ${fmtUnit(u.nah, 'nah', 'nahs')}
-                            </span>
-                        </div>
-                    `;
-                }).join("");
+                renderNahPacketPage(0);
             } catch (e) {
                 listEl.innerHTML = `<div style="font-size:10px; color:#e76f51; text-align:center; padding:8px;">Unable to load UTXO packets right now.</div>`;
             }
@@ -537,6 +585,7 @@
             const u = window.NAH_WALLET_STATE.nahUtxos[idx];
             if (!u) return;
             window.NAH_WALLET_STATE.selectedUtxo = u;
+            renderNahPacketPage(window.currentPacketPage);
             const splitBox = document.getElementById("vault-splitter-box");
             if (!splitBox) return;
             splitBox.style.display = "block";
@@ -555,7 +604,7 @@
             `;
         }
 
-        // TỰ ĐỘNG KẾT NỐI 1 CHẠM KHI MỞ TỪ DEEP LINK (?auto=xverse / okx / unisat) HOẶC TRONG IN-APP BROWSER
+        // TỰ ĐỘNG KẾT NỐI 1 CHẠM KHI MỞ TỪ DEEP LINK HOẶC TRONG IN-APP BROWSER
         window.addEventListener("load", () => {
             setTimeout(async () => {
                 const params = new URLSearchParams(window.location.search);
@@ -566,6 +615,10 @@
                         window.history.replaceState({}, document.title, window.location.pathname);
                         return;
                     }
+                }
+                if (window.okxwallet && window.okxwallet.bitcoin) {
+                    const ok = await triggerInjectedWallet("okx");
+                    if (ok) return;
                 }
                 try {
                     const saved = JSON.parse(localStorage.getItem("nah_connected_wallet") || "null");
