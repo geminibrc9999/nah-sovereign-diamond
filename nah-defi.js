@@ -1,5 +1,5 @@
 // ============================================================================
-// NAH-DEFI.JS: SOVEREIGN WALLET CONNECT (UNISAT / OKX / XVERSE) & NAH UTXO VAULT
+// NAH-DEFI.JS: SOVEREIGN WALLET CONNECT (OKX / UNISAT / XVERSE) & NAH UTXO VAULT (v2)
 // ============================================================================
 
 window.NAH_WALLET_STATE = {
@@ -19,19 +19,19 @@ window.NAH_WALLET_STATE = {
     if (!hub) return;
 
     hub.innerHTML = `
-        <div class="converter-section" style="background: #fdf6d8; margin-bottom: 20px; border: 3px solid #0b4594;">
+        <div class="converter-section" style="background: #fdf6d8; margin-bottom: 10px; border: 3px solid #0b4594;">
             <div class="sub-title" style="margin-bottom: 6px;">🔐 SOVEREIGN WALLET &amp; NAH UTXO VAULT</div>
             <div style="font-size: 10px; font-weight: 700; color: #0b4594; text-align: center; margin-bottom: 10px;">
                 Zero-Key Architecture: Connect Web3 Wallet or Inspect Any Address UTXO Vault
             </div>
 
-            <!-- 3 NÚT KẾT NỐI VÍ CHÍNH (UNISAT ĐỨNG ĐẦU VỚI NHÃN RECOMMENDED) -->
-            <div id="wallet-connect-btns" style="display: flex; gap: 6px; margin-bottom: 8px;">
-                <button onclick="connectSovereignWallet('unisat')" style="flex: 1.25; background: #111111; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 8px 4px; font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; box-shadow: 2px 2px 0px #0b4594; line-height: 1.15;">
-                    🟡 UNISAT<span style="font-size: 7px; color: #e76f51; display: block; margin-top: 2px;">(RECOMMENDED)</span>
-                </button>
+            <!-- 3 NÚT KẾT NỐI VÍ CHÍNH: OKX (TRÁI) | UNISAT RECOMMENDED (CHÍNH GIỮA) | XVERSE (PHẢI) -->
+            <div id="wallet-connect-btns" style="display: flex; gap: 6px; margin-bottom: 8px; align-items: stretch;">
                 <button onclick="connectSovereignWallet('okx')" style="flex: 1; background: #111111; color: #00ccff; border: 2px solid #0b4594; border-radius: 8px; padding: 8px 4px; font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; box-shadow: 2px 2px 0px #0b4594;">
                     🟢 OKX WALLET
+                </button>
+                <button onclick="connectSovereignWallet('unisat')" style="flex: 1.25; background: #111111; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 8px 4px; font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; box-shadow: 2px 2px 0px #0b4594; line-height: 1.15;">
+                    🟡 UNISAT<span style="font-size: 7px; color: #e76f51; display: block; margin-top: 2px;">(RECOMMENDED)</span>
                 </button>
                 <button onclick="connectSovereignWallet('xverse')" style="flex: 1; background: #111111; color: #f4a261; border: 2px solid #0b4594; border-radius: 8px; padding: 8px 4px; font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; box-shadow: 2px 2px 0px #0b4594;">
                     🔵 XVERSE
@@ -46,7 +46,7 @@ window.NAH_WALLET_STATE = {
                 </button>
             </div>
 
-            <!-- THÔNG BÁO KHI DÙNG TRÌNH DUYỆT SAFARI DI ĐỘNG -->
+            <!-- THÔNG BÁO TRẠNG THÁI MỞ APP / TẢI VÍ -->
             <div id="wallet-status-msg" style="display: none; margin-top: 8px; padding: 8px; background: #fff3e0; border: 1.5px dashed #e76f51; border-radius: 6px; font-size: 10px; font-weight: 700; color: #0b4594; text-align: center;"></div>
 
             <!-- BẢNG ĐIỀU KHIỂN KẾT NỐI & KHO UTXO -->
@@ -96,54 +96,85 @@ function showWalletNotice(htmlMsg) {
     box.innerHTML = htmlMsg;
 }
 
+// HÀM TỰ ĐỘNG GỌI APP VÍ TRONG ĐIỆN THOẠI & CHUYỂN HƯỚNG TẢI VÍ NẾU CHƯA CÀI APP
+function launchMobileWalletOrDownload(walletName, deepLinkUrl, downloadUrl) {
+    showWalletNotice(`
+        🚀 Launching <strong>${walletName}</strong> App...<br>
+        <span style="font-size:9px; color:#555;">If ${walletName} is not installed on your device, redirecting to official download page: <a href="${downloadUrl}" target="_blank" style="color:#e76f51; text-decoration:underline; font-weight:900;">Download ${walletName}</a></span>
+    `);
+
+    let appOpened = false;
+    const markOpened = () => { appOpened = true; };
+
+    const onVisChange = () => {
+        if (document.hidden) appOpened = true;
+    };
+
+    window.addEventListener("blur", markOpened, { once: true });
+    window.addEventListener("pagehide", markOpened, { once: true });
+    document.addEventListener("visibilitychange", onVisChange);
+
+    // Kích hoạt Deep Link để mở App Ví trên điện thoại
+    window.location.href = deepLinkUrl;
+
+    // Nếu sau 2.2 giây trình duyệt vẫn đứng yên (chưa cài App), tự động mở trang Download chính thức
+    setTimeout(() => {
+        window.removeEventListener("blur", markOpened);
+        window.removeEventListener("pagehide", markOpened);
+        document.removeEventListener("visibilitychange", onVisChange);
+        if (!appOpened && !document.hidden) {
+            window.location.href = downloadUrl;
+        }
+    }, 2200);
+}
+
 async function connectSovereignWallet(type) {
     const msgBox = document.getElementById("wallet-status-msg");
     if (msgBox) msgBox.style.display = "none";
 
+    const currentUrl = window.location.href.split("#")[0];
+    const encodedUrl = encodeURIComponent(currentUrl);
+
     try {
         if (type === "unisat") {
-            if (!window.unisat) {
-                showWalletNotice(`
-                    UniSat Wallet not detected in this browser.<br>
-                    Open <strong>nahkahmotors.com</strong> inside the UniSat App Browser, or paste your address above to inspect your UTXO Vault!
-                `);
+            if (window.unisat) {
+                const accounts = await window.unisat.requestAccounts();
+                const pubKey = await window.unisat.getPublicKey();
+                if (accounts && accounts.length > 0) {
+                    await loadVaultForAddress(accounts[0], "UNISAT", pubKey || "");
+                }
                 return;
             }
-            const accounts = await window.unisat.requestAccounts();
-            const pubKey = await window.unisat.getPublicKey();
-            if (accounts && accounts.length > 0) {
-                await loadVaultForAddress(accounts[0], "UNISAT", pubKey || "");
-            }
+            const nonce = Date.now();
+            const unisatDeepLink = `unisat://request?method=connect&from=NAHSovereignDiamond&nonce=${nonce}`;
+            launchMobileWalletOrDownload("UniSat Wallet", unisatDeepLink, "https://unisat.io/download");
+
         } else if (type === "okx") {
             const provider = (window.okxwallet && window.okxwallet.bitcoin) ? window.okxwallet.bitcoin : null;
-            if (!provider) {
-                const dappUrl = encodeURIComponent(window.location.href);
-                showWalletNotice(`
-                    OKX Wallet not detected in this browser.<br>
-                    👉 <a href="okx://wallet/dapp/url?dappUrl=${dappUrl}" style="color:#e76f51; text-decoration:underline; font-weight:900;">Tap here to open in OKX Wallet App</a>, or paste your address above to inspect your UTXO Vault!
-                `);
+            if (provider) {
+                const res = await provider.connect();
+                await loadVaultForAddress(res.address, "OKX WALLET", res.publicKey || "");
                 return;
             }
-            const res = await provider.connect();
-            await loadVaultForAddress(res.address, "OKX WALLET", res.publicKey || "");
+            const okxDeepLink = `okx://wallet/dapp/url?dappUrl=${encodedUrl}`;
+            launchMobileWalletOrDownload("OKX Wallet", okxDeepLink, "https://www.okx.com/download");
+
         } else if (type === "xverse") {
             const xv = (window.XverseProviders && window.XverseProviders.BitcoinProvider) || window.BitcoinProvider;
-            if (!xv) {
-                showWalletNotice(`
-                    Xverse Wallet not detected in this browser.<br>
-                    Open <strong>nahkahmotors.com</strong> inside the Xverse App Browser, or paste your address above to inspect your UTXO Vault!
-                `);
+            if (xv) {
+                const resp = await xv.request("getAccounts", {
+                    purposes: ["ordinals", "payment"],
+                    message: "Connect to NAH Sovereign Diamond Vault"
+                });
+                const list = (resp && resp.result) ? resp.result : [];
+                const ordAcc = list.find(a => a.purpose === "ordinals") || list[0];
+                if (ordAcc && ordAcc.address) {
+                    await loadVaultForAddress(ordAcc.address, "XVERSE", ordAcc.publicKey || "");
+                }
                 return;
             }
-            const resp = await xv.request("getAccounts", {
-                purposes: ["ordinals", "payment"],
-                message: "Connect to NAH Sovereign Diamond Vault"
-            });
-            const list = (resp && resp.result) ? resp.result : [];
-            const ordAcc = list.find(a => a.purpose === "ordinals") || list[0];
-            if (ordAcc && ordAcc.address) {
-                await loadVaultForAddress(ordAcc.address, "XVERSE", ordAcc.publicKey || "");
-            }
+            const xverseDeepLink = `xverse://browser?url=${encodedUrl}`;
+            launchMobileWalletOrDownload("Xverse Wallet", xverseDeepLink, "https://www.xverse.app/download");
         }
     } catch (err) {
         showWalletNotice("Wallet connection cancelled or failed: " + (err.message || err));
