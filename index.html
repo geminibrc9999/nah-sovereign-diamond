@@ -13,52 +13,29 @@
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Quicksand:wght@500;700;900&display=swap');
 
         body {
-            background-color: #fceea7; 
-            color: #0b4594; 
-            font-family: 'Quicksand', sans-serif;
-            font-size: 14px; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center;
-            position: relative;
+            background-color: #fceea7; color: #0b4594; font-family: 'Quicksand', sans-serif;
+            font-size: 14px; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; position: relative;
             background-image: 
                 linear-gradient(45deg, rgba(11, 69, 148, 0.05) 25%, transparent 25%, transparent 75%, rgba(11, 69, 148, 0.05) 75%, rgba(11, 69, 148, 0.05)), 
                 linear-gradient(45deg, rgba(11, 69, 148, 0.05) 25%, transparent 25%, transparent 75%, rgba(11, 69, 148, 0.05) 75%, rgba(11, 69, 148, 0.05));
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
+            background-size: 20px 20px; background-position: 0 0, 10px 10px;
         }
 
         .mainframe { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 15px 10px; box-sizing: border-box; }
         .terminal {
-            width: 100%; max-width: 600px; 
-            background: #ffffff; 
-            border: 3px solid #0b4594; 
-            border-radius: 15px; 
-            padding: 25px 30px; 
-            box-shadow: 6px 6px 0px #f4a261; 
-            position: relative; z-index: 2; margin: 15px 0; box-sizing: border-box; overflow: hidden;
+            width: 100%; max-width: 600px; background: #ffffff; border: 3px solid #0b4594; border-radius: 15px; 
+            padding: 25px 30px; box-shadow: 6px 6px 0px #f4a261; position: relative; z-index: 2; margin: 15px 0; box-sizing: border-box; overflow: hidden;
         }
 
-        .tab-menu {
-            width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; z-index: 10;
-        }
+        .tab-menu { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; z-index: 10; }
         .tab-row { display: flex; width: 100%; gap: 8px; }
         .tab-btn {
-            background: #e9c46a; 
-            color: #0b4594; 
-            border: 2px solid #0b4594; 
-            border-radius: 10px;
-            padding: 12px 6px; 
+            background: #e9c46a; color: #0b4594; border: 2px solid #0b4594; border-radius: 10px; padding: 12px 6px; 
             font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; text-transform: uppercase; 
-            transition: all 0.2s; flex: 1; text-align: center; display: flex; align-items: center; justify-content: center; line-height: 1.2;
-            box-shadow: 3px 3px 0px #0b4594; 
+            transition: all 0.2s; flex: 1; text-align: center; display: flex; align-items: center; justify-content: center; line-height: 1.2; box-shadow: 3px 3px 0px #0b4594; 
         }
-
         .tab-btn:hover { background: #f4a261; transform: translate(1px, 1px); box-shadow: 2px 2px 0px #0b4594; }
-        .tab-btn.active {
-            background: #0b4594; 
-            color: #fceea7; 
-            border-color: #0b4594;
-            transform: translate(3px, 3px);
-            box-shadow: 0px 0px 0px #0b4594;
-        }
+        .tab-btn.active { background: #0b4594; color: #fceea7; border-color: #0b4594; transform: translate(3px, 3px); box-shadow: 0px 0px 0px #0b4594; }
         
         .promo-btn-container { width: 100%; max-width: 600px; margin-top: 2px; }
         .promo-btn { background: #e76f51; color: #ffffff; font-size: 12px; box-shadow: 3px 3px 0px #0b4594; letter-spacing: 0.5px; width: 100%; }
@@ -66,12 +43,8 @@
         .promo-btn.active { background: #0b4594; color: #e76f51; }
 
         .tab-content { width: 100%; display: none; flex-direction: column; align-items: center; }
-        
         .title-container { text-align: center; }
-        .title { 
-            font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; 
-            color: #0b4594; text-shadow: 2px 2px 0px #f4a261; margin-bottom: 8px; line-height: 1.2; 
-        }
+        .title { font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #0b4594; text-shadow: 2px 2px 0px #f4a261; margin-bottom: 8px; line-height: 1.2; }
         .slogan-1 { font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 900; color: #e76f51; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
         
         .diamond { display: inline-block; animation: sparkle 1s infinite alternate; }
@@ -80,38 +53,22 @@
             100% { transform: scale(1.3); filter: brightness(1.5) drop-shadow(0 0 15px rgba(0, 204, 255, 0.9)); } 
         }
 
-        /* 3 Ô ĐEN XẾP THÀNH 1 HÀNG NGANG NHỎ GỌN */
         .live-dash-container { display: flex; flex-wrap: nowrap; gap: 8px; margin-bottom: 18px; width: 100%; }
-        .live-box { 
-            flex: 1 1 33.33%; min-width: 0; background: #111111; border: 2px solid #0b4594; padding: 10px 6px; border-radius: 10px; 
-            box-shadow: 3px 3px 0px #fceea7; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; text-align: center;
-        }
+        .live-box { flex: 1 1 33.33%; min-width: 0; background: #111111; border: 2px solid #0b4594; padding: 10px 6px; border-radius: 10px; box-shadow: 3px 3px 0px #fceea7; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; text-align: center; }
         .live-box-label { font-size: 10px; color: #888; font-weight: 900; margin-bottom: 6px; letter-spacing: 0.5px; text-transform: none; }
         .live-box-value { font-size: 15px; font-weight: 900; white-space: nowrap; }
         .live-box-subtext { font-size: 8px; color: #fff; margin-top: 4px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
 
-        .converter-section { 
-            margin-bottom: 25px; padding: 15px; background: #ffffff; border: 3px solid #0b4594; 
-            border-radius: 12px; box-shadow: 4px 4px 0px #e9c46a; width: 100%; box-sizing: border-box;
-        }
-        .converter-row { 
-            display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; 
-            background: #fdf6d8; border: 2px solid #e9c46a; padding: 8px 15px; border-radius: 8px; 
-        }
+        .converter-section { margin-bottom: 25px; padding: 15px; background: #ffffff; border: 3px solid #0b4594; border-radius: 12px; box-shadow: 4px 4px 0px #e9c46a; width: 100%; box-sizing: border-box; }
+        .converter-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; background: #fdf6d8; border: 2px solid #e9c46a; padding: 8px 15px; border-radius: 8px; }
         .converter-row:last-child { margin-bottom: 0; background: #e8f4f8; border-color: #00ccff; }
         .converter-label { font-size: 13px; font-weight: 900; color: #0b4594; width: 45px; text-transform: none; }
-        
-        .converter-input { 
-            flex: 1; background: transparent; border: none; font-family: 'Quicksand', sans-serif; font-size: 16px; font-weight: 900; text-align: right; outline: none; width: 100%; color: #e76f51; 
-        }
+        .converter-input { flex: 1; background: transparent; border: none; font-family: 'Quicksand', sans-serif; font-size: 16px; font-weight: 900; text-align: right; outline: none; width: 100%; color: #e76f51; }
         .converter-input::placeholder { color: #ccc; font-weight: 700; }
         .converter-input::-webkit-outer-spin-button, .converter-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         .converter-input[type=number] { -moz-appearance: textfield; }
 
-        .sub-section { 
-            margin-top: 10px; margin-bottom: 25px; padding: 15px; background: #fdf6d8; 
-            border: 2px solid #0b4594; border-radius: 10px; width: 100%; box-sizing: border-box;
-        }
+        .sub-section { margin-top: 10px; margin-bottom: 25px; padding: 15px; background: #fdf6d8; border: 2px solid #0b4594; border-radius: 10px; width: 100%; box-sizing: border-box; }
         .sub-title { font-size: 14px; font-weight: 900; color: #e76f51; margin-bottom: 12px; text-transform: uppercase; text-align: center; }
         .sub-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; padding: 8px 0; border-bottom: 2px dotted #e9c46a; }
         .sub-row:last-child { border-bottom: none; padding-bottom: 0; }
@@ -119,14 +76,10 @@
         .sub-row .value { color: #e76f51; text-align: right; }
         .sub-row a { color: #0b4594; text-decoration: underline; }
         
-        .report-block { 
-            background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; 
-            padding: 15px; margin-bottom: 20px; box-shadow: 3px 3px 0px #e9c46a;
-        }
+        .report-block { background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; padding: 15px; margin-bottom: 20px; box-shadow: 3px 3px 0px #e9c46a; }
         .report-heading { font-size: 16px; color: #0b4594; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; border-bottom: 2px solid #e9c46a; padding-bottom: 5px; }
         .info-text { font-size: 14px; margin-bottom: 12px; line-height: 1.6; color: #333; text-align: justify; font-weight: 700; }
         .info-text strong { color: #0b4594; font-weight: 900; }
-
         .link-blue { color: #0b4594; text-decoration: underline; font-weight: bold; }
         
         .blueprint-card { background: #fff; border: 2px solid #0b4594; border-radius: 8px; overflow: hidden; margin-bottom: 15px; }
@@ -136,10 +89,7 @@
         .bp-label { padding: 10px 15px; font-size: 12px; color: #0b4594; text-transform: uppercase; font-weight: 900; background: #fdf6d8; border-right: 2px solid #e9c46a; display: flex; align-items: center; }
         .bp-value { padding: 10px 15px; font-size: 13px; color: #333; line-height: 1.5; font-weight: 700; }
         
-        .math-box { 
-            background: #fff3e0; border: 2px dashed #f4a261; padding: 15px; margin: 15px 0; 
-            border-radius: 8px; color: #e76f51; font-size: 13px; font-weight: 900; line-height: 1.6; word-wrap: break-word;
-        }
+        .math-box { background: #fff3e0; border: 2px dashed #f4a261; padding: 15px; margin: 15px 0; border-radius: 8px; color: #e76f51; font-size: 13px; font-weight: 900; line-height: 1.6; word-wrap: break-word; }
         .math-box.green { background: #e8f5e9; border-color: #2a9d8f; color: #2a9d8f; }
         .math-box.blue { background: #e3f2fd; border-color: #0b4594; color: #0b4594; }
 
@@ -152,55 +102,23 @@
         .wp-list li { margin-bottom: 12px; text-align: justify; }
         .wp-highlight { color: #e76f51; font-weight: 900; }
 
-        #tab-promo .terminal {
-            max-width: 400px; 
-            background: #0b4594;
-            color: #ffffff;
-            border: 4px solid #fceea7;
-            box-shadow: 8px 8px 0px #e76f51;
-            padding: 30px 20px;
-        }
+        #tab-promo .terminal { max-width: 400px; background: #0b4594; color: #ffffff; border: 4px solid #fceea7; box-shadow: 8px 8px 0px #e76f51; padding: 30px 20px; }
         #tab-promo .title { color: #fceea7; text-shadow: none; font-size: 26px; }
-        #tab-promo .promo-content {
-            background: #ffffff; color: #0b4594; padding: 20px; border-radius: 12px; border: 3px dashed #e76f51;
-            text-align: center; font-size: 15px; font-weight: 700; margin: 20px 0; line-height: 1.6;
-        }
-        #tab-promo .promo-highlight {
-            display: block; font-size: 22px; color: #e76f51; font-weight: 900; margin: 15px 0; text-transform: uppercase; line-height: 1.3;
-        }
-        #tab-promo .contact-info {
-            background: #e9c46a; color: #0b4594; padding: 15px; border-radius: 8px; font-size: 14px; font-weight: 900; text-align: left;
-            border: 2px solid #ffffff;
-        }
+        #tab-promo .promo-content { background: #ffffff; color: #0b4594; padding: 20px; border-radius: 12px; border: 3px dashed #e76f51; text-align: center; font-size: 15px; font-weight: 700; margin: 20px 0; line-height: 1.6; }
+        #tab-promo .promo-highlight { display: block; font-size: 22px; color: #e76f51; font-weight: 900; margin: 15px 0; text-transform: uppercase; line-height: 1.3; }
+        #tab-promo .contact-info { background: #e9c46a; color: #0b4594; padding: 15px; border-radius: 8px; font-size: 14px; font-weight: 900; text-align: left; border: 2px solid #ffffff; }
         #tab-promo .contact-info p { margin: 5px 0; display: flex; align-items: center; }
         #tab-promo .contact-label { width: 80px; display: inline-block; font-weight: 900; }
 
-        .secret-menu {
-            width: 100%; max-width: 600px; display: flex; justify-content: center; gap: 10px; margin-top: 30px; margin-bottom: 15px; flex-wrap: wrap;
-        }
-        .secret-btn {
-            background: transparent; color: #0b4594; border: 1px dashed rgba(11, 69, 148, 0.4); border-radius: 5px;
-            padding: 6px 12px; font-family: 'Quicksand', sans-serif; font-size: 10px; font-weight: 700; cursor: pointer; text-transform: uppercase; 
-            transition: all 0.2s; opacity: 0.6;
-        }
+        .secret-menu { width: 100%; max-width: 600px; display: flex; justify-content: center; gap: 10px; margin-top: 30px; margin-bottom: 15px; flex-wrap: wrap; }
+        .secret-btn { background: transparent; color: #0b4594; border: 1px dashed rgba(11, 69, 148, 0.4); border-radius: 5px; padding: 6px 12px; font-family: 'Quicksand', sans-serif; font-size: 10px; font-weight: 700; cursor: pointer; text-transform: uppercase; transition: all 0.2s; opacity: 0.6; }
         .secret-btn:hover { opacity: 1; border-style: solid; background: rgba(11, 69, 148, 0.1); }
         .secret-btn.active { opacity: 1; border-style: solid; background: #0b4594; color: #fceea7; }
 
-        /* DẢI MEMPOOL 3 PENDING + 5 MINED NHỎ GỌN */
-        .mempool-strip {
-            display: flex; gap: 5px; overflow-x: auto; padding: 4px 1px; width: 100%; box-sizing: border-box;
-        }
-        .mp-card {
-            min-width: 72px; flex: 1 0 auto; border-radius: 6px; padding: 5px 3px; text-align: center;
-            display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;
-        }
-        .mp-card.pending {
-            background: #2b1d0e; border: 1.5px dashed #f4a261; color: #fceea7;
-        }
-        .mp-card.mined {
-            background: #111111; border: 1.5px solid #0b4594; color: #00ccff;
-        }
-
+        .mempool-strip { display: flex; gap: 5px; overflow-x: auto; padding: 4px 1px; width: 100%; box-sizing: border-box; }
+        .mp-card { min-width: 72px; flex: 1 0 auto; border-radius: 6px; padding: 5px 3px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
+        .mp-card.pending { background: #2b1d0e; border: 1.5px dashed #f4a261; color: #fceea7; }
+        .mp-card.mined { background: #111111; border: 1.5px solid #0b4594; color: #00ccff; }
         .footer { font-size: 12px; text-align: center; font-weight: 900; color: #0b4594; padding-bottom: 40px; text-transform: uppercase; }
 
         @media (max-width: 500px) { 
@@ -223,13 +141,8 @@
 <body>
     <div class="mainframe">
         
-        <!-- HEADER CỐ ĐỊNH -->
-        <div class="terminal" style="margin-bottom: 0; padding-bottom: 20px; border-bottom: none; border-radius: 15px 15px 0 0;">
-            <div class="title-container">
-                <div class="title">NAH SOVEREIGN DIAMOND <span class="diamond">💎</span></div>
-                <div class="slogan-1">digital diamond etched on digital gold</div>
-            </div>
-        </div>
+        <!-- HEADER CỐ ĐỊNH (NẠP TỪ nah-explorer.js) -->
+        <div id="nah-header-slot" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
 
         <!-- HỆ THỐNG TAB NAVIGATION -->
         <div class="tab-menu">
@@ -247,7 +160,7 @@
         <div id="tab-nah" class="tab-content" style="display: flex;">
             <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px; width: 100%;">
                 
-                <!-- 3 Ô ĐEN TRÊN 1 HÀNG NGANG: vnd/nah | sat/nah | usd/btc -->
+                <!-- 3 Ô BÁO GIÁ & NGUỒN GIÁ (GIỮ TRỰC TIẾP TRONG index.html ĐỂ NÂNG CẤP SANG DEX RIÊNG & VẼ CHART) -->
                 <div class="live-dash-container">
                     <div class="live-box">
                         <div class="live-box-label">vnd / nah</div>
@@ -256,7 +169,7 @@
                     <div class="live-box">
                         <div class="live-box-label">sat / nah</div>
                         <div id="sats-val" class="live-box-value" style="color: #00ccff; text-shadow: 0 0 8px rgba(0, 204, 255, 0.5);">... s/💎</div>
-                        <div class="live-box-subtext">(BASED ON <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #2a9d8f; text-decoration: underline;">SATFLOW</a>)</div>
+                        <div id="price-source-label" class="live-box-subtext">(BASED ON <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #2a9d8f; text-decoration: underline;">SATFLOW</a>)</div>
                     </div>
                     <div class="live-box">
                         <div class="live-box-label">usd / btc</div>
@@ -264,89 +177,26 @@
                     </div>
                 </div>
 
-                <div style="font-size: 13px; font-weight: 900; text-align: center; color: #0b4594; margin-bottom: 15px; width: 100%;">
+                <div id="alt-exchange-line" style="font-size: 13px; font-weight: 900; text-align: center; color: #0b4594; margin-bottom: 15px; width: 100%;">
                     💎 Alternative exchange to acquire nah: <a href="https://unisat.io/market/v2/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #eab308; text-decoration: underline;">UniSat</a>.
                 </div>
 
-                <div class="info-text" style="font-size: 11px; text-align: center; margin-bottom: 25px; color: #0b4594; border: 2px dashed #0b4594; background: #e8f4f8; padding: 12px 6px; border-radius: 8px; font-weight: 700; width: 100%; box-sizing: border-box;">
-                    <strong style="white-space: nowrap;">nah-core Pruned Indexer (&lt;10MB) OPEN SOURCED:</strong> <br>
-                    <a href="https://stacker.news/items/1600596" target="_blank" style="color: #e76f51; text-decoration: underline; font-weight: 900; display: inline-block; margin-top: 6px; font-size: 12px;">https://stacker.news/items/1600596</a>
-                </div>
+                <!-- KHUNG CHỜ CHO BIỂU ĐỒ GIÁ (CHARTS: btc/usd, sat/nah, vnd/nah) -->
+                <div id="nah-charts-hub" style="width: 100%;"></div>
 
-                <div class="converter-section">
-                    <div class="sub-title">REAL-TIME OMNI CONVERTER</div>
-                    <div class="converter-row">
-                        <span class="converter-label">vnd</span>
-                        <input type="number" step="any" id="conv-vnd" class="converter-input" style="color: #2a9d8f;" placeholder="0">
-                    </div>
-                    <div class="converter-row">
-                        <span class="converter-label">usd</span>
-                        <input type="number" step="any" id="conv-usd" class="converter-input" style="color: #e76f51;" placeholder="0">
-                    </div>
-                    <div class="converter-row">
-                        <span class="converter-label">btc</span>
-                        <input type="number" step="any" id="conv-btc" class="converter-input" style="color: #f4a261;" placeholder="0">
-                    </div>
-                    <div class="converter-row">
-                        <span class="converter-label">sat</span>
-                        <input type="number" step="any" id="conv-sat" class="converter-input" style="color: #0b4594;" placeholder="0">
-                    </div>
-                    <div class="converter-row">
-                        <span class="converter-label">nah</span>
-                        <input type="number" step="any" id="conv-nah" class="converter-input" style="color: #00ccff; text-shadow: 0 0 2px rgba(0, 204, 255, 0.4);" placeholder="0">
-                    </div>
-                </div>
+                <!-- KHUNG CHỜ CHO CONNECT WALLET, NAH SPLITTER & KEYLESS PSBT DEX -->
+                <div id="nah-defi-hub" style="width: 100%;"></div>
 
-                <div class="sub-section">
-                    <div class="sub-title">NAH MARKET CAP &amp; TOKENOMICS</div>
-                    <div class="sub-row"><span class="label">MAX SUPPLY</span><span class="value">148.3 TRILLION nahs</span></div>
-                    <div class="sub-row"><span class="label">HELD BY SATOSHI NAKAMOTO</span><span class="value">63 TRILLION nahs</span></div>
-                    <div class="sub-row"><span class="label">MAX CIRCULATING SUPPLY</span><span class="value">85.3 TRILLION nahs</span></div>
-                    <div class="sub-row"><span class="label">MARKET CAP (btc)</span><span class="value" id="mcap-btc">LOADING...</span></div>
-                    <div class="sub-row"><span class="label">MARKET CAP (usd)</span><span class="value" id="mcap-usd">LOADING...</span></div>
-                    <div class="sub-row">
-                        <span class="label">LIST OF CURRENT NAH HODLERS (<span id="nah-holders-count">18</span>)</span>
-                        <span class="value"><a href="javascript:void(0)" onclick="toggleHoldersList()" id="holders-toggle-btn" style="color: #0b4594; font-weight: 900;">VIEW LIST ▼</a></span>
-                    </div>
-                </div>
+                <!-- KHUNG NAH-CORE PRUNED INDEXER & LINK STACKER NEWS (NẠP TỪ nah-explorer.js) -->
+                <div id="nah-stacker-slot" style="width: 100%;"></div>
 
-                <!-- BITCOIN SAT NAH SOVEREIGN EXPLORER -->
-                <div class="converter-section" style="background: #fdf6d8; margin-bottom: 18px;">
-                    <div class="sub-title" style="margin-bottom: 8px;">🔍 BITCOIN SAT NAH SOVEREIGN EXPLORER</div>
-                    <div style="display: flex; gap: 6px; margin-bottom: 10px;">
-                        <input type="text" id="wallet-search-input" placeholder="Paste Bitcoin Address" style="flex: 1; padding: 10px; border: 2px solid #0b4594; border-radius: 8px; font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 700; color: #0b4594; outline: none; background: #ffffff;">
-                        <button onclick="lookupNahWallet()" style="background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 0 14px; font-family: 'Quicksand', sans-serif; font-weight: 900; font-size: 12px; cursor: pointer;">SEARCH</button>
-                    </div>
-                    <div id="wallet-search-result" style="display: none; background: #ffffff; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; font-size: 11px; font-weight: 700; color: #0b4594; word-break: break-all;"></div>
+                <!-- MARKET CAP, EXPLORER, TIMECHAIN & OMNI CONVERTER (NẠP TỪ nah-explorer.js) -->
+                <div id="nah-bottom-slot" style="width: 100%;"></div>
 
-                    <div id="holders-leaderboard" style="display: none; margin-top: 12px; background: #ffffff; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; max-height: 300px; overflow-y: auto;">
-                        <div style="font-size: 11px; font-weight: 900; color: #e76f51; text-align: center; margin-bottom: 8px; text-transform: uppercase;">TAP ADDRESS TO VIEW HISTORY</div>
-                        <div id="holders-list-body" style="font-size: 11px; font-weight: 700;">LOADING...</div>
-                    </div>
-
-                    <div style="margin-top: 10px; padding-top: 8px; border-top: 1.5px dashed #e9c46a; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 900; color: #0b4594;">
-                        <span>TOTAL NAH TRANSACTIONS COUNT:</span>
-                        <span id="nah-total-tx-count" style="color: #e76f51; font-size: 12px;">609</span>
-                    </div>
-                </div>
-
-                <!-- BITCOIN TIMECHAIN LIVE BLOCKS (3 PENDING + 5 MINED BLOCKS) -->
-                <div class="sub-section" style="background: #ffffff; margin-top: 0; margin-bottom: 16px; padding: 10px;">
-                    <div class="sub-title" style="font-size: 11px; margin-bottom: 6px;">⛓️ BITCOIN TIMECHAIN: 3 PENDING &amp; 5 MINED BLOCKS</div>
-                    <div id="block-ticker" class="mempool-strip">
-                        <div style="font-size: 10px; color: #888; text-align: center; width: 100%; padding: 6px;">Loading live blocks...</div>
-                    </div>
-                </div>
-
-                <div class="info-text" style="font-size: 12px; font-weight: 700; text-align: center; margin-top: 10px;">
-                    * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank" class="link-blue">Facebook</a> or <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank" class="link-blue">LinkedIn</a>.
-                </div>
-
-                <div class="status" id="last-update" style="color: #888; font-size: 11px; text-align: right; margin-top: 15px; font-weight: bold;">CONNECTING...</div>
             </div>
         </div>
 
-        <!-- TAB PROMO (MIN'S KITCHEN) — ĐÃ CẬP NHẬT THÁNG 11/2026 -->
+        <!-- TAB PROMO (MIN'S KITCHEN) — CHỈNH SỬA HÀNG THÁNG TRỰC TIẾP TẠI ĐÂY -->
         <div id="tab-promo" class="tab-content">
             <div class="terminal" style="margin-top: 0;">
                 <div class="title-container">
@@ -377,587 +227,53 @@
         <!-- CONTAINER CHỨA 5 TAB TĨNH NẠP TỪ FILE brc-static.js -->
         <div id="brc-static-tabs-container" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
 
-        <!-- SECRET MENU -->
-        <div class="secret-menu">
-            <button class="secret-btn" onclick="openTab('tab-wp')">BRC WHITEPAPER</button>
-            <button class="secret-btn" onclick="openTab('tab-bp')">BRC BLACKPAPER</button>
-            <button class="secret-btn" onclick="openTab('tab-exhibit')">62ND EXHIBIT A</button>
-        </div>
-
-        <div class="footer">WEBSITE ĐƯỢC BẢO TRỢ BỞI MIN'S KITCHEN &amp; BRC</div>
+        <!-- SECRET MENU & FOOTER (NẠP TỪ nah-explorer.js) -->
+        <div id="nah-footer-slot" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
     </div>
 
-    <!-- NẠP 5 TAB TĨNH TỪ BRC-STATIC.JS -->
+    <!-- NẠP CÁC MODULE TĨNH -->
     <script src="brc-static.js"></script>
+    <script src="nah-explorer.js"></script>
 
+    <!-- LOGIC BÁO GIÁ (GIỮ TRỰC TIẾP TRONG index.html ĐỂ KẾT NỐI VỚI DEX & CHARTS) -->
     <script>
-        function openTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.secret-btn').forEach(el => el.classList.remove('active'));
-            
-            const target = document.getElementById(tabId);
-            if (target) target.style.display = 'flex';
-            
-            const btn = document.querySelector(`[onclick="openTab('${tabId}')"]`);
-            if (btn) btn.classList.add('active');
-        }
-
-        const CURRENT_NAH_SATS = 0.0005; 
-        const CIRCULATING_SUPPLY = 85300000000000; 
+        window.CURRENT_NAH_SATS = 0.0005; 
+        window.CIRCULATING_SUPPLY = 85300000000000; 
+        window.globalLiveVndRate = 25500; 
+        window.globalLiveBtcPrice = 80000;
 
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
         const FOREX_API = "https://open.er-api.com/v6/latest/USD";
-        const NAH_NODE_API = "https://api.nahkahmotors.com/api/v1";
-        const MEMPOOL_API = "https://mempool.space/api";
-
-        let globalLiveVndRate = 25500; 
-        let globalLiveBtcPrice = 80000;
-        let currentLookupAddr = "";
-        let lastSeenSatTxid = "";
-        let loadedSatRawTxs = [];
-
-        function fmtUnit(n, singular, plural) {
-            return Number(n) === 1 ? singular : plural;
-        }
-
-        function formatLocalDate(ts) {
-            if (!ts) return "Confirmed";
-            try {
-                const d = new Date(ts * 1000);
-                return d.toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-            } catch(e) {
-                return String(ts);
-            }
-        }
-
-        function fmtFeeRate(v) {
-            if (!v || v <= 0) return "0.1";
-            return v < 1 ? v.toFixed(1) : Math.round(v).toString();
-        }
 
         async function engageOracle() {
             try {
                 const [btcRes, forexRes] = await Promise.all([ fetch(BTC_LIVE_API), fetch(FOREX_API) ]);
                 const btcData = await btcRes.json(), forexData = await forexRes.json();
-                globalLiveBtcPrice = parseFloat(btcData.USD);
-                globalLiveVndRate = parseFloat(forexData.rates.VND);
+                window.globalLiveBtcPrice = parseFloat(btcData.USD);
+                window.globalLiveVndRate = parseFloat(forexData.rates.VND);
                 
-                const usdVal = (CURRENT_NAH_SATS / 100000000) * globalLiveBtcPrice;
-                const vndVal = usdVal * globalLiveVndRate; 
-                const mcapBtc = (CIRCULATING_SUPPLY * CURRENT_NAH_SATS) / 100000000;
+                const usdVal = (window.CURRENT_NAH_SATS / 100000000) * window.globalLiveBtcPrice;
+                const vndVal = usdVal * window.globalLiveVndRate; 
+                const mcapBtc = (window.CIRCULATING_SUPPLY * window.CURRENT_NAH_SATS) / 100000000;
                 
-                document.getElementById("mcap-btc").innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " btc";
-                document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
+                const mcapBtcEl = document.getElementById("mcap-btc");
+                const mcapUsdEl = document.getElementById("mcap-usd");
+                if (mcapBtcEl) mcapBtcEl.innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " btc";
+                if (mcapUsdEl) mcapUsdEl.innerText = "$" + (window.CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
                 
-                document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " s/💎";
+                document.getElementById("sats-val").innerText = window.CURRENT_NAH_SATS + " s/💎";
                 document.getElementById("live-vnd-nah").innerText = vndVal.toFixed(4) + " ₫";
-                document.getElementById("live-usd-btc").innerText = "$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
+                document.getElementById("live-usd-btc").innerText = "$" + window.globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                
+                const lastUpdEl = document.getElementById("last-update");
+                if (lastUpdEl) lastUpdEl.innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
             } catch (error) {
                 console.error("Oracle Connection Failed: ", error);
             }
         }
 
-        async function loadBlockTicker() {
-            try {
-                const [mpRes, minedRes] = await Promise.all([
-                    fetch(`${MEMPOOL_API}/v1/fees/mempool-blocks`),
-                    fetch(`${MEMPOOL_API}/v1/blocks`)
-                ]);
-                const mpBlocks = await mpRes.json();
-                const minedBlocks = await minedRes.json();
-
-                let pendingCards = [];
-                for (let i = 2; i >= 0; i--) {
-                    const b = mpBlocks[i];
-                    const waitMin = (i + 1) * 10;
-                    if (b) {
-                        const minF = b.feeRange && b.feeRange.length ? fmtFeeRate(b.feeRange[0]) : fmtFeeRate(b.medianFee || 1);
-                        const maxF = b.feeRange && b.feeRange.length ? fmtFeeRate(b.feeRange[b.feeRange.length - 1]) : minF;
-                        pendingCards.push(`
-                            <div class="mp-card pending">
-                                <div style="font-size:8px; color:#f4a261; font-weight:900;">Pending ~${waitMin}m</div>
-                                <div style="font-size:9px; color:#fff; font-weight:900; margin:2px 0;">${minF}–${maxF} sat/vB</div>
-                                <div style="font-size:8px; color:#ccc;">${b.nTx.toLocaleString('en-US')} txs</div>
-                            </div>
-                        `);
-                    } else {
-                        pendingCards.push(`
-                            <div class="mp-card pending" style="opacity:0.65;">
-                                <div style="font-size:8px; color:#f4a261; font-weight:900;">Pending ~${waitMin}m</div>
-                                <div style="font-size:9px; color:#fff; font-weight:900; margin:2px 0;">~1 sat/vB</div>
-                                <div style="font-size:8px; color:#ccc;">Open Queue</div>
-                            </div>
-                        `);
-                    }
-                }
-
-                let minedCards = (minedBlocks || []).slice(0, 5).map(b => {
-                    const minsAgo = Math.max(1, Math.round((Date.now() / 1000 - b.timestamp) / 60));
-                    const medFee = b.extras && b.extras.medianFee ? fmtFeeRate(b.extras.medianFee) : "1";
-                    return `
-                        <div class="mp-card mined">
-                            <div style="font-size:9px; color:#00ccff; font-weight:900;">#${b.height.toLocaleString('en-US')}</div>
-                            <div style="font-size:9px; color:#fceea7; font-weight:900; margin:2px 0;">~${medFee} sat/vB</div>
-                            <div style="font-size:8px; color:#aaa;">${minsAgo}m ago</div>
-                        </div>
-                    `;
-                });
-
-                document.getElementById("block-ticker").innerHTML = pendingCards.join("") + minedCards.join("");
-            } catch(e) {
-                console.error("Block ticker error:", e);
-            }
-        }
-
-        async function syncNahCoreNode() {
-            try {
-                const res = await fetch(`${NAH_NODE_API}/status`);
-                const data = await res.json();
-                if (data.holders_count) {
-                    document.getElementById("nah-holders-count").innerText = data.holders_count;
-                }
-                if (data.indexed_nah_txs) {
-                    document.getElementById("nah-total-tx-count").innerText = data.indexed_nah_txs.toLocaleString('en-US');
-                }
-            } catch (e) {
-                console.error("nah-core API sync error:", e);
-            }
-        }
-
-        function shortAddress(addr) {
-            if (!addr) return "";
-            return addr.length > 20 ? addr.slice(0, 8) + "..." + addr.slice(-6) : addr;
-        }
-
-        async function toggleHoldersList() {
-            const box = document.getElementById("holders-leaderboard");
-            const btn = document.getElementById("holders-toggle-btn");
-            if (box.style.display === "block") {
-                box.style.display = "none";
-                btn.innerText = "VIEW LIST ▼";
-                return;
-            }
-            box.style.display = "block";
-            btn.innerText = "HIDE LIST ▲";
-            const body = document.getElementById("holders-list-body");
-            body.innerHTML = "LOADING...";
-            try {
-                const res = await fetch(`${NAH_NODE_API}/holders`);
-                const data = await res.json();
-                body.innerHTML = data.holders.map(h => {
-                    let rawPct = (h.balance / 148300000000000) * 100;
-                    let pctStr = (h.balance > 0 && rawPct < 0.0001) ? "<0.0001%" : rawPct.toFixed(4) + "%";
-                    const unit = fmtUnit(h.balance, "nah", "nahs");
-                    return `<div style="display:flex; justify-content:space-between; align-items:center; gap:6px; padding:7px 0; border-bottom:1px dotted #e9c46a; cursor:pointer;" onclick="document.getElementById('wallet-search-input').value='${h.address}'; lookupNahWallet();">
-                        <span style="color:#0b4594; text-decoration:underline; white-space:nowrap;">#${h.rank} ${shortAddress(h.address)}</span>
-                        <span style="color:#e76f51; text-align:right; white-space:nowrap;">${h.balance.toLocaleString('en-US')} ${unit} (${pctStr})</span>
-                    </div>`;
-                }).join("");
-            } catch (e) {
-                body.innerHTML = "Unable to load holder list.";
-            }
-        }
-
-        function isDustOrSelfFeeOnly(tx, addr) {
-            let sent = 0, recv = 0;
-            (tx.vin || []).forEach(v => {
-                if (v.prevout && v.prevout.scriptpubkey_address === addr) sent += (v.prevout.value || 0);
-            });
-            (tx.vout || []).forEach(v => {
-                if (v.scriptpubkey_address === addr) recv += (v.value || 0);
-            });
-            const net = recv - sent;
-            const fee = tx.fee || 0;
-
-            if (net === 0) return true;
-            if (Math.abs(net) <= 600) return true;
-            if (net < 0 && Math.abs(net) <= (fee + 600)) return true;
-            return false;
-        }
-
-        function renderSatTxsList(txs, addr) {
-            const cleanTxs = txs.filter(tx => !isDustOrSelfFeeOnly(tx, addr));
-            if (cleanTxs.length === 0) {
-                return '<div style="color:#777; font-size:11px; padding:6px 0;">No sat transactions found for this address.</div>';
-            }
-            return cleanTxs.map(tx => {
-                let sent = 0, recv = 0;
-                (tx.vin || []).forEach(v => {
-                    if (v.prevout && v.prevout.scriptpubkey_address === addr) sent += (v.prevout.value || 0);
-                });
-                (tx.vout || []).forEach(v => {
-                    if (v.scriptpubkey_address === addr) recv += (v.value || 0);
-                });
-                const net = recv - sent;
-                const isSent = net < 0;
-                const amt = Math.abs(net);
-                const badgeColor = isSent ? "#e76f51" : "#2a9d8f";
-                const sign = isSent ? "-" : "+";
-                const peerLabel = isSent ? "To" : "From";
-                const txUnit = fmtUnit(amt, "sat", "sats");
-
-                let peer = "Bitcoin Network";
-                if (isSent) {
-                    const other = (tx.vout || []).find(v => v.scriptpubkey_address && v.scriptpubkey_address !== addr && (v.value || 0) > 600);
-                    const fallbackOther = (tx.vout || []).find(v => v.scriptpubkey_address && v.scriptpubkey_address !== addr);
-                    peer = other ? other.scriptpubkey_address : (fallbackOther ? fallbackOther.scriptpubkey_address : addr);
-                } else {
-                    const other = (tx.vin || []).find(v => v.prevout && v.prevout.scriptpubkey_address && v.prevout.scriptpubkey_address !== addr && (v.prevout.value || 0) > 600);
-                    const fallbackOther = (tx.vin || []).find(v => v.prevout && v.prevout.scriptpubkey_address && v.prevout.scriptpubkey_address !== addr);
-                    peer = other ? other.prevout.scriptpubkey_address : (fallbackOther ? fallbackOther.prevout.scriptpubkey_address : "Coinbase / Network");
-                }
-                const canClickPeer = peer && !peer.includes("Network") && !peer.includes("Coinbase");
-                const peerHtml = canClickPeer
-                    ? `<a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${peer}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(peer)}</a>`
-                    : `<span style="color:#777;">${peer}</span>`;
-
-                const timeStr = (tx.status && tx.status.block_time) ? formatLocalDate(tx.status.block_time) : "Unconfirmed (Mempool)";
-                const feeStr = tx.fee ? `tx fee: ${tx.fee.toLocaleString('en-US')} sats` : "";
-
-                return `<div style="padding:7px 0; border-bottom:1px dotted #ccc; font-size:10px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:3px;">
-                        <span style="color:${badgeColor}; font-weight:900;">${isSent ? 'SENT' : 'RECEIVED'}</span>
-                        <span style="color:${badgeColor}; font-size:11px; font-weight:900; white-space:nowrap;">${sign}${amt.toLocaleString('en-US')} ${txUnit}</span>
-                    </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center; color:#666; margin-bottom:2px;">
-                        <span style="white-space:nowrap;">${peerLabel}: ${peerHtml}</span>
-                        <span style="white-space:nowrap;">${timeStr}</span>
-                    </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center; color:#888; font-size:9px;">
-                        <span>Tx: <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.txid}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${tx.txid.slice(0,8)}...${tx.txid.slice(-6)}</a></span>
-                        <span style="white-space:nowrap;">${feeStr}</span>
-                    </div>
-                </div>`;
-            }).join("");
-        }
-
-        async function loadMoreSatTxs() {
-            if (!currentLookupAddr || !lastSeenSatTxid) return;
-            const btn = document.getElementById("load-more-sat-btn");
-            if (btn) btn.innerText = "LOADING OLDER TRANSACTIONS...";
-            try {
-                const res = await fetch(`${MEMPOOL_API}/address/${encodeURIComponent(currentLookupAddr)}/txs/chain/${lastSeenSatTxid}`);
-                const more = res.ok ? await res.json() : [];
-                if (Array.isArray(more) && more.length > 0) {
-                    loadedSatRawTxs = loadedSatRawTxs.concat(more);
-                    lastSeenSatTxid = more[more.length - 1].txid;
-                    document.getElementById("sat-tx-list-container").innerHTML = renderSatTxsList(loadedSatRawTxs, currentLookupAddr);
-                    if (more.length < 25 && btn) btn.style.display = "none";
-                    else if (btn) btn.innerText = "LOAD OLDER SAT TRANSACTIONS ▼";
-                } else if (btn) {
-                    btn.style.display = "none";
-                }
-            } catch(e) {
-                if (btn) btn.innerText = "LOAD OLDER SAT TRANSACTIONS ▼";
-            }
-        }
-
-        async function lookupNahWallet() {
-            const query = document.getElementById("wallet-search-input").value.trim();
-            const resBox = document.getElementById("wallet-search-result");
-            if (!query) return;
-            resBox.style.display = "block";
-            resBox.innerHTML = "LOADING DETAILS...";
-
-            // XEM CHI TIẾT GIAO DỊCH (TXID 64 KÝ TỰ HEX)
-            if (/^[0-9a-fA-F]{64}$/.test(query)) {
-                try {
-                    const txRes = await fetch(`${NAH_NODE_API}/tx/${query}`);
-                    const d = await txRes.json();
-                    if (!d || d.error) {
-                        resBox.innerHTML = "Transaction not found.";
-                        return;
-                    }
-
-                    const feeUsd = ((d.fee / 100000000) * globalLiveBtcPrice).toFixed(2);
-                    const cleanFeeRate = Number(d.fee_rate || 0).toFixed(2).replace(/\.00$/, "");
-                    const timeStr = d.ts ? formatLocalDate(d.ts) : "Unconfirmed (Mempool)";
-                    const blkStr = d.height ? "#" + d.height.toLocaleString('en-US') : "Pending";
-                    const inputs = d.inputs || [];
-                    const outputs = d.outputs || [];
-
-                    // TÍNH TÓM TẮT BIẾN ĐỘNG RÒNG CHO NEWBIES (ẨN TIỀN THỪA CHANGE KHI GỬI CHO NGƯỜI KHÁC)
-                    const nahSenders = inputs.filter(i => i.nah > 0);
-                    const nahReceivers = outputs.filter(o => o.nah > 0);
-                    let nahSummaryHtml = "";
-                    if (nahReceivers.length > 0) {
-                        const fromAddr = nahSenders.length ? nahSenders[0].address : "NAH Protocol Genesis";
-                        const fromHtml = (!fromAddr.includes("Genesis"))
-                            ? `<a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${fromAddr}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(fromAddr)}</a>`
-                            : `<span>${fromAddr}</span>`;
-
-                        const externalReceivers = nahReceivers.filter(r => r.address !== fromAddr);
-                        const summaryTargets = externalReceivers.length > 0 ? externalReceivers : nahReceivers;
-
-                        nahSummaryHtml = summaryTargets.map(r => {
-                            const isSelf = r.address === fromAddr;
-                            const badge = isSelf ? "SPLIT / CONSOLIDATE" : "SENT";
-                            const badgeBg = isSelf ? "#2a9d8f" : "#e76f51";
-                            return `<div style="padding:6px; margin-bottom:4px; background:#ffffff; border:1.5px solid #0b4594; border-radius:6px;">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
-                                    <span style="background:${badgeBg}; color:#fff; padding:1px 5px; border-radius:4px; font-size:8px; font-weight:900;">💎 ${badge}</span>
-                                    <span style="color:#0b4594; font-size:11px; font-weight:900; white-space:nowrap;">${r.nah.toLocaleString('en-US')} ${fmtUnit(r.nah, 'nah', 'nahs')}</span>
-                                </div>
-                                <div style="display:flex; justify-content:space-between; font-size:9px; color:#555;">
-                                    <span>From: ${fromHtml}</span>
-                                    <span>➔ To: <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${r.address}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(r.address)}</a></span>
-                                </div>
-                            </div>`;
-                        }).join("");
-                    }
-
-                    const addrSatNet = {};
-                    inputs.forEach(i => { if (i.address) addrSatNet[i.address] = (addrSatNet[i.address] || 0) - (i.sats || 0); });
-                    outputs.forEach(o => { if (o.address) addrSatNet[o.address] = (addrSatNet[o.address] || 0) + (o.sats || 0); });
-                    const meaningfulSatMoves = Object.entries(addrSatNet).filter(([_, net]) => Math.abs(net) > 600 && !(net < 0 && Math.abs(net) <= (d.fee + 600)));
-                    let satSummaryHtml = "";
-                    if (meaningfulSatMoves.length > 0) {
-                        satSummaryHtml = meaningfulSatMoves.map(([a, net]) => {
-                            const isGain = net > 0;
-                            const col = isGain ? "#2a9d8f" : "#e76f51";
-                            const sign = isGain ? "+" : "-";
-                            return `<div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px dotted #ccc; font-size:10px;">
-                                <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${a}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(a)}</a>
-                                <span style="color:${col}; font-weight:900; white-space:nowrap;">${sign}${Math.abs(net).toLocaleString('en-US')} sats</span>
-                            </div>`;
-                        }).join("");
-                    }
-
-                    const inputsHtml = inputs.map(i => {
-                        const nahBadge = i.nah > 0
-                            ? `<div style="margin-top:4px; margin-left:10px; padding:4px 8px; background:#111; border:1px solid #00ccff; border-radius:5px; color:#00ccff; font-size:9px; font-weight:900; display:flex; justify-content:space-between;">
-                                <span>💎 NAH•SOVEREIGN•DIAMOND</span>
-                                <span style="white-space:nowrap;">${i.nah.toLocaleString('en-US')} ${fmtUnit(i.nah, 'nah', 'nahs')}</span>
-                               </div>`
-                            : "";
-                        return `<div style="padding:6px 0; border-bottom:1px dotted #e9c46a;">
-                            <div style="display:flex; justify-content:space-between; align-items:center; font-size:10px;">
-                                <span>➔ <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${i.address}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(i.address)}</a></span>
-                                <span style="color:#555; font-weight:900; white-space:nowrap;">${(i.sats || 0).toLocaleString('en-US')} sats</span>
-                            </div>
-                            ${nahBadge}
-                        </div>`;
-                    }).join("");
-
-                    const outputsHtml = outputs.map(o => {
-                        if (o.is_op_return) {
-                            return `<div style="padding:6px 0; border-bottom:1px dotted #e9c46a; display:flex; justify-content:space-between; align-items:center; font-size:10px;">
-                                <span style="background:#0b4594; color:#fceea7; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900;">OP_RETURN: ${o.op_label}</span>
-                                <span style="color:#777; white-space:nowrap;">0 sats</span>
-                            </div>`;
-                        }
-                        const nahBadge = o.nah > 0
-                            ? `<div style="margin-top:4px; margin-left:10px; padding:4px 8px; background:#111; border:1px solid #00ccff; border-radius:5px; color:#00ccff; font-size:9px; font-weight:900; display:flex; justify-content:space-between;">
-                                <span>💎 NAH•SOVEREIGN•DIAMOND</span>
-                                <span style="white-space:nowrap;">${o.nah.toLocaleString('en-US')} ${fmtUnit(o.nah, 'nah', 'nahs')}</span>
-                               </div>`
-                            : "";
-                        return `<div style="padding:6px 0; border-bottom:1px dotted #e9c46a;">
-                            <div style="display:flex; justify-content:space-between; align-items:center; font-size:10px;">
-                                <span><a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${o.address}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(o.address)}</a> ➔</span>
-                                <span style="color:#2a9d8f; font-weight:900; white-space:nowrap;">${(o.sats || 0).toLocaleString('en-US')} sats</span>
-                            </div>
-                            ${nahBadge}
-                        </div>`;
-                    }).join("");
-
-                    const backBtn = currentLookupAddr
-                        ? `<div style="margin-bottom:8px;"><a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${currentLookupAddr}'; lookupNahWallet();" style="color:#0b4594; font-size:10px; font-weight:900; text-decoration:underline;">← BACK TO ADDRESS (${shortAddress(currentLookupAddr)})</a></div>`
-                        : "";
-
-                    resBox.innerHTML = `
-                        ${backBtn}
-                        <div style="background:#111; color:#fff; padding:10px; border-radius:8px; margin-bottom:10px; font-size:10px;">
-                            <div style="color:#00ccff; font-weight:900; margin-bottom:6px; word-break:break-all;">TXID: ${d.txid}</div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; border-top:1px solid #333; padding-top:6px;">
-                                <div style="white-space:nowrap;"><span style="color:#888;">Block:</span> <span style="color:#fceea7;">${blkStr}</span></div>
-                                <div style="text-align:right; white-space:nowrap;"><span style="color:#888;">Time:</span> <span style="color:#fceea7;">${timeStr}</span></div>
-                                <div style="white-space:nowrap;"><span style="color:#888;">Size / vSize:</span> <span style="color:#fff;">${d.size} B / ${d.vsize} vB</span></div>
-                                <div style="text-align:right; white-space:nowrap;"><span style="color:#888;">Fee Rate:</span> <span style="color:#00ccff;">${cleanFeeRate} sat/vB</span></div>
-                            </div>
-                            <div style="border-top:1px dotted #333; margin-top:6px; padding-top:4px; text-align:right; color:#f4a261; white-space:nowrap;">
-                                Fee: ${d.fee.toLocaleString('en-US')} sats ($${feeUsd})
-                            </div>
-                        </div>
-
-                        ${(nahSummaryHtml || satSummaryHtml) ? `
-                        <div style="background:#fdf6d8; border:1.5px solid #0b4594; border-radius:8px; padding:8px; margin-bottom:10px;">
-                            <div style="font-size:10px; font-weight:900; color:#e76f51; text-transform:uppercase; margin-bottom:4px;">⚡ NET TRANSACTION SUMMARY</div>
-                            ${nahSummaryHtml}
-                            ${satSummaryHtml ? `<div style="margin-top:4px;"><div style="font-size:9px; color:#0b4594; font-weight:900;">Net sat change:</div>${satSummaryHtml}</div>` : ''}
-                        </div>` : ''}
-
-                        <div style="font-size:10px; font-weight:900; color:#0b4594; text-transform:uppercase; margin-bottom:4px;">
-                            INPUTS &amp; OUTPUTS (${inputs.length} Inputs, ${outputs.length} Outputs)
-                        </div>
-                        <div style="background:#f8f9fa; border:1px solid #ccc; border-radius:6px; padding:8px; margin-bottom:8px;">
-                            <div style="font-size:9px; color:#e76f51; font-weight:900; text-transform:uppercase; margin-bottom:2px;">INPUTS (FROM)</div>
-                            ${inputsHtml}
-                            <div style="font-size:9px; color:#2a9d8f; font-weight:900; text-transform:uppercase; margin-top:8px; margin-bottom:2px;">OUTPUTS (TO)</div>
-                            ${outputsHtml}
-                        </div>
-                    `;
-                    return;
-                } catch(e) {
-                    resBox.innerHTML = "Unable to load transaction details.";
-                    return;
-                }
-            }
-
-            currentLookupAddr = query;
-            try {
-                const [nahRes, satInfoRes, satTxsRes] = await Promise.allSettled([
-                    fetch(`${NAH_NODE_API}/address/${encodeURIComponent(query)}`).then(r => r.ok ? r.json() : null),
-                    fetch(`${MEMPOOL_API}/address/${encodeURIComponent(query)}`).then(r => r.ok ? r.json() : null),
-                    fetch(`${MEMPOOL_API}/address/${encodeURIComponent(query)}/txs`).then(r => r.ok ? r.json() : [])
-                ]);
-
-                const nahData = (nahRes.status === "fulfilled" && nahRes.value) ? nahRes.value : { address: query, balance: 0, history: [] };
-                const satInfo = (satInfoRes.status === "fulfilled" && satInfoRes.value) ? satInfoRes.value : null;
-                loadedSatRawTxs = (satTxsRes.status === "fulfilled" && Array.isArray(satTxsRes.value)) ? satTxsRes.value : [];
-
-                if (loadedSatRawTxs.length >= 25) {
-                    lastSeenSatTxid = loadedSatRawTxs[loadedSatRawTxs.length - 1].txid;
-                    try {
-                        const page2Res = await fetch(`${MEMPOOL_API}/address/${encodeURIComponent(query)}/txs/chain/${lastSeenSatTxid}`);
-                        const page2 = page2Res.ok ? await page2Res.json() : [];
-                        if (Array.isArray(page2) && page2.length > 0) {
-                            loadedSatRawTxs = loadedSatRawTxs.concat(page2);
-                            lastSeenSatTxid = page2[page2.length - 1].txid;
-                        }
-                    } catch(e) {}
-                } else {
-                    lastSeenSatTxid = "";
-                }
-
-                const nahBal = nahData.balance || 0;
-                const nahUnit = fmtUnit(nahBal, "nah", "nahs");
-                let rawPct = (nahBal / 148300000000000) * 100;
-                let pctTotal = (nahBal > 0 && rawPct < 0.0001) ? "<0.0001%" : rawPct.toFixed(6) + "%";
-
-                let satBal = 0;
-                let totalChainTxCount = loadedSatRawTxs.length;
-                if (satInfo && satInfo.chain_stats) {
-                    const c = satInfo.chain_stats;
-                    const m = satInfo.mempool_stats || { funded_txo_sum: 0, spent_txo_sum: 0, tx_count: 0 };
-                    satBal = (c.funded_txo_sum - c.spent_txo_sum) + (m.funded_txo_sum - m.spent_txo_sum);
-                    totalChainTxCount = (c.tx_count || 0) + (m.tx_count || 0);
-                }
-                const satUnit = fmtUnit(satBal, "sat", "sats");
-
-                const nahHistory = nahData.history || [];
-
-                const nahHistoryHtml = nahHistory.map(tx => {
-                    const isSent = tx.type === "SENT";
-                    const badgeColor = isSent ? "#e76f51" : "#2a9d8f";
-                    const sign = isSent ? "-" : "+";
-                    const peerLabel = isSent ? "To" : "From";
-                    const txUnit = fmtUnit(tx.amount, "nah", "nahs");
-                    const canClickPeer = tx.counterparty && !tx.counterparty.includes("Protocol") && !tx.counterparty.includes("Genesis");
-                    const peerHtml = canClickPeer
-                        ? `<a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.counterparty}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(tx.counterparty)}</a>`
-                        : `<span style="color:#555;">${tx.counterparty}</span>`;
-                    const feeStr = tx.fee_sats ? `tx fee: ${tx.fee_sats.toLocaleString('en-US')} sats` : "";
-                    const timeStr = tx.ts ? formatLocalDate(tx.ts) : `Block #${tx.height}`;
-
-                    return `<div style="padding:8px; margin-bottom:6px; background:#fdf6d8; border:2px solid #0b4594; border-radius:6px; font-size:10px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:4px;">
-                            <span style="background:${badgeColor}; color:#fff; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">💎 ${tx.type}</span>
-                            <span style="color:${badgeColor}; font-size:12px; font-weight:900; white-space:nowrap;">${sign}${tx.amount.toLocaleString('en-US')} ${txUnit}</span>
-                        </div>
-                        <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; color:#0b4594; font-size:10px; margin-bottom:3px;">
-                            <span style="white-space:nowrap;">${peerLabel}: ${peerHtml}</span>
-                            <span style="white-space:nowrap; color:#555;">${timeStr}</span>
-                        </div>
-                        <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; color:#666; font-size:9px; border-top:1px dashed #e9c46a; padding-top:3px;">
-                            <span style="white-space:nowrap;">Tx: <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.txid}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${tx.txid.slice(0,8)}...${tx.txid.slice(-6)}</a></span>
-                            <span style="white-space:nowrap;">${feeStr}</span>
-                        </div>
-                    </div>`;
-                }).join("");
-
-                const satHistoryHtml = renderSatTxsList(loadedSatRawTxs, query);
-                const cleanSatCount = loadedSatRawTxs.filter(tx => !isDustOrSelfFeeOnly(tx, query)).length;
-                const hasMoreSat = totalChainTxCount > loadedSatRawTxs.length && lastSeenSatTxid;
-
-                resBox.innerHTML = `
-                    <div style="color:#0b4594; font-size:10px; margin-bottom:6px; word-break:break-all;">ADDRESS: <span style="color:#555;">${query}</span></div>
-                    <div style="background:#111111; border:2px solid #0b4594; border-radius:8px; padding:10px; margin-bottom:8px; text-align:center;">
-                        <div style="color:#00ccff; font-size:17px; font-weight:900; text-shadow:0 0 8px rgba(0,204,255,0.4);">💎 ${nahBal.toLocaleString('en-US')} ${nahUnit}</div>
-                        <div style="color:#2a9d8f; font-size:10px; margin-top:3px;">SHARE OF MAX SUPPLY: ${pctTotal}</div>
-                    </div>
-                    <div style="color:#0b4594; font-size:12px; margin-bottom:12px; text-align:center;">sat balance: <span style="color:#f4a261; font-weight:900;">${satBal.toLocaleString('en-US')} ${satUnit}</span></div>
-
-                    <div style="color:#e76f51; font-size:11px; font-weight:900; margin-bottom:6px;">💎 nah transactions (${nahHistory.length})</div>
-                    <div style="max-height:240px; overflow-y:auto; margin-bottom:14px;">
-                        ${nahHistoryHtml || '<div style="color:#777; font-size:11px; padding:6px 0;">No nah transactions found for this address.</div>'}
-                    </div>
-
-                    <div style="color:#0b4594; font-size:11px; font-weight:900; border-top:2px solid #e9c46a; padding-top:10px; margin-bottom:4px;">sat transactions (${cleanSatCount})</div>
-                    <div id="sat-tx-list-container" style="max-height:200px; overflow-y:auto;">
-                        ${satHistoryHtml}
-                    </div>
-                    ${hasMoreSat ? `<button id="load-more-sat-btn" onclick="loadMoreSatTxs()" style="width:100%; margin-top:8px; padding:6px; background:#fdf6d8; border:1px solid #0b4594; border-radius:6px; color:#0b4594; font-family:'Quicksand',sans-serif; font-size:10px; font-weight:900; cursor:pointer;">LOAD OLDER SAT TRANSACTIONS ▼</button>` : ''}
-                `;
-            } catch (e) {
-                resBox.innerHTML = "Unable to load address details right now.";
-            }
-        }
-        
-        function formatConvert(val, decimals) {
-            let str = val.toFixed(decimals);
-            if (str.includes('.')) { str = str.replace(/0+$/, '').replace(/\.$/, ''); }
-            return str;
-        }
-
-        function setupOmniConverter() {
-            const inputs = ['vnd', 'usd', 'btc', 'sat', 'nah'];
-            inputs.forEach(currency => {
-                document.getElementById(`conv-${currency}`).addEventListener('input', function(e) {
-                    if(e.target.value === '') {
-                        inputs.forEach(id => { if(id !== currency) document.getElementById(`conv-${id}`).value = ''; });
-                        return;
-                    }
-                    const val = parseFloat(e.target.value);
-                    if(isNaN(val)) return;
-
-                    const btc_usd = globalLiveBtcPrice;
-                    const usd_vnd = globalLiveVndRate;
-                    const btc_vnd = btc_usd * usd_vnd;
-                    const sat_nah = CURRENT_NAH_SATS; 
-
-                    let btc_val = 0;
-                    if(currency === 'vnd') btc_val = val / btc_vnd;
-                    if(currency === 'usd') btc_val = val / btc_usd;
-                    if(currency === 'btc') btc_val = val;
-                    if(currency === 'sat') btc_val = val / 100000000;
-                    if(currency === 'nah') btc_val = (val * sat_nah) / 100000000;
-
-                    const out_vnd = formatConvert(btc_val * btc_vnd, 2);
-                    const out_usd = formatConvert(btc_val * btc_usd, 6);
-                    const out_btc = formatConvert(btc_val, 10);
-                    const out_sat = formatConvert(btc_val * 100000000, 2);
-                    const out_nah = formatConvert((btc_val * 100000000) / sat_nah, 2);
-
-                    if(currency !== 'vnd') document.getElementById('conv-vnd').value = out_vnd;
-                    if(currency !== 'usd') document.getElementById('conv-usd').value = out_usd;
-                    if(currency !== 'btc') document.getElementById('conv-btc').value = out_btc;
-                    if(currency !== 'sat') document.getElementById('conv-sat').value = out_sat;
-                    if(currency !== 'nah') document.getElementById('conv-nah').value = out_nah;
-                });
-            });
-        }
-
-        async function bootSystem() {
-            await Promise.all([ engageOracle(), syncNahCoreNode(), loadBlockTicker() ]);
-            setInterval(engageOracle, 60000); 
-            setInterval(syncNahCoreNode, 60000);
-            setInterval(loadBlockTicker, 30000);
-            setupOmniConverter();
-        }
-        bootSystem();
+        engageOracle();
+        setInterval(engageOracle, 60000);
     </script>
 </body>
 </html>
