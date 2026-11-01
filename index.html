@@ -160,7 +160,7 @@
         <div id="tab-nah" class="tab-content" style="display: flex;">
             <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px; width: 100%;">
                 
-                <!-- 3 Ô BÁO GIÁ & NGUỒN GIÁ (GIỮ TRỰC TIẾP TRONG index.html ĐỂ NÂNG CẤP SANG DEX RIÊNG & VẼ CHART) -->
+                <!-- 3 Ô BÁO GIÁ & NGUỒN GIÁ (GIỮ TRỰC TIẾP TRONG index.html) -->
                 <div class="live-dash-container">
                     <div class="live-box">
                         <div class="live-box-label">vnd / nah</div>
@@ -181,10 +181,10 @@
                     💎 Alternative exchange to acquire nah: <a href="https://unisat.io/market/v2/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #eab308; text-decoration: underline;">UniSat</a>.
                 </div>
 
-                <!-- KHUNG CHỜ CHO BIỂU ĐỒ GIÁ (CHARTS: btc/usd, sat/nah, vnd/nah) -->
+                <!-- KHUNG CHỜ CHO BIỂU ĐỒ GIÁ -->
                 <div id="nah-charts-hub" style="width: 100%;"></div>
 
-                <!-- KHUNG CHỜ CHO CONNECT WALLET, NAH SPLITTER & KEYLESS PSBT DEX -->
+                <!-- KHUNG KẾT NỐI VÍ & KHO NAH UTXO (NẠP TỪ nah-defi.js) -->
                 <div id="nah-defi-hub" style="width: 100%;"></div>
 
                 <!-- KHUNG NAH-CORE PRUNED INDEXER & LINK STACKER NEWS (NẠP TỪ nah-explorer.js) -->
@@ -196,7 +196,7 @@
             </div>
         </div>
 
-        <!-- TAB PROMO (MIN'S KITCHEN) — CHỈNH SỬA HÀNG THÁNG TRỰC TIẾP TẠI ĐÂY -->
+        <!-- TAB PROMO (MIN'S KITCHEN) -->
         <div id="tab-promo" class="tab-content">
             <div class="terminal" style="margin-top: 0;">
                 <div class="title-container">
@@ -231,11 +231,12 @@
         <div id="nah-footer-slot" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
     </div>
 
-    <!-- NẠP CÁC MODULE TĨNH -->
+    <!-- NẠP CÁC MODULE TĨNH (ĐÃ GẮN VERSION CHỐNG CACHE TRÌNH DUYỆT) -->
     <script src="brc-static.js"></script>
-    <script src="nah-explorer.js?v=2"></script>
+    <script src="nah-explorer.js?v=3"></script>
+    <script src="nah-defi.js?v=1"></script>
 
-    <!-- LOGIC BÁO GIÁ (GIỮ TRỰC TIẾP TRONG index.html ĐỂ KẾT NỐI VỚI DEX & CHARTS) -->
+    <!-- LOGIC BÁO GIÁ & KẾT NỐI DEX -->
     <script>
         window.CURRENT_NAH_SATS = 0.0005; 
         window.CIRCULATING_SUPPLY = 85300000000000; 
