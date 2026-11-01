@@ -1,6 +1,6 @@
 // ============================================================================
 // NAH-EXPLORER.JS: IMMUTABLE INFRASTRUCTURE MODULE
-// (Header, Stacker News, Market Cap, Explorer, Timechain, Omni Converter, Footer)
+// (Header, Stacker News, Market Cap, Explorer with Live Mempool & Est. 1st Conf, Timechain, Omni Converter, Footer)
 // ============================================================================
 
 (function () {
@@ -39,7 +39,7 @@
         <div class="converter-section" style="background: #fdf6d8; margin-bottom: 18px;">
             <div class="sub-title" style="margin-bottom: 8px;">🔍 BITCOIN SAT NAH SOVEREIGN EXPLORER</div>
             <div style="display: flex; gap: 6px; margin-bottom: 10px;">
-                <input type="text" id="wallet-search-input" placeholder="Paste Bitcoin Address" style="flex: 1; padding: 10px; border: 2px solid #0b4594; border-radius: 8px; font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 700; color: #0b4594; outline: none; background: #ffffff;">
+                <input type="text" id="wallet-search-input" placeholder="Paste Bitcoin Address or TxID" style="flex: 1; padding: 10px; border: 2px solid #0b4594; border-radius: 8px; font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 700; color: #0b4594; outline: none; background: #ffffff;">
                 <button onclick="lookupNahWallet()" style="background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 0 14px; font-family: 'Quicksand', sans-serif; font-weight: 900; font-size: 12px; cursor: pointer;">SEARCH</button>
             </div>
             <div id="wallet-search-result" style="display: none; background: #ffffff; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; font-size: 11px; font-weight: 700; color: #0b4594; word-break: break-all;"></div>
@@ -120,6 +120,7 @@
 const NAH_NODE_API = "https://api.nahkahmotors.com/api/v1";
 const MEMPOOL_API = "https://mempool.space/api";
 
+window.liveMempoolBlocks = [];
 let currentLookupAddr = "";
 let lastSeenSatTxid = "";
 let loadedSatRawTxs = [];
@@ -155,6 +156,26 @@ function fmtFeeRate(v) {
     return v < 1 ? v.toFixed(1) : Math.round(v).toString();
 }
 
+// TÍNH THỜI GIAN ƯỚC TÍNH ĐẾN CONFIRMATION ĐẦU TIÊN DỰA TRÊN FEE RATE VÀ LIVE MEMPOOL BLOCKS
+function estimateFirstConfWait(feeRateSatVb) {
+    const rate = Number(feeRateSatVb || 0);
+    const mp = window.liveMempoolBlocks || [];
+    if (!mp || mp.length === 0) {
+        return "~10 mins (Next Block)";
+    }
+    for (let i = 0; i < mp.length; i++) {
+        const b = mp[i];
+        const minF = (b.feeRange && b.feeRange.length) ? b.feeRange[0] : (b.medianFee || 0.1);
+        const isNotFull = (i === 0 && (b.blockVSize || 0) < 980000);
+        if (isNotFull || rate >= minF) {
+            const mins = (i + 1) * 10;
+            return i === 0 ? "~10 mins (Next Block)" : `~${mins} mins (${i + 1} Blocks)`;
+        }
+    }
+    const maxWait = (mp.length + 1) * 10;
+    return `~${maxWait}+ mins (Low Fee Queue)`;
+}
+
 async function loadBlockTicker() {
     try {
         const [mpRes, minedRes] = await Promise.all([
@@ -163,6 +184,10 @@ async function loadBlockTicker() {
         ]);
         const mpBlocks = await mpRes.json();
         const minedBlocks = await minedRes.json();
+
+        if (Array.isArray(mpBlocks)) {
+            window.liveMempoolBlocks = mpBlocks;
+        }
 
         let pendingCards = [];
         for (let i = 2; i >= 0; i--) {
@@ -309,17 +334,35 @@ function renderSatTxsList(txs, addr) {
             ? `<a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${peer}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(peer)}</a>`
             : `<span style="color:#777;">${peer}</span>`;
 
-        const timeStr = (tx.status && tx.status.block_time) ? formatLocalDate(tx.status.block_time) : "Unconfirmed (Mempool)";
-        const feeStr = tx.fee ? `tx fee: ${tx.fee.toLocaleString('en-US')} sats` : "";
+        const isConfirmed = Boolean(tx.status && tx.status.confirmed);
+        const vsize = tx.weight ? (tx.weight / 4.0) : (tx.size || 1);
+        const feeRate = tx.fee ? (tx.fee / vsize) : 0;
+        const cleanRate = feeRate > 0 ? feeRate.toFixed(2).replace(/\.00$/, "") : "";
 
-        return `<div style="padding:7px 0; border-bottom:1px dotted #ccc; font-size:10px;">
+        const statusBadge = isConfirmed
+            ? `<span style="color:${badgeColor}; font-weight:900;">${isSent ? 'SENT' : 'RECEIVED'}</span>`
+            : `<span style="background:#f4a261; color:#111; padding:1px 5px; border-radius:4px; font-size:9px; font-weight:900;">⏳ UNCONFIRMED • ${isSent ? 'SENT' : 'RECEIVED'}</span>`;
+
+        const timeOrWaitHtml = isConfirmed
+            ? `<span style="white-space:nowrap;">${formatLocalDate(tx.status.block_time)}</span>`
+            : `<span style="color:#e76f51; font-weight:900; white-space:nowrap;">⏳ 1st conf: ${estimateFirstConfWait(feeRate)}</span>`;
+
+        const feeStr = tx.fee
+            ? `tx fee: ${tx.fee.toLocaleString('en-US')} sats${cleanRate ? ` (${cleanRate} sat/vB)` : ''}`
+            : "";
+
+        const rowStyle = isConfirmed
+            ? "padding:7px 0; border-bottom:1px dotted #ccc; font-size:10px;"
+            : "padding:8px; margin-bottom:6px; background:#fff3e0; border:2px dashed #f4a261; border-radius:6px; font-size:10px;";
+
+        return `<div style="${rowStyle}">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:3px;">
-                <span style="color:${badgeColor}; font-weight:900;">${isSent ? 'SENT' : 'RECEIVED'}</span>
+                ${statusBadge}
                 <span style="color:${badgeColor}; font-size:11px; font-weight:900; white-space:nowrap;">${sign}${amt.toLocaleString('en-US')} ${txUnit}</span>
             </div>
             <div style="display:flex; justify-content:space-between; align-items:center; color:#666; margin-bottom:2px;">
                 <span style="white-space:nowrap;">${peerLabel}: ${peerHtml}</span>
-                <span style="white-space:nowrap;">${timeStr}</span>
+                ${timeOrWaitHtml}
             </div>
             <div style="display:flex; justify-content:space-between; align-items:center; color:#888; font-size:9px;">
                 <span>Tx: <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.txid}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${tx.txid.slice(0,8)}...${tx.txid.slice(-6)}</a></span>
@@ -368,10 +411,11 @@ async function lookupNahWallet() {
                 return;
             }
 
+            const isConfirmed = Boolean(d.height && d.height > 0);
             const feeUsd = ((d.fee / 100000000) * btcUsd).toFixed(2);
             const cleanFeeRate = Number(d.fee_rate || 0).toFixed(2).replace(/\.00$/, "");
-            const timeStr = d.ts ? formatLocalDate(d.ts) : "Unconfirmed (Mempool)";
-            const blkStr = d.height ? "#" + d.height.toLocaleString('en-US') : "Pending";
+            const timeStr = isConfirmed ? formatLocalDate(d.ts) : `⏳ Est. 1st conf: ${estimateFirstConfWait(d.fee_rate)}`;
+            const blkStr = isConfirmed ? "#" + d.height.toLocaleString('en-US') : "⏳ Unconfirmed (Mempool)";
             const inputs = d.inputs || [];
             const outputs = d.outputs || [];
 
@@ -393,7 +437,7 @@ async function lookupNahWallet() {
                     const badgeBg = isSelf ? "#2a9d8f" : "#e76f51";
                     return `<div style="padding:6px; margin-bottom:4px; background:#ffffff; border:1.5px solid #0b4594; border-radius:6px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
-                            <span style="background:${badgeBg}; color:#fff; padding:1px 5px; border-radius:4px; font-size:8px; font-weight:900;">💎 ${badge}</span>
+                            <span style="background:${badgeBg}; color:#fff; padding:1px 5px; border-radius:4px; font-size:8px; font-weight:900;">💎 ${badge}${!isConfirmed ? ' (UNCONFIRMED)' : ''}</span>
                             <span style="color:#0b4594; font-size:11px; font-weight:900; white-space:nowrap;">${r.nah.toLocaleString('en-US')} ${fmtUnit(r.nah, 'nah', 'nahs')}</span>
                         </div>
                         <div style="display:flex; justify-content:space-between; font-size:9px; color:#555;">
@@ -468,8 +512,8 @@ async function lookupNahWallet() {
                 <div style="background:#111; color:#fff; padding:10px; border-radius:8px; margin-bottom:10px; font-size:10px;">
                     <div style="color:#00ccff; font-weight:900; margin-bottom:6px; word-break:break-all;">TXID: ${d.txid}</div>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; border-top:1px solid #333; padding-top:6px;">
-                        <div style="white-space:nowrap;"><span style="color:#888;">Block:</span> <span style="color:#fceea7;">${blkStr}</span></div>
-                        <div style="text-align:right; white-space:nowrap;"><span style="color:#888;">Time:</span> <span style="color:#fceea7;">${timeStr}</span></div>
+                        <div style="white-space:nowrap;"><span style="color:#888;">Block:</span> <span style="color:${isConfirmed ? '#fceea7' : '#f4a261'}; font-weight:900;">${blkStr}</span></div>
+                        <div style="text-align:right; white-space:nowrap;"><span style="color:#888;">${isConfirmed ? 'Time:' : ''}</span> <span style="color:#fceea7; font-weight:900;">${timeStr}</span></div>
                         <div style="white-space:nowrap;"><span style="color:#888;">Size / vSize:</span> <span style="color:#fff;">${d.size} B / ${d.vsize} vB</span></div>
                         <div style="text-align:right; white-space:nowrap;"><span style="color:#888;">Fee Rate:</span> <span style="color:#00ccff;">${cleanFeeRate} sat/vB</span></div>
                     </div>
@@ -544,8 +588,23 @@ async function lookupNahWallet() {
         const satUnit = fmtUnit(satBal, "sat", "sats");
 
         const nahHistory = nahData.history || [];
+        const unconfNahTxs = nahHistory.filter(t => t.confirmed === false || !t.height || t.height === 0);
+        let pendingNahBanner = "";
+        if (unconfNahTxs.length > 0) {
+            let netPendingNah = 0;
+            unconfNahTxs.forEach(t => {
+                if (t.type === "RECEIVED") netPendingNah += (t.amount || 0);
+                else if (t.type === "SENT") netPendingNah -= (t.amount || 0);
+            });
+            const signP = netPendingNah >= 0 ? "+" : "-";
+            const waitP = estimateFirstConfWait(unconfNahTxs[0].fee_rate);
+            pendingNahBanner = `<div style="margin-top:4px; padding:4px 8px; background:#2b1d0e; border:1px dashed #f4a261; border-radius:6px; color:#fceea7; font-size:9px; font-weight:900;">
+                ⏳ MEMPOOL PENDING (${unconfNahTxs.length}): ${ netPendingNah !== 0 ? `${signP}${Math.abs(netPendingNah).toLocaleString('en-US')} ${fmtUnit(Math.abs(netPendingNah), 'nah', 'nahs')} • ` : 'SPLIT / CONSOLIDATE • ' }1st conf: ${waitP}
+            </div>`;
+        }
 
         const nahHistoryHtml = nahHistory.map(tx => {
+            const isConfirmed = !(tx.confirmed === false || !tx.height || tx.height === 0);
             const isSent = tx.type === "SENT";
             const badgeColor = isSent ? "#e76f51" : "#2a9d8f";
             const sign = isSent ? "-" : "+";
@@ -555,17 +614,32 @@ async function lookupNahWallet() {
             const peerHtml = canClickPeer
                 ? `<a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.counterparty}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${shortAddress(tx.counterparty)}</a>`
                 : `<span style="color:#555;">${tx.counterparty}</span>`;
-            const feeStr = tx.fee_sats ? `tx fee: ${tx.fee_sats.toLocaleString('en-US')} sats` : "";
-            const timeStr = tx.ts ? formatLocalDate(tx.ts) : `Block #${tx.height}`;
 
-            return `<div style="padding:8px; margin-bottom:6px; background:#fdf6d8; border:2px solid #0b4594; border-radius:6px; font-size:10px;">
+            const cleanRate = tx.fee_rate ? Number(tx.fee_rate).toFixed(2).replace(/\.00$/, "") : "";
+            const feeStr = tx.fee_sats
+                ? `tx fee: ${tx.fee_sats.toLocaleString('en-US')} sats${cleanRate ? ` (${cleanRate} sat/vB)` : ''}`
+                : "";
+
+            const timeOrWaitHtml = isConfirmed
+                ? `<span style="white-space:nowrap; color:#555;">${tx.ts ? formatLocalDate(tx.ts) : `Block #${tx.height}`}</span>`
+                : `<span style="white-space:nowrap; color:#e76f51; font-weight:900;">⏳ 1st conf: ${estimateFirstConfWait(tx.fee_rate)}</span>`;
+
+            const cardStyle = isConfirmed
+                ? "padding:8px; margin-bottom:6px; background:#fdf6d8; border:2px solid #0b4594; border-radius:6px; font-size:10px;"
+                : "padding:8px; margin-bottom:6px; background:#fff3e0; border:2px dashed #e76f51; border-radius:6px; font-size:10px;";
+
+            const statusBadgeHtml = isConfirmed
+                ? `<span style="background:${badgeColor}; color:#fff; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">💎 ${tx.type}</span>`
+                : `<span style="background:#f4a261; color:#111; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">⏳ UNCONFIRMED • 💎 ${tx.type}</span>`;
+
+            return `<div style="${cardStyle}">
                 <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:4px;">
-                    <span style="background:${badgeColor}; color:#fff; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">💎 ${tx.type}</span>
+                    ${statusBadgeHtml}
                     <span style="color:${badgeColor}; font-size:12px; font-weight:900; white-space:nowrap;">${sign}${tx.amount.toLocaleString('en-US')} ${txUnit}</span>
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; color:#0b4594; font-size:10px; margin-bottom:3px;">
                     <span style="white-space:nowrap;">${peerLabel}: ${peerHtml}</span>
-                    <span style="white-space:nowrap; color:#555;">${timeStr}</span>
+                    ${timeOrWaitHtml}
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; color:#666; font-size:9px; border-top:1px dashed #e9c46a; padding-top:3px;">
                     <span style="white-space:nowrap;">Tx: <a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${tx.txid}'; lookupNahWallet();" style="color:#0b4594; text-decoration:underline;">${tx.txid.slice(0,8)}...${tx.txid.slice(-6)}</a></span>
@@ -583,6 +657,7 @@ async function lookupNahWallet() {
             <div style="background:#111111; border:2px solid #0b4594; border-radius:8px; padding:10px; margin-bottom:8px; text-align:center;">
                 <div style="color:#00ccff; font-size:17px; font-weight:900; text-shadow:0 0 8px rgba(0,204,255,0.4);">💎 ${nahBal.toLocaleString('en-US')} ${nahUnit}</div>
                 <div style="color:#2a9d8f; font-size:10px; margin-top:3px;">SHARE OF MAX SUPPLY: ${pctTotal}</div>
+                ${pendingNahBanner}
             </div>
             <div style="color:#0b4594; font-size:12px; margin-bottom:12px; text-align:center;">sat balance: <span style="color:#f4a261; font-weight:900;">${satBal.toLocaleString('en-US')} ${satUnit}</span></div>
 
