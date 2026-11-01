@@ -11,7 +11,7 @@
                 <div class="slogan-1">digital diamond etched on digital gold</div>
             </div>
         </div>
-    `
+    `;
 
     const stackerBoxHtml = `
         <div class="info-text" style="font-size: 11px; text-align: center; margin-bottom: 20px; color: #0b4594; border: 2px dashed #0b4594; background: #e8f4f8; padding: 12px 6px; border-radius: 8px; font-weight: 700; width: 100%; box-sizing: border-box;">
