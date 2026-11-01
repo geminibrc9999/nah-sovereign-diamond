@@ -121,7 +121,7 @@
         .mp-card.mined { background: #111111; border: 1.5px solid #0b4594; color: #00ccff; }
         .footer { font-size: 12px; text-align: center; font-weight: 900; color: #0b4594; padding-bottom: 40px; text-transform: uppercase; }
 
-        /* KHUNG BỌC UNDER CONSTRUCTION */
+        /* KHUNG BỌC UNDER CONSTRUCTION ĐẶT DƯỚI CÙNG */
         .construction-zone {
             width: 100%; box-sizing: border-box; margin: 18px 0; padding: 12px 10px 6px 10px;
             border: 2.5px dashed #e76f51; border-radius: 14px;
@@ -209,13 +209,13 @@
                 <!-- MARKET CAP, EXPLORER, TIMECHAIN & OMNI CONVERTER (NẠP TỪ nah-explorer.js) -->
                 <div id="nah-bottom-slot" style="width: 100%;"></div>
 
-                <!-- ĐƯỜNG KẺ NGANG & KHUNG BỌC UNDER CONSTRUCTION (NẰM NGAY TRÊN DÒNG NAH WAS CREATED BY BEMP...) -->
+                <!-- KHUNG UNDER CONSTRUCTION ĐẶT DƯỚI CÙNG (NGAY TRÊN DÒNG BEMP RESEARCH) -->
                 <div class="construction-zone">
-                    <div class="construction-banner">🚧 UNDER CONSTRUCTION — SOVEREIGN DEFI HUB PREVIEW 🚧</div>
+                    <div class="construction-banner">🚧 UNDER CONSTRUCTION 🚧</div>
                     <div class="converter-section" style="background: #fdf6d8; margin-bottom: 6px; border: 3px solid #0b4594;">
                         <div class="sub-title" style="margin-bottom: 10px;">🔐 SOVEREIGN WALLET &amp; NAH UTXO VAULT</div>
 
-                        <!-- 3 NÚT KẾT NỐI VÍ: OKX (TRÁI) | UNISAT RECOMMENDED (CHÍNH GIỮA) | XVERSE (PHẢI) -->
+                        <!-- THỨ TỰ NÚT: OKX (TRÁI) | UNISAT RECOMMENDED (CHÍNH GIỮA) | XVERSE (PHẢI) -->
                         <div id="wallet-connect-btns" style="display: flex; gap: 6px; margin-bottom: 10px; align-items: stretch;">
                             <a id="btn-wallet-okx" href="okx://wallet/dapp/url?dappUrl=https%3A%2F%2Fnahkahmotors.com" onclick="return handleWalletTap(event, 'okx')" class="wallet-btn-link" style="color: #00ccff;">
                                 <span>🟢 OKX WALLET</span>
@@ -239,10 +239,10 @@
 
                         <div id="wallet-status-msg" style="display: none; margin-top: 8px; padding: 8px; background: #fff3e0; border: 1.5px dashed #e76f51; border-radius: 6px; font-size: 10px; font-weight: 700; color: #0b4594; text-align: center;"></div>
 
-                        <!-- BẢNG HIỂN THỊ KHO UTXO KHI ĐÃ KẾT NỐI HOẶC LOAD VAULT -->
+                        <!-- BẢNG HIỂN THỊ KHO UTXO -->
                         <div id="wallet-vault-panel" style="display: none; margin-top: 10px; background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; padding: 10px;">
                             <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px dotted #e9c46a; padding-bottom: 6px; margin-bottom: 8px;">
-                                <div>
+                               <div>
                                     <span id="vault-provider-badge" style="background: #0b4594; color: #fceea7; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 900; text-transform: uppercase;">CONNECTED</span>
                                     <span id="vault-addr-display" style="font-size: 11px; font-weight: 900; color: #0b4594; margin-left: 4px;">...</span>
                                 </div>
@@ -319,9 +319,9 @@
 
     <!-- NẠP CÁC MODULE TĨNH -->
     <script src="brc-static.js"></script>
-    <script src="nah-explorer.js?v=4"></script>
+    <script src="nah-explorer.js?v=5"></script>
 
-    <!-- LOGIC BÁO GIÁ & CỔNG KẾT NỐI VÍ TRỰC TIẾP -->
+    <!-- LOGIC BÁO GIÁ & KẾT NỐI VÍ TRỰC TIẾP -->
     <script>
         window.CURRENT_NAH_SATS = 0.0005; 
         window.CIRCULATING_SUPPLY = 85300000000000; 
@@ -365,7 +365,6 @@
             box.innerHTML = htmlMsg;
         }
 
-        // KẾT NỐI TRỰC TIẾP HOẶC KÍCH HOẠT NATIVE DEEP LINK TRÊN IPHONE SAFARI
         function handleWalletTap(evt, type) {
             const downloadMap = {
                 unisat: { name: "UniSat Wallet", url: "https://unisat.io/download" },
@@ -373,6 +372,7 @@
                 xverse: { name: "Xverse Wallet", url: "https://www.xverse.app/download" }
             };
 
+            // NẾU MỞ BÊN TRONG IN-APP BROWSER CỦA VÍ (GIỐNG DOTSWAP)
             if (type === "unisat" && window.unisat) {
                 evt.preventDefault();
                 window.unisat.requestAccounts().then(async accs => {
@@ -399,7 +399,7 @@
                 return false;
             }
 
-            // TRÊN TRÌNH DUYỆT SAFARI IPHONE: Cho phép thẻ <a href="unisat://..."> chạy trực tiếp để iOS bật App Ví!
+            // NẾU MỞ BÊN NGOÀI SAFARI: BẬT DEEP LINK, NẾU CHƯA CÀI APP SẼ CHUYỂN SANG TRANG DOWNLOAD
             const info = downloadMap[type];
             showWalletNotice(`
                 📲 Opening <strong>${info.name}</strong> App...<br>
