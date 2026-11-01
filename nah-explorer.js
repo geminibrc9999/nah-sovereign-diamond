@@ -1,5 +1,6 @@
 // ============================================================================
-// NAH-EXPLORER.JS: STATIC MODULE FOR HEADER, MARKET CAP, EXPLORER, TIMECHAIN & CONVERTER
+// NAH-EXPLORER.JS: IMMUTABLE INFRASTRUCTURE MODULE
+// (Header, Stacker News, Market Cap, Explorer, Timechain, Omni Converter, Footer)
 // ============================================================================
 
 (function () {
@@ -12,28 +13,7 @@
         </div>
     `;
 
-    const topWidgetsHtml = `
-        <!-- 3 Ô ĐEN TRÊN 1 HÀNG NGANG: vnd/nah | sat/nah | usd/btc -->
-        <div class="live-dash-container">
-            <div class="live-box">
-                <div class="live-box-label">vnd / nah</div>
-                <div id="live-vnd-nah" class="live-box-value" style="color: #00ccff; text-shadow: 0 0 8px rgba(0, 204, 255, 0.5);">...</div>
-            </div>
-            <div class="live-box">
-                <div class="live-box-label">sat / nah</div>
-                <div id="sats-val" class="live-box-value" style="color: #00ccff; text-shadow: 0 0 8px rgba(0, 204, 255, 0.5);">... s/💎</div>
-                <div class="live-box-subtext">(BASED ON <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #2a9d8f; text-decoration: underline;">SATFLOW</a>)</div>
-            </div>
-            <div class="live-box">
-                <div class="live-box-label">usd / btc</div>
-                <div id="live-usd-btc" class="live-box-value" style="color: #ff9900; text-shadow: 0 0 8px rgba(255, 153, 0, 0.5);">...</div>
-            </div>
-        </div>
-
-        <div style="font-size: 13px; font-weight: 900; text-align: center; color: #0b4594; margin-bottom: 15px; width: 100%;">
-            💎 Alternative exchange to acquire nah: <a href="https://unisat.io/market/v2/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #eab308; text-decoration: underline;">UniSat</a>.
-        </div>
-
+    const stackerBoxHtml = `
         <div class="info-text" style="font-size: 11px; text-align: center; margin-bottom: 20px; color: #0b4594; border: 2px dashed #0b4594; background: #e8f4f8; padding: 12px 6px; border-radius: 8px; font-weight: 700; width: 100%; box-sizing: border-box;">
             <strong style="white-space: nowrap;">nah-core Pruned Indexer (&lt;10MB) OPEN SOURCED:</strong> <br>
             <a href="https://stacker.news/items/1600596" target="_blank" style="color: #e76f51; text-decoration: underline; font-weight: 900; display: inline-block; margin-top: 6px; font-size: 12px;">https://stacker.news/items/1600596</a>
@@ -127,8 +107,8 @@
     const hSlot = document.getElementById("nah-header-slot");
     if (hSlot) hSlot.innerHTML = headerHtml;
 
-    const topSlot = document.getElementById("nah-top-slot");
-    if (topSlot) topSlot.innerHTML = topWidgetsHtml;
+    const stSlot = document.getElementById("nah-stacker-slot");
+    if (stSlot) stSlot.innerHTML = stackerBoxHtml;
 
     const botSlot = document.getElementById("nah-bottom-slot");
     if (botSlot) botSlot.innerHTML = bottomWidgetsHtml;
@@ -137,16 +117,9 @@
     if (fSlot) fSlot.innerHTML = footerHtml;
 })();
 
-const CURRENT_NAH_SATS = 0.0005; 
-const CIRCULATING_SUPPLY = 85300000000000; 
-
-const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
-const FOREX_API = "https://open.er-api.com/v6/latest/USD";
 const NAH_NODE_API = "https://api.nahkahmotors.com/api/v1";
 const MEMPOOL_API = "https://mempool.space/api";
 
-let globalLiveVndRate = 25500; 
-let globalLiveBtcPrice = 80000;
 let currentLookupAddr = "";
 let lastSeenSatTxid = "";
 let loadedSatRawTxs = [];
@@ -180,29 +153,6 @@ function formatLocalDate(ts) {
 function fmtFeeRate(v) {
     if (!v || v <= 0) return "0.1";
     return v < 1 ? v.toFixed(1) : Math.round(v).toString();
-}
-
-async function engageOracle() {
-    try {
-        const [btcRes, forexRes] = await Promise.all([ fetch(BTC_LIVE_API), fetch(FOREX_API) ]);
-        const btcData = await btcRes.json(), forexData = await forexRes.json();
-        globalLiveBtcPrice = parseFloat(btcData.USD);
-        globalLiveVndRate = parseFloat(forexData.rates.VND);
-        
-        const usdVal = (CURRENT_NAH_SATS / 100000000) * globalLiveBtcPrice;
-        const vndVal = usdVal * globalLiveVndRate; 
-        const mcapBtc = (CIRCULATING_SUPPLY * CURRENT_NAH_SATS) / 100000000;
-        
-        document.getElementById("mcap-btc").innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " btc";
-        document.getElementById("mcap-usd").innerText = "$" + (CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
-        
-        document.getElementById("sats-val").innerText = CURRENT_NAH_SATS + " s/💎";
-        document.getElementById("live-vnd-nah").innerText = vndVal.toFixed(4) + " ₫";
-        document.getElementById("live-usd-btc").innerText = "$" + globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-        document.getElementById("last-update").innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
-    } catch (error) {
-        console.error("Oracle Connection Failed: ", error);
-    }
 }
 
 async function loadBlockTicker() {
@@ -407,6 +357,8 @@ async function lookupNahWallet() {
     resBox.style.display = "block";
     resBox.innerHTML = "LOADING DETAILS...";
 
+    const btcUsd = window.globalLiveBtcPrice || 80000;
+
     if (/^[0-9a-fA-F]{64}$/.test(query)) {
         try {
             const txRes = await fetch(`${NAH_NODE_API}/tx/${query}`);
@@ -416,7 +368,7 @@ async function lookupNahWallet() {
                 return;
             }
 
-            const feeUsd = ((d.fee / 100000000) * globalLiveBtcPrice).toFixed(2);
+            const feeUsd = ((d.fee / 100000000) * btcUsd).toFixed(2);
             const cleanFeeRate = Number(d.fee_rate || 0).toFixed(2).replace(/\.00$/, "");
             const timeStr = d.ts ? formatLocalDate(d.ts) : "Unconfirmed (Mempool)";
             const blkStr = d.height ? "#" + d.height.toLocaleString('en-US') : "Pending";
@@ -669,10 +621,10 @@ function setupOmniConverter() {
             const val = parseFloat(e.target.value);
             if(isNaN(val)) return;
 
-            const btc_usd = globalLiveBtcPrice;
-            const usd_vnd = globalLiveVndRate;
+            const btc_usd = window.globalLiveBtcPrice || 80000;
+            const usd_vnd = window.globalLiveVndRate || 25500;
             const btc_vnd = btc_usd * usd_vnd;
-            const sat_nah = CURRENT_NAH_SATS; 
+            const sat_nah = window.CURRENT_NAH_SATS || 0.0005; 
 
             let btc_val = 0;
             if(currency === 'vnd') btc_val = val / btc_vnd;
@@ -696,11 +648,10 @@ function setupOmniConverter() {
     });
 }
 
-async function bootSystem() {
-    await Promise.all([ engageOracle(), syncNahCoreNode(), loadBlockTicker() ]);
-    setInterval(engageOracle, 60000); 
+async function bootExplorerInfrastructure() {
+    setupOmniConverter();
+    await Promise.all([ syncNahCoreNode(), loadBlockTicker() ]);
     setInterval(syncNahCoreNode, 60000);
     setInterval(loadBlockTicker, 30000);
-    setupOmniConverter();
 }
-bootSystem();
+bootExplorerInfrastructure();
