@@ -1,6 +1,5 @@
 // ============================================================================
-// NAH-EXPLORER.JS: IMMUTABLE INFRASTRUCTURE MODULE (v2.1 - CACHE BUSTED)
-// (Header, Stacker News, Market Cap, Explorer with Live Mempool & Est. 1st Conf, Timechain, Omni Converter, Footer)
+// NAH-EXPLORER.JS: IMMUTABLE INFRASTRUCTURE MODULE (v4)
 // ============================================================================
 
 (function () {
@@ -63,7 +62,7 @@
             </div>
         </div>
 
-        <!-- REAL-TIME OMNI CONVERTER (ĐẶT DƯỚI CÙNG, NGAY DƯỚI BITCOIN TIMECHAIN) -->
+        <!-- REAL-TIME OMNI CONVERTER -->
         <div class="converter-section" style="margin-bottom: 18px;">
             <div class="sub-title">REAL-TIME OMNI CONVERTER</div>
             <div class="converter-row">
@@ -87,11 +86,12 @@
                 <input type="number" step="any" id="conv-nah" class="converter-input" style="color: #00ccff; text-shadow: 0 0 2px rgba(0, 204, 255, 0.4);" placeholder="0">
             </div>
         </div>
+    `;
 
+    const creditsHtml = `
         <div class="info-text" style="font-size: 12px; font-weight: 700; text-align: center; margin-top: 10px;">
             * Nah Sovereign Diamond was created by Bemp Research Corporation. For more info visit our <a href="https://facebook.com/bempresearch" target="_blank" class="link-blue">Facebook</a> or <a href="https://www.linkedin.com/company/bemp-research-corporation" target="_blank" class="link-blue">LinkedIn</a>.
         </div>
-
         <div class="status" id="last-update" style="color: #888; font-size: 11px; text-align: right; margin-top: 15px; font-weight: bold;">CONNECTING...</div>
     `;
 
@@ -112,6 +112,9 @@
 
     const botSlot = document.getElementById("nah-bottom-slot");
     if (botSlot) botSlot.innerHTML = bottomWidgetsHtml;
+
+    const credSlot = document.getElementById("nah-credits-slot");
+    if (credSlot) credSlot.innerHTML = creditsHtml;
 
     const fSlot = document.getElementById("nah-footer-slot");
     if (fSlot) fSlot.innerHTML = footerHtml;
@@ -338,7 +341,6 @@ function renderSatTxsList(txs, addr) {
         const feeRate = tx.fee ? (tx.fee / vsize) : 0;
         const cleanRate = feeRate > 0 ? feeRate.toFixed(2).replace(/\.00$/, "") : "";
 
-        // 1. NHÃN UNCONFIRMED CHO SAT: ⏳ UNCONFIRMED / PENDING
         const statusBadge = isConfirmed
             ? `<span style="color:${badgeColor}; font-weight:900;">${isSent ? 'SENT' : 'RECEIVED'}</span>`
             : `<span style="background:#f4a261; color:#111; padding:1px 5px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">⏳ UNCONFIRMED / PENDING</span>`;
@@ -431,7 +433,6 @@ async function lookupNahWallet() {
                 const externalReceivers = nahReceivers.filter(r => r.address !== fromAddr);
                 const summaryTargets = externalReceivers.length > 0 ? externalReceivers : nahReceivers;
 
-                // 4. TRONG NET TRANSACTION SUMMARY CỦA UNCONFIRMED TX: CHỈ HIỆN 💎 UNCONFIRMED
                 nahSummaryHtml = summaryTargets.map(r => {
                     const isSelf = r.address === fromAddr;
                     const badge = !isConfirmed ? "UNCONFIRMED" : (isSelf ? "SPLIT / CONSOLIDATE" : "SENT");
@@ -509,7 +510,6 @@ async function lookupNahWallet() {
                 ? `<div style="margin-bottom:8px;"><a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${currentLookupAddr}'; lookupNahWallet();" style="color:#0b4594; font-size:10px; font-weight:900; text-decoration:underline;">← BACK TO ADDRESS (${shortAddress(currentLookupAddr)})</a></div>`
                 : "";
 
-            // 3. KHUNG ĐEN TXID DETAILS CHỐNG TRÀN CHỮ 100% TRÊN DI ĐỘNG
             resBox.innerHTML = `
                 ${backBtn}
                 <div style="background:#111; color:#fff; padding:10px; border-radius:8px; margin-bottom:10px; font-size:10px; box-sizing:border-box; width:100%; overflow:hidden;">
@@ -598,7 +598,6 @@ async function lookupNahWallet() {
         const unconfNahTxs = nahHistory.filter(t => t.confirmed === false || !t.height || t.height === 0);
         let pendingNahBanner = "";
 
-        // 2. THANH TRẠNG THÁI TRONG Ô ĐEN TRÊN CÙNG: ⏳ PENDING (số tx): +tổng nahs
         if (unconfNahTxs.length > 0) {
             let netPendingNah = 0;
             unconfNahTxs.forEach(t => {
@@ -639,7 +638,6 @@ async function lookupNahWallet() {
                 ? "padding:8px; margin-bottom:6px; background:#fdf6d8; border:2px solid #0b4594; border-radius:6px; font-size:10px;"
                 : "padding:8px; margin-bottom:6px; background:#fff3e0; border:2px dashed #e76f51; border-radius:6px; font-size:10px;";
 
-            // 1. NHÃN UNCONFIRMED CHO NAH: ⏳ UNCONFIRMED / 💎 PENDING
             const statusBadgeHtml = isConfirmed
                 ? `<span style="background:${badgeColor}; color:#fff; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">💎 ${tx.type}</span>`
                 : `<span style="background:#f4a261; color:#111; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">⏳ UNCONFIRMED / 💎 PENDING</span>`;
