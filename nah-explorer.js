@@ -1,5 +1,5 @@
 // ============================================================================
-// NAH-EXPLORER.JS: IMMUTABLE INFRASTRUCTURE MODULE
+// NAH-EXPLORER.JS: IMMUTABLE INFRASTRUCTURE MODULE (v2.1 - CACHE BUSTED)
 // (Header, Stacker News, Market Cap, Explorer with Live Mempool & Est. 1st Conf, Timechain, Omni Converter, Footer)
 // ============================================================================
 
@@ -338,6 +338,7 @@ function renderSatTxsList(txs, addr) {
         const feeRate = tx.fee ? (tx.fee / vsize) : 0;
         const cleanRate = feeRate > 0 ? feeRate.toFixed(2).replace(/\.00$/, "") : "";
 
+        // 1. NHÃN UNCONFIRMED CHO SAT: ⏳ UNCONFIRMED / PENDING
         const statusBadge = isConfirmed
             ? `<span style="color:${badgeColor}; font-weight:900;">${isSent ? 'SENT' : 'RECEIVED'}</span>`
             : `<span style="background:#f4a261; color:#111; padding:1px 5px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">⏳ UNCONFIRMED / PENDING</span>`;
@@ -430,14 +431,15 @@ async function lookupNahWallet() {
                 const externalReceivers = nahReceivers.filter(r => r.address !== fromAddr);
                 const summaryTargets = externalReceivers.length > 0 ? externalReceivers : nahReceivers;
 
+                // 4. TRONG NET TRANSACTION SUMMARY CỦA UNCONFIRMED TX: CHỈ HIỆN 💎 UNCONFIRMED
                 nahSummaryHtml = summaryTargets.map(r => {
                     const isSelf = r.address === fromAddr;
-                    const badge = !isConfirmed ? "⏳ UNCONFIRMED / 💎 PENDING" : (isSelf ? "💎 SPLIT / CONSOLIDATE" : "💎 SENT");
+                    const badge = !isConfirmed ? "UNCONFIRMED" : (isSelf ? "SPLIT / CONSOLIDATE" : "SENT");
                     const badgeBg = !isConfirmed ? "#f4a261" : (isSelf ? "#2a9d8f" : "#e76f51");
                     const badgeCol = !isConfirmed ? "#111" : "#fff";
                     return `<div style="padding:6px; margin-bottom:4px; background:#ffffff; border:1.5px solid #0b4594; border-radius:6px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
-                            <span style="background:${badgeBg}; color:${badgeCol}; padding:1px 5px; border-radius:4px; font-size:8px; font-weight:900;">${badge}</span>
+                            <span style="background:${badgeBg}; color:${badgeCol}; padding:1px 5px; border-radius:4px; font-size:8px; font-weight:900;">💎 ${badge}</span>
                             <span style="color:#0b4594; font-size:11px; font-weight:900; white-space:nowrap;">${r.nah.toLocaleString('en-US')} ${fmtUnit(r.nah, 'nah', 'nahs')}</span>
                         </div>
                         <div style="display:flex; justify-content:space-between; font-size:9px; color:#555;">
@@ -507,6 +509,7 @@ async function lookupNahWallet() {
                 ? `<div style="margin-bottom:8px;"><a href="javascript:void(0)" onclick="document.getElementById('wallet-search-input').value='${currentLookupAddr}'; lookupNahWallet();" style="color:#0b4594; font-size:10px; font-weight:900; text-decoration:underline;">← BACK TO ADDRESS (${shortAddress(currentLookupAddr)})</a></div>`
                 : "";
 
+            // 3. KHUNG ĐEN TXID DETAILS CHỐNG TRÀN CHỮ 100% TRÊN DI ĐỘNG
             resBox.innerHTML = `
                 ${backBtn}
                 <div style="background:#111; color:#fff; padding:10px; border-radius:8px; margin-bottom:10px; font-size:10px; box-sizing:border-box; width:100%; overflow:hidden;">
@@ -594,6 +597,8 @@ async function lookupNahWallet() {
         const nahHistory = nahData.history || [];
         const unconfNahTxs = nahHistory.filter(t => t.confirmed === false || !t.height || t.height === 0);
         let pendingNahBanner = "";
+
+        // 2. THANH TRẠNG THÁI TRONG Ô ĐEN TRÊN CÙNG: ⏳ PENDING (số tx): +tổng nahs
         if (unconfNahTxs.length > 0) {
             let netPendingNah = 0;
             unconfNahTxs.forEach(t => {
@@ -634,6 +639,7 @@ async function lookupNahWallet() {
                 ? "padding:8px; margin-bottom:6px; background:#fdf6d8; border:2px solid #0b4594; border-radius:6px; font-size:10px;"
                 : "padding:8px; margin-bottom:6px; background:#fff3e0; border:2px dashed #e76f51; border-radius:6px; font-size:10px;";
 
+            // 1. NHÃN UNCONFIRMED CHO NAH: ⏳ UNCONFIRMED / 💎 PENDING
             const statusBadgeHtml = isConfirmed
                 ? `<span style="background:${badgeColor}; color:#fff; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">💎 ${tx.type}</span>`
                 : `<span style="background:#f4a261; color:#111; padding:2px 6px; border-radius:4px; font-size:9px; font-weight:900; white-space:nowrap;">⏳ UNCONFIRMED / 💎 PENDING</span>`;
