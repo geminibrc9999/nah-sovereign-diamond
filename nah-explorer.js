@@ -13,7 +13,7 @@
         </div>
     `;
 
-    co stackerBoxHtml = `
+    const stackerBoxHtml = `
         <div class="info-text" style="font-size: 11px; text-align: center; margin-bottom: 20px; color: #0b4594; border: 2px dashed #0b4594; background: #e8f4f8; padding: 12px 6px; border-radius: 8px; font-weight: 700; width: 100%; box-sizing: border-box;">
             <strong style="white-space: nowrap;">nah-core Pruned Indexer (&lt;10MB) OPEN SOURCED:</strong> <br>
             <a href="https://stacker.news/items/1600596" target="_blank" rel="noopener noreferrer" style="color: #e76f51; text-decoration: underline; font-weight: 900; display: inline-block; margin-top: 6px; font-size: 12px;">https://stacker.news/items/1600596</a>
