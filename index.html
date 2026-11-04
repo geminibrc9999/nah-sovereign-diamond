@@ -8,156 +8,9 @@
     <meta name="author" content="Bemp Research Corporation">
     
     <title>NAH SOVEREIGN DIAMOND 💎 & BEMP LI-S ARCHITECTURE</title>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Quicksand:wght@500;700;900&display=swap');
-
-        body {
-            background-color: #fceea7; color: #0b4594; font-family: 'Quicksand', sans-serif;
-            font-size: 14px; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; position: relative;
-            background-image: 
-                linear-gradient(45deg, rgba(11, 69, 148, 0.05) 25%, transparent 25%, transparent 75%, rgba(11, 69, 148, 0.05) 75%, rgba(11, 69, 148, 0.05)), 
-                linear-gradient(45deg, rgba(11, 69, 148, 0.05) 25%, transparent 25%, transparent 75%, rgba(11, 69, 148, 0.05) 75%, rgba(11, 69, 148, 0.05));
-            background-size: 20px 20px; background-position: 0 0, 10px 10px;
-        }
-
-        .mainframe { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 15px 10px; box-sizing: border-box; }
-        .terminal {
-            width: 100%; max-width: 600px; background: #ffffff; border: 3px solid #0b4594; border-radius: 15px; 
-            padding: 25px 30px; box-shadow: 6px 6px 0px #f4a261; position: relative; z-index: 2; margin: 15px 0; box-sizing: border-box; overflow: hidden;
-        }
-
-        .tab-menu { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; z-index: 10; }
-        .tab-row { display: flex; width: 100%; gap: 8px; }
-        .tab-btn {
-            background: #e9c46a; color: #0b4594; border: 2px solid #0b4594; border-radius: 10px; padding: 12px 6px; 
-            font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; text-transform: uppercase; 
-            transition: all 0.2s; flex: 1; text-align: center; display: flex; align-items: center; justify-content: center; line-height: 1.2; box-shadow: 3px 3px 0px #0b4594; 
-        }
-        .tab-btn:hover { background: #f4a261; transform: translate(1px, 1px); box-shadow: 2px 2px 0px #0b4594; }
-        .tab-btn.active { background: #0b4594; color: #fceea7; border-color: #0b4594; transform: translate(3px, 3px); box-shadow: 0px 0px 0px #0b4594; }
-        
-        .promo-btn-container { width: 100%; max-width: 600px; margin-top: 2px; }
-        .promo-btn { background: #e76f51; color: #ffffff; font-size: 12px; box-shadow: 3px 3px 0px #0b4594; letter-spacing: 0.5px; width: 100%; }
-        .promo-btn:hover { background: #d05b3f; }
-        .promo-btn.active { background: #0b4594; color: #e76f51; }
-
-        .tab-content { width: 100%; display: none; flex-direction: column; align-items: center; }
-        .title-container { text-align: center; }
-        .title { font-family: 'Orbitron', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #0b4594; text-shadow: 2px 2px 0px #f4a261; margin-bottom: 8px; line-height: 1.2; }
-        .slogan-1 { font-family: 'Quicksand', sans-serif; font-size: 12px; font-weight: 900; color: #e76f51; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        
-        .diamond { display: inline-block; animation: sparkle 1s infinite alternate; }
-        @keyframes sparkle { 
-            0% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 5px rgba(0, 204, 255, 0.5)); } 
-            100% { transform: scale(1.3); filter: brightness(1.5) drop-shadow(0 0 15px rgba(0, 204, 255, 0.9)); } 
-        }
-
-        .live-dash-container { display: flex; flex-wrap: nowrap; gap: 8px; margin-bottom: 18px; width: 100%; }
-        .live-box { flex: 1 1 33.33%; min-width: 0; background: #111111; border: 2px solid #0b4594; padding: 10px 6px; border-radius: 10px; box-shadow: 3px 3px 0px #fceea7; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; text-align: center; }
-        .live-box-label { font-size: 10px; color: #888; font-weight: 900; margin-bottom: 6px; letter-spacing: 0.5px; text-transform: none; }
-        .live-box-value { font-size: 15px; font-weight: 900; white-space: nowrap; }
-        .live-box-subtext { font-size: 8px; color: #fff; margin-top: 4px; font-weight: bold; text-transform: uppercase; white-space: nowrap; }
-
-        .converter-section { margin-bottom: 25px; padding: 15px; background: #ffffff; border: 3px solid #0b4594; border-radius: 12px; box-shadow: 4px 4px 0px #e9c46a; width: 100%; box-sizing: border-box; }
-        .converter-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; background: #fdf6d8; border: 2px solid #e9c46a; padding: 8px 15px; border-radius: 8px; }
-        .converter-row:last-child { margin-bottom: 0; background: #e8f4f8; border-color: #00ccff; }
-        .converter-label { font-size: 13px; font-weight: 900; color: #0b4594; width: 45px; text-transform: none; }
-        .converter-input { flex: 1; background: transparent; border: none; font-family: 'Quicksand', sans-serif; font-size: 16px; font-weight: 900; text-align: right; outline: none; width: 100%; color: #e76f51; }
-        .converter-input::placeholder { color: #ccc; font-weight: 700; }
-        .converter-input::-webkit-outer-spin-button, .converter-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-        .converter-input[type=number] { -moz-appearance: textfield; }
-
-        .sub-section { margin-top: 10px; margin-bottom: 25px; padding: 15px; background: #fdf6d8; border: 2px solid #0b4594; border-radius: 10px; width: 100%; box-sizing: border-box; }
-        .sub-title { font-size: 14px; font-weight: 900; color: #e76f51; margin-bottom: 12px; text-transform: uppercase; text-align: center; }
-        .sub-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; padding: 8px 0; border-bottom: 2px dotted #e9c46a; }
-        .sub-row:last-child { border-bottom: none; padding-bottom: 0; }
-        .sub-row .label { color: #0b4594; }
-        .sub-row .value { color: #e76f51; text-align: right; }
-        .sub-row a { color: #0b4594; text-decoration: underline; }
-        
-        .report-block { background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; padding: 15px; margin-bottom: 20px; box-shadow: 3px 3px 0px #e9c46a; }
-        .report-heading { font-size: 16px; color: #0b4594; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; border-bottom: 2px solid #e9c46a; padding-bottom: 5px; }
-        .info-text { font-size: 14px; margin-bottom: 12px; line-height: 1.6; color: #333; text-align: justify; font-weight: 700; }
-        .info-text strong { color: #0b4594; font-weight: 900; }
-        .link-blue { color: #0b4594; text-decoration: underline; font-weight: bold; }
-        
-        .blueprint-card { background: #fff; border: 2px solid #0b4594; border-radius: 8px; overflow: hidden; margin-bottom: 15px; }
-        .bp-header { background: #e9c46a; font-size: 14px; font-weight: 900; color: #0b4594; padding: 10px 15px; text-transform: uppercase; border-bottom: 2px solid #0b4594; text-align: center; }
-        .bp-grid { display: grid; grid-template-columns: 120px 1fr; border-bottom: 2px dotted #e9c46a; }
-        .bp-grid:last-child { border-bottom: none; }
-        .bp-label { padding: 10px 15px; font-size: 12px; color: #0b4594; text-transform: uppercase; font-weight: 900; background: #fdf6d8; border-right: 2px solid #e9c46a; display: flex; align-items: center; }
-        .bp-value { padding: 10px 15px; font-size: 13px; color: #333; line-height: 1.5; font-weight: 700; }
-        
-        .math-box { background: #fff3e0; border: 2px dashed #f4a261; padding: 15px; margin: 15px 0; border-radius: 8px; color: #e76f51; font-size: 13px; font-weight: 900; line-height: 1.6; word-wrap: break-word; }
-        .math-box.green { background: #e8f5e9; border-color: #2a9d8f; color: #2a9d8f; }
-        .math-box.blue { background: #e3f2fd; border-color: #0b4594; color: #0b4594; }
-
-        .wp-title { font-family: 'Quicksand', sans-serif; font-size: 20px; font-weight: 900; color: #e76f51; margin-bottom: 15px; text-transform: uppercase; text-align: center; line-height: 1.4; }
-        .wp-subtitle { font-size: 13px; color: #0b4594; font-weight: 700; text-align: center; margin-bottom: 25px; }
-        .wp-h1 { font-size: 18px; color: #0b4594; font-weight: 900; margin-top: 30px; margin-bottom: 12px; text-transform: uppercase; border-bottom: 3px solid #e9c46a; padding-bottom: 5px; }
-        .wp-h2 { font-size: 15px; color: #f4a261; font-weight: 900; margin-top: 20px; margin-bottom: 10px; }
-        .wp-text { font-size: 14px; margin-bottom: 15px; line-height: 1.6; color: #333; text-align: justify; font-weight: 500; }
-        .wp-list { margin: 10px 0 15px 25px; padding: 0; color: #333; font-size: 14px; font-weight: 500; line-height: 1.6; }
-        .wp-list li { margin-bottom: 12px; text-align: justify; }
-        .wp-highlight { color: #e76f51; font-weight: 900; }
-
-        #tab-promo .terminal { max-width: 400px; background: #0b4594; color: #ffffff; border: 4px solid #fceea7; box-shadow: 8px 8px 0px #e76f51; padding: 30px 20px; }
-        #tab-promo .title { color: #fceea7; text-shadow: none; font-size: 26px; }
-        #tab-promo .promo-content { background: #ffffff; color: #0b4594; padding: 20px; border-radius: 12px; border: 3px dashed #e76f51; text-align: center; font-size: 15px; font-weight: 700; margin: 20px 0; line-height: 1.6; }
-        #tab-promo .promo-highlight { display: block; font-size: 22px; color: #e76f51; font-weight: 900; margin: 15px 0; text-transform: uppercase; line-height: 1.3; }
-        #tab-promo .contact-info { background: #e9c46a; color: #0b4594; padding: 15px; border-radius: 8px; font-size: 14px; font-weight: 900; text-align: left; border: 2px solid #ffffff; }
-        #tab-promo .contact-info p { margin: 5px 0; display: flex; align-items: center; }
-        #tab-promo .contact-label { width: 80px; display: inline-block; font-weight: 900; }
-
-        .secret-menu { width: 100%; max-width: 600px; display: flex; justify-content: center; gap: 10px; margin-top: 30px; margin-bottom: 15px; flex-wrap: wrap; }
-        .secret-btn { background: transparent; color: #0b4594; border: 1px dashed rgba(11, 69, 148, 0.4); border-radius: 5px; padding: 6px 12px; font-family: 'Quicksand', sans-serif; font-size: 10px; font-weight: 700; cursor: pointer; text-transform: uppercase; transition: all 0.2s; opacity: 0.6; }
-        .secret-btn:hover { opacity: 1; border-style: solid; background: rgba(11, 69, 148, 0.1); }
-        .secret-btn.active { opacity: 1; border-style: solid; background: #0b4594; color: #fceea7; }
-
-        .mempool-strip { display: flex; gap: 5px; overflow-x: auto; padding: 4px 1px; width: 100%; box-sizing: border-box; }
-        .mp-card { min-width: 72px; flex: 1 0 auto; border-radius: 6px; padding: 5px 3px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box; }
-        .mp-card.pending { background: #2b1d0e; border: 1.5px dashed #f4a261; color: #fceea7; }
-        .mp-card.mined { background: #111111; border: 1.5px solid #0b4594; color: #00ccff; }
-        .footer { font-size: 12px; text-align: center; font-weight: 900; color: #0b4594; padding-bottom: 40px; text-transform: uppercase; }
-
-        /* KHUNG BỌC UNDER CONSTRUCTION */
-        .construction-zone {
-            width: 100%; box-sizing: border-box; margin: 18px 0; padding: 12px 10px 6px 10px;
-            border: 2.5px dashed #e76f51; border-radius: 14px;
-            background: repeating-linear-gradient(-45deg, rgba(231, 111, 81, 0.06), rgba(231, 111, 81, 0.06) 10px, rgba(252, 238, 167, 0.25) 10px, rgba(252, 238, 167, 0.25) 20px);
-        }
-        .construction-banner {
-            background: #e76f51; color: #ffffff; font-size: 10px; font-weight: 900; text-align: center;
-            padding: 4px 8px; border-radius: 6px; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase;
-            border: 1.5px solid #0b4594;
-        }
-        .wallet-btn-link {
-            flex: 1; background: #111111; border: 2px solid #0b4594; border-radius: 8px; padding: 10px 4px;
-            font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer;
-            box-shadow: 2px 2px 0px #0b4594; text-decoration: none; text-align: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; line-height: 1.15;
-        }
-
-        @media (max-width: 500px) { 
-            .terminal { padding: 18px 14px; }
-            .title { font-size: 20px; }
-            .bp-grid { grid-template-columns: 1fr; } 
-            .bp-label { border-right: none; border-bottom: 2px solid #e9c46a; padding-bottom: 8px; } 
-            .tab-btn { font-size: 9px; padding: 10px 2px; letter-spacing: 0px; }
-            .live-dash-container { gap: 5px; }
-            .live-box { padding: 8px 3px; }
-            .live-box-label { font-size: 9px; margin-bottom: 4px; }
-            .live-box-value { font-size: 13px; }
-            #sats-val { font-size: 14px !important; }
-            .live-box-subtext { font-size: 7px; }
-            #tab-promo .terminal { max-width: 90%; }
-            .secret-btn { font-size: 9px; padding: 5px 8px; }
-            .wallet-btn-link { font-size: 10px; padding: 8px 2px; }
-        }
-    </style>
+    <link rel="stylesheet" href="nah-style.css?v=24">
 </head>
-<body>
+<body style="touch-action: manipulation;">
     <div class="mainframe">
         
         <!-- HEADER CỐ ĐỊNH (NẠP TỪ nah-explorer.js) -->
@@ -169,6 +22,9 @@
                 <button class="tab-btn active" onclick="openTab('tab-nah')">NAH SOVEREIGN DIAMOND</button>
                 <button class="tab-btn" onclick="openTab('tab-note')">CO-FOUNDER'S NOTE</button>
                 <button class="tab-btn" onclick="openTab('tab-bemp')">BEMP CELLS ARCHITECTURE</button>
+            </div>
+            <div class="wallet-btn-container">
+                <button class="tab-btn wallet-tab-btn" onclick="openTab('tab-wallet')">💎 NAH COLD / COOL WALLET 💎</button>
             </div>
             <div class="promo-btn-container">
                 <button class="tab-btn promo-btn" onclick="openTab('tab-promo')">🎁 PROMO: VIÊN NGỌC HẠNH PHÚC CHO NGƯỜI ĂN HÀNG 🎁</button>
@@ -188,7 +44,7 @@
                     <div class="live-box">
                         <div class="live-box-label">sat / nah</div>
                         <div id="sats-val" class="live-box-value" style="color: #00ccff; text-shadow: 0 0 8px rgba(0, 204, 255, 0.5);">... s/💎</div>
-                        <div id="price-source-label" class="live-box-subtext">(BASED ON <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #2a9d8f; text-decoration: underline;">SATFLOW</a>)</div>
+                        <div id="price-source-label" class="live-box-subtext">(BASED ON <a href="https://www.satflow.com/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" rel="noopener noreferrer" style="color: #2a9d8f; text-decoration: underline;">SATFLOW</a>)</div>
                     </div>
                     <div class="live-box">
                         <div class="live-box-label">usd / btc</div>
@@ -197,7 +53,7 @@
                 </div>
 
                 <div id="alt-exchange-line" style="font-size: 13px; font-weight: 900; text-align: center; color: #0b4594; margin-bottom: 15px; width: 100%;">
-                    💎 Alternative exchange to acquire nah: <a href="https://unisat.io/market/v2/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" style="color: #eab308; text-decoration: underline;">UniSat</a>.
+                    💎 Alternative exchange to acquire nah: <a href="https://unisat.io/market/v2/runes/NAH•SOVEREIGN•DIAMOND" target="_blank" rel="noopener noreferrer" style="color: #eab308; text-decoration: underline;">UniSat</a>.
                 </div>
 
                 <!-- KHUNG CHỜ CHO BIỂU ĐỒ GIÁ -->
@@ -209,79 +65,426 @@
                 <!-- MARKET CAP, EXPLORER, TIMECHAIN & OMNI CONVERTER (NẠP TỪ nah-explorer.js) -->
                 <div id="nah-bottom-slot" style="width: 100%;"></div>
 
-                <!-- KHUNG UNDER CONSTRUCTION: NAH DECENTRALIZED EXCHANGE -->
-                <div class="construction-zone">
-                    <div class="construction-banner">🚧 UNDER CONSTRUCTION 🚧</div>
-                    <div class="converter-section" style="background: #fdf6d8; margin-bottom: 6px; border: 3px solid #0b4594;">
-                        <div class="sub-title" style="margin-bottom: 10px;">💎 NAH DECENTRALIZED EXCHANGE</div>
-
-                        <!-- BƯỚC 1: NÚT CONNECT WALLET DUY NHẤT -->
-                        <div id="connect-wallet-entry" style="width: 100%;">
-                            <button onclick="toggleWalletSelector()" style="width: 100%; background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 10px; padding: 12px; font-family: 'Quicksand', sans-serif; font-size: 13px; font-weight: 900; cursor: pointer; box-shadow: 3px 3px 0px #f4a261; text-transform: uppercase; letter-spacing: 0.5px;">
-                                🔗 CONNECT WALLET
-                            </button>
-                        </div>
-
-                        <!-- BƯỚC 2: POPUP 3 LỰA CHỌN VÍ: XVERSE (TRÁI) | UNISAT RECOMMENDED (GIỮA) | OKX WALLET (PHẢI) -->
-                        <div id="wallet-selector-popup" style="display: none; margin-top: 10px; padding: 10px; background: #ffffff; border: 2px solid #0b4594; border-radius: 10px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <span style="font-size: 10px; font-weight: 900; color: #0b4594; text-transform: uppercase;">SELECT YOUR BITCOIN WALLET</span>
-                                <span onclick="toggleWalletSelector()" style="font-size: 10px; font-weight: 900; color: #e76f51; cursor: pointer;">✕</span>
-                            </div>
-                            <div style="display: flex; gap: 6px; align-items: stretch;">
-                                <a id="btn-wallet-xverse" href="xverse://browser?url=https%3A%2F%2Fnahkahmotors.com%2F%3Fauto%3Dxverse" onclick="return handleWalletTap(event, 'xverse')" class="wallet-btn-link" style="color: #f4a261;">
-                                    <span>🔵 XVERSE</span>
-                                </a>
-                                <a id="btn-wallet-unisat" href="javascript:void(0)" onclick="return handleWalletTap(event, 'unisat')" class="wallet-btn-link" style="flex: 1.25; color: #fceea7;">
-                                    <span>🟡 UNISAT</span>
-                                    <span style="font-size: 7px; color: #e76f51; display: block; margin-top: 2px;">(RECOMMENDED)</span>
-                                </a>
-                                <a id="btn-wallet-okx" href="javascript:void(0)" onclick="return handleWalletTap(event, 'okx')" class="wallet-btn-link" style="color: #00ccff;">
-                                    <span>🟢 OKX WALLET</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div id="wallet-status-msg" style="display: none; margin-top: 8px; padding: 8px; background: #fff3e0; border: 1.5px dashed #e76f51; border-radius: 6px; font-size: 10px; font-weight: 700; color: #0b4594; text-align: center;"></div>
-
-                        <!-- BƯỚC 3: GIAO DIỆN SAU KHI KẾT NỐI VÍ (KHÔNG CẮT NGANG THẺ PACKET) -->
-                        <div id="wallet-vault-panel" style="display: none; background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; padding: 10px;">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; border-bottom: 1.5px dotted #e9c46a; padding-bottom: 8px; margin-bottom: 10px;">
-                                <div id="vault-addr-display" style="font-size: 10px; font-weight: 900; color: #0b4594; word-break: break-all; line-height: 1.35; flex: 1;">...</div>
-                                <button onclick="disconnectSovereignWallet()" style="background: transparent; color: #e76f51; border: 1.5px solid #e76f51; border-radius: 5px; padding: 3px 7px; font-family: 'Quicksand', sans-serif; font-size: 9px; font-weight: 900; cursor: pointer; white-space: nowrap; flex-shrink: 0;">
-                                    DISCONNECT ✕
-                                </button>
-                            </div>
-
-                            <div style="display: flex; gap: 6px; margin-bottom: 10px;">
-                                <div style="flex: 1; background: #111111; border: 1.5px solid #0b4594; border-radius: 8px; padding: 8px 6px; text-align: center;">
-                                    <div style="font-size: 9px; color: #888; font-weight: 900;">💎 PROTECTED nah VAULT</div>
-                                    <div id="vault-nah-bal" style="font-size: 13px; color: #00ccff; font-weight: 900; margin: 3px 0; white-space: nowrap;">0 nahs</div>
-                                    <div id="vault-nah-packets" style="font-size: 8px; color: #2a9d8f; font-weight: 900;">0 UTXO packets</div>
-                                </div>
-                                <div style="flex: 1; background: #111111; border: 1.5px solid #0b4594; border-radius: 8px; padding: 8px 6px; text-align: center;">
-                                    <div style="font-size: 9px; color: #888; font-weight: 900;">⚡ BASIC sat BALANCE</div>
-                                    <div id="vault-sat-bal" style="font-size: 13px; color: #f4a261; font-weight: 900; margin: 3px 0; white-space: nowrap;">0 sats</div>
-                                    <div id="vault-sat-packets" style="font-size: 8px; color: #ccc; font-weight: 900;">0 spendable UTXOs</div>
-                                </div>
-                            </div>
-
-                            <div style="font-size: 10px; font-weight: 900; color: #e76f51; text-transform: uppercase; margin-bottom: 6px;">
-                                📦 NAH UTXO PACKETS <span style="color: #0b4594; font-size: 9px;">(TAP PACKET TO SPLIT / LIST)</span>
-                            </div>
-
-                            <!-- DANH SÁCH PACKET PHÂN TRANG (5 PACKETS NGUYÊN VẸN / TRANG — KHÔNG BAO GIỜ BỊ CẮT LƯNG CHỪNG) -->
-                            <div id="vault-utxo-list"></div>
-                            <div id="vault-utxo-pagination" style="display: none; justify-content: space-between; align-items: center; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #e9c46a; font-size: 10px; font-weight: 900; color: #0b4594;"></div>
-
-                            <div id="vault-splitter-box" style="display: none; margin-top: 10px; padding: 10px; background: #fdf6d8; border: 2px solid #0b4594; border-radius: 8px;"></div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- DÒNG BẢN QUYỀN BEMP & REAL-TIME SYNC (NẠP TỪ nah-explorer.js) -->
                 <div id="nah-credits-slot" style="width: 100%;"></div>
 
+            </div>
+        </div>
+
+        <!-- TAB RIÊNG: NAH COLD / COOL WALLET (v26.0 — FOREVER IMMUTABLE EDITION) -->
+        <div id="tab-wallet" class="tab-content">
+            <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px; width: 100%;">
+                <div class="converter-section" style="background: #fdf6d8; margin-bottom: 6px; border: 3px solid #0b4594;">
+                    <div class="sub-title" style="margin-bottom: 6px;">💎 NAH SOVEREIGN COLD / COOL WALLET</div>
+                    <div style="font-size: 10px; font-weight: 700; color: #0b4594; text-align: center; margin-bottom: 10px; line-height: 1.4;">
+                        100% Verifiable • Zero-Keyboard Seed Shield • Dual-Vault <strong>nah</strong> &amp; <strong>sat</strong> Isolation
+                    </div>
+
+                    <!-- THANH CẢM BIẾN TRẠNG THÁI MẠNG & ĐÈN BÁO SẴN SÀNG CHO CHẾ ĐỘ MÁY BAY -->
+                    <div id="airgap-status-bar" style="background: #111111; color: #00ccff; border: 1.5px solid #0b4594; border-radius: 6px; padding: 6px 8px; margin-bottom: 10px; font-size: 9px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px;">
+                        <span id="airgap-net-indicator">📡 INTERNET: CONNECTED</span>
+                        <span id="airgap-ready-badge" style="color: #f4a261;">⏳ LOADING DICTIONARY...</span>
+                    </div>
+
+                    <!-- MÀN HÌNH 0: CHỌN CHẾ ĐỘ KIẾN TRÚC (PURE COLD WALLET vs. INTERACTIVE COOL WALLET) -->
+                    <div id="wallet-mode-selector-screen" style="width: 100%;">
+                        <div style="background: #ffffff; border: 2px solid #0b4594; border-radius: 9px; padding: 9px 10px; margin-bottom: 10px; font-size: 9.5px; font-weight: 700; color: #333; line-height: 1.45;">
+                            <div style="font-size: 10.5px; font-weight: 900; color: #0b4594; margin-bottom: 3px; text-transform: uppercase;">
+                                🏆 THE WORLD’S MOST LOGICAL &amp; VERIFIABLE BITCOIN WALLET
+                            </div>
+                            • <strong>100% Verifiable ("Verify, Don't Trust"):</strong> Zero third-party libraries. All 6 source modules and the official BIP-39 dictionary are locked and verified via live in-browser <code>SHA-256</code> hashes against GitHub.<br>
+                            • <strong>100% Zero-Keyboard Seed Shield:</strong> Create, verify, and restore seeds via in-app touch buttons — your phone’s OS keyboard never opens or sees a single seed letter.<br>
+                            • <strong>Human + Hardware Entropy:</strong> Mixes 10 physical dice taps with hardware CSPRNG in <strong>Airplane Mode</strong> — $0 cost, zero chip-RNG flaws, zero physical wrench-attack trail.<br>
+                            • <strong>Dual-Vault Runestone Guard:</strong> Strictly isolates <strong>nah</strong> packets from <strong>sat</strong> UTXOs so <strong>nah</strong> is never burned as miner fees.
+                        </div>
+
+                        <div class="mode-select-grid">
+                            <!-- THẺ 1: PURE COLD WALLET -->
+                            <div class="mode-card cold">
+                                <div>
+                                    <span class="mode-badge">❄️ 100% OFFLINE • ZERO STORAGE</span>
+                                    <div class="mode-title">❄️ PURE COLD WALLET</div>
+                                    <div style="font-size: 9px; color: #00ccff; font-weight: 700; margin-bottom: 5px; line-height: 1.35;">
+                                        Your phone acts as a temporary offline calculator — zero keys ever touch storage or the internet:
+                                    </div>
+                                    <ul class="mode-feature-list">
+                                        <li><strong>Offline Birth:</strong> Tap 10 dice rolls in <strong>Airplane Mode</strong>, write 12 words on paper, and verify 3 words by touch.</li>
+                                        <li><strong>Instant RAM Wipe (<code>0x00</code>):</strong> The millisecond your <strong>Taproot (<code>bc1p</code>)</strong> address appears, all 12 words and private keys are permanently erased from RAM.</li>
+                                        <li><strong>Workflow:</strong> Copy <strong><code>bc1p</code></strong> address ➔ Wipe screen &amp; close tab ➔ Go online &amp; receive <strong>nah / sat</strong> in deep freeze forever.</li>
+                                    </ul>
+                                </div>
+                                <button type="button" onclick="selectWalletArchitectureMode('cold')" style="width: 100%; background: #00ccff; color: #111111; border: 2px solid #ffffff; border-radius: 8px; padding: 9px 6px; font-family: 'Quicksand', sans-serif; font-size: 10px; font-weight: 900; cursor: pointer; text-transform: uppercase;">
+                                    ❄️ CREATE PURE COLD WALLET
+                                </button>
+                            </div>
+
+                            <!-- THẺ 2: INTERACTIVE COOL WALLET -->
+                            <div class="mode-card cool">
+                                <div>
+                                    <span class="mode-badge">⚡ 3ms RAM SIGNING • DUAL VAULT</span>
+                                    <div class="mode-title">⚡ INTERACTIVE COOL WALLET</div>
+                                    <div style="font-size: 9px; color: #e76f51; font-weight: 900; margin-bottom: 5px; line-height: 1.35;">
+                                        Unlike hot wallets that type seeds online and keep private keys sitting in RAM while you browse:
+                                    </div>
+                                    <ul class="mode-feature-list">
+                                        <li><strong>Offline Setup, Encrypted Vault:</strong> Create (<code>bc1p</code>) or restore (<code>bc1p / bc1q</code>) in <strong>Airplane Mode</strong>, locked with <strong>600,000-round AES-256-GCM</strong> before going online.</li>
+                                        <li><strong>~3ms Zero-String Signing:</strong> Zero private keys sit in RAM while viewing balances. Keys decrypt as raw bytes for <strong>~3ms</strong> only when you <strong>sign transactions</strong>, then zero out (<code>0x00</code>).</li>
+                                        <li><strong>Wrench-Attack Defense:</strong> Auto-destructs after 5 wrong password tries (or use One-Time RAM Mode).</li>
+                                    </ul>
+                                </div>
+                                <button type="button" onclick="selectWalletArchitectureMode('cool')" style="width: 100%; background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 9px 6px; font-family: 'Quicksand', sans-serif; font-size: 10px; font-weight: 900; cursor: pointer; text-transform: uppercase;">
+                                    ⚡ OPEN / SETUP COOL WALLET
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MÀN HÌNH 1: MENU CHỌN TẠO MỚI HOẶC IMPORT CỦA COOL WALLET -->
+                    <div id="wallet-entry-screen" style="display: none; width: 100%;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size: 11px; font-weight: 900; color: #0b4594;">⚡ COOL WALLET SETUP (ZERO-KEYBOARD)</span>
+                            <button type="button" onclick="openModeSelectorScreen()" style="background: #ffffff; color: #0b4594; border: 1.5px solid #0b4594; border-radius: 5px; padding: 3px 7px; font-family: 'Quicksand', sans-serif; font-size: 9px; font-weight: 900; cursor: pointer;">
+                                ⬅ SWITCH MODE (COLD / COOL)
+                            </button>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button type="button" onclick="openCreateWalletScreen('cool')" style="flex: 1; background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 10px; padding: 12px 6px; font-family: 'Quicksand', sans-serif; font-size: 10.5px; font-weight: 900; cursor: pointer; box-shadow: 3px 3px 0px #f4a261; text-transform: uppercase;">
+                                🆕 CREATE NEW COOL WALLET (bc1p)
+                            </button>
+                            <button type="button" onclick="openImportWalletScreen()" style="flex: 1; background: #111111; color: #00ccff; border: 2px solid #0b4594; border-radius: 10px; padding: 12px 6px; font-family: 'Quicksand', sans-serif; font-size: 10.5px; font-weight: 900; cursor: pointer; box-shadow: 3px 3px 0px #0b4594; text-transform: uppercase;">
+                                🔑 IMPORT 12 / 24 WORDS (bc1p &amp; bc1q)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- MÀN HÌNH 2: MỞ KHÓA COOL WALLET BẰNG PASSWORD (600,000 ROUNDS + TỰ HỦY SAU 5 LẦN SAI) -->
+                    <div id="wallet-unlock-screen" style="display: none; background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; padding: 12px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 11px; font-weight: 900; color: #0b4594;">🔒 UNLOCK YOUR SAVED COOL WALLET</span>
+                            <button type="button" onclick="openModeSelectorScreen()" style="background: #fdf6d8; color: #0b4594; border: 1.5px solid #0b4594; border-radius: 5px; padding: 2px 6px; font-family: 'Quicksand', sans-serif; font-size: 8.5px; font-weight: 900; cursor: pointer;">
+                                ❄️ COLD / COOL MODES
+                            </button>
+                        </div>
+                        <div style="display: flex; gap: 5px; margin-bottom: 8px;">
+                            <input type="password" id="unlock-password-input" maxlength="128" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" data-lpignore="true" class="sovereign-input" placeholder="Enter your wallet password..." onkeydown="if(event.key==='Enter' && !event.isComposing && !event.repeat) unlockEncryptedWallet()" style="flex: 1;">
+                            <button type="button" id="btn-show-unlock-pwd" onclick="togglePwdPairVisibility('unlock-password-input', null, this)" style="background: #fdf6d8; color: #0b4594; border: 2px solid #0b4594; border-radius: 8px; padding: 0 10px; font-family: 'Quicksand', sans-serif; font-size: 9px; font-weight: 900; cursor: pointer;">
+                                SHOW
+                            </button>
+                        </div>
+                        <div style="display: flex; gap: 6px;">
+                            <button type="button" id="btn-unlock-wallet" onclick="unlockEncryptedWallet()" style="flex: 2; background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 9px; font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer;">
+                                🔓 UNLOCK COOL WALLET
+                            </button>
+                            <button type="button" onclick="resetStoredWalletPrompt()" style="flex: 1; background: transparent; color: #e76f51; border: 1.5px solid #e76f51; border-radius: 8px; padding: 9px 4px; font-family: 'Quicksand', sans-serif; font-size: 10px; font-weight: 900; cursor: pointer;">
+                                CHANGE WALLET
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- MÀN HÌNH 3: TẠO VÍ MỚI (PHỤC VỤ CẢ PURE COLD WALLET & COOL WALLET — 100% ZERO-KEYBOARD SEED) -->
+                    <div id="wallet-create-screen" style="display: none; background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; padding: 12px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span id="create-screen-title" style="font-size: 11px; font-weight: 900; color: #0b4594;">🆕 CREATE SOVEREIGN BITCOIN WALLET</span>
+                            <button type="button" onclick="openModeSelectorScreen()" style="background: #fdf6d8; color: #e76f51; border: 1.5px solid #e76f51; border-radius: 5px; padding: 2px 7px; font-family: 'Quicksand', sans-serif; font-size: 9px; font-weight: 900; cursor: pointer;">
+                                ⬅ MODE
+                            </button>
+                        </div>
+
+                        <!-- BƯỚC 1: HƯỚNG DẪN CHẾ ĐỘ MÁY BAY -->
+                        <div class="step-card">
+                            <div><span class="step-badge">STEP 1</span><strong>✈️ Airplane Mode Isolation:</strong></div>
+                            <div id="create-step1-desc" style="margin-top: 3px; color: #333;"></div>
+                        </div>
+
+                        <!-- BƯỚC 2: TRỘN ENTROPY 10 LẦN CHẠM (ZERO-KEYBOARD) -->
+                        <div id="create-entropy-step" class="step-card">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;">
+                                <span><span class="step-badge">STEP 2</span><strong>🎲 Mix Your Personal Randomness (Zero-Keyboard):</strong></span>
+                                <span id="entropy-pct-label" style="color: #e76f51; font-size: 9px; font-weight: 900;">0% MIXED (10 TAPS NEEDED)</span>
+                            </div>
+                            <div style="color: #333; margin-bottom: 6px;">
+                                Never rely only on a factory chip. Tap <strong>🎲 ROLL DICE (+10%)</strong> 10 times below — each tap mixes microsecond human timing with hardware CSPRNG via commutative XOR + HMAC-SHA512:
+                            </div>
+                            <div style="width: 100%; height: 8px; background: #eee; border: 1px solid #0b4594; border-radius: 4px; overflow: hidden; margin-bottom: 6px;">
+                                <div id="entropy-progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #f4a261, #2a9d8f); transition: width 0.15s;"></div>
+                            </div>
+                            <button type="button" onclick="onHumanEntropyInput('dice_' + performance.now())" style="width: 100%; background: #e9c46a; color: #0b4594; border: 2px solid #0b4594; border-radius: 8px; padding: 8px; margin-bottom: 6px; font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer; box-shadow: 2px 2px 0px #0b4594;">
+                                🎲 TAP TO ROLL DICE (+10% HUMAN ENTROPY)
+                            </button>
+                            <button type="button" id="btn-generate-seed" onclick="generateSingleCleanSeed()" disabled style="width: 100%; background: #cccccc; color: #666666; border: 2px solid #999999; border-radius: 8px; padding: 9px; font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: not-allowed;">
+                                🔒 TAP ROLL DICE 10 TIMES TO UNLOCK (0%)
+                            </button>
+                        </div>
+
+                        <!-- BƯỚC 3A: HIỂN THỊ 12 TỪ ĐỂ GHI RA GIẤY (KHÓA COPY CLIPBOARD) -->
+                        <div id="seed-display-stage" style="display: none;">
+                            <div class="step-card" style="margin-bottom: 0;">
+                                <div><span class="step-badge">STEP 3A</span><strong>📝 Write All 12 Words on Physical Paper:</strong></div>
+                                <div style="font-size: 9.5px; color: #e76f51; font-weight: 900; margin: 4px 0;">
+                                    ⚠️ Write down all 12 words in exact order (1 to 12) on physical paper! NEVER screenshot, NEVER save in phone notes or cloud! In the next step, you will verify 3 random words by tapping buttons (your phone keyboard will never open).
+                                </div>
+                                <div id="generated-seed-box" oncopy="return false" oncut="return false" oncontextmenu="return false" style="background: #111111; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; font-size: 12px; font-weight: 900; line-height: 1.75; text-align: center; word-spacing: 4px; margin-bottom: 8px; user-select: none;"></div>
+
+                                <button type="button" onclick="proceedToBlindPaperQuiz()" style="width: 100%; background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer;">
+                                    📝 I WROTE ALL 12 WORDS ON PAPER ➔ START ZERO-KEYBOARD CHECK
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- BƯỚC 3B: TRẮC NGHIỆM CHẠM 3 TỪ KHÔNG BÀN PHÍM (ZERO-KEYBOARD TOUCH QUIZ) -->
+                        <div id="seed-quiz-stage" style="display: none;">
+                            <div class="step-card" style="margin-bottom: 0;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; flex-wrap: wrap; gap: 4px;">
+                                    <span><span class="step-badge">STEP 3B</span><strong>🛡️ Paper Check:</strong> <span id="quiz-progress-status" class="quiz-progress-badge">0/3 SELECTED</span></span>
+                                    <a href="javascript:void(0)" onclick="peekAtSeedWordsAgain()" style="font-size: 9px; font-weight: 900; color: #e76f51; text-decoration: underline;">
+                                        👁️ Peek at 12 words again
+                                    </a>
+                                </div>
+
+                                <div style="background: #fff3e0; border: 1.5px dashed #e76f51; border-radius: 8px; padding: 8px; margin-bottom: 8px;">
+                                    <div style="font-size: 9px; font-weight: 900; color: #0b4594; margin-bottom: 6px; text-align: center;">
+                                        Look at your paper and tap the matching button in each row below (no keyboard typing):
+                                    </div>
+                                    <div class="quiz-row-box">
+                                        <div class="quiz-row-label">1. Tap <span style="color:#e76f51;">Word #<span id="quiz-num-1">2</span></span> from your paper:</div>
+                                        <div id="quiz-opts-1" class="quiz-opt-grid"></div>
+                                    </div>
+                                    <div class="quiz-row-box">
+                                        <div class="quiz-row-label">2. Tap <span style="color:#e76f51;">Word #<span id="quiz-num-2">6</span></span> from your paper:</div>
+                                        <div id="quiz-opts-2" class="quiz-opt-grid"></div>
+                                    </div>
+                                    <div class="quiz-row-box" style="margin-bottom: 0;">
+                                        <div class="quiz-row-label">3. Tap <span style="color:#e76f51;">Word #<span id="quiz-num-3">11</span></span> from your paper:</div>
+                                        <div id="quiz-opts-3" class="quiz-opt-grid"></div>
+                                    </div>
+                                </div>
+
+                                <!-- KHỐI MẬT KHẨU CHỈ HIỆN KHI Ở CHẾ ĐỘ COOL WALLET (ẨN KHI Ở CHẾ ĐỘ PURE COLD WALLET) -->
+                                <div id="cool-password-setup-block">
+                                    <div style="display: flex; gap: 5px; margin-bottom: 6px;">
+                                        <input type="password" id="create-password-1" maxlength="128" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" data-lpignore="true" class="sovereign-input" placeholder="Create Cool Wallet password (8+ characters)" oninput="updatePwdStrengthAndMatchUI('create-password-1', 'create-password-2', 'create-pwd-meter')" style="flex: 1;">
+                                        <button type="button" id="btn-show-create-pwd" onclick="togglePwdPairVisibility('create-password-1', 'create-password-2', this)" style="background: #ffffff; color: #0b4594; border: 2px solid #0b4594; border-radius: 8px; padding: 0 9px; font-family: 'Quicksand', sans-serif; font-size: 9px; font-weight: 900; cursor: pointer;">
+                                            SHOW
+                                        </button>
+                                    </div>
+                                    <input type="password" id="create-password-2" maxlength="128" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" data-lpignore="true" class="sovereign-input" placeholder="Type password again to confirm" oninput="updatePwdStrengthAndMatchUI('create-password-1', 'create-password-2', 'create-pwd-meter')" onkeydown="if(event.key==='Enter' && !event.isComposing && !event.repeat) finalizeCreateWallet()" style="margin-bottom: 4px;">
+                                    <div id="create-pwd-meter" style="font-size: 9px; font-weight: 900; color: #666; margin-bottom: 8px; min-height: 13px;"></div>
+
+                                    <div style="font-size: 9.5px; font-weight: 900; color: #0b4594; margin-bottom: 4px;">
+                                        Where are you using this device? (Your 12 paper words are always your permanent master backup):
+                                    </div>
+                                    <label class="storage-choice-card">
+                                        <input type="radio" name="create-storage-mode" id="create-mode-save" value="save" checked style="margin-top: 2px; accent-color: #0b4594;">
+                                        <div>
+                                            <strong style="color: #0b4594;">🔒 My Personal Phone / Computer (Recommended — Normal Safari Tab):</strong><br>
+                                            <span style="color: #444;">Keep my wallet locked with 600,000-round AES-256 encryption on this browser (auto-destructs after 5 wrong password tries).</span>
+                                        </div>
+                                    </label>
+                                    <label class="storage-choice-card" style="margin-bottom: 8px;">
+                                        <input type="radio" name="create-storage-mode" id="create-mode-ram" value="ram" style="margin-top: 2px; accent-color: #e76f51;">
+                                        <div>
+                                            <strong style="color: #e76f51;">🔥 One-Time Session Only (Shared / Public Device):</strong><br>
+                                            <span style="color: #444;">Wipe everything the moment I lock or close this browser tab.</span>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <button type="button" id="btn-finalize-create" onclick="finalizeCreateWallet()" style="width: 100%; background: #2a9d8f; color: #ffffff; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer;">
+                                    ✅ VERIFY 3 WORDS, LOCK &amp; OPEN COOL WALLET
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MÀN HÌNH 3C: KẾT QUẢ ĐỊA CHỈ NHẬN CỦA PURE COLD WALLET (SAU KHI ĐÃ XÓA SẠCH KHÓA KHỎI RAM) -->
+                    <div id="wallet-cold-address-screen" style="display: none; background: #ffffff; border: 2.5px solid #0b4594; border-radius: 10px; padding: 12px;">
+                        <div style="background: #e8f5e9; border: 1.5px solid #2a9d8f; border-radius: 7px; padding: 7px 9px; margin-bottom: 8px; font-size: 9.5px; font-weight: 900; color: #2a9d8f; text-align: center;">
+                            ❄️ PURE COLD WALLET READY — 12 SEED WORDS &amp; PRIVATE KEYS HAVE BEEN 100% WIPED FROM RAM!
+                        </div>
+                        <div style="font-size: 10px; font-weight: 900; color: #0b4594; text-align: center; margin-bottom: 4px;">
+                            Your Permanent Bitcoin Taproot (BIP-86 <strong>bc1p</strong>) Receiving Address (for both <strong>nah</strong> &amp; <strong>sat</strong>):
+                        </div>
+                        <div id="cold-addr-chunked-display" class="chunked-addr-box"></div>
+                        <button type="button" id="btn-copy-cold-addr" onclick="copyColdWalletAddress()" style="width: 100%; background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; margin-bottom: 8px; font-family: 'Quicksand', sans-serif; font-size: 10.5px; font-weight: 900; cursor: pointer;">
+                            📋 COPY TAPROOT (bc1p) RECEIVING ADDRESS
+                        </button>
+                        <div class="step-card" style="margin-bottom: 8px;">
+                            <strong>✅ Next Steps for Pure Cold Storage:</strong><br>
+                            1. Tap <strong>📋 COPY</strong> above (and optionally write the first &amp; last 6 characters on your paper).<br>
+                            2. Tap <strong>🔥 WIPE SCREEN &amp; FINISH</strong> below (we will keep the first &amp; last 6 characters visible as a clipboard check).<br>
+                            3. Turn OFF Airplane Mode and send your <strong>nah</strong> or <strong>sat</strong> to this address. Check your balance anytime on the public <strong>NAH Explorer</strong> on Tab 1 without ever touching your 12 paper words!
+                        </div>
+                        <button type="button" onclick="wipeColdAddressScreenAndFinish()" style="width: 100%; background: #e76f51; color: #ffffff; border: 2px solid #0b4594; border-radius: 8px; padding: 9px; font-family: 'Quicksand', sans-serif; font-size: 10.5px; font-weight: 900; cursor: pointer;">
+                            🔥 WIPE SCREEN &amp; FINISH COLD WALLET SETUP
+                        </button>
+                    </div>
+
+                    <!-- MÀN HÌNH 4: IMPORT 12/24 SEED WORDS BẰNG BÀN CHẠM A-Z THÔNG MINH (100% ZERO-KEYBOARD) -->
+                    <div id="wallet-import-screen" style="display: none; background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; padding: 12px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size: 11px; font-weight: 900; color: #0b4594;">🔑 ZERO-KEYBOARD SEED IMPORT (bc1p &amp; bc1q)</span>
+                            <button type="button" onclick="openModeSelectorScreen()" style="background: #fdf6d8; color: #e76f51; border: 1.5px solid #e76f51; border-radius: 5px; padding: 2px 7px; font-family: 'Quicksand', sans-serif; font-size: 9px; font-weight: 900; cursor: pointer;">
+                                ⬅ MODE
+                            </button>
+                        </div>
+
+                        <div class="step-card">
+                            <div><span class="step-badge">STEP 1</span><strong>✈️ Turn ON Airplane Mode &amp; Use Predictive Touch Pad:</strong></div>
+                            <div style="margin-top: 2px; color: #333;">
+                                Turn ON Airplane Mode before entering your words. Use the <strong>smart A–Z touch pad</strong> below (invalid next letters automatically lock so you can never mistype!). Restores both <strong>Taproot (bc1p)</strong> and <strong>Native SegWit (bc1q)</strong>!
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                            <span id="import-words-counter" style="font-size: 9.5px; font-weight: 900; color: #0b4594;">0 / 12 WORDS SELECTED</span>
+                            <div style="display: flex; gap: 4px;">
+                                <button type="button" onclick="removeLastImportedWord()" style="background: #fdf6d8; color: #0b4594; border: 1.5px solid #0b4594; border-radius: 5px; padding: 2px 7px; font-family: 'Quicksand', sans-serif; font-size: 8.5px; font-weight: 900; cursor: pointer;">
+                                    ↩ UNDO WORD
+                                </button>
+                                <button type="button" onclick="clearAllImportedWords()" style="background: #fff3e0; color: #e76f51; border: 1.5px solid #e76f51; border-radius: 5px; padding: 2px 7px; font-family: 'Quicksand', sans-serif; font-size: 8.5px; font-weight: 900; cursor: pointer;">
+                                    ✕ CLEAR ALL
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- HỘP HIỂN THỊ CÁC THẺ TỪ ĐÃ CHỌN (KHÓA COPY CLIPBOARD) -->
+                        <div id="import-seed-chips-box" class="seed-chip-box" oncopy="return false" oncut="return false" oncontextmenu="return false"></div>
+
+                        <!-- THANH GỢI Ý TỪ CHUẨN BIP-39 TỨC THỜI -->
+                        <div id="import-prefix-strip" class="bip39-suggest-strip"></div>
+
+                        <!-- BÀN CHẠM CHỮ CÁI A-Z THÔNG MINH NỘI TUYẾN (TỰ KHÓA PHÍM CHẾT) -->
+                        <div id="import-az-pad" class="az-pad-grid"></div>
+
+                        <div style="display: flex; gap: 5px; margin-bottom: 6px;">
+                            <input type="password" id="import-password-1" maxlength="128" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" data-lpignore="true" class="sovereign-input" placeholder="Create Cool Wallet password (8+ characters)" oninput="updatePwdStrengthAndMatchUI('import-password-1', 'import-password-2', 'import-pwd-meter')" style="flex: 1;">
+                            <button type="button" id="btn-show-import-pwd" onclick="togglePwdPairVisibility('import-password-1', 'import-password-2', this)" style="background: #fdf6d8; color: #0b4594; border: 2px solid #0b4594; border-radius: 8px; padding: 0 9px; font-family: 'Quicksand', sans-serif; font-size: 9px; font-weight: 900; cursor: pointer;">
+                                SHOW
+                            </button>
+                        </div>
+                        <input type="password" id="import-password-2" maxlength="128" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" data-lpignore="true" class="sovereign-input" placeholder="Type password again to confirm" oninput="updatePwdStrengthAndMatchUI('import-password-1', 'import-password-2', 'import-pwd-meter')" onkeydown="if(event.key==='Enter' && !event.isComposing && !event.repeat) finalizeImportWallet()" style="margin-bottom: 4px;">
+                        <div id="import-pwd-meter" style="font-size: 9px; font-weight: 900; color: #666; margin-bottom: 8px; min-height: 13px;"></div>
+
+                        <div style="font-size: 9.5px; font-weight: 900; color: #0b4594; margin-bottom: 4px;">
+                            Where are you using this device?
+                        </div>
+                        <label class="storage-choice-card">
+                            <input type="radio" name="import-storage-mode" id="import-mode-save" value="save" checked style="margin-top: 2px; accent-color: #0b4594;">
+                            <div>
+                                <strong style="color: #0b4594;">🔒 My Personal Phone / Computer (Recommended — Normal Safari Tab):</strong><br>
+                                <span style="color: #444;">Keep my wallet locked with 600,000-round AES-256 encryption on this browser (auto-destructs after 5 wrong password tries).</span>
+                            </div>
+                        </label>
+                        <label class="storage-choice-card" style="margin-bottom: 8px;">
+                            <input type="radio" name="import-storage-mode" id="import-mode-ram" value="ram" style="margin-top: 2px; accent-color: #e76f51;">
+                            <div>
+                                <strong style="color: #e76f51;">🔥 One-Time Session Only (Shared / Public Device):</strong><br>
+                                <span style="color: #444;">Wipe everything the moment I lock or close this browser tab.</span>
+                            </div>
+                        </label>
+
+                        <button type="button" id="btn-finalize-import" onclick="finalizeImportWallet()" style="width: 100%; background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; font-family: 'Quicksand', sans-serif; font-size: 11px; font-weight: 900; cursor: pointer;">
+                            🔐 ENCRYPT &amp; OPEN COOL WALLET
+                        </button>
+                    </div>
+
+                    <div id="wallet-status-msg" style="display: none; margin-top: 8px; padding: 8px; background: #fff3e0; border: 1.5px dashed #e76f51; border-radius: 6px; font-size: 10px; font-weight: 700; color: #0b4594; text-align: center;"></div>
+
+                    <!-- MÀN HÌNH 5: BẢNG ĐIỀU KHIỂN COOL WALLET ĐÃ MỞ KHÓA (v26.0) -->
+                    <div id="wallet-vault-panel" style="display: none; background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; padding: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
+                            <div style="display: flex; gap: 4px; align-items: center;">
+                                <button id="btn-mode-taproot" onclick="switchWalletAddressMode('taproot', false)" style="background: #0b4594; color: #fceea7; border: 1.5px solid #0b4594; border-radius: 5px; padding: 3px 7px; font-family: 'Quicksand', sans-serif; font-size: 9px; font-weight: 900; cursor: pointer;">
+                                    TAPROOT (bc1p)
+                                </button>
+                                <button id="btn-mode-segwit" onclick="switchWalletAddressMode('segwit', false)" style="display: none; background: #fdf6d8; color: #0b4594; border: 1.5px solid #0b4594; border-radius: 5px; padding: 3px 7px; font-family: 'Quicksand', sans-serif; font-size: 9px; font-weight: 900; cursor: pointer;">
+                                    SEGWIT (bc1q)
+                                </button>
+                                <button onclick="switchWalletAddressMode(ACTIVE_ADDR_MODE, true)" title="Refresh Balance" style="background: #e9c46a; color: #0b4594; border: 1.5px solid #0b4594; border-radius: 5px; padding: 3px 6px; font-family: 'Quicksand', sans-serif; font-size: 9px; font-weight: 900; cursor: pointer;">
+                                    ↻
+                                </button>
+                            </div>
+                            <div style="display: flex; gap: 4px;">
+                                <button id="btn-emergency-backup" onclick="toggleEmergencyBackupBox()" style="background: #fdf6d8; color: #0b4594; border: 1.5px solid #0b4594; border-radius: 5px; padding: 3px 6px; font-family: 'Quicksand', sans-serif; font-size: 8.5px; font-weight: 900; cursor: pointer;">
+                                    🔑 VIEW 12 WORDS
+                                </button>
+                                <button onclick="lockSovereignWallet(false)" style="background: #111111; color: #fceea7; border: 1.5px solid #0b4594; border-radius: 5px; padding: 3px 7px; font-family: 'Quicksand', sans-serif; font-size: 9px; font-weight: 900; cursor: pointer;">
+                                    🔒 LOCK
+                                </button>
+                                <button onclick="resetStoredWalletPrompt()" style="background: transparent; color: #e76f51; border: 1.5px solid #e76f51; border-radius: 5px; padding: 3px 6px; font-family: 'Quicksand', sans-serif; font-size: 9px; font-weight: 900; cursor: pointer;">
+                                    WIPE ✕
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="vault-storage-mode-badge" style="font-size: 8px; font-weight: 900; color: #2a9d8f; margin-bottom: 4px; text-transform: uppercase;">
+                            🔒 SAVED ENCRYPTED COOL VAULT (15M IDLE / 3M SCREEN-LOCK AUTO-GUARD)
+                        </div>
+
+                        <!-- KHUNG XEM LẠI 12 TỪ KHÓA KHẨN CẤP ĐỂ GHI LẠI RA GIẤY (KHÓA COPY CLIPBOARD) -->
+                        <div id="emergency-backup-box" style="display: none; background: #fff3e0; border: 2px dashed #e76f51; border-radius: 8px; padding: 8px; margin-bottom: 8px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                <span style="font-size: 9.5px; font-weight: 900; color: #e76f51;">🔑 VERIFY PASSWORD TO VIEW 12 WORDS FOR PAPER BACKUP (30s AUTO-HIDE)</span>
+                                <span onclick="closeEmergencyBackupBox()" style="font-size: 10px; font-weight: 900; color: #0b4594; cursor: pointer;">✕</span>
+                            </div>
+                            <div id="emergency-pwd-row" style="display: flex; gap: 5px;">
+                                <input type="password" id="emergency-pwd-input" maxlength="128" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" data-lpignore="true" class="sovereign-input" placeholder="Re-enter your wallet password..." oninput="onEmergencyPwdInput()" onkeydown="if(event.key==='Enter' && !event.isComposing && !event.repeat) revealEmergencySeedWords()" style="font-size: 10px; padding: 6px 8px; flex: 1;">
+                                <button type="button" id="btn-reveal-emergency" onclick="revealEmergencySeedWords()" style="background: #0b4594; color: #fceea7; border: 1.5px solid #0b4594; border-radius: 6px; padding: 0 10px; font-family: 'Quicksand', sans-serif; font-size: 9.5px; font-weight: 900; cursor: pointer; white-space: nowrap;">
+                                    REVEAL
+                                </button>
+                            </div>
+                            <div id="emergency-seed-output" oncopy="return false" oncut="return false" oncontextmenu="return false" style="display: none; margin-top: 6px; background: #111111; color: #fceea7; border-radius: 6px; padding: 8px; font-size: 11px; font-weight: 900; text-align: center; line-height: 1.6; user-select: none;"></div>
+                        </div>
+
+                        <!-- HIỂN THỊ FULL ĐỊA CHỈ VÍ (TÔ MÀU 6 KÝ TỰ ĐẦU & CUỐI ĐỂ KIỂM TRA NHANH KHI PASTE) -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px; border-bottom: 1.5px dotted #e9c46a; padding-bottom: 8px; margin-bottom: 10px;">
+                            <div id="vault-addr-display" style="font-size: 10px; font-weight: 900; color: #0b4594; word-break: break-all; line-height: 1.35; flex: 1;">...</div>
+                            <button id="btn-copy-addr" onclick="copyActiveWalletAddress()" style="background: #fdf6d8; color: #0b4594; border: 1.5px solid #0b4594; border-radius: 5px; padding: 4px 7px; font-family: 'Quicksand', sans-serif; font-size: 8.5px; font-weight: 900; cursor: pointer; white-space: nowrap; flex-shrink: 0;">
+                                📋 COPY
+                            </button>
+                        </div>
+
+                        <!-- 2 KÉT SẮT TÁCH BIỆT (CÂN ĐỐI 50/50 TRÊN MỌI MÀN HÌNH + KÈM GIÁ TRỊ QUY ĐỔI USD/SAT & NÚT 📤 SEND sat) -->
+                        <div style="display: flex; gap: 6px; margin-bottom: 6px;">
+                            <div style="flex: 1; min-width: 0; background: #111111; border: 1.5px solid #0b4594; border-radius: 8px; padding: 8px 6px; text-align: center;">
+                                <div style="font-size: 9px; color: #888; font-weight: 900;">💎 PROTECTED nah VAULT</div>
+                                <div id="vault-nah-bal" style="font-size: 13px; color: #00ccff; font-weight: 900; margin: 2px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">0 nahs</div>
+                                <div id="vault-nah-fiat" class="vault-fiat-sub" style="white-space: normal; word-break: break-word; line-height: 1.25;">≈ 0 sats ($0.00)</div>
+                                <div id="vault-nah-packets" style="font-size: 8px; color: #2a9d8f; font-weight: 900;">0 UTXO packets</div>
+                            </div>
+                            <div style="flex: 1; min-width: 0; background: #111111; border: 1.5px solid #0b4594; border-radius: 8px; padding: 8px 6px; text-align: center;">
+                                <div style="font-size: 9px; color: #888; font-weight: 900;">⚡ BASIC sat BALANCE</div>
+                                <div id="vault-sat-bal" style="font-size: 13px; color: #f4a261; font-weight: 900; margin: 2px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">0 sats</div>
+                                <div id="vault-sat-fiat" class="vault-fiat-sub" style="white-space: normal; word-break: break-word; line-height: 1.25;">≈ $0.00</div>
+                                <div id="vault-sat-packets" style="font-size: 8px; color: #ccc; font-weight: 900;">0 spendable UTXOs</div>
+                                <button type="button" class="sat-send-trigger-btn" onclick="openSendSatDrawer()">📤 SEND sat</button>
+                            </div>
+                        </div>
+
+                        <!-- GIẢI THÍCH NGẮN GỌN, DỄ HIỂU VỀ 2 KÉT SẮT -->
+                        <div style="background: #fdf6d8; border: 1px dotted #0b4594; border-radius: 6px; padding: 5px 8px; margin-bottom: 10px; font-size: 8.5px; font-weight: 700; color: #0b4594; line-height: 1.35;">
+                            💡 <strong>Dual-Vault Safety Shield:</strong> Your <strong>nah</strong> packets (and any UTXO &lt; 600 sats) are strictly isolated from your <strong>Basic sat Balance</strong> so <strong>nah</strong> is never burned as miner fees when you sign transactions.
+                        </div>
+
+                        <div style="font-size: 10px; font-weight: 900; color: #e76f51; text-transform: uppercase; margin-bottom: 6px;">
+                            📦 NAH UTXO PACKETS <span style="color: #0b4594; font-size: 9px; text-transform: none;">(TAP PACKET TO SEND nah OR SPLIT)</span>
+                        </div>
+
+                        <div id="vault-utxo-list"></div>
+                        <div id="vault-utxo-pagination" style="display: none; justify-content: space-between; align-items: center; margin-top: 6px; padding-top: 6px; border-top: 1px dashed #e9c46a; font-size: 10px; font-weight: 900; color: #0b4594;"></div>
+
+                        <!-- KHAY CÔNG CỤ ĐA NĂNG (📤 SEND nah / ✂️ SPLIT PACKET / 📤 SEND sat) -->
+                        <div id="vault-splitter-box" style="display: none; margin-top: 10px; padding: 10px; background: #fdf6d8; border: 2px solid #0b4594; border-radius: 8px;"></div>
+                    </div>
+
+                    <!-- KHU VỰC OPEN-SOURCE & 6-MODULE AUDITABILITY HUB ("VERIFY, DON'T TRUST") -->
+                    <div style="margin-top: 10px; padding-top: 8px; border-top: 1.5px dashed #e9c46a; text-align: center;">
+                        <a href="javascript:void(0)" onclick="verifyWalletCodeIntegrity()" style="font-size: 9.5px; font-weight: 900; color: #0b4594; text-decoration: underline;">
+                            🛡️ OPEN-SOURCE WALLET AUDIT HUB &amp; LIVE 6-MODULE SHA-256 VERIFIER ("VERIFY, DON'T TRUST")
+                        </a>
+                        <div id="wallet-audit-box" style="display: none; margin-top: 6px; padding: 8px; background: #111111; color: #00ccff; border: 1.5px solid #0b4594; border-radius: 8px; font-size: 9px; font-weight: 700; word-break: break-all; text-align: left; line-height: 1.5;"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -320,313 +523,85 @@
         <div id="nah-footer-slot" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
     </div>
 
-    <!-- NẠP CÁC MODULE TĨNH -->
+    <!-- NẠP CÁC MODULE ĐỘC LẬP (v26.0) -->
     <script src="brc-static.js"></script>
-    <script src="nah-explorer.js?v=5"></script>
+    <script src="nah-explorer.js?v=23"></script>
+    <script src="nah-wallet.js?v=26"></script>
+    <script src="nah-wallet-setup.js?v=26"></script>
+    <script src="nah-wallet-vault.js?v=26"></script>
 
-    <!-- LOGIC BÁO GIÁ & SÀN NAH DECENTRALIZED EXCHANGE -->
+    <!-- BỘ ĐỒNG BỘ GIÁ ORACLE ĐỘC LẬP (PROMISE.ALLSETTLED) & KHỞI ĐỘNG HỆ THỐNG (v26.0) -->
     <script>
-        window.CURRENT_NAH_SATS = 0.0005; 
-        window.CIRCULATING_SUPPLY = 85300000000000; 
-        window.globalLiveVndRate = 25500; 
+        window.CURRENT_NAH_SATS = 0.0005;
+        window.CIRCULATING_SUPPLY = 85300000000000;
+        window.globalLiveVndRate = 25500;
         window.globalLiveBtcPrice = 80000;
-        window.currentPacketPage = 0;
-        const PACKETS_PER_PAGE = 5;
 
         const BTC_LIVE_API = "https://mempool.space/api/v1/prices";
         const FOREX_API = "https://open.er-api.com/v6/latest/USD";
 
         async function engageOracle() {
+            if (!navigator.onLine) return;
             try {
-                const [btcRes, forexRes] = await Promise.all([ fetch(BTC_LIVE_API), fetch(FOREX_API) ]);
-                const btcData = await btcRes.json(), forexData = await forexRes.json();
-                window.globalLiveBtcPrice = parseFloat(btcData.USD);
-                window.globalLiveVndRate = parseFloat(forexData.rates.VND);
-                
+                const reqFn = (url) => (typeof fetchWithTimeout === "function")
+                    ? fetchWithTimeout(url, {}, 10000)
+                    : fetch(url);
+
+                const [btcSettled, forexSettled] = await Promise.allSettled([
+                    reqFn(BTC_LIVE_API),
+                    reqFn(FOREX_API)
+                ]);
+
+                if (btcSettled.status === "fulfilled" && btcSettled.value && btcSettled.value.ok) {
+                    try {
+                        const btcData = await btcSettled.value.json();
+                        const parsedBtc = parseFloat(btcData && btcData.USD);
+                        if (Number.isFinite(parsedBtc) && parsedBtc > 0) {
+                            window.globalLiveBtcPrice = parsedBtc;
+                        }
+                    } catch (e) {}
+                }
+
+                if (forexSettled.status === "fulfilled" && forexSettled.value && forexSettled.value.ok) {
+                    try {
+                        const forexData = await forexSettled.value.json();
+                        const parsedVnd = parseFloat(forexData && forexData.rates && forexData.rates.VND);
+                        if (Number.isFinite(parsedVnd) && parsedVnd > 0) {
+                            window.globalLiveVndRate = parsedVnd;
+                        }
+                    } catch (e) {}
+                }
+
                 const usdVal = (window.CURRENT_NAH_SATS / 100000000) * window.globalLiveBtcPrice;
-                const vndVal = usdVal * window.globalLiveVndRate; 
+                const vndVal = usdVal * window.globalLiveVndRate;
                 const mcapBtc = (window.CIRCULATING_SUPPLY * window.CURRENT_NAH_SATS) / 100000000;
-                
+
                 const mcapBtcEl = document.getElementById("mcap-btc");
                 const mcapUsdEl = document.getElementById("mcap-usd");
-                if (mcapBtcEl) mcapBtcEl.innerText = mcapBtc.toLocaleString('en-US', {maximumFractionDigits: 2}) + " btc";
-                if (mcapUsdEl) mcapUsdEl.innerText = "$" + (window.CIRCULATING_SUPPLY * usdVal).toLocaleString('en-US', {maximumFractionDigits: 0});
-                
-                document.getElementById("sats-val").innerText = window.CURRENT_NAH_SATS + " s/💎";
-                document.getElementById("live-vnd-nah").innerText = vndVal.toFixed(4) + " ₫";
-                document.getElementById("live-usd-btc").innerText = "$" + window.globalLiveBtcPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                
+                if (mcapBtcEl) mcapBtcEl.innerText = mcapBtc.toLocaleString("en-US", { maximumFractionDigits: 2 }) + " btc";
+                if (mcapUsdEl) mcapUsdEl.innerText = "$" + (window.CIRCULATING_SUPPLY * usdVal).toLocaleString("en-US", { maximumFractionDigits: 0 });
+
+                const satsValEl = document.getElementById("sats-val");
+                const vndNahEl = document.getElementById("live-vnd-nah");
+                const usdBtcEl = document.getElementById("live-usd-btc");
+                if (satsValEl) satsValEl.innerText = window.CURRENT_NAH_SATS + " s/💎";
+                if (vndNahEl) vndNahEl.innerText = vndVal.toFixed(4) + " ₫";
+                if (usdBtcEl) usdBtcEl.innerText = "$" + window.globalLiveBtcPrice.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+                if (window.NAH_WALLET_STATE && typeof applyVaultStateToUI === "function") {
+                    applyVaultStateToUI(window.NAH_WALLET_STATE);
+                }
+
                 const lastUpdEl = document.getElementById("last-update");
                 if (lastUpdEl) lastUpdEl.innerText = "FULL REAL-TIME SYNC: " + new Date().toLocaleTimeString();
             } catch (error) {
-                console.error("Oracle Connection Failed: ", error);
+                console.error("Oracle Sync Notice:", error);
             }
         }
 
-        function toggleWalletSelector() {
-            const pop = document.getElementById("wallet-selector-popup");
-            const msg = document.getElementById("wallet-status-msg");
-            if (msg) msg.style.display = "none";
-            if (!pop) return;
-            pop.style.display = (pop.style.display === "block") ? "none" : "block";
-        }
-
-        function showWalletNotice(htmlMsg) {
-            const box = document.getElementById("wallet-status-msg");
-            if (!box) return;
-            box.style.display = "block";
-            box.innerHTML = htmlMsg;
-        }
-
-        async function triggerInjectedWallet(type) {
-            if (type === "unisat" && window.unisat) {
-                const accs = await window.unisat.requestAccounts();
-                const pub = await window.unisat.getPublicKey();
-                if (accs && accs.length > 0) {
-                    await loadVaultForAddress(accs[0], "UNISAT", pub || "");
-                    return true;
-                }
-            }
-            if (type === "okx") {
-                const okxBtc = (window.okxwallet && window.okxwallet.bitcoin) ? window.okxwallet.bitcoin : null;
-                if (okxBtc) {
-                    const res = await okxBtc.connect();
-                    if (res && res.address) {
-                        await loadVaultForAddress(res.address, "OKX WALLET", res.publicKey || "");
-                        return true;
-                    }
-                }
-            }
-            const xv = (window.XverseProviders && window.XverseProviders.BitcoinProvider) || window.BitcoinProvider;
-            if (type === "xverse" && xv) {
-                const resp = await xv.request("getAccounts", { purposes: ["ordinals", "payment"], message: "Connect to NAH Decentralized Exchange" });
-                const list = (resp && resp.result) ? resp.result : [];
-                const ord = list.find(a => a.purpose === "ordinals") || list[0];
-                if (ord && ord.address) {
-                    await loadVaultForAddress(ord.address, "XVERSE", ord.publicKey || "");
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        function handleWalletTap(evt, type) {
-            const hasUniSat = (type === "unisat" && window.unisat);
-            const hasOkx = (type === "okx" && window.okxwallet && window.okxwallet.bitcoin);
-            const xv = (window.XverseProviders && window.XverseProviders.BitcoinProvider) || window.BitcoinProvider;
-            const hasXverse = (type === "xverse" && xv);
-
-            if (hasUniSat || hasOkx || hasXverse) {
-                evt.preventDefault();
-                triggerInjectedWallet(type).catch(e => showWalletNotice(e.message || String(e)));
-                return false;
-            }
-
-            if (type === "xverse") {
-                showWalletNotice(`📲 Opening <strong>Xverse Wallet</strong>...`);
-                return true;
-            }
-
-            if (type === "unisat") {
-                evt.preventDefault();
-                showWalletNotice(`
-                    🟡 <strong>UniSat Desktop / Mobile:</strong><br>
-                    • On Desktop: Install the open-source <a href="https://unisat.io/download" target="_blank" style="color:#e76f51; text-decoration:underline; font-weight:900;">UniSat Chrome Extension</a> for 1-click connection.<br>
-                    • On iPhone (UniSat iOS app has no built-in browser): Paste your UniSat address below to load your packets:
-                    <div style="display:flex; gap:5px; margin-top:6px;">
-                        <input type="text" id="quick-unisat-addr" placeholder="Paste your UniSat bc1p... address" style="flex:1; padding:6px 8px; border:1.5px solid #0b4594; border-radius:6px; font-family:'Quicksand',sans-serif; font-size:10px; font-weight:700;">
-                        <button onclick="const v=document.getElementById('quick-unisat-addr').value.trim(); if(v) loadVaultForAddress(v,'UNISAT','');" style="background:#0b4594; color:#fceea7; border:none; border-radius:6px; padding:0 10px; font-family:'Quicksand',sans-serif; font-size:10px; font-weight:900; cursor:pointer;">CONNECT</button>
-                    </div>
-                `);
-                return false;
-            }
-
-            if (type === "okx") {
-                evt.preventDefault();
-                showWalletNotice(`
-                    🟢 <strong>OKX Wallet App:</strong><br>
-                    Open your <strong>OKX Wallet</strong> app ➔ tap the <strong>Browser / Discover</strong> tab at the bottom ➔ enter <strong>nahkahmotors.com</strong> for instant 1-tap connection, or paste your OKX address below:
-                    <div style="display:flex; gap:5px; margin-top:6px;">
-                        <input type="text" id="quick-okx-addr" placeholder="Paste your OKX bc1p... address" style="flex:1; padding:6px 8px; border:1.5px solid #0b4594; border-radius:6px; font-family:'Quicksand',sans-serif; font-size:10px; font-weight:700;">
-                        <button onclick="const v=document.getElementById('quick-okx-addr').value.trim(); if(v) loadVaultForAddress(v,'OKX WALLET','');" style="background:#0b4594; color:#fceea7; border:none; border-radius:6px; padding:0 10px; font-family:'Quicksand',sans-serif; font-size:10px; font-weight:900; cursor:pointer;">CONNECT</button>
-                    </div>
-                `);
-                return false;
-            }
-            return true;
-        }
-
-        function disconnectSovereignWallet() {
-            window.NAH_WALLET_STATE = {
-                connected: false, providerName: "", address: "", publicKey: "",
-                nahBalance: 0, nahUtxos: [], cardinalUtxos: [], cardinalSats: 0, selectedUtxo: null
-            };
-            try { localStorage.removeItem("nah_connected_wallet"); } catch(e) {}
-            document.getElementById("wallet-vault-panel").style.display = "none";
-            document.getElementById("wallet-selector-popup").style.display = "none";
-            document.getElementById("connect-wallet-entry").style.display = "block";
-        }
-
-        function renderNahPacketPage(pageIdx) {
-            const state = window.NAH_WALLET_STATE;
-            const listEl = document.getElementById("vault-utxo-list");
-            const pagEl = document.getElementById("vault-utxo-pagination");
-            if (!state || !listEl) return;
-
-            const utxos = state.nahUtxos || [];
-            const nahBal = state.nahBalance || 0;
-            if (utxos.length === 0) {
-                listEl.innerHTML = `<div style="font-size:10px; color:#777; text-align:center; padding:10px;">No nah UTXO packets found in this wallet.</div>`;
-                if (pagEl) pagEl.style.display = "none";
-                return;
-            }
-
-            const totalPages = Math.ceil(utxos.length / PACKETS_PER_PAGE);
-            window.currentPacketPage = Math.max(0, Math.min(pageIdx, totalPages - 1));
-            const start = window.currentPacketPage * PACKETS_PER_PAGE;
-            const slice = utxos.slice(start, start + PACKETS_PER_PAGE);
-
-            listEl.innerHTML = slice.map((u, i) => {
-                const realIdx = start + i;
-                const pctWallet = nahBal > 0 ? ((u.nah / nahBal) * 100).toFixed(2) + "%" : "100%";
-                const isSelected = state.selectedUtxo && state.selectedUtxo.outpoint === u.outpoint;
-                const borderCol = isSelected ? "#e76f51" : "#0b4594";
-                const bgCol = isSelected ? "#fff3e0" : "#fdf6d8";
-                return `
-                    <div onclick="selectNahUtxoPacket(${realIdx})" style="padding:10px; margin-bottom:6px; background:${bgCol}; border:2px solid ${borderCol}; border-radius:8px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-                        <span style="background:#111; color:#00ccff; padding:3px 7px; border-radius:5px; font-size:9px; font-weight:900; white-space:nowrap;">
-                            PACKET #${realIdx + 1} (${pctWallet})
-                        </span>
-                        <span style="color:#0b4594; font-size:12px; font-weight:900; white-space:nowrap;">
-                            💎 ${u.nah.toLocaleString('en-US')} ${fmtUnit(u.nah, 'nah', 'nahs')}
-                        </span>
-                    </div>
-                `;
-            }).join("");
-
-            if (pagEl) {
-                if (totalPages > 1) {
-                    pagEl.style.display = "flex";
-                    const prevDisabled = window.currentPacketPage === 0;
-                    const nextDisabled = window.currentPacketPage >= totalPages - 1;
-                    pagEl.innerHTML = `
-                        <button onclick="renderNahPacketPage(${window.currentPacketPage - 1})" ${prevDisabled ? 'disabled' : ''} style="background:${prevDisabled ? '#eee' : '#0b4594'}; color:${prevDisabled ? '#999' : '#fceea7'}; border:none; border-radius:5px; padding:4px 10px; font-family:'Quicksand',sans-serif; font-size:9px; font-weight:900; cursor:${prevDisabled ? 'default' : 'pointer'};">◀ PREV</button>
-                        <span>PAGE ${window.currentPacketPage + 1} / ${totalPages} (${utxos.length} PACKETS)</span>
-                        <button onclick="renderNahPacketPage(${window.currentPacketPage + 1})" ${nextDisabled ? 'disabled' : ''} style="background:${nextDisabled ? '#eee' : '#0b4594'}; color:${nextDisabled ? '#999' : '#fceea7'}; border:none; border-radius:5px; padding:4px 10px; font-family:'Quicksand',sans-serif; font-size:9px; font-weight:900; cursor:${nextDisabled ? 'default' : 'pointer'};">NEXT ▶</button>
-                    `;
-                } else {
-                    pagEl.style.display = "none";
-                }
-            }
-        }
-
-        async function loadVaultForAddress(address, providerLabel, pubKey) {
-            document.getElementById("connect-wallet-entry").style.display = "none";
-            document.getElementById("wallet-selector-popup").style.display = "none";
-            const msgBox = document.getElementById("wallet-status-msg");
-            if (msgBox) msgBox.style.display = "none";
-
-            const panel = document.getElementById("wallet-vault-panel");
-            const listEl = document.getElementById("vault-utxo-list");
-            const splitBox = document.getElementById("vault-splitter-box");
-            if (panel) panel.style.display = "block";
-            if (splitBox) splitBox.style.display = "none";
-            if (listEl) listEl.innerHTML = `<div style="font-size:10px; color:#888; text-align:center; padding:10px;">Loading UTXO packets...</div>`;
-
-            document.getElementById("vault-addr-display").innerText = address;
-
-            try {
-                localStorage.setItem("nah_connected_wallet", JSON.stringify({ address, providerLabel, pubKey }));
-            } catch(e) {}
-
-            try {
-                const [nahRes, btcUtxoRes] = await Promise.allSettled([
-                    fetch(`${NAH_NODE_API}/address/${encodeURIComponent(address)}`).then(r => r.ok ? r.json() : null),
-                    fetch(`${MEMPOOL_API}/address/${encodeURIComponent(address)}/utxo`).then(r => r.ok ? r.json() : [])
-                ]);
-
-                const nahData = (nahRes.status === "fulfilled" && nahRes.value) ? nahRes.value : { balance: 0, utxos: [] };
-                const rawBtcUtxos = (btcUtxoRes.status === "fulfilled" && Array.isArray(btcUtxoRes.value)) ? btcUtxoRes.value : [];
-
-                const nahUtxos = nahData.utxos || [];
-                const nahOutpointSet = new Set(nahUtxos.map(u => u.outpoint));
-
-                const cardinalUtxos = rawBtcUtxos.filter(u => {
-                    const op = `${u.txid}:${u.vout}`;
-                    return !nahOutpointSet.has(op) && (u.value || 0) > 600;
-                });
-                const cardinalSats = cardinalUtxos.reduce((acc, u) => acc + (u.value || 0), 0);
-
-                window.NAH_WALLET_STATE = {
-                    connected: true,
-                    providerName: providerLabel,
-                    address: address,
-                    publicKey: pubKey,
-                    nahBalance: nahData.balance || 0,
-                    nahUtxos: nahUtxos,
-                    cardinalUtxos: cardinalUtxos,
-                    cardinalSats: cardinalSats,
-                    selectedUtxo: null
-                };
-
-                const nahBal = nahData.balance || 0;
-                document.getElementById("vault-nah-bal").innerText = `${nahBal.toLocaleString('en-US')} ${fmtUnit(nahBal, 'nah', 'nahs')}`;
-                document.getElementById("vault-nah-packets").innerText = `${nahUtxos.length} ${fmtUnit(nahUtxos.length, 'UTXO packet', 'UTXO packets')}`;
-                document.getElementById("vault-sat-bal").innerText = `${cardinalSats.toLocaleString('en-US')} ${fmtUnit(cardinalSats, 'sat', 'sats')}`;
-                document.getElementById("vault-sat-packets").innerText = `${cardinalUtxos.length} spendable ${fmtUnit(cardinalUtxos.length, 'UTXO', 'UTXOs')}`;
-
-                renderNahPacketPage(0);
-            } catch (e) {
-                listEl.innerHTML = `<div style="font-size:10px; color:#e76f51; text-align:center; padding:8px;">Unable to load UTXO packets right now.</div>`;
-            }
-        }
-
-        function selectNahUtxoPacket(idx) {
-            const u = window.NAH_WALLET_STATE.nahUtxos[idx];
-            if (!u) return;
-            window.NAH_WALLET_STATE.selectedUtxo = u;
-            renderNahPacketPage(window.currentPacketPage);
-            const splitBox = document.getElementById("vault-splitter-box");
-            if (!splitBox) return;
-            splitBox.style.display = "block";
-            splitBox.innerHTML = `
-                <div style="font-size:11px; font-weight:900; color:#0b4594; margin-bottom:8px; text-align:center;">
-                    SELECTED PACKET #${idx + 1}: <span style="color:#e76f51;">💎 ${u.nah.toLocaleString('en-US')} ${fmtUnit(u.nah, 'nah', 'nahs')}</span>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <button style="flex:1; background:#0b4594; color:#fceea7; border:1.5px solid #0b4594; border-radius:6px; padding:8px 4px; font-family:'Quicksand',sans-serif; font-size:10px; font-weight:900; cursor:pointer;">
-                        SPLIT PACKET
-                    </button>
-                    <button style="flex:1; background:#2a9d8f; color:#ffffff; border:1.5px solid #0b4594; border-radius:6px; padding:8px 4px; font-family:'Quicksand',sans-serif; font-size:10px; font-weight:900; cursor:pointer;">
-                        LIST FOR SALE
-                    </button>
-                </div>
-            `;
-        }
-
-        // TỰ ĐỘNG KẾT NỐI 1 CHẠM KHI MỞ TỪ DEEP LINK HOẶC TRONG IN-APP BROWSER
         window.addEventListener("load", () => {
-            setTimeout(async () => {
-                const params = new URLSearchParams(window.location.search);
-                const autoWallet = params.get("auto");
-                if (autoWallet) {
-                    const ok = await triggerInjectedWallet(autoWallet);
-                    if (ok) {
-                        window.history.replaceState({}, document.title, window.location.pathname);
-                        return;
-                    }
-                }
-                if (window.okxwallet && window.okxwallet.bitcoin) {
-                    const ok = await triggerInjectedWallet("okx");
-                    if (ok) return;
-                }
-                try {
-                    const saved = JSON.parse(localStorage.getItem("nah_connected_wallet") || "null");
-                    if (saved && saved.address) {
-                        await loadVaultForAddress(saved.address, saved.providerLabel || "CONNECTED", saved.pubKey || "");
-                    }
-                } catch(e) {}
-            }, 400);
+            if (typeof initOfflineEngineStatus === "function") initOfflineEngineStatus();
+            if (typeof showInitialWalletScreen === "function") showInitialWalletScreen();
         });
 
         engageOracle();
