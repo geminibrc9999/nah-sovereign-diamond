@@ -1,5 +1,5 @@
 // ============================================================================
-// NAH-WALLET-VAULT.JS: DUAL-VAULT UTXO, SEND/SPLIT & 6-FILE AUDIT HUB (v26.0)
+// NAH-WALLET-VAULT.JS: DUAL-VAULT UTXO, SEND/SPLIT & 6-FILE AUDIT HUB (v27.0)
 // Design Philosophy: Forever Immutable + Dual-Vault Isolation + Zero Trust
 // ============================================================================
 
@@ -528,7 +528,7 @@ function openSendNahWorkspace() {
             Recipient Bitcoin Address (Taproot <strong>bc1p...</strong> or SegWit <strong>bc1q...</strong>):
         </div>
         <input type="text" id="send-nah-recip-input" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" class="sovereign-input" placeholder="Paste recipient bc1p... or bc1q... address" oninput="onSendNahInputUpdate()" style="font-size:10.5px; margin-bottom:5px;">
-        <div id="send-nah-recip-verify" class="recip-verify-box" style="display:none;"></div>
+        <div id="send-nah-recip-verify" class="recip-verify-box" style="display:none; word-break:normal; overflow-wrap:break-word;"></div>
         <div style="font-size:9.5px; font-weight:900; color:#0b4594; margin-bottom:3px;">
             Amount of <strong>nah</strong> to send (if less than 100%, remainder automatically returns to your wallet):
         </div>
@@ -545,7 +545,7 @@ function openSendNahWorkspace() {
         <button type="button" id="btn-exec-send-nah" onclick="executeNahPacketSend()" style="width:100%; background:#0b4594; color:#fceea7; border:2px solid #0b4594; border-radius:8px; padding:9px; font-family:'Quicksand',sans-serif; font-size:10.5px; font-weight:900; cursor:pointer;">
             📤 SIGN &amp; SEND nah ON BITCOIN
         </button>
-        <div id="split-tx-result" style="display:none; margin-top:6px; padding:6px; background:#111111; color:#00ccff; border-radius:6px; font-size:9px; word-break:break-all;"></div>
+        <div id="split-tx-result" style="display:none; margin-top:6px; padding:6px; background:#111111; color:#00ccff; border-radius:6px; font-size:9px; word-break:normal; overflow-wrap:break-word;"></div>
     `;
     onSendNahInputUpdate();
 }
@@ -591,7 +591,7 @@ function onSendNahInputUpdate() {
             const selfWarn = isSelfAddr
                 ? `<div style="color:#e76f51; margin-top:2px;">⚠️ Note: This is your own wallet address (Self-Transfer)!</div>`
                 : "";
-            verEl.innerHTML = `✓ Verify First &amp; Last 6 Chars: ${formatAddressWithChecksumHighlight(rawRecip)}${selfWarn}`;
+            verEl.innerHTML = `✓ Verify First &amp; Last 6 Chars: <span style="word-break:break-all;">${formatAddressWithChecksumHighlight(rawRecip)}</span>${selfWarn}`;
         } else {
             verEl.style.display = "none";
             verEl.innerHTML = "";
@@ -746,7 +746,7 @@ function openSplitPacketDrawer() {
         <button type="button" id="btn-exec-split" onclick="executeNahPacketSplit()" style="width:100%; background:#e76f51; color:#ffffff; border:2px solid #0b4594; border-radius:8px; padding:9px; font-family:'Quicksand',sans-serif; font-size:10.5px; font-weight:900; cursor:pointer;">
             ⚡ SIGN &amp; BROADCAST SPLIT ON BITCOIN
         </button>
-        <div id="split-tx-result" style="display:none; margin-top:6px; padding:6px; background:#111111; color:#00ccff; border-radius:6px; font-size:9px; word-break:break-all;"></div>
+        <div id="split-tx-result" style="display:none; margin-top:6px; padding:6px; background:#111111; color:#00ccff; border-radius:6px; font-size:9px; word-break:normal; overflow-wrap:break-word;"></div>
     `;
     updateSplitConservationPreview();
 }
@@ -969,7 +969,7 @@ function openSendSatDrawer() {
             Recipient Bitcoin Address (Taproot <strong>bc1p...</strong> or SegWit <strong>bc1q...</strong>):
         </div>
         <input type="text" id="send-sat-recip-input" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" class="sovereign-input" placeholder="Paste recipient bc1p... or bc1q... address" oninput="onSendSatInputUpdate()" style="font-size:10.5px; margin-bottom:5px;">
-        <div id="send-sat-recip-verify" class="recip-verify-box" style="display:none;"></div>
+        <div id="send-sat-recip-verify" class="recip-verify-box" style="display:none; word-break:normal; overflow-wrap:break-word;"></div>
         <div style="font-size:9.5px; font-weight:900; color:#0b4594; margin-bottom:3px;">
             Amount of <strong>sat</strong> to send (min 546 sats — protected <strong>nah</strong> packets are never touched):
         </div>
@@ -986,7 +986,7 @@ function openSendSatDrawer() {
         <button type="button" id="btn-exec-send-sat" onclick="executeBtcSatSend()" style="width:100%; background:#0b4594; color:#fceea7; border:2px solid #0b4594; border-radius:8px; padding:9px; font-family:'Quicksand',sans-serif; font-size:10.5px; font-weight:900; cursor:pointer;">
             ⚡ SIGN &amp; SEND sat ON BITCOIN
         </button>
-        <div id="split-tx-result" style="display:none; margin-top:6px; padding:6px; background:#111111; color:#00ccff; border-radius:6px; font-size:9px; word-break:break-all;"></div>
+        <div id="split-tx-result" style="display:none; margin-top:6px; padding:6px; background:#111111; color:#00ccff; border-radius:6px; font-size:9px; word-break:normal; overflow-wrap:break-word;"></div>
     `;
     onSendSatInputUpdate();
 }
@@ -1040,7 +1040,7 @@ function onSendSatInputUpdate() {
             const selfWarn = isSelfAddr
                 ? `<div style="color:#e76f51; margin-top:2px;">⚠️ Note: This is your own wallet address (Self-Transfer)!</div>`
                 : "";
-            verEl.innerHTML = `✓ Verify First &amp; Last 6 Chars: ${formatAddressWithChecksumHighlight(rawRecip)}${selfWarn}`;
+            verEl.innerHTML = `✓ Verify First &amp; Last 6 Chars: <span style="word-break:break-all;">${formatAddressWithChecksumHighlight(rawRecip)}</span>${selfWarn}`;
         } else {
             verEl.style.display = "none";
             verEl.innerHTML = "";
@@ -1183,7 +1183,7 @@ async function signAndBroadcastVaultTx({ btnEl, defaultBtnLabel, buildFn }) {
                             <button type="button" class="raw-hex-action-btn" onclick="retryBroadcastSignedTx(this)">📡 BROADCAST WHEN ONLINE</button>
                         </div>
                     </div>
-                    <div style="background:#222; padding:4px; border-radius:4px; color:#2a9d8f; user-select:all;">${esc(signed.rawHex)}</div>
+                    <div style="background:#222; padding:4px; border-radius:4px; color:#2a9d8f; word-break:break-all; user-select:all;">${esc(signed.rawHex)}</div>
                 `;
             }
             if (btnEl) { btnEl.disabled = false; btnEl.innerText = defaultBtnLabel; }
@@ -1232,7 +1232,7 @@ async function signAndBroadcastVaultTx({ btnEl, defaultBtnLabel, buildFn }) {
                             <button type="button" class="raw-hex-action-btn" onclick="copySignedRawHex(this)">📋 COPY SIGNED HEX</button>
                         </div>
                     </div>
-                    <div style="background:#222; padding:4px; border-radius:4px; color:#2a9d8f; user-select:all;">${esc(signed.rawHex)}</div>
+                    <div style="background:#222; padding:4px; border-radius:4px; color:#2a9d8f; word-break:break-all; user-select:all;">${esc(signed.rawHex)}</div>
                 `;
             } else {
                 resBox.innerHTML = `<span style="color:#e76f51;">❌ ${esc(e.message || e)}</span>`;
@@ -1300,11 +1300,11 @@ function finalizeBroadcastedTxUI(account, state, signed, broadcastedTxid) {
 
     splitBox.style.display = "block";
     splitBox.innerHTML = `
-        <div style="background:#111111; color:#00ccff; border:1.5px solid #2a9d8f; border-radius:8px; padding:10px; font-size:9.5px; word-break:break-all; line-height:1.5;">
+        <div style="background:#111111; color:#00ccff; border:1.5px solid #2a9d8f; border-radius:8px; padding:10px; font-size:9.5px; word-break:normal; overflow-wrap:break-word; line-height:1.5;">
             <div style="color:#2a9d8f; font-weight:900; font-size:10.5px; margin-bottom:4px;">✅ TRANSACTION BROADCASTED &amp; VAULT UPDATED!</div>
             ${summaryLine}
             <div>• Exact Network Fee: <strong>${signed.feeSats.toLocaleString("en-US")} sats</strong> (≈ ${formatSatsToUsd(signed.feeSats)} • ${signed.vsize} vB)</div>
-            <div style="margin-bottom:6px;">• Live Mempool TxID: <a href="https://mempool.space/tx/${safeTxid}" target="_blank" rel="noopener noreferrer" style="color:#fceea7; text-decoration:underline; font-weight:900;">${safeTxid} ↗</a></div>
+            <div style="margin-bottom:6px;">• Live Mempool TxID: <a href="https://mempool.space/tx/${safeTxid}" target="_blank" rel="noopener noreferrer" style="color:#fceea7; text-decoration:underline; font-weight:900; word-break:break-all;">${safeTxid} ↗</a></div>
             <button type="button" class="raw-hex-action-btn explorer-link" onclick="viewTxInNahExplorer('${safeTxid}')">🔍 VIEW IN NAH EXPLORER</button>
         </div>
     `;
@@ -1332,7 +1332,7 @@ async function retryBroadcastSignedTx(btnEl) {
                         <button type="button" class="raw-hex-action-btn" onclick="copySignedRawHex(this)">📋 COPY SIGNED HEX</button>
                     </div>
                 </div>
-                <div style="background:#222; padding:4px; border-radius:4px; color:#2a9d8f; user-select:all;">${esc(signed.rawHex)}</div>
+                <div style="background:#222; padding:4px; border-radius:4px; color:#2a9d8f; word-break:break-all; user-select:all;">${esc(signed.rawHex)}</div>
             `;
         }
         return;
@@ -1364,7 +1364,7 @@ async function retryBroadcastSignedTx(btnEl) {
                         <button type="button" class="raw-hex-action-btn" onclick="copySignedRawHex(this)">📋 COPY SIGNED HEX</button>
                     </div>
                 </div>
-                <div style="background:#222; padding:4px; border-radius:4px; color:#2a9d8f; user-select:all;">${esc(signed.rawHex)}</div>
+                <div style="background:#222; padding:4px; border-radius:4px; color:#2a9d8f; word-break:break-all; user-select:all;">${esc(signed.rawHex)}</div>
             `;
         }
     }
@@ -1380,51 +1380,53 @@ async function verifyWalletCodeIntegrity() {
     }
     isAuditRunning = true;
     box.style.display = "block";
+    box.style.wordBreak = "normal";
+    box.style.overflowWrap = "break-word";
     box.innerHTML = "Running BIP-86/84 mathematical vectors & computing live SHA-256 digests across all 6 modules...";
     try {
         assertCoreModulesIntact(false);
         const audit = await window.NahSovereignBtc.computeSelfCodeAuditHash();
         const safeWalletHref = esc(audit.walletUrl || "nah-wallet.js?v=26");
         const safeSetupHref = esc(audit.setupUrl || "nah-wallet-setup.js?v=26");
-        const safeVaultHref = esc(audit.vaultUrl || "nah-wallet-vault.js?v=26");
+        const safeVaultHref = esc(audit.vaultUrl || "nah-wallet-vault.js?v=27");
         const safeStyleHref = esc(audit.styleUrl || "nah-style.css?v=24");
         const safeExplorerHref = esc(audit.explorerUrl || "nah-explorer.js?v=23");
         box.innerHTML = `
-            <div style="color:#fceea7; font-size:9.5px; margin-bottom:4px; border-bottom:1px solid #333; padding-bottom:3px;">
-                🛡️ <strong>100% CLIENT-SIDE ENCLAVE, ZERO DEPENDENCIES &amp; ZERO BACKEND TRUST (v26.0)</strong>
+            <div style="color:#fceea7; font-size:9.5px; margin-bottom:5px; border-bottom:1px solid #333; padding-bottom:4px; line-height:1.4;">
+                🛡️ <strong>100% <span style="white-space:nowrap;">CLIENT-SIDE</span> ENCLAVE, ZERO DEPENDENCIES &amp; ZERO BACKEND TRUST (v27.0)</strong>
             </div>
-            <div style="color:#ccc; margin-bottom:6px; font-weight:500;">
-                Hosted on GitHub Pages (<a href="${GITHUB_REPO_URL}" target="_blank" rel="noopener noreferrer" style="color:#fceea7; text-decoration:underline; font-weight:900;">github.com/geminibrc9999/nah-sovereign-diamond</a>) with <strong>zero NPM dependencies</strong>. All <code>secp256k1</code> math, SHA-256-locked BIP-39 dictionary, 600k-round PBKDF2-AES-256-GCM, and ~3ms Zero-String RAM signing (<code>BIP-340 / RFC-6979</code>) execute 100% inside your browser. Public nodes (<code>nah-core</code> &amp; <code>mempool.space</code>) only ever receive your public address (<code>GET /address/bc1...</code>) and pre-signed raw tx hex (<code>POST /tx</code>). Match the live <code>SHA-256</code> hashes below against GitHub to verify that zero keys or seeds ever leave your device.
+            <div style="color:#ccc; margin-bottom:7px; font-weight:500; line-height:1.45; word-break:normal; overflow-wrap:break-word;">
+                Hosted on GitHub Pages (<a href="${GITHUB_REPO_URL}" target="_blank" rel="noopener noreferrer" style="color:#fceea7; text-decoration:underline; font-weight:900; display:inline-block;">github.com/geminibrc9999/nah-sovereign-diamond</a>) with <strong>zero NPM dependencies</strong>. All <code>secp256k1</code> math, <span style="white-space:nowrap;">SHA-256-locked</span> <span style="white-space:nowrap;">BIP-39</span> dictionary, <span style="white-space:nowrap;">600k-round</span> <span style="white-space:nowrap;">PBKDF2-AES-256-GCM</span>, and ~3ms <span style="white-space:nowrap;">Zero-String</span> RAM signing (<code style="white-space:nowrap;">BIP-340</code> / <code style="white-space:nowrap;">RFC-6979</code>) execute 100% inside your browser. Public nodes (<code style="white-space:nowrap;">nah-core</code> &amp; <code style="white-space:nowrap;">mempool.space</code>) only ever receive your public address (<code style="white-space:nowrap;">GET /address/bc1...</code>) and <span style="white-space:nowrap;">pre-signed</span> raw tx hex (<code style="white-space:nowrap;">POST /tx</code>). Match the live <code style="white-space:nowrap;">SHA-256</code> hashes below against GitHub to verify that zero keys or seeds ever leave your device.
             </div>
-            <div style="color:#fceea7; margin-bottom:2px;">📂 <strong>LIVE IN-BROWSER SOURCE MODULES &amp; SHA-256 HASHES:</strong></div>
-            <div style="margin-bottom:3px;">
+            <div style="color:#fceea7; margin-bottom:3px;">📂 <strong>LIVE <span style="white-space:nowrap;">IN-BROWSER</span> SOURCE MODULES &amp; <span style="white-space:nowrap;">SHA-256</span> HASHES:</strong></div>
+            <div style="margin-bottom:4px;">
                 1. <a href="${safeWalletHref}" target="_blank" rel="noopener noreferrer" style="color:#00ccff; text-decoration:underline;">nah-wallet.js</a> (${audit.sizeBytes.toLocaleString("en-US")} B) • <a href="${GITHUB_REPO_URL}/blob/main/nah-wallet.js" target="_blank" rel="noopener noreferrer" style="color:#fceea7; text-decoration:underline;">[GitHub]</a><br>
-                <span style="color:#2a9d8f;">SHA-256: ${audit.sha256}</span>
+                <span style="color:#2a9d8f; word-break:break-all;">SHA-256: ${audit.sha256}</span>
             </div>
-            <div style="margin-bottom:3px;">
+            <div style="margin-bottom:4px;">
                 2. <a href="${safeSetupHref}" target="_blank" rel="noopener noreferrer" style="color:#00ccff; text-decoration:underline;">nah-wallet-setup.js</a> (${audit.setupSizeBytes.toLocaleString("en-US")} B) • <a href="${GITHUB_REPO_URL}/blob/main/nah-wallet-setup.js" target="_blank" rel="noopener noreferrer" style="color:#fceea7; text-decoration:underline;">[GitHub]</a><br>
-                <span style="color:#2a9d8f;">SHA-256: ${audit.setupSha256}</span>
+                <span style="color:#2a9d8f; word-break:break-all;">SHA-256: ${audit.setupSha256}</span>
             </div>
-            <div style="margin-bottom:3px;">
+            <div style="margin-bottom:4px;">
                 3. <a href="${safeVaultHref}" target="_blank" rel="noopener noreferrer" style="color:#00ccff; text-decoration:underline;">nah-wallet-vault.js</a> (${audit.vaultSizeBytes.toLocaleString("en-US")} B) • <a href="${GITHUB_REPO_URL}/blob/main/nah-wallet-vault.js" target="_blank" rel="noopener noreferrer" style="color:#fceea7; text-decoration:underline;">[GitHub]</a><br>
-                <span style="color:#2a9d8f;">SHA-256: ${audit.vaultSha256}</span>
+                <span style="color:#2a9d8f; word-break:break-all;">SHA-256: ${audit.vaultSha256}</span>
             </div>
-            <div style="margin-bottom:3px;">
+            <div style="margin-bottom:4px;">
                 4. <a href="index.html" target="_blank" rel="noopener noreferrer" style="color:#00ccff; text-decoration:underline;">index.html</a> (${audit.indexSizeBytes.toLocaleString("en-US")} B) • <a href="${GITHUB_REPO_URL}/blob/main/index.html" target="_blank" rel="noopener noreferrer" style="color:#fceea7; text-decoration:underline;">[GitHub]</a><br>
-                <span style="color:#2a9d8f;">SHA-256: ${audit.indexSha256}</span>
+                <span style="color:#2a9d8f; word-break:break-all;">SHA-256: ${audit.indexSha256}</span>
             </div>
-            <div style="margin-bottom:3px;">
+            <div style="margin-bottom:4px;">
                 5. <a href="${safeStyleHref}" target="_blank" rel="noopener noreferrer" style="color:#00ccff; text-decoration:underline;">nah-style.css</a> (${audit.styleSizeBytes.toLocaleString("en-US")} B) • <a href="${GITHUB_REPO_URL}/blob/main/nah-style.css" target="_blank" rel="noopener noreferrer" style="color:#fceea7; text-decoration:underline;">[GitHub]</a><br>
-                <span style="color:#2a9d8f;">SHA-256: ${audit.styleSha256}</span>
+                <span style="color:#2a9d8f; word-break:break-all;">SHA-256: ${audit.styleSha256}</span>
             </div>
             <div style="margin-bottom:6px;">
                 6. <a href="${safeExplorerHref}" target="_blank" rel="noopener noreferrer" style="color:#00ccff; text-decoration:underline;">nah-explorer.js</a> (${audit.explorerSizeBytes.toLocaleString("en-US")} B) • <a href="${GITHUB_REPO_URL}/blob/main/nah-explorer.js" target="_blank" rel="noopener noreferrer" style="color:#fceea7; text-decoration:underline;">[GitHub]</a><br>
-                <span style="color:#2a9d8f;">SHA-256: ${audit.explorerSha256}</span>
+                <span style="color:#2a9d8f; word-break:break-all;">SHA-256: ${audit.explorerSha256}</span>
             </div>
-            <div style="border-top:1px dotted #444; padding-top:4px; color:#ddd;">
-                • Official BIP-39 Wordlist SHA-256: <span style="color:#2a9d8f;">${audit.bip39WordlistSha256} (Pinned &amp; Frozen)</span><br>
-                • Official BIP-84 / BIP-86 Test Vectors: <strong style="color:#2a9d8f;">${audit.vectorsVerified ? "PASSED 100%" : "FAILED"}</strong><br>
-                • Security Architecture: <strong>100% Zero-Keyboard Seed Entry + Forever Immutable Block Barrier</strong>
+            <div style="border-top:1px dotted #444; padding-top:5px; color:#ddd; line-height:1.45; word-break:normal; overflow-wrap:break-word;">
+                • Official <span style="white-space:nowrap;">BIP-39</span> Wordlist <span style="white-space:nowrap;">SHA-256:</span> <span style="color:#2a9d8f; word-break:break-all;">${audit.bip39WordlistSha256}</span> <span style="color:#2a9d8f; white-space:nowrap;">(Pinned &amp; Frozen)</span><br>
+                • Official <span style="white-space:nowrap;">BIP-84</span> / <span style="white-space:nowrap;">BIP-86</span> Test Vectors: <strong style="color:#2a9d8f;">${audit.vectorsVerified ? "PASSED 100%" : "FAILED"}</strong><br>
+                • Security Architecture: <strong>100% <span style="white-space:nowrap;">Zero-Keyboard</span> Seed Entry + Forever Immutable Block Barrier</strong>
             </div>
         `;
     } catch (e) {
