@@ -71,13 +71,14 @@
             </div>
         </div>
 
-        <!-- TAB RIÊNG: NAH COLD / COOL WALLET (v26.0 — FOREVER IMMUTABLE EDITION) -->
+        <!-- TAB RIÊNG: NAH COLD / COOL WALLET (v27.0 — FOREVER IMMUTABLE EDITION) -->
         <div id="tab-wallet" class="tab-content">
             <div class="terminal" style="margin-top: 0; border-radius: 0 0 15px 15px; width: 100%;">
                 <div class="converter-section" style="background: #fdf6d8; margin-bottom: 6px; border: 3px solid #0b4594;">
                     <div class="sub-title" style="margin-bottom: 6px;">💎 NAH SOVEREIGN COLD / COOL WALLET</div>
-                    <div style="font-size: 10px; font-weight: 700; color: #0b4594; text-align: center; margin-bottom: 10px; line-height: 1.4;">
-                        100% Verifiable • Zero-Keyboard Seed Shield • Dual-Vault <strong>nah</strong> &amp; <strong>sat</strong> Isolation
+                    <div style="font-size: 10px; font-weight: 700; color: #0b4594; text-align: center; margin-bottom: 10px; line-height: 1.45;">
+                        100% Verifiable • Zero-Keyboard Seed Shield<br>
+                        Dual-Vault <strong>nah</strong> &amp; <strong>sat</strong> Isolation
                     </div>
 
                     <!-- THANH CẢM BIẾN TRẠNG THÁI MẠNG & ĐÈN BÁO SẴN SÀNG CHO CHẾ ĐỘ MÁY BAY -->
@@ -89,13 +90,21 @@
                     <!-- MÀN HÌNH 0: CHỌN CHẾ ĐỘ KIẾN TRÚC (PURE COLD WALLET vs. INTERACTIVE COOL WALLET) -->
                     <div id="wallet-mode-selector-screen" style="width: 100%;">
                         <div style="background: #ffffff; border: 2px solid #0b4594; border-radius: 9px; padding: 9px 10px; margin-bottom: 10px; font-size: 9.5px; font-weight: 700; color: #333; line-height: 1.45;">
-                            <div style="font-size: 10.5px; font-weight: 900; color: #0b4594; margin-bottom: 3px; text-transform: uppercase;">
+                            <div style="font-size: 10.5px; font-weight: 900; color: #0b4594; margin-bottom: 4px; text-transform: uppercase;">
                                 🏆 THE WORLD’S MOST LOGICAL &amp; VERIFIABLE BITCOIN WALLET
                             </div>
-                            • <strong>100% Verifiable ("Verify, Don't Trust"):</strong> Zero third-party libraries. All 6 source modules and the official BIP-39 dictionary are locked and verified via live in-browser <code>SHA-256</code> hashes against GitHub.<br>
-                            • <strong>100% Zero-Keyboard Seed Shield:</strong> Create, verify, and restore seeds via in-app touch buttons — your phone’s OS keyboard never opens or sees a single seed letter.<br>
-                            • <strong>Human + Hardware Entropy:</strong> Mixes 10 physical dice taps with hardware CSPRNG in <strong>Airplane Mode</strong> — $0 cost, zero chip-RNG flaws, zero physical wrench-attack trail.<br>
-                            • <strong>Dual-Vault Runestone Guard:</strong> Strictly isolates <strong>nah</strong> packets from <strong>sat</strong> UTXOs so <strong>nah</strong> is never burned as miner fees.
+                            <div style="margin-bottom: 4px;">
+                                • <strong>100% Verifiable ("Verify, Don't Trust"):</strong> Zero third-party libraries. All 6 source modules and the official BIP-39 dictionary are locked and verified via live in-browser <code>SHA-256</code> hashes against GitHub.
+                            </div>
+                            <div style="margin-bottom: 4px;">
+                                • <strong>100% Zero-Keyboard Seed Shield:</strong> Create, verify, and restore seeds via in-app touch buttons — your phone’s OS keyboard never opens or sees a single seed letter.
+                            </div>
+                            <div style="margin-bottom: 4px;">
+                                • <strong>Human + Hardware Entropy:</strong> Mixes 10 physical dice taps with hardware CSPRNG in <strong>Airplane Mode</strong> — $0 cost, zero chip-RNG flaws, zero physical wrench-attack trail.
+                            </div>
+                            <div>
+                                • <strong>Dual-Vault Runestone Guard:</strong> Strictly isolates <strong>nah</strong> packets from <strong>sat</strong> UTXOs so <strong>nah</strong> is never burned as miner fees.
+                            </div>
                         </div>
 
                         <div class="mode-select-grid">
@@ -304,7 +313,7 @@
                         <div style="font-size: 10px; font-weight: 900; color: #0b4594; text-align: center; margin-bottom: 4px;">
                             Your Permanent Bitcoin Taproot (BIP-86 <strong>bc1p</strong>) Receiving Address (for both <strong>nah</strong> &amp; <strong>sat</strong>):
                         </div>
-                        <div id="cold-addr-chunked-display" class="chunked-addr-box"></div>
+                        <div id="cold-addr-chunked-display" class="chunked-addr-box" style="word-break: normal; overflow-wrap: break-word;"></div>
                         <button type="button" id="btn-copy-cold-addr" onclick="copyColdWalletAddress()" style="width: 100%; background: #0b4594; color: #fceea7; border: 2px solid #0b4594; border-radius: 8px; padding: 10px; margin-bottom: 8px; font-family: 'Quicksand', sans-serif; font-size: 10.5px; font-weight: 900; cursor: pointer;">
                             📋 COPY TAPROOT (bc1p) RECEIVING ADDRESS
                         </button>
@@ -390,7 +399,7 @@
 
                     <div id="wallet-status-msg" style="display: none; margin-top: 8px; padding: 8px; background: #fff3e0; border: 1.5px dashed #e76f51; border-radius: 6px; font-size: 10px; font-weight: 700; color: #0b4594; text-align: center;"></div>
 
-                    <!-- MÀN HÌNH 5: BẢNG ĐIỀU KHIỂN COOL WALLET ĐÃ MỞ KHÓA (v26.0) -->
+                    <!-- MÀN HÌNH 5: BẢNG ĐIỀU KHIỂN COOL WALLET ĐÃ MỞ KHÓA (v27.0) -->
                     <div id="wallet-vault-panel" style="display: none; background: #ffffff; border: 2px solid #0b4594; border-radius: 10px; padding: 10px;">
                         <div style="display: flex; justify-content: space-between; align-items: center; gap: 4px; margin-bottom: 6px; flex-wrap: wrap;">
                             <div style="display: flex; gap: 4px; align-items: center;">
@@ -482,7 +491,7 @@
                         <a href="javascript:void(0)" onclick="verifyWalletCodeIntegrity()" style="font-size: 9.5px; font-weight: 900; color: #0b4594; text-decoration: underline;">
                             🛡️ OPEN-SOURCE WALLET AUDIT HUB &amp; LIVE 6-MODULE SHA-256 VERIFIER ("VERIFY, DON'T TRUST")
                         </a>
-                        <div id="wallet-audit-box" style="display: none; margin-top: 6px; padding: 8px; background: #111111; color: #00ccff; border: 1.5px solid #0b4594; border-radius: 8px; font-size: 9px; font-weight: 700; word-break: break-all; text-align: left; line-height: 1.5;"></div>
+                        <div id="wallet-audit-box" style="display: none; margin-top: 6px; padding: 8px; background: #111111; color: #00ccff; border: 1.5px solid #0b4594; border-radius: 8px; font-size: 9px; font-weight: 700; word-break: normal; overflow-wrap: break-word; text-align: left; line-height: 1.5;"></div>
                     </div>
                 </div>
             </div>
@@ -523,14 +532,14 @@
         <div id="nah-footer-slot" style="width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
     </div>
 
-    <!-- NẠP CÁC MODULE ĐỘC LẬP (v26.0) -->
+    <!-- NẠP CÁC MODULE ĐỘC LẬP (v27.0) -->
     <script src="brc-static.js"></script>
     <script src="nah-explorer.js?v=23"></script>
     <script src="nah-wallet.js?v=26"></script>
     <script src="nah-wallet-setup.js?v=26"></script>
-    <script src="nah-wallet-vault.js?v=26"></script>
+    <script src="nah-wallet-vault.js?v=27"></script>
 
-    <!-- BỘ ĐỒNG BỘ GIÁ ORACLE ĐỘC LẬP (PROMISE.ALLSETTLED) & KHỞI ĐỘNG HỆ THỐNG (v26.0) -->
+    <!-- BỘ ĐỒNG BỘ GIÁ ORACLE ĐỘC LẬP (PROMISE.ALLSETTLED) & KHỞI ĐỘNG HỆ THỐNG (v27.0) -->
     <script>
         window.CURRENT_NAH_SATS = 0.0005;
         window.CIRCULATING_SUPPLY = 85300000000000;
